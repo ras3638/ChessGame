@@ -2,15 +2,14 @@ package chessPackage;
 
 import java.util.Arrays;
 
-public class WhitePiece {
-	
-	public static String getColor(){
+public class WhitePiece extends Piece {
+	static String getColor(){
 		String Color = "White";
 		return Color;
 	}
-	
-	public static boolean pawnPromotion(int Y, String CurrentTitle){
+	static boolean pawnPromotion(int Y, String CurrentTitle){
 		//returns true if a white pawn has been promoted
+		
 		if(CurrentTitle == "White Pawn (H2)"){
 			if(Y==0){
 				WhitePawnH2.setCurrentPositionX(-1);
@@ -87,10 +86,13 @@ public class WhitePiece {
 		
 		
 	}
-	public static void updateEnPassatKill(int CurrentX, int CurrentY){
+	static void updateEnPassatKill(int CurrentX, int CurrentY){
+		
 		int [] CurrentXY = new int[2];
+		
 		CurrentXY[0] = CurrentX + 0;
 		CurrentXY[1] = CurrentY + 1;
+		
 		if(BlackPawnH7.getEnPassant() && Arrays.equals(CurrentXY, BlackPawnH7.getCurrentPositionXY())){
 			
 			BlackPawnH7.setCurrentPositionXY(-1,-1);
@@ -170,80 +172,72 @@ public class WhitePiece {
 			return;
 		}
 	}
-	
-public static void updateKill(int[]CurrentXY){
-	if(Arrays.equals(CurrentXY, BlackPawnH7.getCurrentPositionXY())){
-		BlackPawnH7.setCurrentPositionXY(-1,-1);
-		BlackPawnH7.setCurrentPositionX(-1);
-		BlackPawnH7.setCurrentPositionY(-1);
-		BlackPawnH7.setActive(false);
-		System.out.println("Black Pawn (H7) has been killed");
-		return;
-	
-}
-	if(Arrays.equals(CurrentXY, BlackPawnG7.getCurrentPositionXY())){
-		BlackPawnG7.setCurrentPositionXY(-1,-1);
-		BlackPawnG7.setCurrentPositionX(-1);
-		BlackPawnG7.setCurrentPositionY(-1);
-		BlackPawnG7.setActive(false);
-		System.out.println("Black Pawn (G7) has been killed");
-		return;
-	
-}
-	if(Arrays.equals(CurrentXY, BlackPawnF7.getCurrentPositionXY())){
-		BlackPawnF7.setCurrentPositionXY(-1,-1);
-		BlackPawnF7.setCurrentPositionX(-1);
-		BlackPawnF7.setCurrentPositionY(-1);
-		BlackPawnF7.setActive(false);
-		System.out.println("Black Pawn (F7) has been killed");
-		return;
-	
-}
-	if(Arrays.equals(CurrentXY, BlackPawnE7.getCurrentPositionXY())){
-		BlackPawnE7.setCurrentPositionXY(-1,-1);
-		BlackPawnE7.setCurrentPositionX(-1);
-		BlackPawnE7.setCurrentPositionY(-1);
-		BlackPawnE7.setActive(false);
-		System.out.println("Black Pawn (E7) has been killed");
-		return;
-	
-}
-	if(Arrays.equals(CurrentXY, BlackKnightG8.getCurrentPositionXY())){
-		BlackKnightG8.setCurrentPositionXY(-1,-1);
-		BlackKnightG8.setCurrentPositionX(-1);
-		BlackKnightG8.setCurrentPositionY(-1);
-		BlackKnightG8.setActive(false);
-		System.out.println("Black Knight (G8) has been killed");
-		return;
-	
-}
-	if(Arrays.equals(CurrentXY, BlackBishopF8.getCurrentPositionXY())){
-		BlackBishopF8.setCurrentPositionXY(-1,-1);
-		BlackBishopF8.setCurrentPositionX(-1);
-		BlackBishopF8.setCurrentPositionY(-1);
-		BlackBishopF8.setActive(false);
-		System.out.println("Black Bishop (F8) has been killed");
-		return;
-	
-}
-	if(Arrays.equals(CurrentXY, BlackPawnD7.getCurrentPositionXY())){
-		BlackPawnD7.setCurrentPositionXY(-1,-1);
-		BlackPawnD7.setCurrentPositionX(-1);
-		BlackPawnD7.setCurrentPositionY(-1);
-		BlackPawnD7.setActive(false);
-		System.out.println("Black Pawn (D7) has been killed");
-		return;
-	
-}
+	static void updateKill(int[] CurrentXY){
+		
+		if(Arrays.equals(CurrentXY, BlackPawnH7.getCurrentPositionXY())){
+			BlackPawnH7.setCurrentPositionXY(-1,-1);
+			BlackPawnH7.setCurrentPositionX(-1);
+			BlackPawnH7.setCurrentPositionY(-1);
+			BlackPawnH7.setActive(false);
+			System.out.println("Black Pawn (H7) has been killed");
+			return;
+		}
+		if(Arrays.equals(CurrentXY, BlackPawnG7.getCurrentPositionXY())){
+			BlackPawnG7.setCurrentPositionXY(-1,-1);
+			BlackPawnG7.setCurrentPositionX(-1);
+			BlackPawnG7.setCurrentPositionY(-1);
+			BlackPawnG7.setActive(false);
+			System.out.println("Black Pawn (G7) has been killed");
+			return;	
+		}
+		if(Arrays.equals(CurrentXY, BlackPawnF7.getCurrentPositionXY())){
+			BlackPawnF7.setCurrentPositionXY(-1,-1);
+			BlackPawnF7.setCurrentPositionX(-1);
+			BlackPawnF7.setCurrentPositionY(-1);
+			BlackPawnF7.setActive(false);
+			System.out.println("Black Pawn (F7) has been killed");
+			return;	
+		}
+		if(Arrays.equals(CurrentXY, BlackPawnE7.getCurrentPositionXY())){
+			BlackPawnE7.setCurrentPositionXY(-1,-1);
+			BlackPawnE7.setCurrentPositionX(-1);
+			BlackPawnE7.setCurrentPositionY(-1);
+			BlackPawnE7.setActive(false);
+			System.out.println("Black Pawn (E7) has been killed");
+			return;
+		}
+		if(Arrays.equals(CurrentXY, BlackKnightG8.getCurrentPositionXY())){
+			BlackKnightG8.setCurrentPositionXY(-1,-1);
+			BlackKnightG8.setCurrentPositionX(-1);
+			BlackKnightG8.setCurrentPositionY(-1);
+			BlackKnightG8.setActive(false);
+			System.out.println("Black Knight (G8) has been killed");
+			return;
+		}
+		if(Arrays.equals(CurrentXY, BlackBishopF8.getCurrentPositionXY())){
+			BlackBishopF8.setCurrentPositionXY(-1,-1);
+			BlackBishopF8.setCurrentPositionX(-1);
+			BlackBishopF8.setCurrentPositionY(-1);
+			BlackBishopF8.setActive(false);
+			System.out.println("Black Bishop (F8) has been killed");
+			return;
+		}
+		if(Arrays.equals(CurrentXY, BlackPawnD7.getCurrentPositionXY())){
+			BlackPawnD7.setCurrentPositionXY(-1,-1);
+			BlackPawnD7.setCurrentPositionX(-1);
+			BlackPawnD7.setCurrentPositionY(-1);
+			BlackPawnD7.setActive(false);
+			System.out.println("Black Pawn (D7) has been killed");
+			return;
+		}
 		if(Arrays.equals(CurrentXY, BlackRookH8.getCurrentPositionXY())){
 			BlackRookH8.setCurrentPositionXY(-1,-1);
 			BlackRookH8.setCurrentPositionX(-1);
 			BlackRookH8.setCurrentPositionY(-1);
 			BlackRookH8.setActive(false);
 			System.out.println("Black Rook (H8) has been killed");
-			return;
-		
-	}
+			return;		
+		}
 		if(Arrays.equals(CurrentXY, BlackPawnA7.getCurrentPositionXY())){
 			BlackPawnA7.setCurrentPositionXY(-1,-1);
 			BlackPawnA7.setCurrentPositionX(-1);
@@ -251,8 +245,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackPawnA7.setActive(false);
 			System.out.println("Black Pawn (A7) has been killed");
 			return;
-		
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackPawnB7.getCurrentPositionXY())){
 			BlackPawnB7.setCurrentPositionXY(-1,-1);
 			BlackPawnB7.setCurrentPositionX(-1);
@@ -260,7 +253,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackPawnB7.setActive(false);
 			System.out.println("Black Pawn (B7) has been killed");
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackKingE8.getCurrentPositionXY())){
 			BlackKingE8.setCurrentPositionXY(-1,-1);
 			BlackKingE8.setCurrentPositionX(-1);
@@ -268,9 +261,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackKingE8.setActive(false);
 			System.out.println("Black King (E8) has been killed");
 			return;
-		
-	}
-	
+		}
 		if(Arrays.equals(CurrentXY, BlackKnightB8.getCurrentPositionXY())){
 			BlackKnightB8.setCurrentPositionXY(-1,-1);
 			BlackKnightB8.setCurrentPositionX(-1);
@@ -278,9 +269,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackKnightB8.setActive(false);
 			System.out.println("Black Knight (B8) has been killed");
 			return;
-	}
-		
-		
+		}
 		if(Arrays.equals(CurrentXY, BlackPawnC7.getCurrentPositionXY())){
 			BlackPawnC7.setCurrentPositionXY(-1,-1);
 			BlackPawnC7.setCurrentPositionX(-1);
@@ -288,8 +277,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackPawnC7.setActive(false);
 			System.out.println("Black Pawn (C7) has been killed");
 			return;
-	}
-		
+		}
 		if(Arrays.equals(CurrentXY, BlackRookA8.getCurrentPositionXY())){
 			BlackRookA8.setCurrentPositionXY(-1,-1);
 			BlackRookA8.setCurrentPositionX(-1);
@@ -297,7 +285,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackRookA8.setActive(false);
 			System.out.println("Black Rook (A8) has been killed");
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackBishopC8.getCurrentPositionXY())){
 			BlackBishopC8.setCurrentPositionXY(-1,-1);
 			BlackBishopC8.setCurrentPositionX(-1);
@@ -305,7 +293,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackBishopC8.setActive(false);
 			System.out.println("Black Bishop (C8) has been killed");
 			return;
-	}	
+		}	
 		if(Arrays.equals(CurrentXY, BlackQueenD8.getCurrentPositionXY())){
 			BlackQueenD8.setCurrentPositionXY(-1,-1);
 			BlackQueenD8.setCurrentPositionX(-1);
@@ -313,16 +301,15 @@ public static void updateKill(int[]CurrentXY){
 			BlackQueenD8.setActive(false);
 			System.out.println("Black Queen (D8) has been killed");
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackQueenProm1.getCurrentPositionXY())){
 			BlackQueenProm1.setCurrentPositionXY(-1,-1);
 			BlackQueenProm1.setCurrentPositionX(-1);
 			BlackQueenProm1.setCurrentPositionY(-1);
 			BlackQueenProm1.setActive(false);
 			System.out.println("Black Queen (Prom1) has been killed");
-			return;
-		
-	}
+			return;	
+		}
 		if(Arrays.equals(CurrentXY, BlackQueenProm2.getCurrentPositionXY())){
 			BlackQueenProm2.setCurrentPositionXY(-1,-1);
 			BlackQueenProm2.setCurrentPositionX(-1);
@@ -330,7 +317,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackQueenProm2.setActive(false);
 			System.out.println("Black Queen (Prom2) has been killed");
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackQueenProm3.getCurrentPositionXY())){
 			BlackQueenProm3.setCurrentPositionXY(-1,-1);
 			BlackQueenProm3.setCurrentPositionX(-1);
@@ -338,7 +325,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackQueenProm3.setActive(false);
 			System.out.println("Black Queen (Prom3) has been killed");	
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackQueenProm4.getCurrentPositionXY())){
 			BlackQueenProm4.setCurrentPositionXY(-1,-1);
 			BlackQueenProm4.setCurrentPositionX(-1);
@@ -346,7 +333,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackQueenProm4.setActive(false);
 			System.out.println("Black Queen (Prom4) has been killed");
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackQueenProm5.getCurrentPositionXY())){
 			BlackQueenProm5.setCurrentPositionXY(-1,-1);
 			BlackQueenProm5.setCurrentPositionX(-1);
@@ -354,7 +341,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackQueenProm5.setActive(false);
 			System.out.println("Black Queen (Prom5) has been killed");	
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackQueenProm6.getCurrentPositionXY())){
 			BlackQueenProm6.setCurrentPositionXY(-1,-1);
 			BlackQueenProm6.setCurrentPositionX(-1);
@@ -362,16 +349,15 @@ public static void updateKill(int[]CurrentXY){
 			BlackQueenProm6.setActive(false);
 			System.out.println("Black Queen (Prom6) has been killed");	
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackQueenProm7.getCurrentPositionXY())){
 			BlackQueenProm7.setCurrentPositionXY(-1,-1);
 			BlackQueenProm7.setCurrentPositionX(-1);
 			BlackQueenProm7.setCurrentPositionY(-1);
 			BlackQueenProm7.setActive(false);
-			System.out.println("Black Queen (Prom7) has been killed");
-			
+			System.out.println("Black Queen (Prom7) has been killed");	
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackQueenProm8.getCurrentPositionXY())){
 			BlackQueenProm8.setCurrentPositionXY(-1,-1);
 			BlackQueenProm8.setCurrentPositionX(-1);
@@ -379,16 +365,15 @@ public static void updateKill(int[]CurrentXY){
 			BlackQueenProm8.setActive(false);
 			System.out.println("Black Queen (Prom8) has been killed");
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackRookProm1.getCurrentPositionXY())){
 			BlackRookProm1.setCurrentPositionXY(-1,-1);
 			BlackRookProm1.setCurrentPositionX(-1);
 			BlackRookProm1.setCurrentPositionY(-1);
 			BlackRookProm1.setActive(false);
 			System.out.println("Black Rook (Prom1) has been killed");
-			return;
-		
-	}
+			return;	
+		}
 		if(Arrays.equals(CurrentXY, BlackRookProm2.getCurrentPositionXY())){
 			BlackRookProm2.setCurrentPositionXY(-1,-1);
 			BlackRookProm2.setCurrentPositionX(-1);
@@ -396,7 +381,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackRookProm2.setActive(false);
 			System.out.println("Black Rook (Prom2) has been killed");
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackRookProm3.getCurrentPositionXY())){
 			BlackRookProm3.setCurrentPositionXY(-1,-1);
 			BlackRookProm3.setCurrentPositionX(-1);
@@ -404,7 +389,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackRookProm3.setActive(false);
 			System.out.println("Black Rook (Prom3) has been killed");	
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackRookProm4.getCurrentPositionXY())){
 			BlackRookProm4.setCurrentPositionXY(-1,-1);
 			BlackRookProm4.setCurrentPositionX(-1);
@@ -412,7 +397,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackRookProm4.setActive(false);
 			System.out.println("Black Rook (Prom4) has been killed");
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackRookProm5.getCurrentPositionXY())){
 			BlackRookProm5.setCurrentPositionXY(-1,-1);
 			BlackRookProm5.setCurrentPositionX(-1);
@@ -420,7 +405,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackRookProm5.setActive(false);
 			System.out.println("Black Rook (Prom5) has been killed");	
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackRookProm6.getCurrentPositionXY())){
 			BlackRookProm6.setCurrentPositionXY(-1,-1);
 			BlackRookProm6.setCurrentPositionX(-1);
@@ -428,7 +413,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackRookProm6.setActive(false);
 			System.out.println("Black Rook (Prom6) has been killed");	
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackRookProm7.getCurrentPositionXY())){
 			BlackRookProm7.setCurrentPositionXY(-1,-1);
 			BlackRookProm7.setCurrentPositionX(-1);
@@ -436,7 +421,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackRookProm7.setActive(false);
 			System.out.println("Black Rook (Prom7) has been killed");	
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackRookProm8.getCurrentPositionXY())){
 			BlackRookProm8.setCurrentPositionXY(-1,-1);
 			BlackRookProm8.setCurrentPositionX(-1);
@@ -444,7 +429,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackRookProm8.setActive(false);
 			System.out.println("Black Rook (Prom8) has been killed");
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackBishopProm1.getCurrentPositionXY())){
 			BlackBishopProm1.setCurrentPositionXY(-1,-1);
 			BlackBishopProm1.setCurrentPositionX(-1);
@@ -452,8 +437,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackBishopProm1.setActive(false);
 			System.out.println("Black Bishop (Prom1) has been killed");
 			return;
-		
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackBishopProm2.getCurrentPositionXY())){
 			BlackBishopProm2.setCurrentPositionXY(-1,-1);
 			BlackBishopProm2.setCurrentPositionX(-1);
@@ -461,7 +445,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackBishopProm2.setActive(false);
 			System.out.println("Black Bishop (Prom2) has been killed");
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackBishopProm3.getCurrentPositionXY())){
 			BlackBishopProm3.setCurrentPositionXY(-1,-1);
 			BlackBishopProm3.setCurrentPositionX(-1);
@@ -469,7 +453,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackBishopProm3.setActive(false);
 			System.out.println("Black Bishop (Prom3) has been killed");	
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackBishopProm4.getCurrentPositionXY())){
 			BlackBishopProm4.setCurrentPositionXY(-1,-1);
 			BlackBishopProm4.setCurrentPositionX(-1);
@@ -477,7 +461,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackBishopProm4.setActive(false);
 			System.out.println("Black Bishop (Prom4) has been killed");
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackBishopProm5.getCurrentPositionXY())){
 			BlackBishopProm5.setCurrentPositionXY(-1,-1);
 			BlackBishopProm5.setCurrentPositionX(-1);
@@ -485,7 +469,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackBishopProm5.setActive(false);
 			System.out.println("Black Bishop (Prom5) has been killed");	
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackBishopProm6.getCurrentPositionXY())){
 			BlackBishopProm6.setCurrentPositionXY(-1,-1);
 			BlackBishopProm6.setCurrentPositionX(-1);
@@ -493,7 +477,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackBishopProm6.setActive(false);
 			System.out.println("Black Bishop (Prom6) has been killed");	
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackBishopProm7.getCurrentPositionXY())){
 			BlackBishopProm7.setCurrentPositionXY(-1,-1);
 			BlackBishopProm7.setCurrentPositionX(-1);
@@ -501,7 +485,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackBishopProm7.setActive(false);
 			System.out.println("Black Bishop (Prom7) has been killed");	
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackBishopProm8.getCurrentPositionXY())){
 			BlackBishopProm8.setCurrentPositionXY(-1,-1);
 			BlackBishopProm8.setCurrentPositionX(-1);
@@ -509,7 +493,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackBishopProm8.setActive(false);
 			System.out.println("Black Bishop (Prom8) has been killed");
 			return;
-	}		
+		}		
 		if(Arrays.equals(CurrentXY, BlackKnightProm1.getCurrentPositionXY())){
 			BlackKnightProm1.setCurrentPositionXY(-1,-1);
 			BlackKnightProm1.setCurrentPositionX(-1);
@@ -518,7 +502,7 @@ public static void updateKill(int[]CurrentXY){
 			System.out.println("Black Knight (Prom1) has been killed");
 			return;
 		
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackKnightProm2.getCurrentPositionXY())){
 			BlackKnightProm2.setCurrentPositionXY(-1,-1);
 			BlackKnightProm2.setCurrentPositionX(-1);
@@ -526,7 +510,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackKnightProm2.setActive(false);
 			System.out.println("Black Knight (Prom2) has been killed");
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackKnightProm3.getCurrentPositionXY())){
 			BlackKnightProm3.setCurrentPositionXY(-1,-1);
 			BlackKnightProm3.setCurrentPositionX(-1);
@@ -534,7 +518,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackKnightProm3.setActive(false);
 			System.out.println("Black Knight (Prom3) has been killed");	
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackKnightProm4.getCurrentPositionXY())){
 			BlackKnightProm4.setCurrentPositionXY(-1,-1);
 			BlackKnightProm4.setCurrentPositionX(-1);
@@ -542,7 +526,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackKnightProm4.setActive(false);
 			System.out.println("Black Knight (Prom4) has been killed");
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackKnightProm5.getCurrentPositionXY())){
 			BlackKnightProm5.setCurrentPositionXY(-1,-1);
 			BlackKnightProm5.setCurrentPositionX(-1);
@@ -550,7 +534,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackKnightProm5.setActive(false);
 			System.out.println("Black Knight (Prom5) has been killed");	
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackKnightProm6.getCurrentPositionXY())){
 			BlackKnightProm6.setCurrentPositionXY(-1,-1);
 			BlackKnightProm6.setCurrentPositionX(-1);
@@ -558,7 +542,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackKnightProm6.setActive(false);
 			System.out.println("Black Knight (Prom6) has been killed");	
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackKnightProm7.getCurrentPositionXY())){
 			BlackKnightProm7.setCurrentPositionXY(-1,-1);
 			BlackKnightProm7.setCurrentPositionX(-1);
@@ -566,7 +550,7 @@ public static void updateKill(int[]CurrentXY){
 			BlackKnightProm7.setActive(false);
 			System.out.println("Black Knight (Prom7) has been killed");	
 			return;
-	}
+		}
 		if(Arrays.equals(CurrentXY, BlackKnightProm8.getCurrentPositionXY())){
 			BlackKnightProm8.setCurrentPositionXY(-1,-1);
 			BlackKnightProm8.setCurrentPositionX(-1);
@@ -574,131 +558,12 @@ public static void updateKill(int[]CurrentXY){
 			BlackKnightProm8.setActive(false);
 			System.out.println("Black Knight (Prom8) has been killed");
 			return;
-	}	
-		
-}
-	static int[][] aggregateBlacks(){
-		//toDo MUST UPDATE array length
-		int [][] BlackAggregate = new int [48][2];
-		BlackAggregate[0]=BlackPawnA7.getCurrentPositionXY();
-		BlackAggregate[1]=BlackPawnB7.getCurrentPositionXY();
-		BlackAggregate[2]=BlackKingE8.getCurrentPositionXY();
-		BlackAggregate[3]=BlackKnightB8.getCurrentPositionXY();
-		BlackAggregate[4]=BlackPawnC7.getCurrentPositionXY();
-		BlackAggregate[5]=BlackRookA8.getCurrentPositionXY();
-		BlackAggregate[6]=BlackBishopC8.getCurrentPositionXY();
-		BlackAggregate[7]=BlackQueenD8.getCurrentPositionXY();
-		
-		BlackAggregate[8]=BlackRookProm1.getCurrentPositionXY();
-		BlackAggregate[9]=BlackRookProm2.getCurrentPositionXY();
-		BlackAggregate[10]=BlackRookProm3.getCurrentPositionXY();
-		BlackAggregate[11]=BlackRookProm4.getCurrentPositionXY();
-		BlackAggregate[12]=BlackRookProm5.getCurrentPositionXY();
-		BlackAggregate[13]=BlackRookProm6.getCurrentPositionXY();
-		BlackAggregate[14]=BlackRookProm7.getCurrentPositionXY();
-		BlackAggregate[15]=BlackRookProm8.getCurrentPositionXY();
-		
-		BlackAggregate[16]=BlackQueenProm1.getCurrentPositionXY();
-		BlackAggregate[17]=BlackQueenProm2.getCurrentPositionXY();
-		BlackAggregate[18]=BlackQueenProm3.getCurrentPositionXY();
-		BlackAggregate[19]=BlackQueenProm4.getCurrentPositionXY();
-		BlackAggregate[20]=BlackQueenProm5.getCurrentPositionXY();
-		BlackAggregate[21]=BlackQueenProm6.getCurrentPositionXY();
-		BlackAggregate[22]=BlackQueenProm7.getCurrentPositionXY();
-		BlackAggregate[23]=BlackQueenProm8.getCurrentPositionXY();
-		
-		BlackAggregate[24]=BlackBishopProm1.getCurrentPositionXY();
-		BlackAggregate[25]=BlackBishopProm2.getCurrentPositionXY();
-		BlackAggregate[26]=BlackBishopProm3.getCurrentPositionXY();
-		BlackAggregate[27]=BlackBishopProm4.getCurrentPositionXY();
-		BlackAggregate[28]=BlackBishopProm5.getCurrentPositionXY();
-		BlackAggregate[29]=BlackBishopProm6.getCurrentPositionXY();
-		BlackAggregate[30]=BlackBishopProm7.getCurrentPositionXY();
-		BlackAggregate[31]=BlackBishopProm8.getCurrentPositionXY();
-		
-		BlackAggregate[32]=BlackKnightProm1.getCurrentPositionXY();
-		BlackAggregate[33]=BlackKnightProm2.getCurrentPositionXY();
-		BlackAggregate[34]=BlackKnightProm3.getCurrentPositionXY();
-		BlackAggregate[35]=BlackKnightProm4.getCurrentPositionXY();
-		BlackAggregate[36]=BlackKnightProm5.getCurrentPositionXY();
-		BlackAggregate[37]=BlackKnightProm6.getCurrentPositionXY();
-		BlackAggregate[38]=BlackKnightProm7.getCurrentPositionXY();
-		BlackAggregate[39]=BlackKnightProm8.getCurrentPositionXY();
-		
-		BlackAggregate[40]=BlackRookH8.getCurrentPositionXY();
-		BlackAggregate[41]=BlackPawnD7.getCurrentPositionXY();
-		BlackAggregate[42]=BlackBishopC8.getCurrentPositionXY();
-		BlackAggregate[43]=BlackKnightG8.getCurrentPositionXY();
-		BlackAggregate[44]=BlackPawnE7.getCurrentPositionXY();
-		BlackAggregate[45]=BlackPawnF7.getCurrentPositionXY();
-		BlackAggregate[46]=BlackPawnG7.getCurrentPositionXY();
-		BlackAggregate[47]=BlackPawnH7.getCurrentPositionXY();
-		
-		return BlackAggregate;
-	}
-	static int[][] aggregateWhites(){
-		//toDo MUST UPDATE array length
-		int [][] WhiteAggregate = new int [48][2];
-		//insert white pieces here such as...
-		WhiteAggregate[0]=WhitePawnB2.getCurrentPositionXY();
-		WhiteAggregate[1]=WhitePawnA2.getCurrentPositionXY();
-		WhiteAggregate[2]=WhiteKingE1.getCurrentPositionXY();
-		WhiteAggregate[3]=WhiteKnightB1.getCurrentPositionXY();
-		WhiteAggregate[4]=WhitePawnC2.getCurrentPositionXY();
-		WhiteAggregate[5]=WhiteRookA1.getCurrentPositionXY();
-		WhiteAggregate[6]=WhiteBishopC1.getCurrentPositionXY();
-		WhiteAggregate[7]=WhiteQueenD1.getCurrentPositionXY();
-		WhiteAggregate[8]=WhiteRookProm.getCurrentPositionXY();
-		WhiteAggregate[9]=WhiteRookProm2.getCurrentPositionXY();
-		WhiteAggregate[10]=WhiteRookProm3.getCurrentPositionXY();
-		WhiteAggregate[11]=WhiteRookProm4.getCurrentPositionXY();
-		WhiteAggregate[12]=WhiteRookProm5.getCurrentPositionXY();
-		WhiteAggregate[13]=WhiteRookProm6.getCurrentPositionXY();
-		WhiteAggregate[14]=WhiteRookProm7.getCurrentPositionXY();
-		WhiteAggregate[15]=WhiteRookProm8.getCurrentPositionXY();
-		
-		WhiteAggregate[16]=WhiteQueenProm1.getCurrentPositionXY();
-		WhiteAggregate[17]=WhiteQueenProm2.getCurrentPositionXY();
-		WhiteAggregate[18]=WhiteQueenProm3.getCurrentPositionXY();
-		WhiteAggregate[19]=WhiteQueenProm4.getCurrentPositionXY();
-		WhiteAggregate[20]=WhiteQueenProm5.getCurrentPositionXY();
-		WhiteAggregate[21]=WhiteQueenProm6.getCurrentPositionXY();
-		WhiteAggregate[22]=WhiteQueenProm7.getCurrentPositionXY();
-		WhiteAggregate[23]=WhiteQueenProm8.getCurrentPositionXY();
-		
-		WhiteAggregate[24]=WhiteBishopProm1.getCurrentPositionXY();
-		WhiteAggregate[25]=WhiteBishopProm2.getCurrentPositionXY();
-		WhiteAggregate[26]=WhiteBishopProm3.getCurrentPositionXY();
-		WhiteAggregate[27]=WhiteBishopProm4.getCurrentPositionXY();
-		WhiteAggregate[28]=WhiteBishopProm5.getCurrentPositionXY();
-		WhiteAggregate[29]=WhiteBishopProm6.getCurrentPositionXY();
-		WhiteAggregate[30]=WhiteBishopProm7.getCurrentPositionXY();
-		WhiteAggregate[31]=WhiteBishopProm8.getCurrentPositionXY();
-		
-		WhiteAggregate[32]=WhiteKnightProm1.getCurrentPositionXY();
-		WhiteAggregate[33]=WhiteKnightProm2.getCurrentPositionXY();
-		WhiteAggregate[34]=WhiteKnightProm3.getCurrentPositionXY();
-		WhiteAggregate[35]=WhiteKnightProm4.getCurrentPositionXY();
-		WhiteAggregate[36]=WhiteKnightProm5.getCurrentPositionXY();
-		WhiteAggregate[37]=WhiteKnightProm6.getCurrentPositionXY();
-		WhiteAggregate[38]=WhiteKnightProm7.getCurrentPositionXY();
-		WhiteAggregate[39]=WhiteKnightProm8.getCurrentPositionXY();
-		
-		WhiteAggregate[40]=WhiteRookH1.getCurrentPositionXY();
-		WhiteAggregate[41]=WhitePawnD2.getCurrentPositionXY();
-		WhiteAggregate[42]=WhiteBishopF1.getCurrentPositionXY();
-		WhiteAggregate[43]=WhiteKnightG1.getCurrentPositionXY();
-		WhiteAggregate[44]=WhitePawnE2.getCurrentPositionXY();
-		WhiteAggregate[45]=WhitePawnF2.getCurrentPositionXY();
-		WhiteAggregate[46]=WhitePawnG2.getCurrentPositionXY();
-		WhiteAggregate[47]=WhitePawnH2.getCurrentPositionXY();
-
-		return WhiteAggregate;
+		}		
 	}
 	static int[][] aggregateBlackPawns(){
-		int [][] BlackPawnAggregate = new int [8][2];
 		
-
+		int [][] BlackPawnAggregate = new int [8][2];
+	
 		if(BlackPawnB7.getEnPassant()){
 			BlackPawnAggregate[0]=BlackPawnB7.getCurrentPositionXY();
 		}
@@ -752,15 +617,10 @@ public static void updateKill(int[]CurrentXY){
 		}
 		return BlackPawnAggregate;
 	}
-	
 	static int[][] aggregateBlacksEXKing(String CurrentTitle, int [] ComXY){
 		//Used for check mechanic specifically. Excludes White King position
 		
-		//toDO Must update array length
 		int [][] BlackAggregate = new int [47][2];
-		
-		
-		//insert black pieces here such as...
 
 		if (CurrentTitle == "Black Pawn (A7)"){
 			BlackAggregate[0]=ComXY;
@@ -1055,8 +915,7 @@ public static void updateKill(int[]CurrentXY){
 	}
 	static int[][] aggregateWhitesForCheck(String CurrentTitle, int [] ComXY){
 		//Used for check mechanic specifically. 
-		
-		//toDO Must update array length
+
 		int [][] WhiteAggregate = new int [48][2];
 		
 		WhiteAggregate = aggregateWhites();
@@ -1071,5 +930,4 @@ public static void updateKill(int[]CurrentXY){
 		}
 		return WhiteAggregate;
 	}
-
 }

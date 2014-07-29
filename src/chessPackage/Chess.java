@@ -1,38 +1,29 @@
 package chessPackage;
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame; //imports JFrame library
-import javax.swing.JButton; //imports JButton library
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRootPane;
-import javax.swing.SwingUtilities;
-import javax.swing.border.LineBorder;
-import javax.swing.plaf.basic.BasicBorders;
-import javax.swing.plaf.metal.MetalBorders;
 
+import javax.swing.JFrame; 
+import javax.swing.JButton; 
+import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 import java.awt.Color;
-import java.awt.GridLayout; //imports GridLayout library
-import java.awt.Image;
-import java.awt.Insets;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.URL;
 import java.util.Arrays;
 
-//v2 chess
 public class Chess extends JFrame  implements ActionListener {
 	
 	//Variables
 	private static final long serialVersionUID = 1L;
 	static boolean Highlighted = false;
-	static JButton ComingFrom = null;
 	static boolean WhiteTurn = true;
-	static int[][]PossibleXY;
+	static boolean ActivateWhiteRightCastle = false;
+	static boolean ActivateWhiteLeftCastle = false;
+	static boolean ActivateBlackLeftCastle = false;
+	static boolean ActivateBlackRightCastle = false;
+	static JButton ComingFrom = null;	
 	static String CurrentTitle;
 	static String CurrentColor;
+	static int[][] PossibleXY;
 	static int GlobalWhiteRookProm = 0;
 	static int GlobalWhiteQueenProm = 0;
 	static int GlobalWhiteKnightProm = 0;
@@ -41,10 +32,6 @@ public class Chess extends JFrame  implements ActionListener {
 	static int GlobalBlackQueenProm = 0;
 	static int GlobalBlackKnightProm = 0;
 	static int GlobalBlackBishopProm = 0;
-	static boolean ActivateWhiteRightCastle = false;
-	static boolean ActivateWhiteLeftCastle = false;
-	static boolean ActivateBlackLeftCastle = false;
-	static boolean ActivateBlackRightCastle = false;
 	
 	//Grid Coordinates
 	static final int[] A8ComXY = {0,0};
@@ -57,26 +44,26 @@ public class Chess extends JFrame  implements ActionListener {
 
 	static final int[] A6ComXY = {0,2};
 	static final int A6ComX = 0;
-	static final  int A6ComY = 2;
+	static final int A6ComY = 2;
 
 	static final int[] A5ComXY = {0,3};
-	static final  int A5ComX = 0;
+	static final int A5ComX = 0;
 	static final int A5ComY = 3;
 
 	static final int[] A4ComXY = {0,4};
-	static final  int A4ComX = 0;
+	static final int A4ComX = 0;
 	static final int A4ComY = 4;
 
 	static final int[] A3ComXY = {0,5};
-	static final  int A3ComX = 0;
+	static final int A3ComX = 0;
 	static final int A3ComY = 5;
 
 	static final int[] A2ComXY = {0,6};
-	static final  int A2ComX = 0;
+	static final int A2ComX = 0;
 	static final int A2ComY = 6;
 
 	static final int[] A1ComXY = {0,7};
-	static final  int A1ComX = 0;
+	static final int A1ComX = 0;
 	static final int A1ComY = 7;
 
 	static final int[] B8ComXY = {1,0};
@@ -89,74 +76,74 @@ public class Chess extends JFrame  implements ActionListener {
 
 	static final int[] B6ComXY = {1,2};
 	static final int B6ComX = 1;
-	static final  int B6ComY = 2;
+	static final int B6ComY = 2;
 
 	static final int[] B5ComXY = {1,3};
-	static final  int B5ComX = 1;
+	static final int B5ComX = 1;
 	static final int B5ComY = 3;
 
 	static final int[] B4ComXY = {1,4};
-	static final  int B4ComX = 1;
+	static final int B4ComX = 1;
 	static final int B4ComY = 4;
 
 	static final int[] B3ComXY = {1,5};
-	static final  int B3ComX = 1;
+	static final int B3ComX = 1;
 	static final int B3ComY = 5;
 
 	static final int[] B2ComXY = {1,6};
-	static final  int B2ComX = 1;
+	static final int B2ComX = 1;
 	static final int B2ComY = 6;
 
 	static final int[] B1ComXY = {1,7};
-	static final  int B1ComX = 1;
+	static final int B1ComX = 1;
 	static final int B1ComY = 7;
 
 	static final int[] C8ComXY = {2,0};
-	static final  int C8ComX = 2;
+	static final int C8ComX = 2;
 	static final int C8ComY = 0;
 
 	static final int[] C7ComXY = {2,1};
-	static final  int C7ComX = 2;
+	static final int C7ComX = 2;
 	static final int C7ComY = 1;
 
 	static final int[] C6ComXY = {2,2};
-	static final  int C6ComX = 2;
+	static final int C6ComX = 2;
 	static final int C6ComY = 2;
 
 	static final int[] C5ComXY = {2,3};
-	static final  int C5ComX = 2;
+	static final int C5ComX = 2;
 	static final int C5ComY = 3;
 
 	static final int[] C4ComXY = {2,4};
-	static final  int C4ComX = 2;
+	static final int C4ComX = 2;
 	static final int C4ComY = 4;
 
 	static final int[] C3ComXY = {2,5};
-	static final  int C3ComX = 2;
+	static final int C3ComX = 2;
 	static final int C3ComY = 5;
 
 	static final int[] C2ComXY = {2,6};
-	static final  int C2ComX = 2;
+	static final int C2ComX = 2;
 	static final int C2ComY = 6;
 
 	static final int[] C1ComXY = {2,7};
-	static final  int C1ComX = 2;
+	static final int C1ComX = 2;
 	static final int C1ComY = 7;
 
 	static final int[] D8ComXY = {3,0};
-	static final  int D8ComX = 3;
+	static final int D8ComX = 3;
 	static final int D8ComY = 0;
 
 	static final int[] D7ComXY = {3,1};
-	static final  int D7ComX = 3;
+	static final int D7ComX = 3;
 	static final int D7ComY = 1;
 
 	static final int[] D6ComXY = {3,2};
-	static final  int D6ComX = 3;
+	static final int D6ComX = 3;
 	static final int D6ComY = 2;
 
 	static final int[] D5ComXY = {3,3};
-	static final  int D5ComX = 3;
+	static final int D5ComX = 3;
 	static final int D5ComY = 3;
 
 	static final int[] D4ComXY = {3,4};
@@ -164,143 +151,143 @@ public class Chess extends JFrame  implements ActionListener {
 	static final int D4ComY = 4;
 
 	static final int[] D3ComXY = {3,5};
-	static final  int D3ComX = 3;
+	static final int D3ComX = 3;
 	static final int D3ComY = 5;
 
 	static final int[] D2ComXY = {3,6};
-	static final  int D2ComX = 3;
+	static final int D2ComX = 3;
 	static final int D2ComY = 6;
 
 	static final int[] D1ComXY = {3,7};
-	static final  int D1ComX = 3;
+	static final int D1ComX = 3;
 	static final int D1ComY = 7;
 
 	static final int[] E8ComXY = {4,0};
-	static final  int E8ComX = 4;
+	static final int E8ComX = 4;
 	static final int E8ComY = 0;
 
 	static final int[] E7ComXY = {4,1};
-	static final  int E7ComX = 4;
+	static final int E7ComX = 4;
 	static final int E7ComY = 1;
 
 	static final int[] E6ComXY = {4,2};
-	static final  int E6ComX = 4;
+	static final int E6ComX = 4;
 	static final int E6ComY = 2;
 
 	static final int[] E5ComXY = {4,3};
-	static final  int E5ComX = 4;
+	static final int E5ComX = 4;
 	static final int E5ComY = 3;
 
 	static final int[] E4ComXY = {4,4};
-	static final  int E4ComX = 4;
+	static final int E4ComX = 4;
 	static final int E4ComY = 4;
 
 	static final int[] E3ComXY = {4,5};
-	static final  int E3ComX = 4;
+	static final int E3ComX = 4;
 	static final int E3ComY = 5;
 
 	static final int[] E2ComXY = {4,6};
-	static final  int E2ComX = 4;
+	static final int E2ComX = 4;
 	static final int E2ComY = 6;
 
 	static final int[] E1ComXY = {4,7};
-	static final  int E1ComX = 4;
+	static final int E1ComX = 4;
 	static final int E1ComY = 7;
 
 	static final int[] F8ComXY = {5,0};
-	static final  int F8ComX = 5;
+	static final int F8ComX = 5;
 	static final int F8ComY = 0;
 
 	static final int[] F7ComXY = {5,1};
-	static final  int F7ComX = 5;
+	static final int F7ComX = 5;
 	static final int F7ComY = 1;
 
 	static final int[] F6ComXY = {5,2};
-	static final  int F6ComX = 5;
+	static final int F6ComX = 5;
 	static final int F6ComY = 2;
 
 	static final int[] F5ComXY = {5,3};
-	static final  int F5ComX = 5;
+	static final int F5ComX = 5;
 	static final int F5ComY = 3;
 
 	static final int[] F4ComXY = {5,4};
-	static final  int F4ComX = 5;
+	static final int F4ComX = 5;
 	static final int F4ComY = 4;
 
 	static final int[] F3ComXY = {5,5};
-	static final  int F3ComX = 5;
+	static final int F3ComX = 5;
 	static final int F3ComY = 5;
 
 	static final int[] F2ComXY = {5,6};
-	static final  int F2ComX = 5;
+	static final int F2ComX = 5;
 	static final int F2ComY = 6;
 
 	static final int[] F1ComXY = {5,7};
-	static final  int F1ComX = 5;
+	static final int F1ComX = 5;
 	static final int F1ComY = 7;
 
 	static final int[] G8ComXY = {6,0};
-	static final  int G8ComX = 6;
+	static final int G8ComX = 6;
 	static final int G8ComY = 0;
 
 	static final int[] G7ComXY = {6,1};
-	static final  int G7ComX = 6;
+	static final int G7ComX = 6;
 	static final int G7ComY = 1;
 
 	static final int[] G6ComXY = {6,2};
-	static final  int G6ComX = 6;
+	static final int G6ComX = 6;
 	static final int G6ComY = 2;
 
 	static final int[] G5ComXY = {6,3};
-	static final  int G5ComX = 6;
+	static final int G5ComX = 6;
 	static final int G5ComY = 3;
 
 	static final int[] G4ComXY = {6,4};
-	static final  int G4ComX = 6;
+	static final int G4ComX = 6;
 	static final int G4ComY = 4;
 
 	static final int[] G3ComXY = {6,5};
-	static final  int G3ComX = 6;
+	static final int G3ComX = 6;
 	static final int G3ComY = 5;
 
 	static final int[] G2ComXY = {6,6};
-	static final  int G2ComX = 6;
+	static final int G2ComX = 6;
 	static final int G2ComY = 6;
 
 	static final int[] G1ComXY = {6,7};
-	static final  int G1ComX = 6;
+	static final int G1ComX = 6;
 	static final int G1ComY = 7;
 
 	static final int[] H8ComXY = {7,0};
-	static final  int H8ComX = 7;
+	static final int H8ComX = 7;
 	static final int H8ComY = 0;
 
 	static final int[] H7ComXY = {7,1};
-	static final  int H7ComX = 7;
+	static final int H7ComX = 7;
 	static final int H7ComY = 1;
 
 	static final int[] H6ComXY = {7,2};
-	static final  int H6ComX = 7;
+	static final int H6ComX = 7;
 	static final int H6ComY = 2;
 
 	static final int[] H5ComXY = {7,3};
-	static final  int H5ComX = 7;
+	static final int H5ComX = 7;
 	static final int H5ComY = 3;
 
 	static final int[] H4ComXY = {7,4};
-	static final  int H4ComX = 7;
+	static final int H4ComX = 7;
 	static final int H4ComY = 4;
 
 	static final int[] H3ComXY = {7,5};
-	static final  int H3ComX = 7;
+	static final int H3ComX = 7;
 	static final int H3ComY = 5;
 
 	static final int[] H2ComXY = {7,6};
-	static final  int H2ComX = 7;
+	static final int H2ComX = 7;
 	static final int H2ComY = 6;
 
 	static final int[] H1ComXY = {7,7};
-	static final  int H1ComX = 7;
+	static final int H1ComX = 7;
 	static final int H1ComY = 7;
 
 	//A File
@@ -396,13 +383,11 @@ public class Chess extends JFrame  implements ActionListener {
 					grid[x][y] = bA8;
 					bA8.setIcon(BlackRookA8.getIcon());
 					bA8.setName(BlackRookA8.getTitle());
-
 				}
 				if (x == 0 && y == 1){
 					grid[x][y] = bA7;
 					bA7.setIcon(BlackPawnA7.getIcon());
 					bA7.setName(BlackPawnA7.getTitle());
-
 				}
 				if (x == 0 && y == 2){
 					grid[x][y] = bA6;
@@ -675,7 +660,6 @@ public class Chess extends JFrame  implements ActionListener {
 		frame.setVisible(true); //makes frame visible
 		ResetSelection();
 	}
-
 	void SetActionCommand(){
 		//A File
 		bA8.setActionCommand("A8Com");
@@ -824,9 +808,8 @@ public class Chess extends JFrame  implements ActionListener {
 	public static void main(String[] args) {
 		System.out.println("Welcome to Chess");
 		new Chess(8, 8);
-
 	}
-	static void ResetSelection(){
+	void ResetSelection(){
 		bA8.setSelected(false);
 		bA7.setSelected(false);
 		bA6.setSelected(false);
@@ -992,394 +975,298 @@ public class Chess extends JFrame  implements ActionListener {
 		BlackPawnH7.setEnPassant(false);
 	}
 	static String getPiece(int x,int y){
+		
 		String NoPiece = "NoPiece";
-		if (WhitePawnH2.getCurrentPositionX() == x && WhitePawnH2.getCurrentPositionY() == y)
-		{
+		
+		if (WhitePawnH2.getCurrentPositionX() == x && WhitePawnH2.getCurrentPositionY() == y){
 			return WhitePawnH2.getTitle();
 		}	
-		if (WhitePawnG2.getCurrentPositionX() == x && WhitePawnG2.getCurrentPositionY() == y)
-		{
+		if (WhitePawnG2.getCurrentPositionX() == x && WhitePawnG2.getCurrentPositionY() == y){
 			return WhitePawnG2.getTitle();
 		}	
-		if (WhitePawnF2.getCurrentPositionX() == x && WhitePawnF2.getCurrentPositionY() == y)
-		{
+		if (WhitePawnF2.getCurrentPositionX() == x && WhitePawnF2.getCurrentPositionY() == y){
 			return WhitePawnF2.getTitle();
 		}	
-		if (WhitePawnE2.getCurrentPositionX() == x && WhitePawnE2.getCurrentPositionY() == y)
-		{
+		if (WhitePawnE2.getCurrentPositionX() == x && WhitePawnE2.getCurrentPositionY() == y){
 			return WhitePawnE2.getTitle();
 		}	
-		if (WhiteKnightG1.getCurrentPositionX() == x && WhiteKnightG1.getCurrentPositionY() == y)
-		{
+		if (WhiteKnightG1.getCurrentPositionX() == x && WhiteKnightG1.getCurrentPositionY() == y){
 			return WhiteKnightG1.getTitle();
 		}	
-		if (WhiteBishopF1.getCurrentPositionX() == x && WhiteBishopF1.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopF1.getCurrentPositionX() == x && WhiteBishopF1.getCurrentPositionY() == y){
 			return WhiteBishopF1.getTitle();
 		}	
-		if (WhitePawnD2.getCurrentPositionX() == x && WhitePawnD2.getCurrentPositionY() == y)
-		{
+		if (WhitePawnD2.getCurrentPositionX() == x && WhitePawnD2.getCurrentPositionY() == y){
 			return WhitePawnD2.getTitle();
 		}	
-		if (WhiteRookH1.getCurrentPositionX() == x && WhiteRookH1.getCurrentPositionY() == y)
-		{
+		if (WhiteRookH1.getCurrentPositionX() == x && WhiteRookH1.getCurrentPositionY() == y){
 			return WhiteRookH1.getTitle();
 		}	
-		if (WhiteQueenD1.getCurrentPositionX() == x && WhiteQueenD1.getCurrentPositionY() == y)
-		{
+		if (WhiteQueenD1.getCurrentPositionX() == x && WhiteQueenD1.getCurrentPositionY() == y){
 			return WhiteQueenD1.getTitle();
 		}
-		if (WhitePawnA2.getCurrentPositionX() == x && WhitePawnA2.getCurrentPositionY() == y)
-		{
+		if (WhitePawnA2.getCurrentPositionX() == x && WhitePawnA2.getCurrentPositionY() == y){
 			return WhitePawnA2.getTitle();
 		}
-		if (WhitePawnB2.getCurrentPositionX() == x && WhitePawnB2.getCurrentPositionY() == y)
-		{
+		if (WhitePawnB2.getCurrentPositionX() == x && WhitePawnB2.getCurrentPositionY() == y){
 			return WhitePawnB2.getTitle();
 		}
-		if (WhiteKingE1.getCurrentPositionX() == x && WhiteKingE1.getCurrentPositionY() == y)
-		{
+		if (WhiteKingE1.getCurrentPositionX() == x && WhiteKingE1.getCurrentPositionY() == y){
 			return WhiteKingE1.getTitle();
 		}
-		if (WhiteKnightB1.getCurrentPositionX() == x && WhiteKnightB1.getCurrentPositionY() == y)
-		{
+		if (WhiteKnightB1.getCurrentPositionX() == x && WhiteKnightB1.getCurrentPositionY() == y){
 			return WhiteKnightB1.getTitle();
 		}
-		if (WhitePawnC2.getCurrentPositionX() == x && WhitePawnC2.getCurrentPositionY() == y)
-		{
+		if (WhitePawnC2.getCurrentPositionX() == x && WhitePawnC2.getCurrentPositionY() == y){
 			return WhitePawnC2.getTitle();
 		}
-		if (WhiteRookA1.getCurrentPositionX() == x && WhiteRookA1.getCurrentPositionY() == y)
-		{
+		if (WhiteRookA1.getCurrentPositionX() == x && WhiteRookA1.getCurrentPositionY() == y){
 			return WhiteRookA1.getTitle();
 		}
-		if (WhiteBishopC1.getCurrentPositionX() == x && WhiteBishopC1.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopC1.getCurrentPositionX() == x && WhiteBishopC1.getCurrentPositionY() == y){
 			return WhiteBishopC1.getTitle();
 		}
-		if (BlackRookH8.getCurrentPositionX() == x && BlackRookH8.getCurrentPositionY() == y)
-		{
+		if (BlackRookH8.getCurrentPositionX() == x && BlackRookH8.getCurrentPositionY() == y){
 			return BlackRookH8.getTitle();
 		}
-		if (BlackPawnA7.getCurrentPositionX() == x && BlackPawnA7.getCurrentPositionY() == y)
-		{
+		if (BlackPawnA7.getCurrentPositionX() == x && BlackPawnA7.getCurrentPositionY() == y){
 			return BlackPawnA7.getTitle();
 		}
-		if (BlackPawnB7.getCurrentPositionX() == x && BlackPawnB7.getCurrentPositionY() == y)
-		{
+		if (BlackPawnB7.getCurrentPositionX() == x && BlackPawnB7.getCurrentPositionY() == y){
 			return BlackPawnB7.getTitle();
 		}
-		if (BlackKingE8.getCurrentPositionX() == x && BlackKingE8.getCurrentPositionY() == y)
-		{
+		if (BlackKingE8.getCurrentPositionX() == x && BlackKingE8.getCurrentPositionY() == y){
 			return BlackKingE8.getTitle();
 		}
-		if (BlackKnightG8.getCurrentPositionX() == x && BlackKnightG8.getCurrentPositionY() == y)
-		{
+		if (BlackKnightG8.getCurrentPositionX() == x && BlackKnightG8.getCurrentPositionY() == y){
 			return BlackKnightG8.getTitle();
 		}
-		if (BlackKnightB8.getCurrentPositionX() == x && BlackKnightB8.getCurrentPositionY() == y)
-		{
+		if (BlackKnightB8.getCurrentPositionX() == x && BlackKnightB8.getCurrentPositionY() == y){
 			return BlackKnightB8.getTitle();
 		}
-		if (BlackPawnC7.getCurrentPositionX() == x && BlackPawnC7.getCurrentPositionY() == y)
-		{
+		if (BlackPawnC7.getCurrentPositionX() == x && BlackPawnC7.getCurrentPositionY() == y){
 			return BlackPawnC7.getTitle();
 		}
-		if (BlackPawnD7.getCurrentPositionX() == x && BlackPawnD7.getCurrentPositionY() == y)
-		{
+		if (BlackPawnD7.getCurrentPositionX() == x && BlackPawnD7.getCurrentPositionY() == y){
 			return BlackPawnD7.getTitle();
 		}
-		if (BlackPawnE7.getCurrentPositionX() == x && BlackPawnE7.getCurrentPositionY() == y)
-		{
+		if (BlackPawnE7.getCurrentPositionX() == x && BlackPawnE7.getCurrentPositionY() == y){
 			return BlackPawnE7.getTitle();
 		}
-		if (BlackPawnF7.getCurrentPositionX() == x && BlackPawnF7.getCurrentPositionY() == y)
-		{
+		if (BlackPawnF7.getCurrentPositionX() == x && BlackPawnF7.getCurrentPositionY() == y){
 			return BlackPawnF7.getTitle();
 		}
-		if (BlackPawnG7.getCurrentPositionX() == x && BlackPawnG7.getCurrentPositionY() == y)
-		{
+		if (BlackPawnG7.getCurrentPositionX() == x && BlackPawnG7.getCurrentPositionY() == y){
 			return BlackPawnG7.getTitle();
 		}
-		if (BlackPawnH7.getCurrentPositionX() == x && BlackPawnH7.getCurrentPositionY() == y)
-		{
+		if (BlackPawnH7.getCurrentPositionX() == x && BlackPawnH7.getCurrentPositionY() == y){
 			return BlackPawnH7.getTitle();
 		}
-		if (BlackRookA8.getCurrentPositionX() == x && BlackRookA8.getCurrentPositionY() == y)
-		{
+		if (BlackRookA8.getCurrentPositionX() == x && BlackRookA8.getCurrentPositionY() == y){
 			return BlackRookA8.getTitle();
 		}
-		if (BlackBishopC8.getCurrentPositionX() == x && BlackBishopC8.getCurrentPositionY() == y)
-		{
+		if (BlackBishopC8.getCurrentPositionX() == x && BlackBishopC8.getCurrentPositionY() == y){
 			return BlackBishopC8.getTitle();
 		}
-		if (BlackBishopF8.getCurrentPositionX() == x && BlackBishopF8.getCurrentPositionY() == y)
-		{
+		if (BlackBishopF8.getCurrentPositionX() == x && BlackBishopF8.getCurrentPositionY() == y){
 			return BlackBishopF8.getTitle();
 		}
-		if (BlackQueenD8.getCurrentPositionX() == x && BlackQueenD8.getCurrentPositionY() == y)
-		{
+		if (BlackQueenD8.getCurrentPositionX() == x && BlackQueenD8.getCurrentPositionY() == y){
 			return BlackQueenD8.getTitle();
 		}
-		if (BlackRookH8.getCurrentPositionX() == x && BlackRookH8.getCurrentPositionY() == y)
-		{
+		if (BlackRookH8.getCurrentPositionX() == x && BlackRookH8.getCurrentPositionY() == y){
 			return BlackRookH8.getTitle();
 		}
-		if (WhiteKnightProm8.getCurrentPositionX() == x && WhiteKnightProm8.getCurrentPositionY() == y)
-		{
+		if (WhiteKnightProm8.getCurrentPositionX() == x && WhiteKnightProm8.getCurrentPositionY() == y){
 			return WhiteKnightProm8.getTitle();
 		}
-		if (WhiteKnightProm7.getCurrentPositionX() == x && WhiteKnightProm7.getCurrentPositionY() == y)
-		{
+		if (WhiteKnightProm7.getCurrentPositionX() == x && WhiteKnightProm7.getCurrentPositionY() == y){
 			return WhiteKnightProm7.getTitle();
 		}
-		if (WhiteKnightProm6.getCurrentPositionX() == x && WhiteKnightProm6.getCurrentPositionY() == y)
-		{
+		if (WhiteKnightProm6.getCurrentPositionX() == x && WhiteKnightProm6.getCurrentPositionY() == y){
 			return WhiteKnightProm6.getTitle();
 		}
-		if (WhiteKnightProm5.getCurrentPositionX() == x && WhiteKnightProm5.getCurrentPositionY() == y)
-		{
+		if (WhiteKnightProm5.getCurrentPositionX() == x && WhiteKnightProm5.getCurrentPositionY() == y){
 			return WhiteKnightProm5.getTitle();
 		}
-		if (WhiteKnightProm4.getCurrentPositionX() == x && WhiteKnightProm4.getCurrentPositionY() == y)
-		{
+		if (WhiteKnightProm4.getCurrentPositionX() == x && WhiteKnightProm4.getCurrentPositionY() == y){
 			return WhiteKnightProm4.getTitle();
 		}
-		if (WhiteKnightProm3.getCurrentPositionX() == x && WhiteKnightProm3.getCurrentPositionY() == y)
-		{
+		if (WhiteKnightProm3.getCurrentPositionX() == x && WhiteKnightProm3.getCurrentPositionY() == y){
 			return WhiteKnightProm3.getTitle();
 		}
-		if (WhiteKnightProm2.getCurrentPositionX() == x && WhiteKnightProm2.getCurrentPositionY() == y)
-		{
+		if (WhiteKnightProm2.getCurrentPositionX() == x && WhiteKnightProm2.getCurrentPositionY() == y){
 			return WhiteKnightProm2.getTitle();
 		}
-		if (WhiteKnightProm1.getCurrentPositionX() == x && WhiteKnightProm1.getCurrentPositionY() == y)
-		{
+		if (WhiteKnightProm1.getCurrentPositionX() == x && WhiteKnightProm1.getCurrentPositionY() == y){
 			return WhiteKnightProm1.getTitle();
 		}
-		if (WhiteBishopProm8.getCurrentPositionX() == x && WhiteBishopProm8.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopProm8.getCurrentPositionX() == x && WhiteBishopProm8.getCurrentPositionY() == y){
 			return WhiteBishopProm8.getTitle();
 		}
-		if (WhiteBishopProm7.getCurrentPositionX() == x && WhiteBishopProm7.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopProm7.getCurrentPositionX() == x && WhiteBishopProm7.getCurrentPositionY() == y){
 			return WhiteBishopProm7.getTitle();
 		}
-		if (WhiteBishopProm6.getCurrentPositionX() == x && WhiteBishopProm6.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopProm6.getCurrentPositionX() == x && WhiteBishopProm6.getCurrentPositionY() == y){
 			return WhiteBishopProm6.getTitle();
 		}
-		if (WhiteBishopProm5.getCurrentPositionX() == x && WhiteBishopProm5.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopProm5.getCurrentPositionX() == x && WhiteBishopProm5.getCurrentPositionY() == y){
 			return WhiteBishopProm5.getTitle();
 		}
-		if (WhiteBishopProm4.getCurrentPositionX() == x && WhiteBishopProm4.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopProm4.getCurrentPositionX() == x && WhiteBishopProm4.getCurrentPositionY() == y){
 			return WhiteBishopProm4.getTitle();
 		}
-		if (WhiteBishopProm3.getCurrentPositionX() == x && WhiteBishopProm3.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopProm3.getCurrentPositionX() == x && WhiteBishopProm3.getCurrentPositionY() == y){
 			return WhiteBishopProm3.getTitle();
 		}
-		if (WhiteBishopProm2.getCurrentPositionX() == x && WhiteBishopProm2.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopProm2.getCurrentPositionX() == x && WhiteBishopProm2.getCurrentPositionY() == y){
 			return WhiteBishopProm2.getTitle();
 		}
-		if (WhiteBishopProm1.getCurrentPositionX() == x && WhiteBishopProm1.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopProm1.getCurrentPositionX() == x && WhiteBishopProm1.getCurrentPositionY() == y){
 			return WhiteBishopProm1.getTitle();
 		}
-		if (WhiteQueenProm8.getCurrentPositionX() == x && WhiteQueenProm8.getCurrentPositionY() == y)
-		{
+		if (WhiteQueenProm8.getCurrentPositionX() == x && WhiteQueenProm8.getCurrentPositionY() == y){
 			return WhiteQueenProm8.getTitle();
 		}
-		if (WhiteQueenProm7.getCurrentPositionX() == x && WhiteQueenProm7.getCurrentPositionY() == y)
-		{
+		if (WhiteQueenProm7.getCurrentPositionX() == x && WhiteQueenProm7.getCurrentPositionY() == y){
 			return WhiteQueenProm7.getTitle();
 		}
-		if (WhiteQueenProm6.getCurrentPositionX() == x && WhiteQueenProm6.getCurrentPositionY() == y)
-		{
+		if (WhiteQueenProm6.getCurrentPositionX() == x && WhiteQueenProm6.getCurrentPositionY() == y){
 			return WhiteQueenProm6.getTitle();
 		}
-		if (WhiteQueenProm5.getCurrentPositionX() == x && WhiteQueenProm5.getCurrentPositionY() == y)
-		{
+		if (WhiteQueenProm5.getCurrentPositionX() == x && WhiteQueenProm5.getCurrentPositionY() == y){
 			return WhiteQueenProm5.getTitle();
 		}
-		if (WhiteQueenProm4.getCurrentPositionX() == x && WhiteQueenProm4.getCurrentPositionY() == y)
-		{
+		if (WhiteQueenProm4.getCurrentPositionX() == x && WhiteQueenProm4.getCurrentPositionY() == y){
 			return WhiteQueenProm4.getTitle();
 		}
-		if (WhiteQueenProm3.getCurrentPositionX() == x && WhiteQueenProm3.getCurrentPositionY() == y)
-		{
+		if (WhiteQueenProm3.getCurrentPositionX() == x && WhiteQueenProm3.getCurrentPositionY() == y){
 			return WhiteQueenProm3.getTitle();
 		}
-		if (WhiteQueenProm2.getCurrentPositionX() == x && WhiteQueenProm2.getCurrentPositionY() == y)
-		{
+		if (WhiteQueenProm2.getCurrentPositionX() == x && WhiteQueenProm2.getCurrentPositionY() == y){
 			return WhiteQueenProm2.getTitle();
 		}
-		if (WhiteQueenProm1.getCurrentPositionX() == x && WhiteQueenProm1.getCurrentPositionY() == y)
-		{
+		if (WhiteQueenProm1.getCurrentPositionX() == x && WhiteQueenProm1.getCurrentPositionY() == y){
 			return WhiteQueenProm1.getTitle();
 		}
-		if (WhiteRookProm8.getCurrentPositionX() == x && WhiteRookProm8.getCurrentPositionY() == y)
-		{
+		if (WhiteRookProm8.getCurrentPositionX() == x && WhiteRookProm8.getCurrentPositionY() == y){
 			return WhiteRookProm8.getTitle();
 		}
-		if (WhiteRookProm7.getCurrentPositionX() == x && WhiteRookProm7.getCurrentPositionY() == y)
-		{
+		if (WhiteRookProm7.getCurrentPositionX() == x && WhiteRookProm7.getCurrentPositionY() == y){
 			return WhiteRookProm7.getTitle();
 		}
-		if (WhiteRookProm6.getCurrentPositionX() == x && WhiteRookProm6.getCurrentPositionY() == y)
-		{
+		if (WhiteRookProm6.getCurrentPositionX() == x && WhiteRookProm6.getCurrentPositionY() == y){
 			return WhiteRookProm6.getTitle();
 		}
-		if (WhiteRookProm5.getCurrentPositionX() == x && WhiteRookProm5.getCurrentPositionY() == y)
-		{
+		if (WhiteRookProm5.getCurrentPositionX() == x && WhiteRookProm5.getCurrentPositionY() == y){
 			return WhiteRookProm5.getTitle();
 		}
-		if (WhiteRookProm4.getCurrentPositionX() == x && WhiteRookProm4.getCurrentPositionY() == y)
-		{
+		if (WhiteRookProm4.getCurrentPositionX() == x && WhiteRookProm4.getCurrentPositionY() == y){
 			return WhiteRookProm4.getTitle();
 		}
-		if (WhiteRookProm3.getCurrentPositionX() == x && WhiteRookProm3.getCurrentPositionY() == y)
-		{
+		if (WhiteRookProm3.getCurrentPositionX() == x && WhiteRookProm3.getCurrentPositionY() == y){
 			return WhiteRookProm3.getTitle();
 		}
-		if (WhiteRookProm2.getCurrentPositionX() == x && WhiteRookProm2.getCurrentPositionY() == y)
-		{
+		if (WhiteRookProm2.getCurrentPositionX() == x && WhiteRookProm2.getCurrentPositionY() == y){
 			return WhiteRookProm2.getTitle();
 		}
-		if (WhiteRookProm.getCurrentPositionX() == x && WhiteRookProm.getCurrentPositionY() == y)
-		{
-			return WhiteRookProm.getTitle();
+		if (WhiteRookProm1.getCurrentPositionX() == x && WhiteRookProm1.getCurrentPositionY() == y){
+			return WhiteRookProm1.getTitle();
 		}
-		/////////////////////////////////////////////////////////////////////////
-		if (BlackKnightProm8.getCurrentPositionX() == x && BlackKnightProm8.getCurrentPositionY() == y)
-		{
+		if (BlackKnightProm8.getCurrentPositionX() == x && BlackKnightProm8.getCurrentPositionY() == y){
 			return BlackKnightProm8.getTitle();
 		}
-		if (BlackKnightProm7.getCurrentPositionX() == x && BlackKnightProm7.getCurrentPositionY() == y)
-		{
+		if (BlackKnightProm7.getCurrentPositionX() == x && BlackKnightProm7.getCurrentPositionY() == y){
 			return BlackKnightProm7.getTitle();
 		}
-		if (BlackKnightProm6.getCurrentPositionX() == x && BlackKnightProm6.getCurrentPositionY() == y)
-		{
+		if (BlackKnightProm6.getCurrentPositionX() == x && BlackKnightProm6.getCurrentPositionY() == y){
 			return BlackKnightProm6.getTitle();
 		}
-		if (BlackKnightProm5.getCurrentPositionX() == x && BlackKnightProm5.getCurrentPositionY() == y)
-		{
+		if (BlackKnightProm5.getCurrentPositionX() == x && BlackKnightProm5.getCurrentPositionY() == y){
 			return BlackKnightProm5.getTitle();
 		}
-		if (BlackKnightProm4.getCurrentPositionX() == x && BlackKnightProm4.getCurrentPositionY() == y)
-		{
+		if (BlackKnightProm4.getCurrentPositionX() == x && BlackKnightProm4.getCurrentPositionY() == y){
 			return BlackKnightProm4.getTitle();
 		}
-		if (BlackKnightProm3.getCurrentPositionX() == x && BlackKnightProm3.getCurrentPositionY() == y)
-		{
+		if (BlackKnightProm3.getCurrentPositionX() == x && BlackKnightProm3.getCurrentPositionY() == y){
 			return BlackKnightProm3.getTitle();
 		}
-		if (BlackKnightProm2.getCurrentPositionX() == x && BlackKnightProm2.getCurrentPositionY() == y)
-		{
+		if (BlackKnightProm2.getCurrentPositionX() == x && BlackKnightProm2.getCurrentPositionY() == y){
 			return BlackKnightProm2.getTitle();
 		}
-		if (BlackKnightProm1.getCurrentPositionX() == x && BlackKnightProm1.getCurrentPositionY() == y)
-		{
+		if (BlackKnightProm1.getCurrentPositionX() == x && BlackKnightProm1.getCurrentPositionY() == y){
 			return BlackKnightProm1.getTitle();
 		}
-		if (BlackBishopProm8.getCurrentPositionX() == x && BlackBishopProm8.getCurrentPositionY() == y)
-		{
+		if (BlackBishopProm8.getCurrentPositionX() == x && BlackBishopProm8.getCurrentPositionY() == y){
 			return BlackBishopProm8.getTitle();
 		}
-		if (BlackBishopProm7.getCurrentPositionX() == x && BlackBishopProm7.getCurrentPositionY() == y)
-		{
+		if (BlackBishopProm7.getCurrentPositionX() == x && BlackBishopProm7.getCurrentPositionY() == y){
 			return BlackBishopProm7.getTitle();
 		}
-		if (BlackBishopProm6.getCurrentPositionX() == x && BlackBishopProm6.getCurrentPositionY() == y)
-		{
+		if (BlackBishopProm6.getCurrentPositionX() == x && BlackBishopProm6.getCurrentPositionY() == y){
 			return BlackBishopProm6.getTitle();
 		}
-		if (BlackBishopProm5.getCurrentPositionX() == x && BlackBishopProm5.getCurrentPositionY() == y)
-		{
+		if (BlackBishopProm5.getCurrentPositionX() == x && BlackBishopProm5.getCurrentPositionY() == y){
 			return BlackBishopProm5.getTitle();
 		}
-		if (BlackBishopProm4.getCurrentPositionX() == x && BlackBishopProm4.getCurrentPositionY() == y)
-		{
+		if (BlackBishopProm4.getCurrentPositionX() == x && BlackBishopProm4.getCurrentPositionY() == y){
 			return BlackBishopProm4.getTitle();
 		}
-		if (BlackBishopProm3.getCurrentPositionX() == x && BlackBishopProm3.getCurrentPositionY() == y)
-		{
+		if (BlackBishopProm3.getCurrentPositionX() == x && BlackBishopProm3.getCurrentPositionY() == y){
 			return BlackBishopProm3.getTitle();
 		}
-		if (BlackBishopProm2.getCurrentPositionX() == x && BlackBishopProm2.getCurrentPositionY() == y)
-		{
+		if (BlackBishopProm2.getCurrentPositionX() == x && BlackBishopProm2.getCurrentPositionY() == y){
 			return BlackBishopProm2.getTitle();
 		}
-		if (BlackBishopProm1.getCurrentPositionX() == x && BlackBishopProm1.getCurrentPositionY() == y)
-		{
+		if (BlackBishopProm1.getCurrentPositionX() == x && BlackBishopProm1.getCurrentPositionY() == y){
 			return BlackBishopProm1.getTitle();
 		}
-		if (BlackQueenProm8.getCurrentPositionX() == x && BlackQueenProm8.getCurrentPositionY() == y)
-		{
+		if (BlackQueenProm8.getCurrentPositionX() == x && BlackQueenProm8.getCurrentPositionY() == y){
 			return BlackQueenProm8.getTitle();
 		}
-		if (BlackQueenProm7.getCurrentPositionX() == x && BlackQueenProm7.getCurrentPositionY() == y)
-		{
+		if (BlackQueenProm7.getCurrentPositionX() == x && BlackQueenProm7.getCurrentPositionY() == y){
 			return BlackQueenProm7.getTitle();
 		}
-		if (BlackQueenProm6.getCurrentPositionX() == x && BlackQueenProm6.getCurrentPositionY() == y)
-		{
+		if (BlackQueenProm6.getCurrentPositionX() == x && BlackQueenProm6.getCurrentPositionY() == y){
 			return BlackQueenProm6.getTitle();
 		}
-		if (BlackQueenProm5.getCurrentPositionX() == x && BlackQueenProm5.getCurrentPositionY() == y)
-		{
+		if (BlackQueenProm5.getCurrentPositionX() == x && BlackQueenProm5.getCurrentPositionY() == y){
 			return BlackQueenProm5.getTitle();
 		}
-		if (BlackQueenProm4.getCurrentPositionX() == x && BlackQueenProm4.getCurrentPositionY() == y)
-		{
+		if (BlackQueenProm4.getCurrentPositionX() == x && BlackQueenProm4.getCurrentPositionY() == y){
 			return BlackQueenProm4.getTitle();
 		}
-		if (BlackQueenProm3.getCurrentPositionX() == x && BlackQueenProm3.getCurrentPositionY() == y)
-		{
+		if (BlackQueenProm3.getCurrentPositionX() == x && BlackQueenProm3.getCurrentPositionY() == y){
 			return BlackQueenProm3.getTitle();
 		}
-		if (BlackQueenProm2.getCurrentPositionX() == x && BlackQueenProm2.getCurrentPositionY() == y)
-		{
+		if (BlackQueenProm2.getCurrentPositionX() == x && BlackQueenProm2.getCurrentPositionY() == y){
 			return BlackQueenProm2.getTitle();
 		}
-		if (BlackQueenProm1.getCurrentPositionX() == x && BlackQueenProm1.getCurrentPositionY() == y)
-		{
+		if (BlackQueenProm1.getCurrentPositionX() == x && BlackQueenProm1.getCurrentPositionY() == y){
 			return BlackQueenProm1.getTitle();
 		}
-		if (BlackRookProm8.getCurrentPositionX() == x && BlackRookProm8.getCurrentPositionY() == y)
-		{
+		if (BlackRookProm8.getCurrentPositionX() == x && BlackRookProm8.getCurrentPositionY() == y){
 			return BlackRookProm8.getTitle();
 		}
-		if (BlackRookProm7.getCurrentPositionX() == x && BlackRookProm7.getCurrentPositionY() == y)
-		{
+		if (BlackRookProm7.getCurrentPositionX() == x && BlackRookProm7.getCurrentPositionY() == y){
 			return BlackRookProm7.getTitle();
 		}
-		if (BlackRookProm6.getCurrentPositionX() == x && BlackRookProm6.getCurrentPositionY() == y)
-		{
+		if (BlackRookProm6.getCurrentPositionX() == x && BlackRookProm6.getCurrentPositionY() == y){
 			return BlackRookProm6.getTitle();
 		}
-		if (BlackRookProm5.getCurrentPositionX() == x && BlackRookProm5.getCurrentPositionY() == y)
-		{
+		if (BlackRookProm5.getCurrentPositionX() == x && BlackRookProm5.getCurrentPositionY() == y){
 			return BlackRookProm5.getTitle();
 		}
-		if (BlackRookProm4.getCurrentPositionX() == x && BlackRookProm4.getCurrentPositionY() == y)
-		{
+		if (BlackRookProm4.getCurrentPositionX() == x && BlackRookProm4.getCurrentPositionY() == y){
 			return BlackRookProm4.getTitle();
 		}
-		if (BlackRookProm3.getCurrentPositionX() == x && BlackRookProm3.getCurrentPositionY() == y)
-		{
+		if (BlackRookProm3.getCurrentPositionX() == x && BlackRookProm3.getCurrentPositionY() == y){
 			return BlackRookProm3.getTitle();
 		}
-		if (BlackRookProm2.getCurrentPositionX() == x && BlackRookProm2.getCurrentPositionY() == y)
-		{
+		if (BlackRookProm2.getCurrentPositionX() == x && BlackRookProm2.getCurrentPositionY() == y){
 			return BlackRookProm2.getTitle();
 		}
-		if (BlackRookProm1.getCurrentPositionX() == x && BlackRookProm1.getCurrentPositionY() == y)
-		{
+		if (BlackRookProm1.getCurrentPositionX() == x && BlackRookProm1.getCurrentPositionY() == y){
 			return BlackRookProm1.getTitle();
 		}
 		return NoPiece;    
@@ -2273,13 +2160,13 @@ public class Chess extends JFrame  implements ActionListener {
 		}
 		if (CurrentTitle == "White Rook (Prom1)"){
 			System.out.println("You have set White Rook (Prom1) on to " + Arrays.toString(input));
-			J.setIcon(WhiteRookProm.getIcon());
+			J.setIcon(WhiteRookProm1.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
 			WhiteTurn = false;
-			WhiteRookProm.setCurrentPositionX(X);
-			WhiteRookProm.setCurrentPositionY(Y);
-			WhiteRookProm.setCurrentPositionXY(X,Y);
+			WhiteRookProm1.setCurrentPositionX(X);
+			WhiteRookProm1.setCurrentPositionY(Y);
+			WhiteRookProm1.setCurrentPositionXY(X,Y);
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
@@ -3059,18 +2946,15 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 	}
-    private static void resetMainFrame(JFrame PromotionFrame, LightBox light, JPanel PromotionPanel, JButton J){
-
-		frame.toFront();
+    static void resetMainFrame(JFrame PromotionFrame, LightBox light, JPanel PromotionPanel, JButton J){
+    	frame.toFront();
     	frame.setEnabled(true);
     	PromotionFrame.dispose();
-    	
     	J.setIcon(null);
     	J.setName(null);
-    	
     	light.closeLightBox(frame, PromotionPanel);
     }
-	private static void ActivatePopUp(boolean whiteTurn, final JButton J, final int X) {
+	static void ActivatePopUp(boolean whiteTurn, final JButton J, final int X) {
 		final JFrame PromotionFrame = new JFrame();
 		final JPanel PromotionPanel = new JPanel();
 		final LightBox Light = new LightBox();
@@ -3096,12 +2980,11 @@ public class Chess extends JFrame  implements ActionListener {
 		PromotionFrame.add(grid[2][0]);
 		
 		grid[3][0] = KnightButton;
-		PromotionFrame.add(grid[3][0]);
-		
+		PromotionFrame.add(grid[3][0]);	
         
         if (!whiteTurn){
 			//Activate white promotion
-	        RookButton.setIcon(WhiteRookProm.getIcon());      
+	        RookButton.setIcon(WhiteRookA1.getIcon());      
 	        QueenButton.setIcon(WhiteQueenD1.getIcon()); 
 	        BishopButton.setIcon(WhiteBishopC1.getIcon());
 	        KnightButton.setIcon(WhiteKnightB1.getIcon());
@@ -3114,15 +2997,15 @@ public class Chess extends JFrame  implements ActionListener {
 	            @Override
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
 	            	resetMainFrame(PromotionFrame,Light,PromotionPanel,J);
-	            	J.setIcon(WhiteRookProm.getIcon());
+	            	J.setIcon(WhiteRookA1.getIcon());
 	            	GlobalWhiteRookProm++;
 
 	            	if (GlobalWhiteRookProm == 1){
 	            		J.setName("White Rook (Prom1)");
-		    			WhiteRookProm.setCurrentPositionX(X);
-		    			WhiteRookProm.setCurrentPositionY(0);
-		    			WhiteRookProm.setCurrentPositionXY(X,0);
-		    			WhiteRookProm.setActive(true);
+		    			WhiteRookProm1.setCurrentPositionX(X);
+		    			WhiteRookProm1.setCurrentPositionY(0);
+		    			WhiteRookProm1.setCurrentPositionXY(X,0);
+		    			WhiteRookProm1.setActive(true);
 	    			}
 	            	if (GlobalWhiteRookProm == 2){
 	            		J.setName("White Rook (Prom2)");
@@ -3677,398 +3560,295 @@ public class Chess extends JFrame  implements ActionListener {
 		}
 	}
 	static String getColor(int x,int y){
+		
 		String NoColor = "NoColor";
-		if (WhiteKnightG1.getCurrentPositionX() == x && WhiteKnightG1.getCurrentPositionY() == y)
-		{
+		
+		if (WhiteKnightG1.getCurrentPositionX() == x && WhiteKnightG1.getCurrentPositionY() == y){
 			return WhiteKnightG1.getColor();
 		}
-		if (WhiteBishopF1.getCurrentPositionX() == x && WhiteBishopF1.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopF1.getCurrentPositionX() == x && WhiteBishopF1.getCurrentPositionY() == y){
 			return WhiteBishopF1.getColor();
 		}
-		if (WhitePawnH2.getCurrentPositionX() == x && WhitePawnH2.getCurrentPositionY() == y)
-		{
+		if (WhitePawnH2.getCurrentPositionX() == x && WhitePawnH2.getCurrentPositionY() == y){
 			return WhitePawnH2.getColor();
 		}
-		if (WhitePawnG2.getCurrentPositionX() == x && WhitePawnG2.getCurrentPositionY() == y)
-		{
+		if (WhitePawnG2.getCurrentPositionX() == x && WhitePawnG2.getCurrentPositionY() == y){
 			return WhitePawnG2.getColor();
 		}
-		if (WhitePawnF2.getCurrentPositionX() == x && WhitePawnF2.getCurrentPositionY() == y)
-		{
+		if (WhitePawnF2.getCurrentPositionX() == x && WhitePawnF2.getCurrentPositionY() == y){
 			return WhitePawnF2.getColor();
 		}
-		if (WhitePawnE2.getCurrentPositionX() == x && WhitePawnE2.getCurrentPositionY() == y)
-		{
+		if (WhitePawnE2.getCurrentPositionX() == x && WhitePawnE2.getCurrentPositionY() == y){
 			return WhitePawnE2.getColor();
 		}
-		if (WhitePawnD2.getCurrentPositionX() == x && WhitePawnD2.getCurrentPositionY() == y)
-		{
+		if (WhitePawnD2.getCurrentPositionX() == x && WhitePawnD2.getCurrentPositionY() == y){
 			return WhitePawnD2.getColor();
 		}
-		if (WhiteRookH1.getCurrentPositionX() == x && WhiteRookH1.getCurrentPositionY() == y)
-		{
+		if (WhiteRookH1.getCurrentPositionX() == x && WhiteRookH1.getCurrentPositionY() == y){
 			return WhiteRookH1.getColor();
 		}
-		if (WhiteQueenD1.getCurrentPositionX() == x && WhiteQueenD1.getCurrentPositionY() == y)
-		{
+		if (WhiteQueenD1.getCurrentPositionX() == x && WhiteQueenD1.getCurrentPositionY() == y){
 			return WhiteQueenD1.getColor();
 		}
-		if (WhiteBishopC1.getCurrentPositionX() == x && WhiteBishopC1.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopC1.getCurrentPositionX() == x && WhiteBishopC1.getCurrentPositionY() == y){
 			return WhiteBishopC1.getColor();
 		}
-		if (WhiteRookA1.getCurrentPositionX() == x && WhiteRookA1.getCurrentPositionY() == y)
-		{
+		if (WhiteRookA1.getCurrentPositionX() == x && WhiteRookA1.getCurrentPositionY() == y){
 			return WhiteRookA1.getColor();
 		}
-		if (WhitePawnA2.getCurrentPositionX() == x && WhitePawnA2.getCurrentPositionY() == y)
-		{
+		if (WhitePawnA2.getCurrentPositionX() == x && WhitePawnA2.getCurrentPositionY() == y){
 			return WhitePawnA2.getColor();
 		}
-		if (WhitePawnB2.getCurrentPositionX() == x && WhitePawnB2.getCurrentPositionY() == y)
-		{
+		if (WhitePawnB2.getCurrentPositionX() == x && WhitePawnB2.getCurrentPositionY() == y){
 			return WhitePawnB2.getColor();
 		}
-		if (WhitePawnC2.getCurrentPositionX() == x && WhitePawnC2.getCurrentPositionY() == y)
-		{
+		if (WhitePawnC2.getCurrentPositionX() == x && WhitePawnC2.getCurrentPositionY() == y){
 			return WhitePawnC2.getColor();
 		}
-		if (WhiteKingE1.getCurrentPositionX() == x && WhiteKingE1.getCurrentPositionY() == y)
-		{
+		if (WhiteKingE1.getCurrentPositionX() == x && WhiteKingE1.getCurrentPositionY() == y){
 			return WhiteKingE1.getColor();
 		}
-		if (WhiteKnightB1.getCurrentPositionX() == x && WhiteKnightB1.getCurrentPositionY() == y)
-		{
+		if (WhiteKnightB1.getCurrentPositionX() == x && WhiteKnightB1.getCurrentPositionY() == y){
 			return WhiteKnightB1.getColor();
 		}
-		if (BlackPawnA7.getCurrentPositionX() == x && BlackPawnA7.getCurrentPositionY() == y)
-		{
+		if (BlackPawnA7.getCurrentPositionX() == x && BlackPawnA7.getCurrentPositionY() == y){
 			return BlackPawnA7.getColor();
 		}
-		if (BlackPawnB7.getCurrentPositionX() == x && BlackPawnB7.getCurrentPositionY() == y)
-		{
+		if (BlackPawnB7.getCurrentPositionX() == x && BlackPawnB7.getCurrentPositionY() == y){
 			return BlackPawnB7.getColor();
 		}
-		if (BlackPawnH7.getCurrentPositionX() == x && BlackPawnH7.getCurrentPositionY() == y)
-		{
+		if (BlackPawnH7.getCurrentPositionX() == x && BlackPawnH7.getCurrentPositionY() == y){
 			return BlackPawnH7.getColor();
 		}
-		if (BlackPawnG7.getCurrentPositionX() == x && BlackPawnG7.getCurrentPositionY() == y)
-		{
+		if (BlackPawnG7.getCurrentPositionX() == x && BlackPawnG7.getCurrentPositionY() == y){
 			return BlackPawnG7.getColor();
 		}
-		if (BlackPawnF7.getCurrentPositionX() == x && BlackPawnF7.getCurrentPositionY() == y)
-		{
+		if (BlackPawnF7.getCurrentPositionX() == x && BlackPawnF7.getCurrentPositionY() == y){
 			return BlackPawnF7.getColor();
 		}
-		if (BlackPawnE7.getCurrentPositionX() == x && BlackPawnE7.getCurrentPositionY() == y)
-		{
+		if (BlackPawnE7.getCurrentPositionX() == x && BlackPawnE7.getCurrentPositionY() == y){
 			return BlackPawnE7.getColor();
 		}
-		if (BlackPawnD7.getCurrentPositionX() == x && BlackPawnD7.getCurrentPositionY() == y)
-		{
+		if (BlackPawnD7.getCurrentPositionX() == x && BlackPawnD7.getCurrentPositionY() == y){
 			return BlackPawnD7.getColor();
 		}
-		if (BlackKingE8.getCurrentPositionX() == x && BlackKingE8.getCurrentPositionY() == y)
-		{
+		if (BlackKingE8.getCurrentPositionX() == x && BlackKingE8.getCurrentPositionY() == y){
 			return BlackKingE8.getColor();
 		}
-		if (BlackKnightB8.getCurrentPositionX() == x && BlackKnightB8.getCurrentPositionY() == y)
-		{
+		if (BlackKnightB8.getCurrentPositionX() == x && BlackKnightB8.getCurrentPositionY() == y){
 			return BlackKnightB8.getColor();
 		}
-		if (BlackKnightG8.getCurrentPositionX() == x && BlackKnightG8.getCurrentPositionY() == y)
-		{
+		if (BlackKnightG8.getCurrentPositionX() == x && BlackKnightG8.getCurrentPositionY() == y){
 			return BlackKnightG8.getColor();
 		}
-		if (BlackPawnC7.getCurrentPositionX() == x && BlackPawnC7.getCurrentPositionY() == y)
-		{
+		if (BlackPawnC7.getCurrentPositionX() == x && BlackPawnC7.getCurrentPositionY() == y){
 			return BlackPawnC7.getColor();
 		}
-		if (BlackRookA8.getCurrentPositionX() == x && BlackRookA8.getCurrentPositionY() == y)
-		{
+		if (BlackRookA8.getCurrentPositionX() == x && BlackRookA8.getCurrentPositionY() == y){
 			return BlackRookA8.getColor();
 		}
-		if (BlackBishopC8.getCurrentPositionX() == x && BlackBishopC8.getCurrentPositionY() == y)
-		{
+		if (BlackBishopC8.getCurrentPositionX() == x && BlackBishopC8.getCurrentPositionY() == y){
 			return BlackBishopC8.getColor();
 		}
-		if (BlackBishopF8.getCurrentPositionX() == x && BlackBishopF8.getCurrentPositionY() == y)
-		{
+		if (BlackBishopF8.getCurrentPositionX() == x && BlackBishopF8.getCurrentPositionY() == y){
 			return BlackBishopF8.getColor();
 		}
-		if (BlackQueenD8.getCurrentPositionX() == x && BlackQueenD8.getCurrentPositionY() == y)
-		{
+		if (BlackQueenD8.getCurrentPositionX() == x && BlackQueenD8.getCurrentPositionY() == y){
 			return BlackQueenD8.getColor();
 		}
-		if (BlackRookH8.getCurrentPositionX() == x && BlackRookH8.getCurrentPositionY() == y)
-		{
+		if (BlackRookH8.getCurrentPositionX() == x && BlackRookH8.getCurrentPositionY() == y){
 			return BlackRookH8.getColor();
 		}
-		if (WhiteQueenProm8.getCurrentPositionX() == x && WhiteQueenProm8.getCurrentPositionY() == y)
-		{
+		if (WhiteQueenProm8.getCurrentPositionX() == x && WhiteQueenProm8.getCurrentPositionY() == y){
 			return WhiteQueenProm8.getColor();
 		}
-		if (WhiteQueenProm7.getCurrentPositionX() == x && WhiteQueenProm7.getCurrentPositionY() == y)
-		{
+		if (WhiteQueenProm7.getCurrentPositionX() == x && WhiteQueenProm7.getCurrentPositionY() == y){
 			return WhiteQueenProm7.getColor();
 		}
-		if (WhiteQueenProm6.getCurrentPositionX() == x && WhiteQueenProm6.getCurrentPositionY() == y)
-		{
+		if (WhiteQueenProm6.getCurrentPositionX() == x && WhiteQueenProm6.getCurrentPositionY() == y){
 			return WhiteQueenProm6.getColor();
 		}
-		if (WhiteQueenProm5.getCurrentPositionX() == x && WhiteQueenProm5.getCurrentPositionY() == y)
-		{
+		if (WhiteQueenProm5.getCurrentPositionX() == x && WhiteQueenProm5.getCurrentPositionY() == y){
 			return WhiteQueenProm5.getColor();
 		}
-		if (WhiteQueenProm4.getCurrentPositionX() == x && WhiteQueenProm4.getCurrentPositionY() == y)
-		{
+		if (WhiteQueenProm4.getCurrentPositionX() == x && WhiteQueenProm4.getCurrentPositionY() == y){
 			return WhiteQueenProm4.getColor();
 		}
-		if (WhiteQueenProm3.getCurrentPositionX() == x && WhiteQueenProm3.getCurrentPositionY() == y)
-		{
+		if (WhiteQueenProm3.getCurrentPositionX() == x && WhiteQueenProm3.getCurrentPositionY() == y){
 			return WhiteQueenProm3.getColor();
 		}
-		if (WhiteQueenProm2.getCurrentPositionX() == x && WhiteQueenProm2.getCurrentPositionY() == y)
-		{
+		if (WhiteQueenProm2.getCurrentPositionX() == x && WhiteQueenProm2.getCurrentPositionY() == y){
 			return WhiteQueenProm2.getColor();
 		}
-		
-		if (WhiteQueenProm1.getCurrentPositionX() == x && WhiteQueenProm1.getCurrentPositionY() == y)
-		{
+		if (WhiteQueenProm1.getCurrentPositionX() == x && WhiteQueenProm1.getCurrentPositionY() == y){
 			return WhiteQueenProm1.getColor();
 		}
-		if (WhiteRookProm8.getCurrentPositionX() == x && WhiteRookProm8.getCurrentPositionY() == y)
-		{
+		if (WhiteRookProm8.getCurrentPositionX() == x && WhiteRookProm8.getCurrentPositionY() == y){
 			return WhiteRookProm8.getColor();
 		}
-		if (WhiteRookProm7.getCurrentPositionX() == x && WhiteRookProm7.getCurrentPositionY() == y)
-		{
+		if (WhiteRookProm7.getCurrentPositionX() == x && WhiteRookProm7.getCurrentPositionY() == y){
 			return WhiteRookProm7.getColor();
 		}
-		if (WhiteRookProm6.getCurrentPositionX() == x && WhiteRookProm6.getCurrentPositionY() == y)
-		{
+		if (WhiteRookProm6.getCurrentPositionX() == x && WhiteRookProm6.getCurrentPositionY() == y){
 			return WhiteRookProm6.getColor();
 		}
-		if (WhiteRookProm5.getCurrentPositionX() == x && WhiteRookProm5.getCurrentPositionY() == y)
-		{
+		if (WhiteRookProm5.getCurrentPositionX() == x && WhiteRookProm5.getCurrentPositionY() == y){
 			return WhiteRookProm5.getColor();
 		}
-		if (WhiteRookProm4.getCurrentPositionX() == x && WhiteRookProm4.getCurrentPositionY() == y)
-		{
+		if (WhiteRookProm4.getCurrentPositionX() == x && WhiteRookProm4.getCurrentPositionY() == y){
 			return WhiteRookProm4.getColor();
 		}
-		if (WhiteRookProm3.getCurrentPositionX() == x && WhiteRookProm3.getCurrentPositionY() == y)
-		{
+		if (WhiteRookProm3.getCurrentPositionX() == x && WhiteRookProm3.getCurrentPositionY() == y){
 			return WhiteRookProm3.getColor();
 		}
-		if (WhiteRookProm2.getCurrentPositionX() == x && WhiteRookProm2.getCurrentPositionY() == y)
-		{
+		if (WhiteRookProm2.getCurrentPositionX() == x && WhiteRookProm2.getCurrentPositionY() == y){
 			return WhiteRookProm2.getColor();
 		}
-		
-		if (WhiteRookProm.getCurrentPositionX() == x && WhiteRookProm.getCurrentPositionY() == y)
-		{
-			return WhiteRookProm.getColor();
+		if (WhiteRookProm1.getCurrentPositionX() == x && WhiteRookProm1.getCurrentPositionY() == y){
+			return WhiteRookProm1.getColor();
 		}
-		if (WhiteBishopProm8.getCurrentPositionX() == x && WhiteBishopProm8.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopProm8.getCurrentPositionX() == x && WhiteBishopProm8.getCurrentPositionY() == y){
 			return WhiteBishopProm8.getColor();
 		}
-		if (WhiteBishopProm7.getCurrentPositionX() == x && WhiteBishopProm7.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopProm7.getCurrentPositionX() == x && WhiteBishopProm7.getCurrentPositionY() == y){
 			return WhiteBishopProm7.getColor();
 		}
-		if (WhiteBishopProm6.getCurrentPositionX() == x && WhiteBishopProm6.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopProm6.getCurrentPositionX() == x && WhiteBishopProm6.getCurrentPositionY() == y){
 			return WhiteBishopProm6.getColor();
 		}
-		if (WhiteBishopProm5.getCurrentPositionX() == x && WhiteBishopProm5.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopProm5.getCurrentPositionX() == x && WhiteBishopProm5.getCurrentPositionY() == y){
 			return WhiteBishopProm5.getColor();
 		}
-		if (WhiteBishopProm4.getCurrentPositionX() == x && WhiteBishopProm4.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopProm4.getCurrentPositionX() == x && WhiteBishopProm4.getCurrentPositionY() == y){
 			return WhiteBishopProm4.getColor();
 		}
-		if (WhiteBishopProm3.getCurrentPositionX() == x && WhiteBishopProm3.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopProm3.getCurrentPositionX() == x && WhiteBishopProm3.getCurrentPositionY() == y){
 			return WhiteBishopProm3.getColor();
 		}
-		if (WhiteBishopProm2.getCurrentPositionX() == x && WhiteBishopProm2.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopProm2.getCurrentPositionX() == x && WhiteBishopProm2.getCurrentPositionY() == y){
 			return WhiteBishopProm2.getColor();
 		}
-		
-		if (WhiteBishopProm1.getCurrentPositionX() == x && WhiteBishopProm1.getCurrentPositionY() == y)
-		{
+		if (WhiteBishopProm1.getCurrentPositionX() == x && WhiteBishopProm1.getCurrentPositionY() == y){
 			return WhiteBishopProm1.getColor();
 		}
-		if (WhiteKnightProm8.getCurrentPositionX() == x && WhiteKnightProm8.getCurrentPositionY() == y)
-		{
+		if (WhiteKnightProm8.getCurrentPositionX() == x && WhiteKnightProm8.getCurrentPositionY() == y){
 			return WhiteKnightProm8.getColor();
 		}
-		if (WhiteKnightProm7.getCurrentPositionX() == x && WhiteKnightProm7.getCurrentPositionY() == y)
-		{
+		if (WhiteKnightProm7.getCurrentPositionX() == x && WhiteKnightProm7.getCurrentPositionY() == y){
 			return WhiteKnightProm7.getColor();
 		}
-		if (WhiteKnightProm6.getCurrentPositionX() == x && WhiteKnightProm6.getCurrentPositionY() == y)
-		{
+		if (WhiteKnightProm6.getCurrentPositionX() == x && WhiteKnightProm6.getCurrentPositionY() == y){
 			return WhiteKnightProm6.getColor();
 		}
-		if (WhiteKnightProm5.getCurrentPositionX() == x && WhiteKnightProm5.getCurrentPositionY() == y)
-		{
+		if (WhiteKnightProm5.getCurrentPositionX() == x && WhiteKnightProm5.getCurrentPositionY() == y){
 			return WhiteKnightProm5.getColor();
 		}
-		if (WhiteKnightProm4.getCurrentPositionX() == x && WhiteKnightProm4.getCurrentPositionY() == y)
-		{
+		if (WhiteKnightProm4.getCurrentPositionX() == x && WhiteKnightProm4.getCurrentPositionY() == y){
 			return WhiteKnightProm4.getColor();
 		}
-		if (WhiteKnightProm3.getCurrentPositionX() == x && WhiteKnightProm3.getCurrentPositionY() == y)
-		{
+		if (WhiteKnightProm3.getCurrentPositionX() == x && WhiteKnightProm3.getCurrentPositionY() == y){
 			return WhiteKnightProm3.getColor();
 		}
-		if (WhiteKnightProm2.getCurrentPositionX() == x && WhiteKnightProm2.getCurrentPositionY() == y)
-		{
+		if (WhiteKnightProm2.getCurrentPositionX() == x && WhiteKnightProm2.getCurrentPositionY() == y){
 			return WhiteKnightProm2.getColor();
 		}
-		
-		if (WhiteKnightProm1.getCurrentPositionX() == x && WhiteKnightProm1.getCurrentPositionY() == y)
-		{
+		if (WhiteKnightProm1.getCurrentPositionX() == x && WhiteKnightProm1.getCurrentPositionY() == y){
 			return WhiteKnightProm1.getColor();
 		}
-		/////
-		if (BlackQueenProm8.getCurrentPositionX() == x && BlackQueenProm8.getCurrentPositionY() == y)
-		{
+		if (BlackQueenProm8.getCurrentPositionX() == x && BlackQueenProm8.getCurrentPositionY() == y){
 			return BlackQueenProm8.getColor();
 		}
-		if (BlackQueenProm7.getCurrentPositionX() == x && BlackQueenProm7.getCurrentPositionY() == y)
-		{
+		if (BlackQueenProm7.getCurrentPositionX() == x && BlackQueenProm7.getCurrentPositionY() == y){
 			return BlackQueenProm7.getColor();
 		}
-		if (BlackQueenProm6.getCurrentPositionX() == x && BlackQueenProm6.getCurrentPositionY() == y)
-		{
+		if (BlackQueenProm6.getCurrentPositionX() == x && BlackQueenProm6.getCurrentPositionY() == y){
 			return BlackQueenProm6.getColor();
 		}
-		if (BlackQueenProm5.getCurrentPositionX() == x && BlackQueenProm5.getCurrentPositionY() == y)
-		{
+		if (BlackQueenProm5.getCurrentPositionX() == x && BlackQueenProm5.getCurrentPositionY() == y){
 			return BlackQueenProm5.getColor();
 		}
-		if (BlackQueenProm4.getCurrentPositionX() == x && BlackQueenProm4.getCurrentPositionY() == y)
-		{
+		if (BlackQueenProm4.getCurrentPositionX() == x && BlackQueenProm4.getCurrentPositionY() == y){
 			return BlackQueenProm4.getColor();
 		}
-		if (BlackQueenProm3.getCurrentPositionX() == x && BlackQueenProm3.getCurrentPositionY() == y)
-		{
+		if (BlackQueenProm3.getCurrentPositionX() == x && BlackQueenProm3.getCurrentPositionY() == y){
 			return BlackQueenProm3.getColor();
 		}
-		if (BlackQueenProm2.getCurrentPositionX() == x && BlackQueenProm2.getCurrentPositionY() == y)
-		{
+		if (BlackQueenProm2.getCurrentPositionX() == x && BlackQueenProm2.getCurrentPositionY() == y){
 			return BlackQueenProm2.getColor();
 		}
-		
-		if (BlackQueenProm1.getCurrentPositionX() == x && BlackQueenProm1.getCurrentPositionY() == y)
-		{
+		if (BlackQueenProm1.getCurrentPositionX() == x && BlackQueenProm1.getCurrentPositionY() == y){
 			return BlackQueenProm1.getColor();
 		}
-		if (BlackRookProm8.getCurrentPositionX() == x && BlackRookProm8.getCurrentPositionY() == y)
-		{
+		if (BlackRookProm8.getCurrentPositionX() == x && BlackRookProm8.getCurrentPositionY() == y){
 			return BlackRookProm8.getColor();
 		}
-		if (BlackRookProm7.getCurrentPositionX() == x && BlackRookProm7.getCurrentPositionY() == y)
-		{
+		if (BlackRookProm7.getCurrentPositionX() == x && BlackRookProm7.getCurrentPositionY() == y){
 			return BlackRookProm7.getColor();
 		}
-		if (BlackRookProm6.getCurrentPositionX() == x && BlackRookProm6.getCurrentPositionY() == y)
-		{
+		if (BlackRookProm6.getCurrentPositionX() == x && BlackRookProm6.getCurrentPositionY() == y){
 			return BlackRookProm6.getColor();
 		}
-		if (BlackRookProm5.getCurrentPositionX() == x && BlackRookProm5.getCurrentPositionY() == y)
-		{
+		if (BlackRookProm5.getCurrentPositionX() == x && BlackRookProm5.getCurrentPositionY() == y){
 			return BlackRookProm5.getColor();
 		}
-		if (BlackRookProm4.getCurrentPositionX() == x && BlackRookProm4.getCurrentPositionY() == y)
-		{
+		if (BlackRookProm4.getCurrentPositionX() == x && BlackRookProm4.getCurrentPositionY() == y){
 			return BlackRookProm4.getColor();
 		}
-		if (BlackRookProm3.getCurrentPositionX() == x && BlackRookProm3.getCurrentPositionY() == y)
-		{
+		if (BlackRookProm3.getCurrentPositionX() == x && BlackRookProm3.getCurrentPositionY() == y){
 			return BlackRookProm3.getColor();
 		}
-		if (BlackRookProm2.getCurrentPositionX() == x && BlackRookProm2.getCurrentPositionY() == y)
-		{
+		if (BlackRookProm2.getCurrentPositionX() == x && BlackRookProm2.getCurrentPositionY() == y){
 			return BlackRookProm2.getColor();
 		}
-		
-		if (BlackRookProm1.getCurrentPositionX() == x && BlackRookProm1.getCurrentPositionY() == y)
-		{
+		if (BlackRookProm1.getCurrentPositionX() == x && BlackRookProm1.getCurrentPositionY() == y){
 			return BlackRookProm1.getColor();
 		}
-		if (BlackBishopProm8.getCurrentPositionX() == x && BlackBishopProm8.getCurrentPositionY() == y)
-		{
+		if (BlackBishopProm8.getCurrentPositionX() == x && BlackBishopProm8.getCurrentPositionY() == y){
 			return BlackBishopProm8.getColor();
 		}
-		if (BlackBishopProm7.getCurrentPositionX() == x && BlackBishopProm7.getCurrentPositionY() == y)
-		{
+		if (BlackBishopProm7.getCurrentPositionX() == x && BlackBishopProm7.getCurrentPositionY() == y){
 			return BlackBishopProm7.getColor();
 		}
-		if (BlackBishopProm6.getCurrentPositionX() == x && BlackBishopProm6.getCurrentPositionY() == y)
-		{
+		if (BlackBishopProm6.getCurrentPositionX() == x && BlackBishopProm6.getCurrentPositionY() == y){
 			return BlackBishopProm6.getColor();
 		}
-		if (BlackBishopProm5.getCurrentPositionX() == x && BlackBishopProm5.getCurrentPositionY() == y)
-		{
+		if (BlackBishopProm5.getCurrentPositionX() == x && BlackBishopProm5.getCurrentPositionY() == y){
 			return BlackBishopProm5.getColor();
 		}
-		if (BlackBishopProm4.getCurrentPositionX() == x && BlackBishopProm4.getCurrentPositionY() == y)
-		{
+		if (BlackBishopProm4.getCurrentPositionX() == x && BlackBishopProm4.getCurrentPositionY() == y){
 			return BlackBishopProm4.getColor();
 		}
-		if (BlackBishopProm3.getCurrentPositionX() == x && BlackBishopProm3.getCurrentPositionY() == y)
-		{
+		if (BlackBishopProm3.getCurrentPositionX() == x && BlackBishopProm3.getCurrentPositionY() == y){
 			return BlackBishopProm3.getColor();
 		}
-		if (BlackBishopProm2.getCurrentPositionX() == x && BlackBishopProm2.getCurrentPositionY() == y)
-		{
+		if (BlackBishopProm2.getCurrentPositionX() == x && BlackBishopProm2.getCurrentPositionY() == y){
 			return BlackBishopProm2.getColor();
-		}
-		
-		if (BlackBishopProm1.getCurrentPositionX() == x && BlackBishopProm1.getCurrentPositionY() == y)
-		{
+		}	
+		if (BlackBishopProm1.getCurrentPositionX() == x && BlackBishopProm1.getCurrentPositionY() == y){
 			return BlackBishopProm1.getColor();
 		}
-		if (BlackKnightProm8.getCurrentPositionX() == x && BlackKnightProm8.getCurrentPositionY() == y)
-		{
+		if (BlackKnightProm8.getCurrentPositionX() == x && BlackKnightProm8.getCurrentPositionY() == y){
 			return BlackKnightProm8.getColor();
 		}
-		if (BlackKnightProm7.getCurrentPositionX() == x && BlackKnightProm7.getCurrentPositionY() == y)
-		{
+		if (BlackKnightProm7.getCurrentPositionX() == x && BlackKnightProm7.getCurrentPositionY() == y){
 			return BlackKnightProm7.getColor();
 		}
-		if (BlackKnightProm6.getCurrentPositionX() == x && BlackKnightProm6.getCurrentPositionY() == y)
-		{
+		if (BlackKnightProm6.getCurrentPositionX() == x && BlackKnightProm6.getCurrentPositionY() == y){
 			return BlackKnightProm6.getColor();
 		}
-		if (BlackKnightProm5.getCurrentPositionX() == x && BlackKnightProm5.getCurrentPositionY() == y)
-		{
+		if (BlackKnightProm5.getCurrentPositionX() == x && BlackKnightProm5.getCurrentPositionY() == y){
 			return BlackKnightProm5.getColor();
 		}
-		if (BlackKnightProm4.getCurrentPositionX() == x && BlackKnightProm4.getCurrentPositionY() == y)
-		{
+		if (BlackKnightProm4.getCurrentPositionX() == x && BlackKnightProm4.getCurrentPositionY() == y){
 			return BlackKnightProm4.getColor();
 		}
-		if (BlackKnightProm3.getCurrentPositionX() == x && BlackKnightProm3.getCurrentPositionY() == y)
-		{
+		if (BlackKnightProm3.getCurrentPositionX() == x && BlackKnightProm3.getCurrentPositionY() == y){
 			return BlackKnightProm3.getColor();
 		}
-		if (BlackKnightProm2.getCurrentPositionX() == x && BlackKnightProm2.getCurrentPositionY() == y)
-		{
+		if (BlackKnightProm2.getCurrentPositionX() == x && BlackKnightProm2.getCurrentPositionY() == y){
 			return BlackKnightProm2.getColor();
 		}
-		
-		if (BlackKnightProm1.getCurrentPositionX() == x && BlackKnightProm1.getCurrentPositionY() == y)
-		{
+		if (BlackKnightProm1.getCurrentPositionX() == x && BlackKnightProm1.getCurrentPositionY() == y){
 			return BlackKnightProm1.getColor();
 		}
 
@@ -4078,7 +3858,6 @@ public class Chess extends JFrame  implements ActionListener {
 		J.setSelected(true);
 		J.setBorder(new LineBorder(Color.blue, 5,true));
 		Highlighted = true;
-
 	}
 	static void dehighlightButton(JButton J){
 		J.setSelected(false);
@@ -4086,9 +3865,8 @@ public class Chess extends JFrame  implements ActionListener {
 		Highlighted = false;
 	}
 	static void whiteMovementHandler(int ComX, int ComY){
-		//toDO
-		if(CurrentTitle == "White Knight (G1)"){
 
+		if(CurrentTitle == "White Knight (G1)"){
 			int x = WhiteKnightG1.getCurrentPositionX();
 			int y = WhiteKnightG1.getCurrentPositionY();
 			PossibleXY = WhiteKnightG1.movementHandler(x, y);
@@ -4096,7 +3874,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}	
 		if(CurrentTitle == "White Bishop (F1)"){
-
 			int x = WhiteBishopF1.getCurrentPositionX();
 			int y = WhiteBishopF1.getCurrentPositionY();
 			PossibleXY = WhiteBishopF1.movementHandler(x, y);
@@ -4104,7 +3881,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}	
 		if(CurrentTitle == "White Pawn (H2)"){
-
 			int x = WhitePawnH2.getCurrentPositionX();
 			int y = WhitePawnH2.getCurrentPositionY();
 			PossibleXY = WhitePawnH2.movementHandler(x, y);
@@ -4112,7 +3888,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}	
 		if(CurrentTitle == "White Pawn (G2)"){
-
 			int x = WhitePawnG2.getCurrentPositionX();
 			int y = WhitePawnG2.getCurrentPositionY();
 			PossibleXY = WhitePawnG2.movementHandler(x, y);
@@ -4120,7 +3895,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}	
 		if(CurrentTitle == "White Pawn (F2)"){
-
 			int x = WhitePawnF2.getCurrentPositionX();
 			int y = WhitePawnF2.getCurrentPositionY();
 			PossibleXY = WhitePawnF2.movementHandler(x, y);
@@ -4128,7 +3902,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}	
 		if(CurrentTitle == "White Pawn (E2)"){
-
 			int x = WhitePawnE2.getCurrentPositionX();
 			int y = WhitePawnE2.getCurrentPositionY();
 			PossibleXY = WhitePawnE2.movementHandler(x, y);
@@ -4136,7 +3909,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}	
 		if(CurrentTitle == "White Pawn (D2)"){
-
 			int x = WhitePawnD2.getCurrentPositionX();
 			int y = WhitePawnD2.getCurrentPositionY();
 			PossibleXY = WhitePawnD2.movementHandler(x, y);
@@ -4144,7 +3916,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}	
 		if(CurrentTitle == "White Queen (D1)"){
-
 			int x = WhiteQueenD1.getCurrentPositionX();
 			int y = WhiteQueenD1.getCurrentPositionY();
 			PossibleXY = WhiteQueenD1.movementHandler(x, y);
@@ -4153,7 +3924,6 @@ public class Chess extends JFrame  implements ActionListener {
 		}
 		
 		if(CurrentTitle == "White Bishop (C1)"){
-
 			int x = WhiteBishopC1.getCurrentPositionX();
 			int y = WhiteBishopC1.getCurrentPositionY();
 			PossibleXY = WhiteBishopC1.movementHandler(x, y);
@@ -4161,7 +3931,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Rook (A1)"){
-
 			int x = WhiteRookA1.getCurrentPositionX();
 			int y = WhiteRookA1.getCurrentPositionY();
 			PossibleXY = WhiteRookA1.movementHandler(x, y);
@@ -4169,7 +3938,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Pawn (C2)"){
-
 			int x = WhitePawnC2.getCurrentPositionX();
 			int y = WhitePawnC2.getCurrentPositionY();
 			PossibleXY = WhitePawnC2.movementHandler(x, y);
@@ -4177,7 +3945,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Pawn (B2)"){
-
 			int x = WhitePawnB2.getCurrentPositionX();
 			int y = WhitePawnB2.getCurrentPositionY();
 			PossibleXY = WhitePawnB2.movementHandler(x, y);
@@ -4185,7 +3952,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Pawn (A2)"){
-
 			int x = WhitePawnA2.getCurrentPositionX();
 			int y = WhitePawnA2.getCurrentPositionY();
 			PossibleXY = WhitePawnA2.movementHandler(x, y);
@@ -4193,7 +3959,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White King (E1)"){
-
 			int x = WhiteKingE1.getCurrentPositionX();
 			int y = WhiteKingE1.getCurrentPositionY();
 			PossibleXY = WhiteKingE1.movementHandler(x, y);
@@ -4201,7 +3966,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Knight (B1)"){
-
 			int x = WhiteKnightB1.getCurrentPositionX();
 			int y = WhiteKnightB1.getCurrentPositionY();
 			PossibleXY = WhiteKnightB1.movementHandler(x, y);
@@ -4209,7 +3973,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Rook (H1)"){
-
 			int x = WhiteRookH1.getCurrentPositionX();
 			int y = WhiteRookH1.getCurrentPositionY();
 			PossibleXY = WhiteRookH1.movementHandler(x, y);
@@ -4217,7 +3980,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom8)"){
-
 			int x = WhiteQueenProm8.getCurrentPositionX();
 			int y = WhiteQueenProm8.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm8.movementHandler(x, y);
@@ -4225,7 +3987,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom7)"){
-
 			int x = WhiteQueenProm7.getCurrentPositionX();
 			int y = WhiteQueenProm7.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm7.movementHandler(x, y);
@@ -4233,7 +3994,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom6)"){
-
 			int x = WhiteQueenProm6.getCurrentPositionX();
 			int y = WhiteQueenProm6.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm6.movementHandler(x, y);
@@ -4241,7 +4001,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom5)"){
-
 			int x = WhiteQueenProm5.getCurrentPositionX();
 			int y = WhiteQueenProm5.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm5.movementHandler(x, y);
@@ -4249,7 +4008,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom4)"){
-
 			int x = WhiteQueenProm4.getCurrentPositionX();
 			int y = WhiteQueenProm4.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm4.movementHandler(x, y);
@@ -4257,7 +4015,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom3)"){
-
 			int x = WhiteQueenProm3.getCurrentPositionX();
 			int y = WhiteQueenProm3.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm3.movementHandler(x, y);
@@ -4265,7 +4022,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom2)"){
-
 			int x = WhiteQueenProm2.getCurrentPositionX();
 			int y = WhiteQueenProm2.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm2.movementHandler(x, y);
@@ -4273,7 +4029,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom1)"){
-
 			int x = WhiteQueenProm1.getCurrentPositionX();
 			int y = WhiteQueenProm1.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm1.movementHandler(x, y);
@@ -4281,7 +4036,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom8)"){
-
 			int x = WhiteKnightProm8.getCurrentPositionX();
 			int y = WhiteKnightProm8.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm8.movementHandler(x, y);
@@ -4289,7 +4043,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom7)"){
-
 			int x = WhiteKnightProm7.getCurrentPositionX();
 			int y = WhiteKnightProm7.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm7.movementHandler(x, y);
@@ -4297,7 +4050,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom6)"){
-
 			int x = WhiteKnightProm6.getCurrentPositionX();
 			int y = WhiteKnightProm6.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm6.movementHandler(x, y);
@@ -4305,7 +4057,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom5)"){
-
 			int x = WhiteKnightProm5.getCurrentPositionX();
 			int y = WhiteKnightProm5.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm5.movementHandler(x, y);
@@ -4313,7 +4064,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom4)"){
-
 			int x = WhiteKnightProm4.getCurrentPositionX();
 			int y = WhiteKnightProm4.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm4.movementHandler(x, y);
@@ -4321,7 +4071,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom3)"){
-
 			int x = WhiteKnightProm3.getCurrentPositionX();
 			int y = WhiteKnightProm3.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm3.movementHandler(x, y);
@@ -4329,7 +4078,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom2)"){
-
 			int x = WhiteKnightProm2.getCurrentPositionX();
 			int y = WhiteKnightProm2.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm2.movementHandler(x, y);
@@ -4337,7 +4085,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom1)"){
-
 			int x = WhiteKnightProm1.getCurrentPositionX();
 			int y = WhiteKnightProm1.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm1.movementHandler(x, y);
@@ -4345,7 +4092,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom8)"){
-
 			int x = WhiteBishopProm8.getCurrentPositionX();
 			int y = WhiteBishopProm8.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm8.movementHandler(x, y);
@@ -4353,7 +4099,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom7)"){
-
 			int x = WhiteBishopProm7.getCurrentPositionX();
 			int y = WhiteBishopProm7.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm7.movementHandler(x, y);
@@ -4361,7 +4106,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom6)"){
-
 			int x = WhiteBishopProm6.getCurrentPositionX();
 			int y = WhiteBishopProm6.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm6.movementHandler(x, y);
@@ -4369,7 +4113,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom5)"){
-
 			int x = WhiteBishopProm5.getCurrentPositionX();
 			int y = WhiteBishopProm5.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm5.movementHandler(x, y);
@@ -4377,7 +4120,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom4)"){
-
 			int x = WhiteBishopProm4.getCurrentPositionX();
 			int y = WhiteBishopProm4.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm4.movementHandler(x, y);
@@ -4385,7 +4127,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom3)"){
-
 			int x = WhiteBishopProm3.getCurrentPositionX();
 			int y = WhiteBishopProm3.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm3.movementHandler(x, y);
@@ -4393,7 +4134,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom2)"){
-
 			int x = WhiteBishopProm2.getCurrentPositionX();
 			int y = WhiteBishopProm2.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm2.movementHandler(x, y);
@@ -4401,7 +4141,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom1)"){
-
 			int x = WhiteBishopProm1.getCurrentPositionX();
 			int y = WhiteBishopProm1.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm1.movementHandler(x, y);
@@ -4409,7 +4148,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom8)"){
-
 			int x = WhiteRookProm8.getCurrentPositionX();
 			int y = WhiteRookProm8.getCurrentPositionY();
 			PossibleXY = WhiteRookProm8.movementHandler(x, y);
@@ -4417,7 +4155,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom7)"){
-
 			int x = WhiteRookProm7.getCurrentPositionX();
 			int y = WhiteRookProm7.getCurrentPositionY();
 			PossibleXY = WhiteRookProm7.movementHandler(x, y);
@@ -4425,7 +4162,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom6)"){
-
 			int x = WhiteRookProm6.getCurrentPositionX();
 			int y = WhiteRookProm6.getCurrentPositionY();
 			PossibleXY = WhiteRookProm6.movementHandler(x, y);
@@ -4433,7 +4169,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom5)"){
-
 			int x = WhiteRookProm5.getCurrentPositionX();
 			int y = WhiteRookProm5.getCurrentPositionY();
 			PossibleXY = WhiteRookProm5.movementHandler(x, y);
@@ -4441,7 +4176,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom4)"){
-
 			int x = WhiteRookProm4.getCurrentPositionX();
 			int y = WhiteRookProm4.getCurrentPositionY();
 			PossibleXY = WhiteRookProm4.movementHandler(x, y);
@@ -4449,7 +4183,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom3)"){
-
 			int x = WhiteRookProm3.getCurrentPositionX();
 			int y = WhiteRookProm3.getCurrentPositionY();
 			PossibleXY = WhiteRookProm3.movementHandler(x, y);
@@ -4457,7 +4190,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom2)"){
-
 			int x = WhiteRookProm2.getCurrentPositionX();
 			int y = WhiteRookProm2.getCurrentPositionY();
 			PossibleXY = WhiteRookProm2.movementHandler(x, y);
@@ -4465,16 +4197,15 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom1)"){
-
-			int x = WhiteRookProm.getCurrentPositionX();
-			int y = WhiteRookProm.getCurrentPositionY();
-			PossibleXY = WhiteRookProm.movementHandler(x, y);
+			int x = WhiteRookProm1.getCurrentPositionX();
+			int y = WhiteRookProm1.getCurrentPositionY();
+			PossibleXY = WhiteRookProm1.movementHandler(x, y);
 			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 	}
 	static void blackMovementHandler(int ComX, int ComY){
-		//toDO
+	
 		if(CurrentTitle == "Black Knight (G8)"){
 			int x = BlackKnightG8.getCurrentPositionX();
 			int y = BlackKnightG8.getCurrentPositionY();
@@ -4847,8 +4578,8 @@ public class Chess extends JFrame  implements ActionListener {
 		}
 
 	}
-
 	static void Engine(int ComX, int ComY,int[] ComXY, JButton b){
+		
 		CurrentColor = getColor(ComX,ComY);
 
 		if (Highlighted == false && CurrentColor == "White"){
@@ -4883,7 +4614,6 @@ public class Chess extends JFrame  implements ActionListener {
 				final long endBlackGrabTime = System.currentTimeMillis();
 				System.out.println("Total black grab piece time: " + (endBlackGrabTime - startBlackGrabTime));
 			}
-
 		}
 		
 		else if (Highlighted == true && b.isSelected()== true){
@@ -4893,17 +4623,16 @@ public class Chess extends JFrame  implements ActionListener {
 		else if (Highlighted == true && b.isSelected() == false){
 			//loops through PossibleXY multiarray to find a match
 			for(int i = 0 ; i < PossibleXY.length ; i++) {
+				
 				int[] Coordinate = PossibleXY[i];
-				if(Arrays.equals(Coordinate, ComXY)){
+				
+				if(Arrays.equals(Coordinate, ComXY)){		
+					//have to check if we are still in check right here	
 					
-					//have to check if we are still in check right here
-					
-					if (WhiteTurn){
-						
+					if (WhiteTurn){		
 						//It is white's turn. Is White King in check?
 						final long startCheckTime = System.currentTimeMillis();
 						if (WhiteKingE1.isWhiteKingInCheck(ComXY, CurrentTitle) == true){
-							//this function was very slow. Has been optimized for queen. TODO for rook and bishop optimization
 							System.out.println("Move denied. White King is in check or would be placed into check");
 							dehighlightButton(ComingFrom);	
 							break;
@@ -4912,35 +4641,26 @@ public class Chess extends JFrame  implements ActionListener {
 						System.out.println("Total white set piece time: " + (endCheckTime - startCheckTime));
 					}
 					else if (WhiteTurn == false){
-						//It is black's turn. Is Black King in check?
-						
+						//It is black's turn. Is Black King in check?	
 						 	final long startCheckTime = System.currentTimeMillis();
 							if (BlackKingE8.isBlackKingInCheck(ComXY, CurrentTitle) == true){
-								//this function is very slow. Has NOT been optimized
 								//this denies movement that place king into check
 								System.out.println("Move denied. Black King is in check or would be placed into check");
 								dehighlightButton(ComingFrom);	
 								break;
 							}
 							final long endCheckTime = System.currentTimeMillis();
-							System.out.println("Total black set piece time: " + (endCheckTime - startCheckTime));
-						
+							System.out.println("Total black set piece time: " + (endCheckTime - startCheckTime));			
 					}
 					
 					System.out.println("You have done a valid move");
-					
 					setPiece(b,ComXY[0],ComXY[1]);
-
 					break;  
 				}		
-			}
-			
-			dehighlightButton(ComingFrom);
-
-			
+			}		
+			dehighlightButton(ComingFrom);		
 		}
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ("A8Com".equals(e.getActionCommand())) {

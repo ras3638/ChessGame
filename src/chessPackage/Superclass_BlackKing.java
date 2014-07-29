@@ -494,8 +494,8 @@ public class Superclass_BlackKing extends BlackPiece {
 				return true;
 			}
 		}
-		if(!Arrays.equals(WhiteRookProm.getCurrentPositionXY(), ComXY) && WhiteRookProm.getActive() == true){
-			MultiArray = Superclass_WhiteRook.checkPreventer(MultiArray, WhiteRookProm.getCurrentPositionX(), WhiteRookProm.getCurrentPositionY(), ComXY, CurrentTitle);
+		if(!Arrays.equals(WhiteRookProm1.getCurrentPositionXY(), ComXY) && WhiteRookProm1.getActive() == true){
+			MultiArray = Superclass_WhiteRook.checkPreventer(MultiArray, WhiteRookProm1.getCurrentPositionX(), WhiteRookProm1.getCurrentPositionY(), ComXY, CurrentTitle);
 			if(MultiArray[0]==null){
 				return true;
 			}
