@@ -4,8 +4,8 @@ public class BlackBishopC8 extends Superclass_BlackBishop {
 	static int CurrentPositionX=2;
 	static int CurrentPositionY=0;
 	static int [] CurrentPositionXY = {2,0};
-	private final static int  StartingPositionX = 2;
-	private final static int StartingPositionY = 0;
+	final static int  StartingPositionX = 2;
+	final static int StartingPositionY = 0;
 	static boolean active = true;
 	
 	static void setActive(boolean a){
@@ -44,8 +44,8 @@ class BlackBishopF8 extends Superclass_BlackBishop {
 	static int CurrentPositionX=5;
 	static int CurrentPositionY=0;
 	static int [] CurrentPositionXY = {5,0};
-	private final static int  StartingPositionX = 5;
-	private final static int StartingPositionY = 0;
+	final static int  StartingPositionX = 5;
+	final static int StartingPositionY = 0;
 	static boolean active = true;
 	
 	static void setActive(boolean a){
@@ -84,8 +84,8 @@ class BlackBishopProm1 extends Superclass_BlackBishop {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	final static int  StartingPositionX = -10;
+	final static int StartingPositionY = -10;
 	static boolean active = false;
 	
 	static void setActive(boolean a){
@@ -124,8 +124,8 @@ class BlackBishopProm2 extends Superclass_BlackBishop {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	final static int  StartingPositionX = -10;
+	final static int StartingPositionY = -10;
 	static boolean active = false;
 	
 	static void setActive(boolean a){
@@ -164,8 +164,8 @@ class BlackBishopProm3 extends Superclass_BlackBishop {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	final static int  StartingPositionX = -10;
+	final static int StartingPositionY = -10;
 	static boolean active = false;
 	
 	static void setActive(boolean a){
@@ -204,8 +204,8 @@ class BlackBishopProm4 extends Superclass_BlackBishop {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	final static int  StartingPositionX = -10;
+	final static int StartingPositionY = -10;
 	static boolean active = false;
 	
 	static void setActive(boolean a){
@@ -244,8 +244,8 @@ class BlackBishopProm5 extends Superclass_BlackBishop {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	final static int  StartingPositionX = -10;
+	final static int StartingPositionY = -10;
 	static boolean active = false;
 	
 	static void setActive(boolean a){
@@ -284,8 +284,8 @@ class BlackBishopProm6 extends Superclass_BlackBishop {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	final static int  StartingPositionX = -10;
+	final static int StartingPositionY = -10;
 	static boolean active = false;
 	
 	static void setActive(boolean a){
@@ -324,8 +324,8 @@ class BlackBishopProm7 extends Superclass_BlackBishop {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	final static int  StartingPositionX = -10;
+	final static int StartingPositionY = -10;
 	static boolean active = false;
 	
 	static void setActive(boolean a){
@@ -364,8 +364,8 @@ class BlackBishopProm8 extends Superclass_BlackBishop {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	final static int  StartingPositionX = -10;
+	final static int StartingPositionY = -10;
 	static boolean active = false;
 	
 	static void setActive(boolean a){

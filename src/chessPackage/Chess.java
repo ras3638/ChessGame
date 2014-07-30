@@ -4,11 +4,22 @@ import javax.swing.JFrame;
 import javax.swing.JButton; 
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Formatter;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
+import java.util.logging.XMLFormatter;
 
 public class Chess extends JFrame  implements ActionListener {
 	
@@ -32,7 +43,12 @@ public class Chess extends JFrame  implements ActionListener {
 	static int GlobalBlackQueenProm = 0;
 	static int GlobalBlackKnightProm = 0;
 	static int GlobalBlackBishopProm = 0;
+
+	static Logger LOGGER = Logger.getLogger(Chess.class .getName());
 	
+
+	Color DarkBrown = new Color(153, 76, 0);
+	Color LightBrown = new Color(255, 204, 153);
 	//Grid Coordinates
 	static final int[] A8ComXY = {0,0};
 	static final int A8ComX = 0;
@@ -291,84 +307,85 @@ public class Chess extends JFrame  implements ActionListener {
 	static final int H1ComY = 7;
 
 	//A File
-	static JButton bA8 = new JButton();
-	static JButton bA7 = new JButton();
-	static JButton bA6 = new JButton();
-	static JButton bA5 = new JButton();
-	static JButton bA4 = new JButton();
-	static JButton bA3 = new JButton();
-	static JButton bA2 = new JButton();
-	static JButton bA1 = new JButton();
+	static ChessButton.LightChessButton bA8 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bA7 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bA6 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bA5 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bA4 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bA3 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bA2 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bA1 = new ChessButton().new DarkChessButton();
 
 	//B File
-	static JButton bB8 = new JButton();
-	static JButton bB7 = new JButton();
-	static JButton bB6 = new JButton();
-	static JButton bB5 = new JButton();
-	static JButton bB4 = new JButton();
-	static JButton bB3 = new JButton();
-	static JButton bB2 = new JButton();
-	static JButton bB1 = new JButton();
+	static ChessButton.DarkChessButton bB8 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bB7 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bB6 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bB5 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bB4 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bB3 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bB2 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bB1 = new ChessButton().new LightChessButton();
 
 	//C File
-	static JButton bC8 = new JButton();
-	static JButton bC7 = new JButton();
-	static JButton bC6 = new JButton();
-	static JButton bC5 = new JButton();
-	static JButton bC4 = new JButton();
-	static JButton bC3 = new JButton();
-	static JButton bC2 = new JButton();
-	static JButton bC1 = new JButton();
+	static ChessButton.LightChessButton bC8 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bC7 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bC6 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bC5 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bC4 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bC3 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bC2 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bC1 = new ChessButton().new DarkChessButton();
 
 	//D File
-	static JButton bD8 = new JButton();
-	static JButton bD7 = new JButton();
-	static JButton bD6 = new JButton();
-	static JButton bD5 = new JButton();
-	static JButton bD4 = new JButton();
-	static JButton bD3 = new JButton();
-	static JButton bD2 = new JButton();
-	static JButton bD1 = new JButton();
+	static ChessButton.DarkChessButton bD8 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bD7 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bD6 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bD5 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bD4 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bD3 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bD2 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bD1 = new ChessButton().new LightChessButton();
 
 	//E File
-	static JButton bE8 = new JButton();
-	static JButton bE7 = new JButton();
-	static JButton bE6 = new JButton();
-	static JButton bE5 = new JButton();
-	static JButton bE4 = new JButton();
-	static JButton bE3 = new JButton();
-	static JButton bE2 = new JButton();
-	static JButton bE1 = new JButton();
+	static ChessButton.LightChessButton bE8 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bE7 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bE6 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bE5 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bE4 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bE3 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bE2 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bE1 = new ChessButton().new DarkChessButton();
 
 	//F File
-	static JButton bF8 = new JButton();
-	static JButton bF7 = new JButton();
-	static JButton bF6 = new JButton();
-	static JButton bF5 = new JButton();
-	static JButton bF4 = new JButton();
-	static JButton bF3 = new JButton();
-	static JButton bF2 = new JButton();
-	static JButton bF1 = new JButton();
+	static ChessButton.DarkChessButton bF8 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bF7 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bF6 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bF5 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bF4 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bF3 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bF2 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bF1 = new ChessButton().new LightChessButton();
 
 	//G File
-	static JButton bG8 = new JButton();
-	static JButton bG7 = new JButton();
-	static JButton bG6 = new JButton();
-	static JButton bG5 = new JButton();
-	static JButton bG4 = new JButton();
-	static JButton bG3 = new JButton();
-	static JButton bG2 = new JButton();
-	static JButton bG1 = new JButton();
+	static ChessButton.LightChessButton bG8 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bG7 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bG6 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bG5 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bG4 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bG3 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bG2 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bG1 = new ChessButton().new DarkChessButton();
 
 	//H File
-	static JButton bH8 = new JButton();
-	static JButton bH7 = new JButton();
-	static JButton bH6 = new JButton();
-	static JButton bH5 = new JButton();
-	static JButton bH4 = new JButton();
-	static JButton bH3 = new JButton();
-	static JButton bH2 = new JButton();
-	static JButton bH1 = new JButton();
+	static ChessButton.DarkChessButton bH8 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bH7 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bH6 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bH5 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bH4 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bH3 = new ChessButton().new LightChessButton();
+	static ChessButton.DarkChessButton bH2 = new ChessButton().new DarkChessButton();
+	static ChessButton.LightChessButton bH1 = new ChessButton().new LightChessButton();
+	
 
 	static JFrame frame = new JFrame(); //creates frame
 	static JButton[][] grid; //names the grid of buttons
@@ -638,11 +655,13 @@ public class Chess extends JFrame  implements ActionListener {
 				}
 				if (x == 7 && y == 5){
 					grid[x][y] = bH3;
+
 				}
 				if (x == 7 && y == 6){
 					grid[x][y] = bH2;
 					bH2.setIcon(WhitePawnH2.getIcon());
 					bH2.setName(WhitePawnH2.getTitle());
+
 				}
 				if (x == 7 && y == 7){
 					grid[x][y] = bH1;
@@ -805,9 +824,20 @@ public class Chess extends JFrame  implements ActionListener {
 		bH2.addActionListener(this);
 		bH1.addActionListener(this);
 	}
+	
+	
 	public static void main(String[] args) {
+		
 		System.out.println("Welcome to Chess");
 		new Chess(8, 8);
+	    try {
+	       Logging.setup();
+	       
+	    }
+	    catch (Throwable e) {
+	        e.printStackTrace();
+	    }	
+	
 	}
 	void ResetSelection(){
 		bA8.setSelected(false);
@@ -1274,7 +1304,7 @@ public class Chess extends JFrame  implements ActionListener {
 	static void setPiece(JButton J, int X, int Y){
 		int[]input={X,Y};
 		if (CurrentTitle == "Black Rook (H8)"){
-			System.out.println("You have set Black Rook (H8) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Rook (H8) on to " + Arrays.toString(input));
 			J.setIcon(BlackRookH8.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -3056,7 +3086,7 @@ public class Chess extends JFrame  implements ActionListener {
 		    			WhiteRookProm8.setActive(true);
 	    			}
 	            	if (GlobalWhiteRookProm >= 9){
-	            		System.out.println("Error. Game cannot handle more than 8 white rooks. Exiting game. GlobalWhiteRookProm at " + GlobalWhiteRookProm);
+	            		LOGGER.log(Level.SEVERE, "Game cannot handle more than 8 white promotional rooks. Exiting game. White promotional rook count at " + GlobalWhiteRookProm);
 	            		System.exit(0);
 	    			}
 	    			
@@ -3127,7 +3157,7 @@ public class Chess extends JFrame  implements ActionListener {
 		    			WhiteQueenProm8.setActive(true);
 	    			}
 	            	if (GlobalWhiteQueenProm >= 9){
-	            		System.out.println("Error. Game cannot handle more than 8 white Queens. Exiting game. GlobalWhiteQueenProm at " + GlobalWhiteQueenProm);
+	            		LOGGER.log(Level.SEVERE, "Game cannot handle more than 8 white promotional queens. Exiting game. White promotional queen count at " + GlobalWhiteQueenProm);
 	            		System.exit(0);
 	    			}
 	            }
@@ -3195,8 +3225,9 @@ public class Chess extends JFrame  implements ActionListener {
 		    			WhiteBishopProm8.setActive(true);
 	    			}
 	            	if (GlobalWhiteBishopProm >= 9){
-	            		System.out.println("Error. Game cannot handle more than 8 white Bishop. Exiting game. GlobalWhiteBishopProm at " + GlobalWhiteBishopProm);
+	            		LOGGER.log(Level.SEVERE, "Game cannot handle more than 8 white promotional bishops. Exiting game. White promotional bishop count at " + GlobalWhiteBishopProm);
 	            		System.exit(0);
+	      
 	    			}
 	            }
 	        });
@@ -3263,7 +3294,7 @@ public class Chess extends JFrame  implements ActionListener {
 		    			WhiteKnightProm8.setActive(true);
 	    			}
 	            	if (GlobalWhiteKnightProm >= 9){
-	            		System.out.println("Error. Game cannot handle more than 8 white Knight. Exiting game. GlobalWhiteKnightProm at " + GlobalWhiteKnightProm);
+	            		LOGGER.log(Level.SEVERE, "Game cannot handle more than 8 white promotional knights. Exiting game. White promotional knight count at " + GlobalWhiteKnightProm);
 	            		System.exit(0);
 	    			}
 	            }
@@ -3345,7 +3376,7 @@ public class Chess extends JFrame  implements ActionListener {
 		    			BlackRookProm8.setActive(true);
 	    			}
 	            	if (GlobalBlackRookProm >= 9){
-	            		System.out.println("Error. Game cannot handle more than 8 Black rooks. Exiting game. GlobalBlackRookProm at " + GlobalBlackRookProm);
+	            		LOGGER.log(Level.SEVERE, "Game cannot handle more than 8 black promotional rooks. Exiting game. Black promotional rook count at " + GlobalBlackRookProm);
 	            		System.exit(0);
 	    			}
 	    			
@@ -3416,7 +3447,7 @@ public class Chess extends JFrame  implements ActionListener {
 		    			BlackQueenProm8.setActive(true);
 	    			}
 	            	if (GlobalBlackQueenProm >= 9){
-	            		System.out.println("Error. Game cannot handle more than 8 Black Queens. Exiting game. GlobalBlackQueenProm at " + GlobalBlackQueenProm);
+	            		LOGGER.log(Level.SEVERE, "Game cannot handle more than 8 black promotional queens. Exiting game. Black promotional queen count at " + GlobalBlackQueenProm);
 	            		System.exit(0);
 	    			}
 	            }
@@ -3484,7 +3515,7 @@ public class Chess extends JFrame  implements ActionListener {
 		    			BlackBishopProm8.setActive(true);
 	    			}
 	            	if (GlobalBlackBishopProm >= 9){
-	            		System.out.println("Error. Game cannot handle more than 8 Black Bishop. Exiting game. GlobalBlackBishopProm at " + GlobalBlackBishopProm);
+	            		LOGGER.log(Level.SEVERE, "Game cannot handle more than 8 black promotional bishops. Exiting game. Black promotional bishop count at " + GlobalBlackBishopProm);
 	            		System.exit(0);
 	    			}
 	            }
@@ -3552,8 +3583,9 @@ public class Chess extends JFrame  implements ActionListener {
 		    			BlackKnightProm8.setActive(true);
 	    			}
 	            	if (GlobalBlackKnightProm >= 9){
-	            		System.out.println("Error. Game cannot handle more than 8 Black Knight. Exiting game. GlobalBlackKnightProm at " + GlobalBlackKnightProm);
+	            		LOGGER.log(Level.SEVERE, "Game cannot handle more than 8 black promotional knights. Exiting game. Black promotional knight count at " + GlobalBlackKnightProm);
 	            		System.exit(0);
+	          
 	    			}
 	            }
 	        });
@@ -3870,56 +3902,56 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = WhiteKnightG1.getCurrentPositionX();
 			int y = WhiteKnightG1.getCurrentPositionY();
 			PossibleXY = WhiteKnightG1.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}	
 		if(CurrentTitle == "White Bishop (F1)"){
 			int x = WhiteBishopF1.getCurrentPositionX();
 			int y = WhiteBishopF1.getCurrentPositionY();
 			PossibleXY = WhiteBishopF1.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}	
 		if(CurrentTitle == "White Pawn (H2)"){
 			int x = WhitePawnH2.getCurrentPositionX();
 			int y = WhitePawnH2.getCurrentPositionY();
 			PossibleXY = WhitePawnH2.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}	
 		if(CurrentTitle == "White Pawn (G2)"){
 			int x = WhitePawnG2.getCurrentPositionX();
 			int y = WhitePawnG2.getCurrentPositionY();
 			PossibleXY = WhitePawnG2.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}	
 		if(CurrentTitle == "White Pawn (F2)"){
 			int x = WhitePawnF2.getCurrentPositionX();
 			int y = WhitePawnF2.getCurrentPositionY();
 			PossibleXY = WhitePawnF2.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}	
 		if(CurrentTitle == "White Pawn (E2)"){
 			int x = WhitePawnE2.getCurrentPositionX();
 			int y = WhitePawnE2.getCurrentPositionY();
 			PossibleXY = WhitePawnE2.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}	
 		if(CurrentTitle == "White Pawn (D2)"){
 			int x = WhitePawnD2.getCurrentPositionX();
 			int y = WhitePawnD2.getCurrentPositionY();
 			PossibleXY = WhitePawnD2.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}	
 		if(CurrentTitle == "White Queen (D1)"){
 			int x = WhiteQueenD1.getCurrentPositionX();
 			int y = WhiteQueenD1.getCurrentPositionY();
 			PossibleXY = WhiteQueenD1.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		
@@ -3927,280 +3959,280 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = WhiteBishopC1.getCurrentPositionX();
 			int y = WhiteBishopC1.getCurrentPositionY();
 			PossibleXY = WhiteBishopC1.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Rook (A1)"){
 			int x = WhiteRookA1.getCurrentPositionX();
 			int y = WhiteRookA1.getCurrentPositionY();
 			PossibleXY = WhiteRookA1.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Pawn (C2)"){
 			int x = WhitePawnC2.getCurrentPositionX();
 			int y = WhitePawnC2.getCurrentPositionY();
 			PossibleXY = WhitePawnC2.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Pawn (B2)"){
 			int x = WhitePawnB2.getCurrentPositionX();
 			int y = WhitePawnB2.getCurrentPositionY();
 			PossibleXY = WhitePawnB2.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Pawn (A2)"){
 			int x = WhitePawnA2.getCurrentPositionX();
 			int y = WhitePawnA2.getCurrentPositionY();
 			PossibleXY = WhitePawnA2.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White King (E1)"){
 			int x = WhiteKingE1.getCurrentPositionX();
 			int y = WhiteKingE1.getCurrentPositionY();
 			PossibleXY = WhiteKingE1.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Knight (B1)"){
 			int x = WhiteKnightB1.getCurrentPositionX();
 			int y = WhiteKnightB1.getCurrentPositionY();
 			PossibleXY = WhiteKnightB1.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Rook (H1)"){
 			int x = WhiteRookH1.getCurrentPositionX();
 			int y = WhiteRookH1.getCurrentPositionY();
 			PossibleXY = WhiteRookH1.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom8)"){
 			int x = WhiteQueenProm8.getCurrentPositionX();
 			int y = WhiteQueenProm8.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm8.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom7)"){
 			int x = WhiteQueenProm7.getCurrentPositionX();
 			int y = WhiteQueenProm7.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm7.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom6)"){
 			int x = WhiteQueenProm6.getCurrentPositionX();
 			int y = WhiteQueenProm6.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm6.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom5)"){
 			int x = WhiteQueenProm5.getCurrentPositionX();
 			int y = WhiteQueenProm5.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm5.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom4)"){
 			int x = WhiteQueenProm4.getCurrentPositionX();
 			int y = WhiteQueenProm4.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm4.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom3)"){
 			int x = WhiteQueenProm3.getCurrentPositionX();
 			int y = WhiteQueenProm3.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm3.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom2)"){
 			int x = WhiteQueenProm2.getCurrentPositionX();
 			int y = WhiteQueenProm2.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm2.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom1)"){
 			int x = WhiteQueenProm1.getCurrentPositionX();
 			int y = WhiteQueenProm1.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm1.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom8)"){
 			int x = WhiteKnightProm8.getCurrentPositionX();
 			int y = WhiteKnightProm8.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm8.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom7)"){
 			int x = WhiteKnightProm7.getCurrentPositionX();
 			int y = WhiteKnightProm7.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm7.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom6)"){
 			int x = WhiteKnightProm6.getCurrentPositionX();
 			int y = WhiteKnightProm6.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm6.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom5)"){
 			int x = WhiteKnightProm5.getCurrentPositionX();
 			int y = WhiteKnightProm5.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm5.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom4)"){
 			int x = WhiteKnightProm4.getCurrentPositionX();
 			int y = WhiteKnightProm4.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm4.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom3)"){
 			int x = WhiteKnightProm3.getCurrentPositionX();
 			int y = WhiteKnightProm3.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm3.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom2)"){
 			int x = WhiteKnightProm2.getCurrentPositionX();
 			int y = WhiteKnightProm2.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm2.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom1)"){
 			int x = WhiteKnightProm1.getCurrentPositionX();
 			int y = WhiteKnightProm1.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm1.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom8)"){
 			int x = WhiteBishopProm8.getCurrentPositionX();
 			int y = WhiteBishopProm8.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm8.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom7)"){
 			int x = WhiteBishopProm7.getCurrentPositionX();
 			int y = WhiteBishopProm7.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm7.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom6)"){
 			int x = WhiteBishopProm6.getCurrentPositionX();
 			int y = WhiteBishopProm6.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm6.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom5)"){
 			int x = WhiteBishopProm5.getCurrentPositionX();
 			int y = WhiteBishopProm5.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm5.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom4)"){
 			int x = WhiteBishopProm4.getCurrentPositionX();
 			int y = WhiteBishopProm4.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm4.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom3)"){
 			int x = WhiteBishopProm3.getCurrentPositionX();
 			int y = WhiteBishopProm3.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm3.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom2)"){
 			int x = WhiteBishopProm2.getCurrentPositionX();
 			int y = WhiteBishopProm2.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm2.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom1)"){
 			int x = WhiteBishopProm1.getCurrentPositionX();
 			int y = WhiteBishopProm1.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm1.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom8)"){
 			int x = WhiteRookProm8.getCurrentPositionX();
 			int y = WhiteRookProm8.getCurrentPositionY();
 			PossibleXY = WhiteRookProm8.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom7)"){
 			int x = WhiteRookProm7.getCurrentPositionX();
 			int y = WhiteRookProm7.getCurrentPositionY();
 			PossibleXY = WhiteRookProm7.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom6)"){
 			int x = WhiteRookProm6.getCurrentPositionX();
 			int y = WhiteRookProm6.getCurrentPositionY();
 			PossibleXY = WhiteRookProm6.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom5)"){
 			int x = WhiteRookProm5.getCurrentPositionX();
 			int y = WhiteRookProm5.getCurrentPositionY();
 			PossibleXY = WhiteRookProm5.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom4)"){
 			int x = WhiteRookProm4.getCurrentPositionX();
 			int y = WhiteRookProm4.getCurrentPositionY();
 			PossibleXY = WhiteRookProm4.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom3)"){
 			int x = WhiteRookProm3.getCurrentPositionX();
 			int y = WhiteRookProm3.getCurrentPositionY();
 			PossibleXY = WhiteRookProm3.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom2)"){
 			int x = WhiteRookProm2.getCurrentPositionX();
 			int y = WhiteRookProm2.getCurrentPositionY();
 			PossibleXY = WhiteRookProm2.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom1)"){
 			int x = WhiteRookProm1.getCurrentPositionX();
 			int y = WhiteRookProm1.getCurrentPositionY();
 			PossibleXY = WhiteRookProm1.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 	}
@@ -4210,112 +4242,112 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackKnightG8.getCurrentPositionX();
 			int y = BlackKnightG8.getCurrentPositionY();
 			PossibleXY = BlackKnightG8.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Bishop (F8)"){
 			int x = BlackBishopF8.getCurrentPositionX();
 			int y = BlackBishopF8.getCurrentPositionY();
 			PossibleXY = BlackBishopF8.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Rook (H8)"){
 			int x = BlackRookH8.getCurrentPositionX();
 			int y = BlackRookH8.getCurrentPositionY();
 			PossibleXY = BlackRookH8.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Pawn (A7)"){
 			int x = BlackPawnA7.getCurrentPositionX();
 			int y = BlackPawnA7.getCurrentPositionY();
 			PossibleXY = BlackPawnA7.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Pawn (H7)"){
 			int x = BlackPawnH7.getCurrentPositionX();
 			int y = BlackPawnH7.getCurrentPositionY();
 			PossibleXY = BlackPawnH7.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Pawn (G7)"){
 			int x = BlackPawnG7.getCurrentPositionX();
 			int y = BlackPawnG7.getCurrentPositionY();
 			PossibleXY = BlackPawnG7.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Pawn (F7)"){
 			int x = BlackPawnF7.getCurrentPositionX();
 			int y = BlackPawnF7.getCurrentPositionY();
 			PossibleXY = BlackPawnF7.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Pawn (E7)"){
 			int x = BlackPawnE7.getCurrentPositionX();
 			int y = BlackPawnE7.getCurrentPositionY();
 			PossibleXY = BlackPawnE7.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Pawn (D7)"){
 			int x = BlackPawnD7.getCurrentPositionX();
 			int y = BlackPawnD7.getCurrentPositionY();
 			PossibleXY = BlackPawnD7.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Pawn (B7)"){
 			int x = BlackPawnB7.getCurrentPositionX();
 			int y = BlackPawnB7.getCurrentPositionY();
 			PossibleXY = BlackPawnB7.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black King (E8)"){
 			int x = BlackKingE8.getCurrentPositionX();
 			int y = BlackKingE8.getCurrentPositionY();
 			PossibleXY = BlackKingE8.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Knight (B8)"){
 			int x = BlackKnightB8.getCurrentPositionX();
 			int y = BlackKnightB8.getCurrentPositionY();
 			PossibleXY = BlackKnightB8.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Pawn (C7)"){
 			int x = BlackPawnC7.getCurrentPositionX();
 			int y = BlackPawnC7.getCurrentPositionY();
 			PossibleXY = BlackPawnC7.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Rook (A8)"){
 			int x = BlackRookA8.getCurrentPositionX();
 			int y = BlackRookA8.getCurrentPositionY();
 			PossibleXY = BlackRookA8.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Bishop (C8)"){
 			int x = BlackBishopC8.getCurrentPositionX();
 			int y = BlackBishopC8.getCurrentPositionY();
 			PossibleXY = BlackBishopC8.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Queen (D8)"){
 			int x = BlackQueenD8.getCurrentPositionX();
 			int y = BlackQueenD8.getCurrentPositionY();
 			PossibleXY = BlackQueenD8.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Queen (Prom8)"){
@@ -4323,7 +4355,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackQueenProm8.getCurrentPositionX();
 			int y = BlackQueenProm8.getCurrentPositionY();
 			PossibleXY = BlackQueenProm8.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Queen (Prom7)"){
@@ -4331,7 +4363,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackQueenProm7.getCurrentPositionX();
 			int y = BlackQueenProm7.getCurrentPositionY();
 			PossibleXY = BlackQueenProm7.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Queen (Prom6)"){
@@ -4339,7 +4371,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackQueenProm6.getCurrentPositionX();
 			int y = BlackQueenProm6.getCurrentPositionY();
 			PossibleXY = BlackQueenProm6.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Queen (Prom5)"){
@@ -4347,7 +4379,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackQueenProm5.getCurrentPositionX();
 			int y = BlackQueenProm5.getCurrentPositionY();
 			PossibleXY = BlackQueenProm5.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Queen (Prom4)"){
@@ -4355,7 +4387,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackQueenProm4.getCurrentPositionX();
 			int y = BlackQueenProm4.getCurrentPositionY();
 			PossibleXY = BlackQueenProm4.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Queen (Prom3)"){
@@ -4363,7 +4395,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackQueenProm3.getCurrentPositionX();
 			int y = BlackQueenProm3.getCurrentPositionY();
 			PossibleXY = BlackQueenProm3.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Queen (Prom2)"){
@@ -4371,7 +4403,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackQueenProm2.getCurrentPositionX();
 			int y = BlackQueenProm2.getCurrentPositionY();
 			PossibleXY = BlackQueenProm2.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Queen (Prom1)"){
@@ -4379,7 +4411,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackQueenProm1.getCurrentPositionX();
 			int y = BlackQueenProm1.getCurrentPositionY();
 			PossibleXY = BlackQueenProm1.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Knight (Prom8)"){
@@ -4387,7 +4419,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackKnightProm8.getCurrentPositionX();
 			int y = BlackKnightProm8.getCurrentPositionY();
 			PossibleXY = BlackKnightProm8.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Knight (Prom7)"){
@@ -4395,7 +4427,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackKnightProm7.getCurrentPositionX();
 			int y = BlackKnightProm7.getCurrentPositionY();
 			PossibleXY = BlackKnightProm7.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Knight (Prom6)"){
@@ -4403,7 +4435,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackKnightProm6.getCurrentPositionX();
 			int y = BlackKnightProm6.getCurrentPositionY();
 			PossibleXY = BlackKnightProm6.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Knight (Prom5)"){
@@ -4411,7 +4443,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackKnightProm5.getCurrentPositionX();
 			int y = BlackKnightProm5.getCurrentPositionY();
 			PossibleXY = BlackKnightProm5.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Knight (Prom4)"){
@@ -4419,7 +4451,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackKnightProm4.getCurrentPositionX();
 			int y = BlackKnightProm4.getCurrentPositionY();
 			PossibleXY = BlackKnightProm4.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Knight (Prom3)"){
@@ -4427,7 +4459,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackKnightProm3.getCurrentPositionX();
 			int y = BlackKnightProm3.getCurrentPositionY();
 			PossibleXY = BlackKnightProm3.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Knight (Prom2)"){
@@ -4435,7 +4467,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackKnightProm2.getCurrentPositionX();
 			int y = BlackKnightProm2.getCurrentPositionY();
 			PossibleXY = BlackKnightProm2.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Knight (Prom1)"){
@@ -4443,7 +4475,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackKnightProm1.getCurrentPositionX();
 			int y = BlackKnightProm1.getCurrentPositionY();
 			PossibleXY = BlackKnightProm1.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Bishop (Prom8)"){
@@ -4451,7 +4483,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackBishopProm8.getCurrentPositionX();
 			int y = BlackBishopProm8.getCurrentPositionY();
 			PossibleXY = BlackBishopProm8.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Bishop (Prom7)"){
@@ -4459,7 +4491,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackBishopProm7.getCurrentPositionX();
 			int y = BlackBishopProm7.getCurrentPositionY();
 			PossibleXY = BlackBishopProm7.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Bishop (Prom6)"){
@@ -4467,7 +4499,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackBishopProm6.getCurrentPositionX();
 			int y = BlackBishopProm6.getCurrentPositionY();
 			PossibleXY = BlackBishopProm6.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Bishop (Prom5)"){
@@ -4475,7 +4507,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackBishopProm5.getCurrentPositionX();
 			int y = BlackBishopProm5.getCurrentPositionY();
 			PossibleXY = BlackBishopProm5.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Bishop (Prom4)"){
@@ -4483,7 +4515,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackBishopProm4.getCurrentPositionX();
 			int y = BlackBishopProm4.getCurrentPositionY();
 			PossibleXY = BlackBishopProm4.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Bishop (Prom3)"){
@@ -4491,7 +4523,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackBishopProm3.getCurrentPositionX();
 			int y = BlackBishopProm3.getCurrentPositionY();
 			PossibleXY = BlackBishopProm3.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Bishop (Prom2)"){
@@ -4499,7 +4531,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackBishopProm2.getCurrentPositionX();
 			int y = BlackBishopProm2.getCurrentPositionY();
 			PossibleXY = BlackBishopProm2.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Bishop (Prom1)"){
@@ -4507,7 +4539,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackBishopProm1.getCurrentPositionX();
 			int y = BlackBishopProm1.getCurrentPositionY();
 			PossibleXY = BlackBishopProm1.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 
@@ -4517,7 +4549,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackRookProm8.getCurrentPositionX();
 			int y = BlackRookProm8.getCurrentPositionY();
 			PossibleXY = BlackRookProm8.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Rook (Prom7)"){
@@ -4525,7 +4557,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackRookProm7.getCurrentPositionX();
 			int y = BlackRookProm7.getCurrentPositionY();
 			PossibleXY = BlackRookProm7.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Rook (Prom6)"){
@@ -4533,7 +4565,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackRookProm6.getCurrentPositionX();
 			int y = BlackRookProm6.getCurrentPositionY();
 			PossibleXY = BlackRookProm6.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Rook (Prom5)"){
@@ -4541,7 +4573,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackRookProm5.getCurrentPositionX();
 			int y = BlackRookProm5.getCurrentPositionY();
 			PossibleXY = BlackRookProm5.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Rook (Prom4)"){
@@ -4549,7 +4581,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackRookProm4.getCurrentPositionX();
 			int y = BlackRookProm4.getCurrentPositionY();
 			PossibleXY = BlackRookProm4.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Rook (Prom3)"){
@@ -4557,7 +4589,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackRookProm3.getCurrentPositionX();
 			int y = BlackRookProm3.getCurrentPositionY();
 			PossibleXY = BlackRookProm3.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Rook (Prom2)"){
@@ -4565,7 +4597,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackRookProm2.getCurrentPositionX();
 			int y = BlackRookProm2.getCurrentPositionY();
 			PossibleXY = BlackRookProm2.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Rook (Prom1)"){
@@ -4573,7 +4605,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackRookProm1.getCurrentPositionX();
 			int y = BlackRookProm1.getCurrentPositionY();
 			PossibleXY = BlackRookProm1.movementHandler(x, y);
-			System.out.println("Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
 
@@ -4587,7 +4619,7 @@ public class Chess extends JFrame  implements ActionListener {
 				final long startWhiteGrabTime = System.currentTimeMillis();
 				highlightButton(b);		
 				CurrentTitle=getPiece(ComX,ComY);
-				System.out.println("Current Title is: " + CurrentTitle);
+				LOGGER.log(Level.INFO, "Current Title is: " + CurrentTitle);
 				whiteMovementHandler(ComX,ComY); //will determine available moves
 				ComingFrom = b; //will set the button to which will send to next button
 				final long endWhiteGrabTime = System.currentTimeMillis();
@@ -4653,7 +4685,8 @@ public class Chess extends JFrame  implements ActionListener {
 							System.out.println("Total black set piece time: " + (endCheckTime - startCheckTime));			
 					}
 					
-					System.out.println("You have done a valid move");
+
+					LOGGER.log(Level.FINE,"You have done a valid move");
 					setPiece(b,ComXY[0],ComXY[1]);
 					break;  
 				}		
