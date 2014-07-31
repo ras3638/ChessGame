@@ -74,50 +74,51 @@ public class Piece {
 		WhiteAggregate[6]=WhiteBishopC1.getCurrentPositionXY();
 		WhiteAggregate[7]=WhiteQueenD1.getCurrentPositionXY();
 	
+		WhiteAggregate[8]=WhiteRookH1.getCurrentPositionXY();
+		WhiteAggregate[9]=WhitePawnD2.getCurrentPositionXY();
+		WhiteAggregate[10]=WhiteBishopF1.getCurrentPositionXY();
+		WhiteAggregate[11]=WhiteKnightG1.getCurrentPositionXY();
+		WhiteAggregate[12]=WhitePawnE2.getCurrentPositionXY();
+		WhiteAggregate[13]=WhitePawnF2.getCurrentPositionXY();
+		WhiteAggregate[14]=WhitePawnG2.getCurrentPositionXY();
+		WhiteAggregate[15]=WhitePawnH2.getCurrentPositionXY();
 		
-		WhiteAggregate[8]=WhiteRookProm1.getCurrentPositionXY();
-		WhiteAggregate[9]=WhiteRookProm2.getCurrentPositionXY();
-		WhiteAggregate[10]=WhiteRookProm3.getCurrentPositionXY();
-		WhiteAggregate[11]=WhiteRookProm4.getCurrentPositionXY();
-		WhiteAggregate[12]=WhiteRookProm5.getCurrentPositionXY();
-		WhiteAggregate[13]=WhiteRookProm6.getCurrentPositionXY();
-		WhiteAggregate[14]=WhiteRookProm7.getCurrentPositionXY();
-		WhiteAggregate[15]=WhiteRookProm8.getCurrentPositionXY();
-		WhiteAggregate[16]=WhiteQueenProm1.getCurrentPositionXY();
-		WhiteAggregate[17]=WhiteQueenProm2.getCurrentPositionXY();
-		WhiteAggregate[18]=WhiteQueenProm3.getCurrentPositionXY();
-		WhiteAggregate[19]=WhiteQueenProm4.getCurrentPositionXY();
-		WhiteAggregate[20]=WhiteQueenProm5.getCurrentPositionXY();
-		WhiteAggregate[21]=WhiteQueenProm6.getCurrentPositionXY();
-		WhiteAggregate[22]=WhiteQueenProm7.getCurrentPositionXY();
-		WhiteAggregate[23]=WhiteQueenProm8.getCurrentPositionXY();
+		WhiteAggregate[16]=WhiteRookProm1.getCurrentPositionXY();
+		WhiteAggregate[17]=WhiteRookProm2.getCurrentPositionXY();
+		WhiteAggregate[18]=WhiteRookProm3.getCurrentPositionXY();
+		WhiteAggregate[19]=WhiteRookProm4.getCurrentPositionXY();
+		WhiteAggregate[20]=WhiteRookProm5.getCurrentPositionXY();
+		WhiteAggregate[21]=WhiteRookProm6.getCurrentPositionXY();
+		WhiteAggregate[22]=WhiteRookProm7.getCurrentPositionXY();
+		WhiteAggregate[23]=WhiteRookProm8.getCurrentPositionXY();
+		WhiteAggregate[24]=WhiteQueenProm1.getCurrentPositionXY();
+		WhiteAggregate[25]=WhiteQueenProm2.getCurrentPositionXY();
+		WhiteAggregate[26]=WhiteQueenProm3.getCurrentPositionXY();
+		WhiteAggregate[27]=WhiteQueenProm4.getCurrentPositionXY();
+		WhiteAggregate[28]=WhiteQueenProm5.getCurrentPositionXY();
+		WhiteAggregate[29]=WhiteQueenProm6.getCurrentPositionXY();
+		WhiteAggregate[30]=WhiteQueenProm7.getCurrentPositionXY();
+		WhiteAggregate[31]=WhiteQueenProm8.getCurrentPositionXY();
 		
-		WhiteAggregate[24]=WhiteBishopProm1.getCurrentPositionXY();
-		WhiteAggregate[25]=WhiteBishopProm2.getCurrentPositionXY();
-		WhiteAggregate[26]=WhiteBishopProm3.getCurrentPositionXY();
-		WhiteAggregate[27]=WhiteBishopProm4.getCurrentPositionXY();
-		WhiteAggregate[28]=WhiteBishopProm5.getCurrentPositionXY();
-		WhiteAggregate[29]=WhiteBishopProm6.getCurrentPositionXY();
-		WhiteAggregate[30]=WhiteBishopProm7.getCurrentPositionXY();
-		WhiteAggregate[31]=WhiteBishopProm8.getCurrentPositionXY();
+		WhiteAggregate[32]=WhiteBishopProm1.getCurrentPositionXY();
+		WhiteAggregate[33]=WhiteBishopProm2.getCurrentPositionXY();
+		WhiteAggregate[34]=WhiteBishopProm3.getCurrentPositionXY();
+		WhiteAggregate[35]=WhiteBishopProm4.getCurrentPositionXY();
+		WhiteAggregate[36]=WhiteBishopProm5.getCurrentPositionXY();
+		WhiteAggregate[37]=WhiteBishopProm6.getCurrentPositionXY();
+		WhiteAggregate[38]=WhiteBishopProm7.getCurrentPositionXY();
+		WhiteAggregate[39]=WhiteBishopProm8.getCurrentPositionXY();
 		
-		WhiteAggregate[32]=WhiteKnightProm1.getCurrentPositionXY();
-		WhiteAggregate[33]=WhiteKnightProm2.getCurrentPositionXY();
-		WhiteAggregate[34]=WhiteKnightProm3.getCurrentPositionXY();
-		WhiteAggregate[35]=WhiteKnightProm4.getCurrentPositionXY();
-		WhiteAggregate[36]=WhiteKnightProm5.getCurrentPositionXY();
-		WhiteAggregate[37]=WhiteKnightProm6.getCurrentPositionXY();
-		WhiteAggregate[38]=WhiteKnightProm7.getCurrentPositionXY();
-		WhiteAggregate[39]=WhiteKnightProm8.getCurrentPositionXY();
+		WhiteAggregate[39]=WhiteKnightProm1.getCurrentPositionXY();
+		WhiteAggregate[40]=WhiteKnightProm2.getCurrentPositionXY();
+		WhiteAggregate[41]=WhiteKnightProm3.getCurrentPositionXY();
+		WhiteAggregate[42]=WhiteKnightProm4.getCurrentPositionXY();
+		WhiteAggregate[43]=WhiteKnightProm5.getCurrentPositionXY();
+		WhiteAggregate[44]=WhiteKnightProm6.getCurrentPositionXY();
+		WhiteAggregate[45]=WhiteKnightProm7.getCurrentPositionXY();
+		WhiteAggregate[46]=WhiteKnightProm8.getCurrentPositionXY();
 		
-		WhiteAggregate[40]=WhiteRookH1.getCurrentPositionXY();
-		WhiteAggregate[41]=WhitePawnD2.getCurrentPositionXY();
-		WhiteAggregate[42]=WhiteBishopF1.getCurrentPositionXY();
-		WhiteAggregate[43]=WhiteKnightG1.getCurrentPositionXY();
-		WhiteAggregate[44]=WhitePawnE2.getCurrentPositionXY();
-		WhiteAggregate[45]=WhitePawnF2.getCurrentPositionXY();
-		WhiteAggregate[46]=WhitePawnG2.getCurrentPositionXY();
-		WhiteAggregate[47]=WhitePawnH2.getCurrentPositionXY();
+
 		
 		return WhiteAggregate;
 	}

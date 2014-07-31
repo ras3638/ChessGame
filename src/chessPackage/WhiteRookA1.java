@@ -238,7 +238,7 @@ class WhiteRookProm4 extends Superclass_WhiteRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Rook (Prom2)";
+		String Title = "White Rook (Prom4)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -278,7 +278,7 @@ class WhiteRookProm5 extends Superclass_WhiteRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Rook (Prom2)";
+		String Title = "White Rook (Prom5)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -318,7 +318,7 @@ class WhiteRookProm6 extends Superclass_WhiteRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Rook (Prom2)";
+		String Title = "White Rook (Prom6)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -358,7 +358,7 @@ class WhiteRookProm7 extends Superclass_WhiteRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Rook (Prom2)";
+		String Title = "White Rook (Prom7)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -398,7 +398,7 @@ class WhiteRookProm8 extends Superclass_WhiteRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Rook (Prom2)";
+		String Title = "White Rook (Prom8)";
 		return Title;
 	}
 	static int getCurrentPositionX(){

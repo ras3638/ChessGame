@@ -9,17 +9,9 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.Arrays;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.FileHandler;
-import java.util.logging.Formatter;
-import java.util.logging.Handler;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.LogRecord;
 import java.util.logging.Logger;
-import java.util.logging.XMLFormatter;
 
 public class Chess extends JFrame  implements ActionListener {
 	
@@ -35,20 +27,9 @@ public class Chess extends JFrame  implements ActionListener {
 	static String CurrentTitle;
 	static String CurrentColor;
 	static int[][] PossibleXY;
-	static int GlobalWhiteRookProm = 0;
-	static int GlobalWhiteQueenProm = 0;
-	static int GlobalWhiteKnightProm = 0;
-	static int GlobalWhiteBishopProm = 0;
-	static int GlobalBlackRookProm = 0;
-	static int GlobalBlackQueenProm = 0;
-	static int GlobalBlackKnightProm = 0;
-	static int GlobalBlackBishopProm = 0;
 
-	static Logger LOGGER = Logger.getLogger(Chess.class .getName());
+	static Logger LOGGER = Logger.getLogger(Chess.class.getName());
 	
-
-	Color DarkBrown = new Color(153, 76, 0);
-	Color LightBrown = new Color(255, 204, 153);
 	//Grid Coordinates
 	static final int[] A8ComXY = {0,0};
 	static final int A8ComX = 0;
@@ -674,10 +655,13 @@ public class Chess extends JFrame  implements ActionListener {
 			}
 		}
 		SetActionCommand();
+		new MenuBar();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack(); //sets appropriate size for frame
 		frame.setVisible(true); //makes frame visible
 		ResetSelection();
+		
+		
 	}
 	void SetActionCommand(){
 		//A File
@@ -826,18 +810,18 @@ public class Chess extends JFrame  implements ActionListener {
 	}
 	
 	
+	
 	public static void main(String[] args) {
 		
 		System.out.println("Welcome to Chess");
 		new Chess(8, 8);
 	    try {
 	       Logging.setup();
-	       
+	      
 	    }
 	    catch (Throwable e) {
 	        e.printStackTrace();
 	    }	
-	
 	}
 	void ResetSelection(){
 		bA8.setSelected(false);
@@ -1319,7 +1303,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Rook (H1)"){
-			System.out.println("You have set White Rook (H1) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Rook (H1) on to " + Arrays.toString(input));
 			J.setIcon(WhiteRookH1.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1334,7 +1318,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Queen (D1)"){
-			System.out.println("You have set White Queen (D1) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Queen (D1) on to " + Arrays.toString(input));
 			J.setIcon(WhiteQueenD1.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1350,11 +1334,17 @@ public class Chess extends JFrame  implements ActionListener {
 				System.out.println("Black Player in check by Queen");
 			}
 			*/
+			
+		
+			if(Superclass_BlackKing.isBlackKingInCheck(input, "White Queen (D1)")){
+				//this doesnt work. need to reverse ! logic in function isBlackKinginCheck
+				System.out.println("Black King in Check!");
+				}
 			resetBlackEnPassat();
 			return;
 		}
 		if (CurrentTitle == "White Bishop (F1)"){
-			System.out.println("You have set White Bishop (F1) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Bishop (F1) on to " + Arrays.toString(input));
 			J.setIcon(WhiteBishopF1.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1368,7 +1358,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Bishop (C1)"){
-			System.out.println("You have set White Bishop (C1) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Bishop (C1) on to " + Arrays.toString(input));
 			J.setIcon(WhiteBishopC1.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1382,7 +1372,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Rook (A1)"){
-			System.out.println("You have set White Rook (A1) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Rook (A1) on to " + Arrays.toString(input));
 			J.setIcon(WhiteRookA1.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1397,7 +1387,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Pawn (H2)"){
-			System.out.println("You have set White Pawn (H2) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Pawn (H2) on to " + Arrays.toString(input));
 			J.setIcon(WhitePawnH2.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1410,7 +1400,7 @@ public class Chess extends JFrame  implements ActionListener {
 			WhitePiece.updateEnPassatKill(X, Y);
 			//determine if a pawn has reached end of board
 			if (WhitePiece.pawnPromotion(Y,CurrentTitle)){
-				ActivatePopUp(WhiteTurn, J,X);
+				new PawnPopUp(WhiteTurn,J, X);
 			}
 			
 			if(WhitePawnH2.getFirstStrike()){
@@ -1427,7 +1417,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;		
 		}
 		if (CurrentTitle == "White Pawn (G2)"){
-			System.out.println("You have set White Pawn (G2) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Pawn (G2) on to " + Arrays.toString(input));
 			J.setIcon(WhitePawnG2.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1440,7 +1430,7 @@ public class Chess extends JFrame  implements ActionListener {
 			WhitePiece.updateEnPassatKill(X, Y);
 			//determine if a pawn has reached end of board
 			if (WhitePiece.pawnPromotion(Y,CurrentTitle)){
-				ActivatePopUp(WhiteTurn, J,X);
+				new PawnPopUp(WhiteTurn,J, X);;
 			}
 			
 			if(WhitePawnG2.getFirstStrike()){
@@ -1457,7 +1447,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;		
 		}
 		if (CurrentTitle == "White Pawn (F2)"){
-			System.out.println("You have set White Pawn (F2) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Pawn (F2) on to " + Arrays.toString(input));
 			J.setIcon(WhitePawnF2.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1470,7 +1460,7 @@ public class Chess extends JFrame  implements ActionListener {
 			WhitePiece.updateEnPassatKill(X, Y);
 			//determine if a pawn has reached end of board
 			if (WhitePiece.pawnPromotion(Y,CurrentTitle)){
-				ActivatePopUp(WhiteTurn, J,X);
+				new PawnPopUp(WhiteTurn, J,X);
 			}
 			
 			if(WhitePawnF2.getFirstStrike()){
@@ -1487,7 +1477,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;		
 		}
 		if (CurrentTitle == "White Pawn (E2)"){
-			System.out.println("You have set White Pawn (E2) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Pawn (E2) on to " + Arrays.toString(input));
 			J.setIcon(WhitePawnE2.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1500,7 +1490,7 @@ public class Chess extends JFrame  implements ActionListener {
 			WhitePiece.updateEnPassatKill(X, Y);
 			//determine if a pawn has reached end of board
 			if (WhitePiece.pawnPromotion(Y,CurrentTitle)){
-				ActivatePopUp(WhiteTurn, J,X);
+				new PawnPopUp(WhiteTurn, J,X);
 			}
 			
 			if(WhitePawnE2.getFirstStrike()){
@@ -1517,7 +1507,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;		
 		}
 		if (CurrentTitle == "White Pawn (D2)"){
-			System.out.println("You have set White Pawn (D2) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Pawn (D2) on to " + Arrays.toString(input));
 			J.setIcon(WhitePawnD2.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1530,7 +1520,7 @@ public class Chess extends JFrame  implements ActionListener {
 			WhitePiece.updateEnPassatKill(X, Y);
 			//determine if a pawn has reached end of board
 			if (WhitePiece.pawnPromotion(Y,CurrentTitle)){
-				ActivatePopUp(WhiteTurn, J,X);
+				new PawnPopUp(WhiteTurn, J,X);
 			}
 			
 			if(WhitePawnD2.getFirstStrike()){
@@ -1547,7 +1537,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;		
 		}
 		if (CurrentTitle == "White Pawn (C2)"){
-			System.out.println("You have set White Pawn (C2) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Pawn (C2) on to " + Arrays.toString(input));
 			J.setIcon(WhitePawnC2.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1560,7 +1550,7 @@ public class Chess extends JFrame  implements ActionListener {
 			WhitePiece.updateEnPassatKill(X, Y);
 			//determine if a pawn has reached end of board
 			if (WhitePiece.pawnPromotion(Y,CurrentTitle)){
-				ActivatePopUp(WhiteTurn, J,X);
+				new PawnPopUp(WhiteTurn, J,X);
 			}
 			
 			if(WhitePawnC2.getFirstStrike()){
@@ -1577,7 +1567,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;		
 		}
 		if (CurrentTitle == "White Pawn (B2)"){
-			System.out.println("You have set White Pawn (B2) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Pawn (B2) on to " + Arrays.toString(input));
 			J.setIcon(WhitePawnB2.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1590,7 +1580,7 @@ public class Chess extends JFrame  implements ActionListener {
 			WhitePiece.updateEnPassatKill(X, Y);
 			//determine if a pawn has reached end of board
 			if (WhitePiece.pawnPromotion(Y,CurrentTitle)){
-				ActivatePopUp(WhiteTurn, J,X);
+				new PawnPopUp(WhiteTurn, J,X);
 			}
 			if(WhitePawnB2.getFirstStrike()){
 				if(WhitePawnB2.getCurrentPositionX() == 1 && WhitePawnB2.getCurrentPositionY() == 4){
@@ -1607,7 +1597,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;	
 		}
 		if (CurrentTitle == "White Pawn (A2)"){
-			System.out.println("You have set White Pawn (A2) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Pawn (A2) on to " + Arrays.toString(input));
 			J.setIcon(WhitePawnA2.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1620,7 +1610,7 @@ public class Chess extends JFrame  implements ActionListener {
 			WhitePiece.updateEnPassatKill(X, Y);
 			//determine if a pawn has reached end of board
 			if (WhitePiece.pawnPromotion(Y,CurrentTitle)){
-				ActivatePopUp(WhiteTurn, J,X);
+				new PawnPopUp(WhiteTurn, J,X);
 			}
 			if(WhitePawnA2.getFirstStrike()){
 				if(WhitePawnA2.getCurrentPositionX() == 0 && WhitePawnA2.getCurrentPositionY() == 4){
@@ -1637,7 +1627,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White King (E1)"){
-			System.out.println("You have set White King (E1) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White King (E1) on to " + Arrays.toString(input));
 			J.setIcon(WhiteKingE1.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1651,7 +1641,7 @@ public class Chess extends JFrame  implements ActionListener {
 			
 			if(ActivateWhiteRightCastle){
 				if(WhiteKingE1.getCurrentPositionX() == 6 && WhiteKingE1.getCurrentPositionY()==7){
-					System.out.println("You have set White Rook (H1) on to [5,7] by castling");
+					LOGGER.log(Level.INFO, "You have set White Rook (H1) on to [5,7] by castling");
 					bF1.setIcon(WhiteRookH1.getIcon());
 					bF1.setName("White Rook (H1)");
 					bH1.setIcon(null);
@@ -1664,7 +1654,7 @@ public class Chess extends JFrame  implements ActionListener {
 			
 			if(ActivateWhiteLeftCastle){
 				if(WhiteKingE1.getCurrentPositionX() == 2 && WhiteKingE1.getCurrentPositionY()==7){
-					System.out.println("You have set White Rook (A1) on to [3,7] by castling");
+					LOGGER.log(Level.INFO, "You have set White Rook (A1) on to [3,7] by castling");
 					bD1.setIcon(WhiteRookA1.getIcon());
 					bD1.setName("White Rook (A1)");
 					bA1.setIcon(null);
@@ -1678,7 +1668,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Knight (G1)"){
-			System.out.println("You have set White Knight (G1) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Knight (G1) on to " + Arrays.toString(input));
 			J.setIcon(WhiteKnightG1.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1692,7 +1682,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;	
 		}
 		if (CurrentTitle == "White Knight (B1)"){
-			System.out.println("You have set White Knight (B1) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Knight (B1) on to " + Arrays.toString(input));
 			J.setIcon(WhiteKnightB1.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1706,7 +1696,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;	
 		}
 		if (CurrentTitle == "Black Pawn (H7)"){
-			System.out.println("You have set Black Pawn (H7) on to a new tile "+ Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Pawn (H7) on to " + Arrays.toString(input));
 			J.setIcon(BlackPawnH7.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1719,7 +1709,7 @@ public class Chess extends JFrame  implements ActionListener {
 			BlackPiece.updateEnPassatKill(X,Y);
 			
 			if (BlackPiece.pawnPromotion(Y,CurrentTitle)){
-				ActivatePopUp(WhiteTurn, J,X);
+				new PawnPopUp(WhiteTurn, J,X);
 			}
 			
 			if(BlackPawnH7.getFirstStrike()){
@@ -1736,7 +1726,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Pawn (G7)"){
-			System.out.println("You have set Black Pawn (G7) on to a new tile "+ Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Pawn (G7) on to " + Arrays.toString(input));
 			J.setIcon(BlackPawnG7.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1749,7 +1739,7 @@ public class Chess extends JFrame  implements ActionListener {
 			BlackPiece.updateEnPassatKill(X,Y);
 			
 			if (BlackPiece.pawnPromotion(Y,CurrentTitle)){
-				ActivatePopUp(WhiteTurn, J,X);
+				new PawnPopUp(WhiteTurn, J,X);
 			}
 			
 			if(BlackPawnG7.getFirstStrike()){
@@ -1766,7 +1756,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Pawn (F7)"){
-			System.out.println("You have set Black Pawn (F7) on to a new tile "+ Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Pawn (F7) on to " + Arrays.toString(input));
 			J.setIcon(BlackPawnF7.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1779,7 +1769,7 @@ public class Chess extends JFrame  implements ActionListener {
 			BlackPiece.updateEnPassatKill(X,Y);
 			
 			if (BlackPiece.pawnPromotion(Y,CurrentTitle)){
-				ActivatePopUp(WhiteTurn, J,X);
+				new PawnPopUp(WhiteTurn, J,X);
 			}
 			
 			if(BlackPawnF7.getFirstStrike()){
@@ -1796,7 +1786,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Pawn (E7)"){
-			System.out.println("You have set Black Pawn (E7) on to a new tile "+ Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Pawn (E7) on to " + Arrays.toString(input));
 			J.setIcon(BlackPawnE7.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1809,7 +1799,7 @@ public class Chess extends JFrame  implements ActionListener {
 			BlackPiece.updateEnPassatKill(X,Y);
 			
 			if (BlackPiece.pawnPromotion(Y,CurrentTitle)){
-				ActivatePopUp(WhiteTurn, J,X);
+				new PawnPopUp(WhiteTurn, J,X);
 			}
 			
 			if(BlackPawnE7.getFirstStrike()){
@@ -1826,7 +1816,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Pawn (D7)"){
-			System.out.println("You have set Black Pawn (D7) on to a new tile "+ Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Pawn (D7) on to " + Arrays.toString(input));
 			J.setIcon(BlackPawnD7.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1839,7 +1829,7 @@ public class Chess extends JFrame  implements ActionListener {
 			BlackPiece.updateEnPassatKill(X,Y);
 			
 			if (BlackPiece.pawnPromotion(Y,CurrentTitle)){
-				ActivatePopUp(WhiteTurn, J,X);
+				new PawnPopUp(WhiteTurn, J,X);
 			}
 			
 			if(BlackPawnD7.getFirstStrike()){
@@ -1856,7 +1846,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Pawn (A7)"){
-			System.out.println("You have set Black Pawn (A7) on to a new tile "+ Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Pawn (A7) on to " + Arrays.toString(input));
 			J.setIcon(BlackPawnA7.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1869,7 +1859,7 @@ public class Chess extends JFrame  implements ActionListener {
 			BlackPiece.updateEnPassatKill(X,Y);
 			
 			if (BlackPiece.pawnPromotion(Y,CurrentTitle)){
-				ActivatePopUp(WhiteTurn, J,X);
+				new PawnPopUp(WhiteTurn, J,X);
 			}
 			
 			if(BlackPawnA7.getFirstStrike()){
@@ -1886,7 +1876,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Pawn (B7)"){
-			System.out.println("You have set Black Pawn (B7) on to a new tile "+ Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Pawn (B7) on to " + Arrays.toString(input));
 			J.setIcon(BlackPawnB7.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1899,7 +1889,7 @@ public class Chess extends JFrame  implements ActionListener {
 			BlackPiece.updateEnPassatKill(X,Y);
 			
 			if (BlackPiece.pawnPromotion(Y,CurrentTitle)){
-				ActivatePopUp(WhiteTurn, J,X);
+				new PawnPopUp(WhiteTurn, J,X);
 			}
 			
 			if(BlackPawnB7.getFirstStrike()){
@@ -1916,7 +1906,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black King (E8)"){
-			System.out.println("You have set Black King (E8) on to a new tile "+ Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black King (E8) on to " + Arrays.toString(input));
 			J.setIcon(BlackKingE8.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1930,7 +1920,7 @@ public class Chess extends JFrame  implements ActionListener {
 	
 			if(ActivateBlackRightCastle){
 				if(BlackKingE8.getCurrentPositionX() == 6 && BlackKingE8.getCurrentPositionY()==0){
-					System.out.println("You have set Black Rook (H8) on to [5,0] by castling");
+					LOGGER.log(Level.INFO, "You have set Black Rook (H8) on to [5,0] by castling");
 					bF8.setIcon(BlackRookH8.getIcon());
 					bF8.setName("Black Rook (H8)");
 					bH8.setIcon(null);
@@ -1943,7 +1933,7 @@ public class Chess extends JFrame  implements ActionListener {
 	
 			if(ActivateBlackLeftCastle){
 				if(BlackKingE8.getCurrentPositionX() == 2 && BlackKingE8.getCurrentPositionY()==0){
-					System.out.println("You have set Black Rook (A8) on to [3,0] by castling");
+					LOGGER.log(Level.INFO, "You have set Black Rook (A8) on to [3,0] by castling");
 					bD8.setIcon(BlackRookA8.getIcon());
 					bD8.setName("Black Rook (A8)");
 					bA8.setIcon(null);
@@ -1958,7 +1948,7 @@ public class Chess extends JFrame  implements ActionListener {
 		}
 		
 		if (CurrentTitle == "Black Knight (B8)"){
-			System.out.println("You have set Black Knight (B8) on to a new tile "+ Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Knight (B8) on to " + Arrays.toString(input));
 			J.setIcon(BlackKnightB8.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1972,7 +1962,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Knight (G8)"){
-			System.out.println("You have set Black Knight (G8) on to a new tile "+ Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Knight (G8) on to " + Arrays.toString(input));
 			J.setIcon(BlackKnightG8.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1986,7 +1976,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Pawn (C7)"){
-			System.out.println("You have set Black Pawn (C7) on to a new tile "+ Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Pawn (C7) on to " + Arrays.toString(input));
 			J.setIcon(BlackPawnC7.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -1999,7 +1989,7 @@ public class Chess extends JFrame  implements ActionListener {
 			BlackPiece.updateEnPassatKill(X,Y);
 			
 			if (BlackPiece.pawnPromotion(Y,CurrentTitle)){
-				ActivatePopUp(WhiteTurn, J,X);
+				new PawnPopUp(WhiteTurn, J,X);
 			}
 			
 			if(BlackPawnC7.getFirstStrike()){
@@ -2017,7 +2007,7 @@ public class Chess extends JFrame  implements ActionListener {
 		}
 	
 		if (CurrentTitle == "Black Rook (A8)"){
-			System.out.println("You have set Black Rook (A8) on to a new tile "+ Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Rook (A8) on to " + Arrays.toString(input));
 			J.setIcon(BlackRookA8.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2032,7 +2022,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Bishop (C8)"){
-			System.out.println("You have set Black Bishop (C8) on to a new tile "+ Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Bishop (C8) on to " + Arrays.toString(input));
 			J.setIcon(BlackBishopC8.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2047,7 +2037,7 @@ public class Chess extends JFrame  implements ActionListener {
 
 		}
 		if (CurrentTitle == "Black Bishop (F8)"){
-			System.out.println("You have set Black Bishop (F8) on to a new tile "+ Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Bishop (F8) on to " + Arrays.toString(input));
 			J.setIcon(BlackBishopF8.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2062,7 +2052,7 @@ public class Chess extends JFrame  implements ActionListener {
 
 		}
 		if (CurrentTitle == "Black Queen (D8)"){
-			System.out.println("You have set Black Queen (D8) on to a new tile "+ Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Queen (D8) on to " + Arrays.toString(input));
 			J.setIcon(BlackQueenD8.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2077,7 +2067,7 @@ public class Chess extends JFrame  implements ActionListener {
 		}
 		
 		if (CurrentTitle == "White Queen (Prom1)"){
-			System.out.println("You have set White Queen (Prom1) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Queen (Prom1) on to " + Arrays.toString(input));
 			J.setIcon(WhiteQueenProm1.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2091,7 +2081,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Queen (Prom2)"){
-			System.out.println("You have set White Queen (Prom2) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Queen (Prom2) on to " + Arrays.toString(input));
 			J.setIcon(WhiteQueenProm2.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2105,7 +2095,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Queen (Prom3)"){
-			System.out.println("You have set White Queen (Prom3) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Queen (Prom3) on to " + Arrays.toString(input));
 			J.setIcon(WhiteQueenProm3.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2119,7 +2109,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Queen (Prom4)"){
-			System.out.println("You have set White Queen (Prom4) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Queen (Prom4) on to " + Arrays.toString(input));
 			J.setIcon(WhiteQueenProm4.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2133,7 +2123,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Queen (Prom5)"){
-			System.out.println("You have set White Queen (Prom5) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Queen (Prom5) on to " + Arrays.toString(input));
 			J.setIcon(WhiteQueenProm5.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2147,7 +2137,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Queen (Prom6)"){
-			System.out.println("You have set White Queen (Prom6) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Queen (Prom6) on to " + Arrays.toString(input));
 			J.setIcon(WhiteQueenProm6.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2161,7 +2151,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Queen (Prom7)"){
-			System.out.println("You have set White Queen (Prom7) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Queen (Prom7) on to " + Arrays.toString(input));
 			J.setIcon(WhiteQueenProm7.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2175,7 +2165,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Queen (Prom8)"){
-			System.out.println("You have set White Queen (Prom8) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Queen (Prom8) on to " + Arrays.toString(input));
 			J.setIcon(WhiteQueenProm8.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2189,7 +2179,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Rook (Prom1)"){
-			System.out.println("You have set White Rook (Prom1) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Rook (Prom1) on to " + Arrays.toString(input));
 			J.setIcon(WhiteRookProm1.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2203,7 +2193,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Rook (Prom2)"){
-			System.out.println("You have set White Rook (Prom2) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Rook (Prom2) on to " + Arrays.toString(input));
 			J.setIcon(WhiteRookProm2.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2217,7 +2207,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Rook (Prom3)"){
-			System.out.println("You have set White Rook (Prom3) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Rook (Prom3) on to " + Arrays.toString(input));
 			J.setIcon(WhiteRookProm3.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2231,7 +2221,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Rook (Prom4)"){
-			System.out.println("You have set White Rook (Prom4) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Rook (Prom4) on to " + Arrays.toString(input));
 			J.setIcon(WhiteRookProm4.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2245,7 +2235,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Rook (Prom5)"){
-			System.out.println("You have set White Rook (Prom5) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Rook (Prom5) on to " + Arrays.toString(input));
 			J.setIcon(WhiteRookProm5.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2259,7 +2249,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Rook (Prom6)"){
-			System.out.println("You have set White Rook (Prom6) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Rook (Prom6) on to " + Arrays.toString(input));
 			J.setIcon(WhiteRookProm6.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2273,7 +2263,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Rook (Prom7)"){
-			System.out.println("You have set White Rook (Prom7) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Rook (Prom7) on to " + Arrays.toString(input));
 			J.setIcon(WhiteRookProm7.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2287,7 +2277,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Rook (Prom8)"){
-			System.out.println("You have set White Rook (Prom8) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Rook (Prom8) on to " + Arrays.toString(input));
 			J.setIcon(WhiteRookProm8.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2301,7 +2291,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Bishop (Prom1)"){
-			System.out.println("You have set White Bishop (Prom1) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Bishop (Prom1) on to " + Arrays.toString(input));
 			J.setIcon(WhiteBishopProm1.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2315,7 +2305,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Bishop (Prom2)"){
-			System.out.println("You have set White Bishop (Prom2) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Bishop (Prom2) on to " + Arrays.toString(input));
 			J.setIcon(WhiteBishopProm2.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2329,7 +2319,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Bishop (Prom3)"){
-			System.out.println("You have set White Bishop (Prom3) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Bishop (Prom3) on to " + Arrays.toString(input));
 			J.setIcon(WhiteBishopProm3.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2343,7 +2333,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Bishop (Prom4)"){
-			System.out.println("You have set White Bishop (Prom4) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Bishop (Prom4) on to " + Arrays.toString(input));
 			J.setIcon(WhiteBishopProm4.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2357,7 +2347,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Bishop (Prom5)"){
-			System.out.println("You have set White Bishop (Prom5) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Bishop (Prom5) on to " + Arrays.toString(input));
 			J.setIcon(WhiteBishopProm5.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2371,7 +2361,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Bishop (Prom6)"){
-			System.out.println("You have set White Bishop (Prom6) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Bishop (Prom6) on to " + Arrays.toString(input));
 			J.setIcon(WhiteBishopProm6.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2385,7 +2375,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Bishop (Prom7)"){
-			System.out.println("You have set White Bishop (Prom7) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Bishop (Prom7) on to " + Arrays.toString(input));
 			J.setIcon(WhiteBishopProm7.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2399,7 +2389,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Bishop (Prom8)"){
-			System.out.println("You have set White Bishop (Prom8) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Bishop (Prom8) on to " + Arrays.toString(input));
 			J.setIcon(WhiteBishopProm8.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2413,7 +2403,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Knight (Prom1)"){
-			System.out.println("You have set White Knight (Prom1) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Knight (Prom1) on to " + Arrays.toString(input));
 			J.setIcon(WhiteKnightProm1.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2427,7 +2417,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Knight (Prom2)"){
-			System.out.println("You have set White Knight (Prom2) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Knight (Prom2) on to " + Arrays.toString(input));
 			J.setIcon(WhiteKnightProm2.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2441,7 +2431,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Knight (Prom3)"){
-			System.out.println("You have set White Knight (Prom3) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Knight (Prom3) on to " + Arrays.toString(input));
 			J.setIcon(WhiteKnightProm3.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2455,7 +2445,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Knight (Prom4)"){
-			System.out.println("You have set White Knight (Prom4) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Knight (Prom4) on to " + Arrays.toString(input));
 			J.setIcon(WhiteKnightProm4.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2469,7 +2459,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Knight (Prom5)"){
-			System.out.println("You have set White Knight (Prom5) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Knight (Prom5) on to " + Arrays.toString(input));
 			J.setIcon(WhiteKnightProm5.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2483,7 +2473,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Knight (Prom6)"){
-			System.out.println("You have set White Knight (Prom6) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Knight (Prom6) on to " + Arrays.toString(input));
 			J.setIcon(WhiteKnightProm6.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2497,7 +2487,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Knight (Prom7)"){
-			System.out.println("You have set White Knight (Prom7) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Knight (Prom7) on to " + Arrays.toString(input));
 			J.setIcon(WhiteKnightProm7.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2511,7 +2501,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "White Knight (Prom8)"){
-			System.out.println("You have set White Knight (Prom8) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set White Knight (Prom8) on to " + Arrays.toString(input));
 			J.setIcon(WhiteKnightProm8.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2526,7 +2516,7 @@ public class Chess extends JFrame  implements ActionListener {
 		}
 		////////////////////////////////
 		if (CurrentTitle == "Black Queen (Prom1)"){
-			System.out.println("You have set Black Queen (Prom1) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Queen (Prom1) on to " + Arrays.toString(input));
 			J.setIcon(BlackQueenProm1.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2540,7 +2530,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Queen (Prom2)"){
-			System.out.println("You have set Black Queen (Prom2) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Queen (Prom2) on to " + Arrays.toString(input));
 			J.setIcon(BlackQueenProm2.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2554,7 +2544,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Queen (Prom3)"){
-			System.out.println("You have set Black Queen (Prom3) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Queen (Prom3) on to " + Arrays.toString(input));
 			J.setIcon(BlackQueenProm3.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2568,7 +2558,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Queen (Prom4)"){
-			System.out.println("You have set Black Queen (Prom4) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have Black Queen (Prom4) on to " + Arrays.toString(input));
 			J.setIcon(BlackQueenProm4.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2583,7 +2573,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Queen (Prom5)"){
-			System.out.println("You have set Black Queen (Prom5) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Queen (Prom5) on to " + Arrays.toString(input));
 			J.setIcon(BlackQueenProm5.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2597,7 +2587,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Queen (Prom6)"){
-			System.out.println("You have set Black Queen (Prom6) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Queen (Prom6) on to " + Arrays.toString(input));
 			J.setIcon(BlackQueenProm6.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2611,7 +2601,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Queen (Prom7)"){
-			System.out.println("You have set Black Queen (Prom7) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Queen (Prom7) on to " + Arrays.toString(input));
 			J.setIcon(BlackQueenProm7.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2625,7 +2615,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Queen (Prom8)"){
-			System.out.println("You have set Black Queen (Prom8) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Queen (Prom8) on to " + Arrays.toString(input));
 			J.setIcon(BlackQueenProm8.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2639,7 +2629,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Rook (Prom1)"){
-			System.out.println("You have set Black Rook (Prom1) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Rook (Prom1) on to " + Arrays.toString(input));
 			J.setIcon(BlackRookProm1.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2653,7 +2643,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Rook (Prom2)"){
-			System.out.println("You have set Black Rook (Prom2) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Rook (Prom2 on to " + Arrays.toString(input));
 			J.setIcon(BlackRookProm2.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2667,7 +2657,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Rook (Prom3)"){
-			System.out.println("You have set Black Rook (Prom3) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Rook (Prom3) on to " + Arrays.toString(input));
 			J.setIcon(BlackRookProm3.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2682,7 +2672,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Rook (Prom4)"){
-			System.out.println("You have set Black Rook (Prom4) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Rook (Prom4) on to " + Arrays.toString(input));
 			J.setIcon(BlackRookProm4.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2696,7 +2686,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Rook (Prom5)"){
-			System.out.println("You have set Black Rook (Prom5) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Rook (Prom5) on to " + Arrays.toString(input));
 			J.setIcon(BlackRookProm5.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2710,7 +2700,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Rook (Prom6)"){
-			System.out.println("You have set Black Rook (Prom6) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Rook (Prom6) on to " + Arrays.toString(input));
 			J.setIcon(BlackRookProm6.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2724,7 +2714,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Rook (Prom7)"){
-			System.out.println("You have set Black Rook (Prom7) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Rook (Prom7) on to " + Arrays.toString(input));
 			J.setIcon(BlackRookProm7.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2738,7 +2728,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Rook (Prom8)"){
-			System.out.println("You have set Black Rook (Prom8) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Rook (Prom8) on to " + Arrays.toString(input));
 			J.setIcon(BlackRookProm8.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2752,7 +2742,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Bishop (Prom1)"){
-			System.out.println("You have set Black Bishop (Prom1) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Bishop (Prom1) on to " + Arrays.toString(input));
 			J.setIcon(BlackBishopProm1.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2766,7 +2756,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Bishop (Prom2)"){
-			System.out.println("You have set Black Bishop (Prom2) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Bishop (Prom2) on to " + Arrays.toString(input));
 			J.setIcon(BlackBishopProm2.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2780,7 +2770,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Bishop (Prom3)"){
-			System.out.println("You have set Black Bishop (Prom3) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Bishop (Prom3) on to " + Arrays.toString(input));
 			J.setIcon(BlackBishopProm3.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2794,7 +2784,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Bishop (Prom4)"){
-			System.out.println("You have set Black Bishop (Prom4) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Bishop (Prom4) on to " + Arrays.toString(input));
 			J.setIcon(BlackBishopProm4.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2808,7 +2798,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Bishop (Prom5)"){
-			System.out.println("You have set Black Bishop (Prom5) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Bishop (Prom5) on to " + Arrays.toString(input));
 			J.setIcon(BlackBishopProm5.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2822,7 +2812,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Bishop (Prom6)"){
-			System.out.println("You have set Black Bishop (Prom6) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Bishop (Prom6) on to " + Arrays.toString(input));
 			J.setIcon(BlackBishopProm6.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2836,7 +2826,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Bishop (Prom7)"){
-			System.out.println("You have set Black Bishop (Prom7) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Bishop (Prom7) on to " + Arrays.toString(input));
 			J.setIcon(BlackBishopProm7.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2850,7 +2840,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Bishop (Prom8)"){
-			System.out.println("You have set Black Bishop (Prom8) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Bishop (Prom8) on to " + Arrays.toString(input));
 			J.setIcon(BlackBishopProm8.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2864,7 +2854,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Knight (Prom1)"){
-			System.out.println("You have set Black Knight (Prom1) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Knight (Prom1) on to " + Arrays.toString(input));
 			J.setIcon(BlackKnightProm1.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2878,7 +2868,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Knight (Prom2)"){
-			System.out.println("You have set Black Knight (Prom2) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Knight (Prom2) on to " + Arrays.toString(input));
 			J.setIcon(BlackKnightProm2.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2892,7 +2882,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Knight (Prom3)"){
-			System.out.println("You have set Black Knight (Prom3) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Knight (Prom3) on to " + Arrays.toString(input));
 			J.setIcon(BlackKnightProm3.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2906,7 +2896,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Knight (Prom4)"){
-			System.out.println("You have set Black Knight (Prom4) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Knight (Prom4) on to " + Arrays.toString(input));
 			J.setIcon(BlackKnightProm4.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2920,7 +2910,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Knight (Prom5)"){
-			System.out.println("You have set Black Knight (Prom5) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Knight (Prom5) on to " + Arrays.toString(input));
 			J.setIcon(BlackKnightProm5.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2934,7 +2924,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Knight (Prom6)"){
-			System.out.println("You have set Black Knight (Prom6) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Knight (Prom6) on to " + Arrays.toString(input));
 			J.setIcon(BlackKnightProm6.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2948,7 +2938,7 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Knight (Prom7)"){
-			System.out.println("You have set Black Knight (Prom7) on to " + Arrays.toString(input));
+			LOGGER.log(Level.INFO, "You have set Black Knight (Prom7) on to " + Arrays.toString(input));
 			J.setIcon(BlackKnightProm7.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2962,7 +2952,6 @@ public class Chess extends JFrame  implements ActionListener {
 			return;
 		}
 		if (CurrentTitle == "Black Knight (Prom8)"){
-			System.out.println("You have set Black Knight (Prom8) on to " + Arrays.toString(input));
 			J.setIcon(BlackKnightProm8.getIcon());
 			J.setName(CurrentTitle);
 			ComingFrom.setIcon(null);
@@ -2984,613 +2973,7 @@ public class Chess extends JFrame  implements ActionListener {
     	J.setName(null);
     	light.closeLightBox(frame, PromotionPanel);
     }
-	static void ActivatePopUp(boolean whiteTurn, final JButton J, final int X) {
-		final JFrame PromotionFrame = new JFrame();
-		final JPanel PromotionPanel = new JPanel();
-		final LightBox Light = new LightBox();
-		JButton RookButton = new JButton();
-        JButton QueenButton = new JButton();
-        JButton BishopButton = new JButton();
-        JButton KnightButton = new JButton();
-		
-        Light.createLightBoxEffect(frame, PromotionPanel); 
-		PromotionFrame.setUndecorated(true);
-		frame.setEnabled(false);
 
-        PromotionFrame.setLayout(new GridLayout(4,1)); //set layout
-		grid=new JButton[4][1]; //allocate the size of grid
-		
-		grid[0][0] = RookButton;
-		PromotionFrame.add(grid[0][0]);
-		
-		grid[1][0] = QueenButton;
-		PromotionFrame.add(grid[1][0]);
-		
-		grid[2][0] = BishopButton;
-		PromotionFrame.add(grid[2][0]);
-		
-		grid[3][0] = KnightButton;
-		PromotionFrame.add(grid[3][0]);	
-        
-        if (!whiteTurn){
-			//Activate white promotion
-	        RookButton.setIcon(WhiteRookA1.getIcon());      
-	        QueenButton.setIcon(WhiteQueenD1.getIcon()); 
-	        BishopButton.setIcon(WhiteBishopC1.getIcon());
-	        KnightButton.setIcon(WhiteKnightB1.getIcon());
-
-			PromotionFrame.pack();
-			PromotionFrame.setVisible(true);
-			PromotionFrame.setLocationRelativeTo(frame); 
-
-	        RookButton.addActionListener(new java.awt.event.ActionListener() {
-	            @Override
-	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	            	resetMainFrame(PromotionFrame,Light,PromotionPanel,J);
-	            	J.setIcon(WhiteRookA1.getIcon());
-	            	GlobalWhiteRookProm++;
-
-	            	if (GlobalWhiteRookProm == 1){
-	            		J.setName("White Rook (Prom1)");
-		    			WhiteRookProm1.setCurrentPositionX(X);
-		    			WhiteRookProm1.setCurrentPositionY(0);
-		    			WhiteRookProm1.setCurrentPositionXY(X,0);
-		    			WhiteRookProm1.setActive(true);
-	    			}
-	            	if (GlobalWhiteRookProm == 2){
-	            		J.setName("White Rook (Prom2)");
-		    			WhiteRookProm2.setCurrentPositionX(X);
-		    			WhiteRookProm2.setCurrentPositionY(0);
-		    			WhiteRookProm2.setCurrentPositionXY(X,0);
-		    			WhiteRookProm2.setActive(true);
-	    			}
-	            	if (GlobalWhiteRookProm == 3){
-	            		J.setName("White Rook (Prom3)");
-		    			WhiteRookProm3.setCurrentPositionX(X);
-		    			WhiteRookProm3.setCurrentPositionY(0);
-		    			WhiteRookProm3.setCurrentPositionXY(X,0);
-		    			WhiteRookProm3.setActive(true);
-	    			}
-	            	if (GlobalWhiteRookProm == 4){
-	            		J.setName("White Rook (Prom4)");
-		    			WhiteRookProm4.setCurrentPositionX(X);
-		    			WhiteRookProm4.setCurrentPositionY(0);
-		    			WhiteRookProm4.setCurrentPositionXY(X,0);
-	    			}
-	            	if (GlobalWhiteRookProm == 5){
-	            		J.setName("White Rook (Prom5)");
-		    			WhiteRookProm5.setCurrentPositionX(X);
-		    			WhiteRookProm5.setCurrentPositionY(0);
-		    			WhiteRookProm5.setCurrentPositionXY(X,0);
-		    			WhiteRookProm5.setActive(true);
-	    			}
-	            	if (GlobalWhiteRookProm == 6){
-	            		J.setName("White Rook (Prom6)");
-		    			WhiteRookProm6.setCurrentPositionX(X);
-		    			WhiteRookProm6.setCurrentPositionY(0);
-		    			WhiteRookProm6.setCurrentPositionXY(X,0);
-		    			WhiteRookProm6.setActive(true);
-	    			}
-	            	if (GlobalWhiteRookProm == 7){
-	            		J.setName("White Rook (Prom7)");
-		    			WhiteRookProm7.setCurrentPositionX(X);
-		    			WhiteRookProm7.setCurrentPositionY(0);
-		    			WhiteRookProm7.setCurrentPositionXY(X,0);
-		    			WhiteRookProm7.setActive(true);
-	    			}
-	            	if (GlobalWhiteRookProm == 8){
-	            		J.setName("White Rook (Prom8)");
-		    			WhiteRookProm8.setCurrentPositionX(X);
-		    			WhiteRookProm8.setCurrentPositionY(0);
-		    			WhiteRookProm8.setCurrentPositionXY(X,0);
-		    			WhiteRookProm8.setActive(true);
-	    			}
-	            	if (GlobalWhiteRookProm >= 9){
-	            		LOGGER.log(Level.SEVERE, "Game cannot handle more than 8 white promotional rooks. Exiting game. White promotional rook count at " + GlobalWhiteRookProm);
-	            		System.exit(0);
-	    			}
-	    			
-	            }
-	        });
-	        QueenButton.addActionListener(new java.awt.event.ActionListener() {
-	            @Override
-	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	            	resetMainFrame(PromotionFrame,Light,PromotionPanel,J);
-	            	J.setIcon(WhiteQueenProm1.getIcon());
-	            	GlobalWhiteQueenProm++;
-
-	            	if (GlobalWhiteQueenProm == 1){
-	            		J.setName("White Queen (Prom1)");
-		    			WhiteQueenProm1.setCurrentPositionX(X);
-		    			WhiteQueenProm1.setCurrentPositionY(0);
-		    			WhiteQueenProm1.setCurrentPositionXY(X,0);
-		    			WhiteQueenProm1.setActive(true);
-	    			}
-	            	if (GlobalWhiteQueenProm == 2){
-	            		J.setName("White Queen (Prom2)");
-		    			WhiteQueenProm2.setCurrentPositionX(X);
-		    			WhiteQueenProm2.setCurrentPositionY(0);
-		    			WhiteQueenProm2.setCurrentPositionXY(X,0);
-		    			WhiteQueenProm2.setActive(true);
-	    			}
-	            	if (GlobalWhiteQueenProm == 3){
-	            		J.setName("White Queen (Prom3)");
-		    			WhiteQueenProm3.setCurrentPositionX(X);
-		    			WhiteQueenProm3.setCurrentPositionY(0);
-		    			WhiteQueenProm3.setCurrentPositionXY(X,0);
-		    			WhiteQueenProm3.setActive(true);
-	    			}
-	            	if (GlobalWhiteQueenProm == 4){
-	            		J.setName("White Queen (Prom4)");
-		    			WhiteQueenProm4.setCurrentPositionX(X);
-		    			WhiteQueenProm4.setCurrentPositionY(0);
-		    			WhiteQueenProm4.setCurrentPositionXY(X,0);
-		    			WhiteQueenProm4.setActive(true);
-	    			}
-	            	if (GlobalWhiteQueenProm == 5){
-	            		J.setName("White Queen (Prom5)");
-		    			WhiteQueenProm5.setCurrentPositionX(X);
-		    			WhiteQueenProm5.setCurrentPositionY(0);
-		    			WhiteQueenProm5.setCurrentPositionXY(X,0);
-		    			WhiteQueenProm5.setActive(true);
-		    			return;
-	    			}
-	            	if (GlobalWhiteQueenProm == 6){
-	            		J.setName("White Queen (Prom6)");
-		    			WhiteQueenProm6.setCurrentPositionX(X);
-		    			WhiteQueenProm6.setCurrentPositionY(0);
-		    			WhiteQueenProm6.setCurrentPositionXY(X,0);
-		    			WhiteQueenProm6.setActive(true);
-	    			}
-	            	if (GlobalWhiteQueenProm == 7){
-	            		J.setName("White Queen (Prom7)");
-		    			WhiteQueenProm7.setCurrentPositionX(X);
-		    			WhiteQueenProm7.setCurrentPositionY(0);
-		    			WhiteQueenProm7.setCurrentPositionXY(X,0);
-		    			WhiteQueenProm7.setActive(true);
-	    			}
-	            	if (GlobalWhiteQueenProm == 8){
-	            		J.setName("White Queen (Prom8)");
-		    			WhiteQueenProm8.setCurrentPositionX(X);
-		    			WhiteQueenProm8.setCurrentPositionY(0);
-		    			WhiteQueenProm8.setCurrentPositionXY(X,0);
-		    			WhiteQueenProm8.setActive(true);
-	    			}
-	            	if (GlobalWhiteQueenProm >= 9){
-	            		LOGGER.log(Level.SEVERE, "Game cannot handle more than 8 white promotional queens. Exiting game. White promotional queen count at " + GlobalWhiteQueenProm);
-	            		System.exit(0);
-	    			}
-	            }
-	        });
-	        BishopButton.addActionListener(new java.awt.event.ActionListener() {
-	            @Override
-	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	            	resetMainFrame(PromotionFrame,Light,PromotionPanel,J);
-	            	J.setIcon(WhiteBishopProm1.getIcon());
-	            	GlobalWhiteBishopProm++;
-
-	            	if (GlobalWhiteBishopProm == 1){
-	            		J.setName("White Bishop (Prom1)");
-		    			WhiteBishopProm1.setCurrentPositionX(X);
-		    			WhiteBishopProm1.setCurrentPositionY(0);
-		    			WhiteBishopProm1.setCurrentPositionXY(X,0);
-		    			WhiteBishopProm1.setActive(true);
-	    			}
-	            	if (GlobalWhiteBishopProm == 2){
-	            		J.setName("White Bishop (Prom2)");
-		    			WhiteBishopProm2.setCurrentPositionX(X);
-		    			WhiteBishopProm2.setCurrentPositionY(0);
-		    			WhiteBishopProm2.setCurrentPositionXY(X,0);
-		    			WhiteBishopProm2.setActive(true);
-	    			}
-	            	if (GlobalWhiteBishopProm == 3){
-	            		J.setName("White Bishop (Prom3)");
-		    			WhiteBishopProm3.setCurrentPositionX(X);
-		    			WhiteBishopProm3.setCurrentPositionY(0);
-		    			WhiteBishopProm3.setCurrentPositionXY(X,0);
-		    			WhiteBishopProm3.setActive(true);
-	    			}
-	            	if (GlobalWhiteBishopProm == 4){
-	            		J.setName("White Bishop (Prom4)");
-		    			WhiteBishopProm4.setCurrentPositionX(X);
-		    			WhiteBishopProm4.setCurrentPositionY(0);
-		    			WhiteBishopProm4.setCurrentPositionXY(X,0);
-	    			}
-	            	if (GlobalWhiteBishopProm == 5){
-	            		J.setName("White Bishop (Prom5)");
-		    			WhiteBishopProm5.setCurrentPositionX(X);
-		    			WhiteBishopProm5.setCurrentPositionY(0);
-		    			WhiteBishopProm5.setCurrentPositionXY(X,0);
-		    			WhiteBishopProm5.setActive(true);
-	    			}
-	            	if (GlobalWhiteBishopProm == 6){
-	            		J.setName("White Bishop (Prom6)");
-		    			WhiteBishopProm6.setCurrentPositionX(X);
-		    			WhiteBishopProm6.setCurrentPositionY(0);
-		    			WhiteBishopProm6.setCurrentPositionXY(X,0);
-		    			WhiteBishopProm6.setActive(true);
-	    			}
-	            	if (GlobalWhiteBishopProm == 7){
-	            		J.setName("White Bishop (Prom7)");
-		    			WhiteBishopProm7.setCurrentPositionX(X);
-		    			WhiteBishopProm7.setCurrentPositionY(0);
-		    			WhiteBishopProm7.setCurrentPositionXY(X,0);
-		    			WhiteBishopProm7.setActive(true);
-	    			}
-	            	if (GlobalWhiteBishopProm == 8){
-	            		J.setName("White Bishop (Prom8)");
-		    			WhiteBishopProm8.setCurrentPositionX(X);
-		    			WhiteBishopProm8.setCurrentPositionY(0);
-		    			WhiteBishopProm8.setCurrentPositionXY(X,0);
-		    			WhiteBishopProm8.setActive(true);
-	    			}
-	            	if (GlobalWhiteBishopProm >= 9){
-	            		LOGGER.log(Level.SEVERE, "Game cannot handle more than 8 white promotional bishops. Exiting game. White promotional bishop count at " + GlobalWhiteBishopProm);
-	            		System.exit(0);
-	      
-	    			}
-	            }
-	        });
-	        KnightButton.addActionListener(new java.awt.event.ActionListener() {
-	            @Override
-	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	            	resetMainFrame(PromotionFrame,Light,PromotionPanel,J);
-	            	J.setIcon(WhiteKnightProm1.getIcon());
-	            	GlobalWhiteKnightProm++;
-
-	            	if (GlobalWhiteKnightProm == 1){
-	            		J.setName("White Knight (Prom1)");
-		    			WhiteKnightProm1.setCurrentPositionX(X);
-		    			WhiteKnightProm1.setCurrentPositionY(0);
-		    			WhiteKnightProm1.setCurrentPositionXY(X,0);
-		    			WhiteKnightProm1.setActive(true);
-	    			}
-	            	if (GlobalWhiteKnightProm == 2){
-	            		J.setName("White Knight (Prom2)");
-		    			WhiteKnightProm2.setCurrentPositionX(X);
-		    			WhiteKnightProm2.setCurrentPositionY(0);
-		    			WhiteKnightProm2.setCurrentPositionXY(X,0);
-		    			WhiteKnightProm2.setActive(true);
-	    			}
-	            	if (GlobalWhiteKnightProm == 3){
-	            		J.setName("White Knight (Prom3)");
-		    			WhiteKnightProm3.setCurrentPositionX(X);
-		    			WhiteKnightProm3.setCurrentPositionY(0);
-		    			WhiteKnightProm3.setCurrentPositionXY(X,0);
-		    			WhiteKnightProm3.setActive(true);
-	    			}
-	            	if (GlobalWhiteKnightProm == 4){
-	            		J.setName("White Knight (Prom4)");
-		    			WhiteKnightProm4.setCurrentPositionX(X);
-		    			WhiteKnightProm4.setCurrentPositionY(0);
-		    			WhiteKnightProm4.setCurrentPositionXY(X,0);
-	    			}
-	            	if (GlobalWhiteKnightProm == 5){
-	            		J.setName("White Knight (Prom5)");
-		    			WhiteKnightProm5.setCurrentPositionX(X);
-		    			WhiteKnightProm5.setCurrentPositionY(0);
-		    			WhiteKnightProm5.setCurrentPositionXY(X,0);
-		    			WhiteKnightProm5.setActive(true);
-	    			}
-	            	if (GlobalWhiteKnightProm == 6){
-	            		J.setName("White Knight (Prom6)");
-		    			WhiteKnightProm6.setCurrentPositionX(X);
-		    			WhiteKnightProm6.setCurrentPositionY(0);
-		    			WhiteKnightProm6.setCurrentPositionXY(X,0);
-		    			WhiteKnightProm6.setActive(true);
-	    			}
-	            	if (GlobalWhiteKnightProm == 7){
-	            		J.setName("White Knight (Prom7)");
-		    			WhiteKnightProm7.setCurrentPositionX(X);
-		    			WhiteKnightProm7.setCurrentPositionY(0);
-		    			WhiteKnightProm7.setCurrentPositionXY(X,0);
-		    			WhiteKnightProm7.setActive(true);
-	    			}
-	            	if (GlobalWhiteKnightProm == 8){
-	            		J.setName("White Knight (Prom8)");
-		    			WhiteKnightProm8.setCurrentPositionX(X);
-		    			WhiteKnightProm8.setCurrentPositionY(0);
-		    			WhiteKnightProm8.setCurrentPositionXY(X,0);
-		    			WhiteKnightProm8.setActive(true);
-	    			}
-	            	if (GlobalWhiteKnightProm >= 9){
-	            		LOGGER.log(Level.SEVERE, "Game cannot handle more than 8 white promotional knights. Exiting game. White promotional knight count at " + GlobalWhiteKnightProm);
-	            		System.exit(0);
-	    			}
-	            }
-	        });
-		}
-			
-		else{
-			//Activate black promotion
-	        RookButton.setIcon(BlackRookProm1.getIcon());
-	        QueenButton.setIcon(BlackQueenProm1.getIcon());
-	        BishopButton.setIcon(BlackBishopProm1.getIcon());  
-	        KnightButton.setIcon(BlackKnightProm1.getIcon());
-
-			PromotionFrame.pack();
-			PromotionFrame.setVisible(true);
-			PromotionFrame.setLocationRelativeTo(frame); 
-
-	        RookButton.addActionListener(new java.awt.event.ActionListener() {
-	            @Override
-	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	            	resetMainFrame(PromotionFrame,Light,PromotionPanel,J);
-	            	J.setIcon(BlackRookProm1.getIcon());
-	            	GlobalBlackRookProm++;
-
-	            	if (GlobalBlackRookProm == 1){
-	            		J.setName("Black Rook (Prom1)");
-		    			BlackRookProm1.setCurrentPositionX(X);
-		    			BlackRookProm1.setCurrentPositionY(7);
-		    			BlackRookProm1.setCurrentPositionXY(X,7);
-		    			BlackRookProm1.setActive(true);
-	    			}
-	            	if (GlobalBlackRookProm == 2){
-	            		J.setName("Black Rook (Prom2)");
-		    			BlackRookProm2.setCurrentPositionX(X);
-		    			BlackRookProm2.setCurrentPositionY(7);
-		    			BlackRookProm2.setCurrentPositionXY(X,7);
-		    			BlackRookProm2.setActive(true);
-	    			}
-	            	if (GlobalBlackRookProm == 3){
-	            		J.setName("Black Rook (Prom3)");
-		    			BlackRookProm3.setCurrentPositionX(X);
-		    			BlackRookProm3.setCurrentPositionY(7);
-		    			BlackRookProm3.setCurrentPositionXY(X,7);
-		    			BlackRookProm3.setActive(true);
-	    			}
-	            	if (GlobalBlackRookProm == 4){
-	            		J.setName("Black Rook (Prom4)");
-		    			BlackRookProm4.setCurrentPositionX(X);
-		    			BlackRookProm4.setCurrentPositionY(7);
-		    			BlackRookProm4.setCurrentPositionXY(X,7);
-		    			BlackRookProm5.setActive(true);
-	    			}
-	            	if (GlobalBlackRookProm == 5){
-	            		J.setName("Black Rook (Prom5)");
-		    			BlackRookProm5.setCurrentPositionX(X);
-		    			BlackRookProm5.setCurrentPositionY(7);
-		    			BlackRookProm5.setCurrentPositionXY(X,7);
-		    			BlackRookProm5.setActive(true);
-	    			}
-	            	if (GlobalBlackRookProm == 6){
-	            		J.setName("Black Rook (Prom6)");
-		    			BlackRookProm6.setCurrentPositionX(X);
-		    			BlackRookProm6.setCurrentPositionY(7);
-		    			BlackRookProm6.setCurrentPositionXY(X,7);
-		    			BlackRookProm6.setActive(true);
-	    			}
-	            	if (GlobalBlackRookProm == 7){
-	            		J.setName("Black Rook (Prom7)");
-		    			BlackRookProm7.setCurrentPositionX(X);
-		    			BlackRookProm7.setCurrentPositionY(7);
-		    			BlackRookProm7.setCurrentPositionXY(X,7);
-		    			BlackRookProm7.setActive(true);
-	    			}
-	            	if (GlobalBlackRookProm == 8){
-	            		J.setName("Black Rook (Prom8)");
-		    			BlackRookProm8.setCurrentPositionX(X);
-		    			BlackRookProm8.setCurrentPositionY(7);
-		    			BlackRookProm8.setCurrentPositionXY(X,7);
-		    			BlackRookProm8.setActive(true);
-	    			}
-	            	if (GlobalBlackRookProm >= 9){
-	            		LOGGER.log(Level.SEVERE, "Game cannot handle more than 8 black promotional rooks. Exiting game. Black promotional rook count at " + GlobalBlackRookProm);
-	            		System.exit(0);
-	    			}
-	    			
-	            }
-	        });
-	        QueenButton.addActionListener(new java.awt.event.ActionListener() {
-	            @Override
-	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	            	resetMainFrame(PromotionFrame,Light,PromotionPanel,J);
-	            	J.setIcon(BlackQueenProm1.getIcon());
-	            	GlobalBlackQueenProm++;
-
-	            	if (GlobalBlackQueenProm == 1){
-	            		J.setName("Black Queen (Prom1)");
-		    			BlackQueenProm1.setCurrentPositionX(X);
-		    			BlackQueenProm1.setCurrentPositionY(7);
-		    			BlackQueenProm1.setCurrentPositionXY(X,7);
-		    			BlackQueenProm1.setActive(true);
-	    			}
-	            	if (GlobalBlackQueenProm == 2){
-	            		J.setName("Black Queen (Prom2)");
-		    			BlackQueenProm2.setCurrentPositionX(X);
-		    			BlackQueenProm2.setCurrentPositionY(7);
-		    			BlackQueenProm2.setCurrentPositionXY(X,7);
-		    			BlackQueenProm2.setActive(true);
-	    			}
-	            	if (GlobalBlackQueenProm == 3){
-	            		J.setName("Black Queen (Prom3)");
-		    			BlackQueenProm3.setCurrentPositionX(X);
-		    			BlackQueenProm3.setCurrentPositionY(7);
-		    			BlackQueenProm3.setCurrentPositionXY(X,7);
-		    			BlackQueenProm3.setActive(true);
-	    			}
-	            	if (GlobalBlackQueenProm == 4){
-	            		J.setName("Black Queen (Prom4)");
-		    			BlackQueenProm4.setCurrentPositionX(X);
-		    			BlackQueenProm4.setCurrentPositionY(7);
-		    			BlackQueenProm4.setCurrentPositionXY(X,7);
-		    			BlackQueenProm4.setActive(true);
-	    			}
-	            	if (GlobalBlackQueenProm == 5){
-	            		J.setName("Black Queen (Prom5)");
-		    			BlackQueenProm5.setCurrentPositionX(X);
-		    			BlackQueenProm5.setCurrentPositionY(7);
-		    			BlackQueenProm5.setCurrentPositionXY(X,7);
-		    			BlackQueenProm5.setActive(true);
-		    			return;
-	    			}
-	            	if (GlobalBlackQueenProm == 6){
-	            		J.setName("Black Queen (Prom6)");
-		    			BlackQueenProm6.setCurrentPositionX(X);
-		    			BlackQueenProm6.setCurrentPositionY(7);
-		    			BlackQueenProm6.setCurrentPositionXY(X,7);
-		    			BlackQueenProm6.setActive(true);
-	    			}
-	            	if (GlobalBlackQueenProm == 7){
-	            		J.setName("Black Queen (Prom7)");
-		    			BlackQueenProm7.setCurrentPositionX(X);
-		    			BlackQueenProm7.setCurrentPositionY(7);
-		    			BlackQueenProm7.setCurrentPositionXY(X,7);
-		    			BlackQueenProm7.setActive(true);
-	    			}
-	            	if (GlobalBlackQueenProm == 8){
-	            		J.setName("Black Queen (Prom8)");
-		    			BlackQueenProm8.setCurrentPositionX(X);
-		    			BlackQueenProm8.setCurrentPositionY(7);
-		    			BlackQueenProm8.setCurrentPositionXY(X,7);
-		    			BlackQueenProm8.setActive(true);
-	    			}
-	            	if (GlobalBlackQueenProm >= 9){
-	            		LOGGER.log(Level.SEVERE, "Game cannot handle more than 8 black promotional queens. Exiting game. Black promotional queen count at " + GlobalBlackQueenProm);
-	            		System.exit(0);
-	    			}
-	            }
-	        });
-	        BishopButton.addActionListener(new java.awt.event.ActionListener() {
-	            @Override
-	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	            	resetMainFrame(PromotionFrame,Light,PromotionPanel,J);
-	            	J.setIcon(BlackBishopProm1.getIcon());
-	            	GlobalBlackBishopProm++;
-
-	            	if (GlobalBlackBishopProm == 1){
-	            		J.setName("Black Bishop (Prom1)");
-		    			BlackBishopProm1.setCurrentPositionX(X);
-		    			BlackBishopProm1.setCurrentPositionY(7);
-		    			BlackBishopProm1.setCurrentPositionXY(X,7);
-		    			BlackBishopProm1.setActive(true);
-	    			}
-	            	if (GlobalBlackBishopProm == 2){
-	            		J.setName("Black Bishop (Prom2)");
-		    			BlackBishopProm2.setCurrentPositionX(X);
-		    			BlackBishopProm2.setCurrentPositionY(7);
-		    			BlackBishopProm2.setCurrentPositionXY(X,7);
-		    			BlackBishopProm2.setActive(true);
-	    			}
-	            	if (GlobalBlackBishopProm == 3){
-	            		J.setName("Black Bishop (Prom3)");
-		    			BlackBishopProm3.setCurrentPositionX(X);
-		    			BlackBishopProm3.setCurrentPositionY(7);
-		    			BlackBishopProm3.setCurrentPositionXY(X,7);
-		    			BlackBishopProm3.setActive(true);
-	    			}
-	            	if (GlobalBlackBishopProm == 4){
-	            		J.setName("Black Bishop (Prom4)");
-		    			BlackBishopProm4.setCurrentPositionX(X);
-		    			BlackBishopProm4.setCurrentPositionY(7);
-		    			BlackBishopProm4.setCurrentPositionXY(X,7);
-	    			}
-	            	if (GlobalBlackBishopProm == 5){
-	            		J.setName("Black Bishop (Prom5)");
-		    			BlackBishopProm5.setCurrentPositionX(X);
-		    			BlackBishopProm5.setCurrentPositionY(7);
-		    			BlackBishopProm5.setCurrentPositionXY(X,7);
-		    			BlackBishopProm5.setActive(true);
-	    			}
-	            	if (GlobalBlackBishopProm == 6){
-	            		J.setName("Black Bishop (Prom6)");
-		    			BlackBishopProm6.setCurrentPositionX(X);
-		    			BlackBishopProm6.setCurrentPositionY(7);
-		    			BlackBishopProm6.setCurrentPositionXY(X,7);
-		    			BlackBishopProm6.setActive(true);
-	    			}
-	            	if (GlobalBlackBishopProm == 7){
-	            		J.setName("Black Bishop (Prom7)");
-		    			BlackBishopProm7.setCurrentPositionX(X);
-		    			BlackBishopProm7.setCurrentPositionY(7);
-		    			BlackBishopProm7.setCurrentPositionXY(X,7);
-		    			BlackBishopProm7.setActive(true);
-	    			}
-	            	if (GlobalBlackBishopProm == 8){
-	            		J.setName("Black Bishop (Prom8)");
-		    			BlackBishopProm8.setCurrentPositionX(X);
-		    			BlackBishopProm8.setCurrentPositionY(7);
-		    			BlackBishopProm8.setCurrentPositionXY(X,7);
-		    			BlackBishopProm8.setActive(true);
-	    			}
-	            	if (GlobalBlackBishopProm >= 9){
-	            		LOGGER.log(Level.SEVERE, "Game cannot handle more than 8 black promotional bishops. Exiting game. Black promotional bishop count at " + GlobalBlackBishopProm);
-	            		System.exit(0);
-	    			}
-	            }
-	        });
-	        KnightButton.addActionListener(new java.awt.event.ActionListener() {
-	            @Override
-	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	            	resetMainFrame(PromotionFrame,Light,PromotionPanel,J);
-	            	J.setIcon(BlackKnightProm1.getIcon());
-	            	GlobalBlackKnightProm++;
-
-	            	if (GlobalBlackKnightProm == 1){
-	            		J.setName("Black Knight (Prom1)");
-		    			BlackKnightProm1.setCurrentPositionX(X);
-		    			BlackKnightProm1.setCurrentPositionY(7);
-		    			BlackKnightProm1.setCurrentPositionXY(X,7);
-		    			BlackKnightProm1.setActive(true);
-	    			}
-	            	if (GlobalBlackKnightProm == 2){
-	            		J.setName("Black Knight (Prom2)");
-		    			BlackKnightProm2.setCurrentPositionX(X);
-		    			BlackKnightProm2.setCurrentPositionY(7);
-		    			BlackKnightProm2.setCurrentPositionXY(X,7);
-		    			BlackKnightProm2.setActive(true);
-	    			}
-	            	if (GlobalBlackKnightProm == 3){
-	            		J.setName("Black Knight (Prom3)");
-		    			BlackKnightProm3.setCurrentPositionX(X);
-		    			BlackKnightProm3.setCurrentPositionY(7);
-		    			BlackKnightProm3.setCurrentPositionXY(X,7);
-		    			BlackKnightProm3.setActive(true);
-	    			}
-	            	if (GlobalBlackKnightProm == 4){
-	            		J.setName("Black Knight (Prom4)");
-		    			BlackKnightProm4.setCurrentPositionX(X);
-		    			BlackKnightProm4.setCurrentPositionY(7);
-		    			BlackKnightProm4.setCurrentPositionXY(X,7);
-	    			}
-	            	if (GlobalBlackKnightProm == 5){
-	            		J.setName("Black Knight (Prom5)");
-		    			BlackKnightProm5.setCurrentPositionX(X);
-		    			BlackKnightProm5.setCurrentPositionY(7);
-		    			BlackKnightProm5.setCurrentPositionXY(X,7);
-		    			BlackKnightProm5.setActive(true);
-	    			}
-	            	if (GlobalBlackKnightProm == 6){
-	            		J.setName("Black Knight (Prom6)");
-		    			BlackKnightProm6.setCurrentPositionX(X);
-		    			BlackKnightProm6.setCurrentPositionY(7);
-		    			BlackKnightProm6.setCurrentPositionXY(X,7);
-		    			BlackKnightProm6.setActive(true);
-	    			}
-	            	if (GlobalBlackKnightProm == 7){
-	            		J.setName("Black Knight (Prom7)");
-		    			BlackKnightProm7.setCurrentPositionX(X);
-		    			BlackKnightProm7.setCurrentPositionY(7);
-		    			BlackKnightProm7.setCurrentPositionXY(X,7);
-		    			BlackKnightProm7.setActive(true);
-	    			}
-	            	if (GlobalBlackKnightProm == 8){
-	            		J.setName("Black Knight (Prom8)");
-		    			BlackKnightProm8.setCurrentPositionX(X);
-		    			BlackKnightProm8.setCurrentPositionY(7);
-		    			BlackKnightProm8.setCurrentPositionXY(X,7);
-		    			BlackKnightProm8.setActive(true);
-	    			}
-	            	if (GlobalBlackKnightProm >= 9){
-	            		LOGGER.log(Level.SEVERE, "Game cannot handle more than 8 black promotional knights. Exiting game. Black promotional knight count at " + GlobalBlackKnightProm);
-	            		System.exit(0);
-	          
-	    			}
-	            }
-	        });
-		}
-	}
 	static String getColor(int x,int y){
 		
 		String NoColor = "NoColor";
@@ -4608,7 +3991,7 @@ public class Chess extends JFrame  implements ActionListener {
 			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
 			return;
 		}
-
+	
 	}
 	static void Engine(int ComX, int ComY,int[] ComXY, JButton b){
 		
@@ -4640,7 +4023,7 @@ public class Chess extends JFrame  implements ActionListener {
 				final long startBlackGrabTime = System.currentTimeMillis();
 				highlightButton(b);
 				CurrentTitle=getPiece(ComX,ComY);
-				System.out.println("Current Title is: " + CurrentTitle);
+				LOGGER.log(Level.INFO, "Current Title is: " + CurrentTitle);
 				blackMovementHandler(ComX,ComY);
 				ComingFrom = b;
 				final long endBlackGrabTime = System.currentTimeMillis();
@@ -4686,8 +4069,9 @@ public class Chess extends JFrame  implements ActionListener {
 					}
 					
 
-					LOGGER.log(Level.FINE,"You have done a valid move");
+					
 					setPiece(b,ComXY[0],ComXY[1]);
+					LOGGER.log(Level.FINE,"You have done a valid move");
 					break;  
 				}		
 			}		
