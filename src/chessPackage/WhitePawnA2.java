@@ -9,6 +9,14 @@ public class WhitePawnA2 extends Superclass_WhitePawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
+	static void reset(){
+		setActive(true);
+		setFirstStrike(true);
+		setEnPassant(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}
@@ -64,6 +72,14 @@ class WhitePawnB2 extends Superclass_WhitePawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
+	static void reset(){
+		setActive(true);
+		setFirstStrike(true);
+		setEnPassant(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}
@@ -118,7 +134,14 @@ class WhitePawnC2 extends Superclass_WhitePawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
-	
+	static void reset(){
+		setActive(true);
+		setFirstStrike(true);
+		setEnPassant(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}
@@ -173,7 +196,14 @@ class WhitePawnD2 extends Superclass_WhitePawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
-	
+	static void reset(){
+		setActive(true);
+		setFirstStrike(true);
+		setEnPassant(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}
@@ -228,7 +258,14 @@ class WhitePawnE2 extends Superclass_WhitePawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
-	
+	static void reset(){
+		setActive(true);
+		setFirstStrike(true);
+		setEnPassant(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}
@@ -283,7 +320,14 @@ class WhitePawnF2 extends Superclass_WhitePawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
-	
+	static void reset(){
+		setActive(true);
+		setFirstStrike(true);
+		setEnPassant(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}
@@ -338,7 +382,14 @@ class WhitePawnG2 extends Superclass_WhitePawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
-	
+	static void reset(){
+		setActive(true);
+		setFirstStrike(true);
+		setEnPassant(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}
@@ -393,7 +444,14 @@ class WhitePawnH2 extends Superclass_WhitePawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
-	
+	static void reset(){
+		setActive(true);
+		setFirstStrike(true);
+		setEnPassant(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}

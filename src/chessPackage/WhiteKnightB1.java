@@ -8,6 +8,12 @@ public class WhiteKnightB1 extends Superclass_WhiteKnight {
 	private final static int StartingPositionY = 7;
 	static boolean active = true;
 	
+	static void reset(){
+		setActive(true);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -47,7 +53,12 @@ class WhiteKnightG1 extends Superclass_WhiteKnight {
 	private final static int  StartingPositionX = 6;
 	private final static int StartingPositionY = 7;
 	static boolean active = true;
-	
+	static void reset(){
+		setActive(true);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -87,7 +98,12 @@ class WhiteKnightProm1 extends Superclass_WhiteKnight {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -127,7 +143,12 @@ class WhiteKnightProm2 extends Superclass_WhiteKnight {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -167,7 +188,12 @@ class WhiteKnightProm3 extends Superclass_WhiteKnight {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -207,7 +233,12 @@ class WhiteKnightProm4 extends Superclass_WhiteKnight {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -247,7 +278,12 @@ class WhiteKnightProm5 extends Superclass_WhiteKnight {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -287,7 +323,12 @@ class WhiteKnightProm6 extends Superclass_WhiteKnight {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -327,7 +368,12 @@ class WhiteKnightProm7 extends Superclass_WhiteKnight {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -367,7 +413,12 @@ class WhiteKnightProm8 extends Superclass_WhiteKnight {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}

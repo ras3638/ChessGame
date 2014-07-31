@@ -10,8 +10,6 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
-import java.util.logging.SimpleFormatter;
-import java.util.logging.StreamHandler;
 
 class StdoutConsoleHandler extends ConsoleHandler {
 	  protected void setOutputStream(OutputStream out) throws SecurityException {
@@ -22,7 +20,6 @@ class StdoutConsoleHandler extends ConsoleHandler {
 public class Logging {
 
 	   static public void setup() throws IOException {
-
 
 		 Chess.LOGGER.setUseParentHandlers(false);
 	     Chess.LOGGER.setLevel(Level.ALL);
@@ -50,7 +47,6 @@ public class Logging {
 	             
 	                return b.toString();
 	            }
-
 	        };
        
 	        Handler fh = new FileHandler(Chess.class.getName() + ".log");

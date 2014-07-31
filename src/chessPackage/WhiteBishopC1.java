@@ -7,7 +7,12 @@ public class WhiteBishopC1 extends Superclass_WhiteBishop {
 	private final static int  StartingPositionX = 2;
 	private final static int StartingPositionY = 7;
 	static boolean active = true;
-	
+	static void reset(){
+		setActive(true);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -44,10 +49,15 @@ class WhiteBishopF1 extends Superclass_WhiteBishop {
 	static int CurrentPositionX=5;
 	static int CurrentPositionY=7;
 	static int [] CurrentPositionXY = {5,7};
-	private final static int  StartingPositionX = 2;
+	private final static int  StartingPositionX = 5;
 	private final static int StartingPositionY = 7;
 	static boolean active = true;
-	
+	static void reset(){
+		setActive(true);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -87,7 +97,12 @@ class WhiteBishopProm1 extends Superclass_WhiteBishop {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -127,7 +142,12 @@ class WhiteBishopProm2 extends Superclass_WhiteBishop {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -167,7 +187,12 @@ class WhiteBishopProm3 extends Superclass_WhiteBishop {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -207,7 +232,12 @@ class WhiteBishopProm4 extends Superclass_WhiteBishop {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -247,7 +277,12 @@ class WhiteBishopProm5 extends Superclass_WhiteBishop {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -287,7 +322,12 @@ class WhiteBishopProm6 extends Superclass_WhiteBishop {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -327,7 +367,12 @@ class WhiteBishopProm7 extends Superclass_WhiteBishop {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -367,7 +412,12 @@ class WhiteBishopProm8 extends Superclass_WhiteBishop {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}

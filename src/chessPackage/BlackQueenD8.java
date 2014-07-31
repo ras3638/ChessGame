@@ -7,7 +7,12 @@ public class BlackQueenD8 extends Superclass_BlackQueen {
 	private final static int  StartingPositionX = 3;
 	private final static int StartingPositionY = 0;
 	static boolean active = true;
-	
+	static void reset(){
+		setActive(true);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -47,7 +52,12 @@ class BlackQueenProm1 extends Superclass_BlackQueen {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -87,7 +97,12 @@ class BlackQueenProm2 extends Superclass_BlackQueen {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -127,7 +142,12 @@ class BlackQueenProm3 extends Superclass_BlackQueen {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -167,7 +187,12 @@ class BlackQueenProm4 extends Superclass_BlackQueen {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -207,7 +232,12 @@ class BlackQueenProm5 extends Superclass_BlackQueen {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -247,7 +277,12 @@ class BlackQueenProm6 extends Superclass_BlackQueen {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -287,7 +322,12 @@ class BlackQueenProm7 extends Superclass_BlackQueen {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -327,7 +367,12 @@ class BlackQueenProm8 extends Superclass_BlackQueen {
 	private final static int  StartingPositionX = -10;
 	private final static int StartingPositionY = -10;
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}

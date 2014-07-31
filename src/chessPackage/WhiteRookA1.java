@@ -8,7 +8,13 @@ public class WhiteRookA1 extends Superclass_WhiteRook {
 	static int [] CurrentPositionXY = {0,7};
 	static boolean active = true;
 	static boolean FirstStrike = true;
-	
+	static void reset(){
+		setActive(true);
+		setFirstStrike(true);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}
@@ -59,7 +65,13 @@ class WhiteRookH1 extends Superclass_WhiteRook {
 	static int [] CurrentPositionXY = {7,7};
 	static boolean active = true;
 	static boolean FirstStrike = true;
-	
+	static void reset(){
+		setActive(true);
+		setFirstStrike(true);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}
@@ -110,7 +122,12 @@ class WhiteRookProm1 extends Superclass_WhiteRook {
 	static int StartingPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -150,7 +167,12 @@ class WhiteRookProm2 extends Superclass_WhiteRook {
 	static int StartingPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -190,7 +212,12 @@ class WhiteRookProm3 extends Superclass_WhiteRook {
 	static int StartingPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -230,7 +257,12 @@ class WhiteRookProm4 extends Superclass_WhiteRook {
 	static int StartingPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -270,7 +302,12 @@ class WhiteRookProm5 extends Superclass_WhiteRook {
 	static int StartingPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -310,7 +347,12 @@ class WhiteRookProm6 extends Superclass_WhiteRook {
 	static int StartingPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -350,7 +392,12 @@ class WhiteRookProm7 extends Superclass_WhiteRook {
 	static int StartingPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -390,7 +437,12 @@ class WhiteRookProm8 extends Superclass_WhiteRook {
 	static int StartingPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
 	static boolean active = false;
-	
+	static void reset(){
+		setActive(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setActive(boolean a){
 		active = a;
 	}

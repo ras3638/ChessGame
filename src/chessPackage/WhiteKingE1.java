@@ -8,7 +8,13 @@ public class WhiteKingE1 extends Superclass_WhiteKing {
 	static final int StartingPositionY = 7;
 	static boolean active = true;
 	static boolean FirstStrike = true;
-	
+	static void reset(){
+		setFirstStrike(true);
+		setActive(true);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}

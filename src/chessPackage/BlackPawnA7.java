@@ -9,6 +9,16 @@ public class BlackPawnA7 extends Superclass_BlackPawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
+	
+	static void reset(){
+		setActive(true);
+		setFirstStrike(true);
+		setEnPassant(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
+	
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}
@@ -62,6 +72,15 @@ class BlackPawnB7 extends Superclass_BlackPawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
+	
+	static void reset(){
+		setActive(true);
+		setFirstStrike(true);
+		setEnPassant(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}
@@ -115,6 +134,14 @@ class BlackPawnC7 extends Superclass_BlackPawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
+	static void reset(){
+		setActive(true);
+		setFirstStrike(true);
+		setEnPassant(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}
@@ -168,6 +195,14 @@ class BlackPawnD7 extends Superclass_BlackPawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
+	static void reset(){
+		setActive(true);
+		setFirstStrike(true);
+		setEnPassant(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}
@@ -221,6 +256,14 @@ class BlackPawnE7 extends Superclass_BlackPawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
+	static void reset(){
+		setActive(true);
+		setFirstStrike(true);
+		setEnPassant(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}
@@ -274,6 +317,14 @@ class BlackPawnF7 extends Superclass_BlackPawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
+	static void reset(){
+		setActive(true);
+		setFirstStrike(true);
+		setEnPassant(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}
@@ -327,6 +378,14 @@ class BlackPawnG7 extends Superclass_BlackPawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
+	static void reset(){
+		setActive(true);
+		setFirstStrike(true);
+		setEnPassant(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}
@@ -380,6 +439,14 @@ class BlackPawnH7 extends Superclass_BlackPawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
+	static void reset(){
+		setActive(true);
+		setFirstStrike(true);
+		setEnPassant(false);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}

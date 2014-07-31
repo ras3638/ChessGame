@@ -16,14 +16,14 @@ public class PawnPopUp {
     JButton QueenButton = new JButton();
     JButton BishopButton = new JButton();
     JButton KnightButton = new JButton();
-	int GlobalWhiteRookProm = 0;
-	int GlobalWhiteQueenProm = 0;
-	int GlobalWhiteKnightProm = 0;
-	int GlobalWhiteBishopProm = 0;
-	int GlobalBlackRookProm = 0;
-	int GlobalBlackQueenProm = 0;
-	int GlobalBlackKnightProm = 0;
-	int GlobalBlackBishopProm = 0;
+	static int GlobalWhiteRookProm = 0;
+	static int GlobalWhiteQueenProm = 0;
+	static int GlobalWhiteKnightProm = 0;
+	static int GlobalWhiteBishopProm = 0;
+	static int GlobalBlackRookProm = 0;
+	static int GlobalBlackQueenProm = 0;
+	static int GlobalBlackKnightProm = 0;
+	static int GlobalBlackBishopProm = 0;
 	
     public PawnPopUp(boolean whiteTurn, final JButton J, final int X){
     	

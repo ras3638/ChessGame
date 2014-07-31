@@ -8,7 +8,13 @@ public class BlackKingE8 extends Superclass_BlackKing {
 	static final int StartingPositionY = 0;
 	static boolean active = true;
 	static boolean FirstStrike = true;
-	
+	static void reset(){
+		setFirstStrike(true);
+		setActive(true);
+		setCurrentPositionX(StartingPositionX);
+		setCurrentPositionY(StartingPositionY);
+		setCurrentPositionXY(StartingPositionX,StartingPositionY);
+	}
 	static void setFirstStrike(boolean a){
 		FirstStrike = a;
 	}
