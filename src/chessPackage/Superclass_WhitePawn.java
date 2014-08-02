@@ -24,6 +24,8 @@ public class Superclass_WhitePawn extends WhitePiece {
 			MultiArray= killSearcher(MultiArray,CurrentX,CurrentY); //XY2,XY3
 			MultiArray=searcherTwoTile(MultiArray,CurrentX,CurrentY); //XY4
 			
+			MultiArray = Piece.arrayConverter(MultiArray);
+			
 			return MultiArray;
 		}
 		else{
@@ -41,6 +43,13 @@ public class Superclass_WhitePawn extends WhitePiece {
 			WhitePawnA2.setEnPassant(false);
 			WhitePawnB2.setEnPassant(false);
 			WhitePawnC2.setEnPassant(false);
+			WhitePawnD2.setEnPassant(false);
+			WhitePawnE2.setEnPassant(false);
+			WhitePawnF2.setEnPassant(false);
+			WhitePawnG2.setEnPassant(false);
+			WhitePawnH2.setEnPassant(false);
+			
+			MultiArray = Piece.arrayConverter(MultiArray);
 			
 			return MultiArray;
 		}
@@ -60,7 +69,7 @@ static int[][] enPassant(int[][] MultiArray, int CurrentX,int CurrentY) {
 		for(int i = 0 ; i < aggregateBlackPawns().length ; i++) {
 			int[] Coordinate = aggregateBlackPawns()[i];
 			if(Arrays.equals(Coordinate, NewXY3)){
-				System.out.println("We have found a black pawn to the right available for enPassant kill");
+				//System.out.println("We have found a black pawn to the right available for enPassant kill");
 				
 				MultiArray[3]=NewXY4;
 				break;  
@@ -81,7 +90,7 @@ static int[][] enPassant(int[][] MultiArray, int CurrentX,int CurrentY) {
 		for(int i = 0 ; i < aggregateBlackPawns().length ; i++) {
 			int[] Coordinate = aggregateBlackPawns()[i];
 			if(Arrays.equals(Coordinate, NewXY5)){
-				System.out.println("We have found a black pawn to the left available for enPassant kill");
+				//System.out.println("We have found a black pawn to the left available for enPassant kill");
 				
 				MultiArray[4]=NewXY6;
 				break;  
@@ -103,7 +112,7 @@ static int[][] enPassant(int[][] MultiArray, int CurrentX,int CurrentY) {
 		for(int i = 0 ; i < aggregateBlacks().length ; i++) {
 			int[] Coordinate = aggregateBlacks()[i];
 			if(Arrays.equals(Coordinate, NewXY2)){
-				System.out.println("We have found a valid black piece to kill");
+				//System.out.println("We have found a valid black piece to kill");
 				MultiArray[1]=NewXY2;
 				break;  
 			}		    			  
@@ -113,7 +122,7 @@ static int[][] enPassant(int[][] MultiArray, int CurrentX,int CurrentY) {
 		for(int i = 0 ; i < aggregateBlacks().length ; i++) {
 			int[] Coordinate = aggregateBlacks()[i];
 			if(Arrays.equals(Coordinate, NewXY3)){
-				System.out.println("We have found a valid black piece to kill");
+				//System.out.println("We have found a valid black piece to kill");
 				MultiArray[2]=NewXY3;
 				break;  
 			}		    			  
@@ -136,7 +145,7 @@ static int[][] enPassant(int[][] MultiArray, int CurrentX,int CurrentY) {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 		
 			if(Arrays.equals(MultiArray[i], NewXY2)){
-				System.out.println("White Pawn threatining check");
+				//System.out.println("White Pawn threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -149,7 +158,7 @@ static int[][] enPassant(int[][] MultiArray, int CurrentX,int CurrentY) {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY3)){
-				System.out.println("White Pawn threating check");
+				//System.out.println("White Pawn threating check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -168,7 +177,7 @@ static int[][] enPassant(int[][] MultiArray, int CurrentX,int CurrentY) {
 		for(int i = 0 ; i < aggregateWhites().length ; i++) {
 			int[] Coordinate = aggregateWhites()[i];
 			if(Arrays.equals(Coordinate, NewXY)){
-				System.out.println("We have found a white piece in front of this pawn");
+				//System.out.println("We have found a white piece in front of this pawn");
 				return MultiArray;
 				//gotta exit out of this function
 			}				
@@ -177,7 +186,7 @@ static int[][] enPassant(int[][] MultiArray, int CurrentX,int CurrentY) {
 		for(int i = 0 ; i < aggregateBlacks().length ; i++) {
 			int[] Coordinate = aggregateBlacks()[i];
 			if(Arrays.equals(Coordinate, NewXY)){
-				System.out.println("We have found a black piece in front of this pawn");
+				//System.out.println("We have found a black piece in front of this pawn");
 				return MultiArray;
 				//gotta exit out of this function
 			}				
@@ -199,7 +208,7 @@ static int[][] enPassant(int[][] MultiArray, int CurrentX,int CurrentY) {
 		for(int i = 0 ; i < aggregateWhites().length ; i++) {
 			int[] Coordinate = aggregateWhites()[i];
 			if(Arrays.equals(Coordinate, NewXY5)){
-				System.out.println("We have found a white piece 2 tiles in front of this pawn");
+				//System.out.println("We have found a white piece 2 tiles in front of this pawn");
 				return MultiArray;
 				//gotta exit out of this function
 			
@@ -210,7 +219,7 @@ static int[][] enPassant(int[][] MultiArray, int CurrentX,int CurrentY) {
 		for(int i = 0 ; i < aggregateBlacks().length ; i++) {
 			int[] Coordinate = aggregateBlacks()[i];
 			if(Arrays.equals(Coordinate, NewXY5)){
-				System.out.println("We have found a black piece 2 tiles in front of this pawn");
+				//System.out.println("We have found a black piece 2 tiles in front of this pawn");
 				return MultiArray;
 				//gotta exit out of this function
 			
@@ -228,7 +237,7 @@ static int[][] enPassant(int[][] MultiArray, int CurrentX,int CurrentY) {
 		for(int i = 0 ; i < aggregateWhites().length ; i++) {
 			int[] Coordinate = aggregateWhites()[i];
 			if(Arrays.equals(Coordinate, NewXY4)){
-				System.out.println("We have found a white piece in front of this pawn");
+				//System.out.println("We have found a white piece in front of this pawn");
 				return MultiArray;
 				//gotta exit out of this function
 			
@@ -239,7 +248,7 @@ static int[][] enPassant(int[][] MultiArray, int CurrentX,int CurrentY) {
 		for(int i = 0 ; i < aggregateBlacks().length ; i++) {
 			int[] Coordinate = aggregateBlacks()[i];
 			if(Arrays.equals(Coordinate, NewXY4)){
-				System.out.println("We have found a black piece in front of this pawn");
+				//System.out.println("We have found a black piece in front of this pawn");
 				return MultiArray;
 				//gotta exit out of this function
 			

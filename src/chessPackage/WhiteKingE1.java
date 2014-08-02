@@ -8,6 +8,8 @@ public class WhiteKingE1 extends Superclass_WhiteKing {
 	static final int StartingPositionY = 7;
 	static boolean active = true;
 	static boolean FirstStrike = true;
+	static final String Title = "White King (E1)";
+	
 	static void reset(){
 		setFirstStrike(true);
 		setActive(true);
@@ -28,13 +30,9 @@ public class WhiteKingE1 extends Superclass_WhiteKing {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White King (E1)";
 		return Title;
 	}
-	
-
 	static int getCurrentPositionX(){
-
 		return CurrentPositionX ;
 	}
 	static int getCurrentPositionY(){
@@ -42,10 +40,8 @@ public class WhiteKingE1 extends Superclass_WhiteKing {
 		return CurrentPositionY ;
 	}
 	static int[] getCurrentPositionXY(){
-
 		return CurrentPositionXY ;
 	}
-
 	static void setCurrentPositionX(int X){
 		CurrentPositionX = X;
 	}
@@ -55,10 +51,7 @@ public class WhiteKingE1 extends Superclass_WhiteKing {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-
 	static int[][] movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
-	}
-	 
-	 
+	} 
 }

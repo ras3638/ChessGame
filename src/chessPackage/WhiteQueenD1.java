@@ -4,9 +4,11 @@ public class WhiteQueenD1 extends Superclass_WhiteQueen {
 	static int CurrentPositionX=3;
 	static int CurrentPositionY=7;
 	static int [] CurrentPositionXY = {3,7};
-	private final static int  StartingPositionX = 3;
-	private final static int StartingPositionY = 7;
+	static final int  StartingPositionX = 3;
+	static final int StartingPositionY = 7;
 	static boolean active = true;
+	static final String Title = "White Queen (D1)";
+	
 	static void reset(){
 		setActive(true);
 		setCurrentPositionX(StartingPositionX);
@@ -20,7 +22,6 @@ public class WhiteQueenD1 extends Superclass_WhiteQueen {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Queen (D1)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -49,9 +50,11 @@ class WhiteQueenProm1 extends Superclass_WhiteQueen {
 	static int CurrentPositionX= -10;
 	static int CurrentPositionY= -10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "White Queen (Prom1)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -65,7 +68,6 @@ class WhiteQueenProm1 extends Superclass_WhiteQueen {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Queen (Prom1)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -94,9 +96,11 @@ class WhiteQueenProm2 extends Superclass_WhiteQueen {
 	static int CurrentPositionX= -10;
 	static int CurrentPositionY= -10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "White Queen (Prom2)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -110,7 +114,6 @@ class WhiteQueenProm2 extends Superclass_WhiteQueen {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Queen (Prom2)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -139,9 +142,11 @@ class WhiteQueenProm3 extends Superclass_WhiteQueen {
 	static int CurrentPositionX= -10;
 	static int CurrentPositionY= -10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "White Queen (Prom3)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -155,7 +160,6 @@ class WhiteQueenProm3 extends Superclass_WhiteQueen {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Queen (Prom3)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -184,9 +188,11 @@ class WhiteQueenProm4 extends Superclass_WhiteQueen {
 	static int CurrentPositionX= -10;
 	static int CurrentPositionY= -10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "White Queen (Prom4)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -200,7 +206,6 @@ class WhiteQueenProm4 extends Superclass_WhiteQueen {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Queen (Prom4)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -229,9 +234,11 @@ class WhiteQueenProm5 extends Superclass_WhiteQueen {
 	static int CurrentPositionX= -10;
 	static int CurrentPositionY= -10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "White Queen (Prom5)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -245,7 +252,6 @@ class WhiteQueenProm5 extends Superclass_WhiteQueen {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Queen (Prom5)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -274,8 +280,8 @@ class WhiteQueenProm6 extends Superclass_WhiteQueen {
 	static int CurrentPositionX= -10;
 	static int CurrentPositionY= -10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
 	static void reset(){
 		setActive(false);
@@ -319,9 +325,11 @@ class WhiteQueenProm7 extends Superclass_WhiteQueen {
 	static int CurrentPositionX= -10;
 	static int CurrentPositionY= -10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "White Queen (Prom7)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -335,7 +343,6 @@ class WhiteQueenProm7 extends Superclass_WhiteQueen {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Queen (Prom7)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -364,9 +371,11 @@ class WhiteQueenProm8 extends Superclass_WhiteQueen {
 	static int CurrentPositionX= -10;
 	static int CurrentPositionY= -10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "White Queen (Prom8)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -380,7 +389,6 @@ class WhiteQueenProm8 extends Superclass_WhiteQueen {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Queen (Prom8)";
 		return Title;
 	}
 	static int getCurrentPositionX(){

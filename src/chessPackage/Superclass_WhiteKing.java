@@ -34,6 +34,9 @@ public class Superclass_WhiteKing extends WhitePiece {
 		//this looks for castle left rook side
 		MultiArray=castleLeftSide(MultiArray,CurrentX,CurrentY);
 		MultiArray=castleRightSide(MultiArray,CurrentX,CurrentY);
+		
+		MultiArray = Piece.arrayConverter(MultiArray);
+		
 		return MultiArray;
 	}
 	static int [][] castleRightSide(int[][] MultiArray, int CurrentX, int CurrentY){
@@ -42,7 +45,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 			int [] ComXY = {4,7};
 			if(WhiteKingE1.isWhiteKingInCheck(ComXY, "White King (E1)")){
 				//cannot castle out of check
-				System.out.println("Cannot right castle out of check");
+				//System.out.println("Cannot right castle out of check");
 				MultiArray[9] = null;
 				return MultiArray;
 			}
@@ -98,7 +101,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 		int [] ComXY = {4,7};
 		if(WhiteKingE1.isWhiteKingInCheck(ComXY, "White King (E1)")){
 			//cannot castle out of check
-			System.out.println("Cannot left castle out of check");
+			//System.out.println("Cannot left castle out of check");
 			MultiArray[8] = null;
 			return MultiArray;
 		}
@@ -255,7 +258,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 		for(int i = 0 ; i < aggregateWhites().length ; i++) {
 			int[] Coordinate = aggregateWhites()[i];
 			if(Arrays.equals(Coordinate, NewXY)){
-				System.out.println("We have found a white piece interrupting this king");
+				//System.out.println("We have found a white piece interrupting this king");
 				return MultiArray;
 				//gotta exit out of this function
 			}		    			  
@@ -282,7 +285,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i], NewXY)){
-				System.out.println("White King threatining check");
+				//System.out.println("White King threatining check");
 				MultiArray[i]=null;
 				
 				break;  
@@ -296,7 +299,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY2)){
-				System.out.println("White King threatining check");
+				//System.out.println("White King threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -308,7 +311,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY3)){
-				System.out.println("White King threatining check");
+				//System.out.println("White King threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -320,7 +323,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY4)){
-				System.out.println("White King threatining check");
+				//System.out.println("White King threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -332,7 +335,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY5)){
-				System.out.println("White King threatining check");
+				//System.out.println("White King threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -344,7 +347,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY6)){
-				System.out.println("White King threatining check");
+				//System.out.println("White King threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -356,7 +359,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY7)){
-				System.out.println("White King threatining check");
+				//System.out.println("White King threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -368,7 +371,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY8)){
-				System.out.println("White King threatining check");
+				//System.out.println("White King threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -396,13 +399,14 @@ public class Superclass_WhiteKing extends WhitePiece {
 
 		
 		//must insert here
-		//toDO
+
 		if(!Arrays.equals(BlackPawnH7.getCurrentPositionXY(), ComXY) && BlackPawnH7.getActive() == true){
 			MultiArray = Superclass_BlackPawn.checkPreventer(MultiArray, BlackPawnH7.getCurrentPositionX(), BlackPawnH7.getCurrentPositionY());
 			if(MultiArray[0]==null){
 				return true;
 			}
 		}
+
 		if(!Arrays.equals(BlackPawnG7.getCurrentPositionXY(), ComXY) && BlackPawnG7.getActive() == true){
 			MultiArray = Superclass_BlackPawn.checkPreventer(MultiArray, BlackPawnG7.getCurrentPositionX(), BlackPawnG7.getCurrentPositionY());
 			if(MultiArray[0]==null){
@@ -449,6 +453,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 				return true;
 			}
 		}
+
 		if(!Arrays.equals(BlackKnightG8.getCurrentPositionXY(), ComXY) && BlackKnightG8.getActive() == true){
 			MultiArray = Superclass_BlackKnight.checkPreventer(MultiArray, BlackKnightG8.getCurrentPositionX(), BlackKnightG8.getCurrentPositionY());
 			if(MultiArray[0]==null){
@@ -757,17 +762,598 @@ public class Superclass_WhiteKing extends WhitePiece {
 		return false;	
 	}
 	
+	static boolean isWhiteKingInCheck_Set(int[] ComXY, String CurrentTitle){
+		//will return true if king is in check
+		//only works during black turn
+		
+		int [][]MultiArray = new int[1][2];
+
+		
+		if (CurrentTitle == "White King (E1)"){
+			
+			MultiArray[0][0] = ComXY[0];
+			MultiArray[0][1] = ComXY[1];
+			
+		}
+		else{
+			MultiArray[0][0]=WhiteKingE1.getCurrentPositionX();
+			MultiArray[0][1]=WhiteKingE1.getCurrentPositionY();
+		}
+
+		
+		//must insert here
+		//toDO
+		
+		if(BlackPawnH7.getActive() == true){
+			MultiArray = Superclass_BlackPawn.checkPreventer(MultiArray, BlackPawnH7.getCurrentPositionX(), BlackPawnH7.getCurrentPositionY());
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+
+		if(BlackPawnG7.getActive() == true){
+			MultiArray = Superclass_BlackPawn.checkPreventer(MultiArray, BlackPawnG7.getCurrentPositionX(), BlackPawnG7.getCurrentPositionY());
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackPawnF7.getActive() == true){
+			MultiArray = Superclass_BlackPawn.checkPreventer(MultiArray, BlackPawnF7.getCurrentPositionX(), BlackPawnF7.getCurrentPositionY());
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackPawnE7.getActive() == true){
+			MultiArray = Superclass_BlackPawn.checkPreventer(MultiArray, BlackPawnE7.getCurrentPositionX(), BlackPawnE7.getCurrentPositionY());
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackRookH8.getActive() == true){
+			MultiArray = Superclass_BlackRook.checkPreventer(MultiArray, BlackRookH8.getCurrentPositionX(), BlackRookH8.getCurrentPositionY(),ComXY,CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		
+		if(BlackPawnD7.getActive() == true){
+			MultiArray = Superclass_BlackPawn.checkPreventer(MultiArray, BlackPawnD7.getCurrentPositionX(), BlackPawnD7.getCurrentPositionY());
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+
+		if(BlackPawnA7.getActive() == true){
+			MultiArray = Superclass_BlackPawn.checkPreventer(MultiArray, BlackPawnA7.getCurrentPositionX(), BlackPawnA7.getCurrentPositionY());
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+
+		
+		if(BlackPawnB7.getActive() == true){
+			MultiArray = Superclass_BlackPawn.checkPreventer(MultiArray, BlackPawnB7.getCurrentPositionX(), BlackPawnB7.getCurrentPositionY());
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+
+		if(BlackKnightG8.getActive() == true){
+			MultiArray = Superclass_BlackKnight.checkPreventer(MultiArray, BlackKnightG8.getCurrentPositionX(), BlackKnightG8.getCurrentPositionY());
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+
+		if(BlackKnightB8.getActive() == true){
+			MultiArray = Superclass_BlackKnight.checkPreventer(MultiArray, BlackKnightB8.getCurrentPositionX(), BlackKnightB8.getCurrentPositionY());
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+
+		if(BlackPawnC7.getActive() == true ){
+			MultiArray = Superclass_BlackPawn.checkPreventer(MultiArray, BlackPawnC7.getCurrentPositionX(), BlackPawnC7.getCurrentPositionY());
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+
+	
+		
+		if(BlackRookA8.getActive() == true){
+			MultiArray = Superclass_BlackRook.checkPreventer(MultiArray, BlackRookA8.getCurrentPositionX(), BlackRookA8.getCurrentPositionY(),ComXY,CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+
+		
+		if(BlackKingE8.getActive() == true){
+			MultiArray = Superclass_BlackKing.checkPreventer(MultiArray, BlackKingE8.getCurrentPositionX(), BlackKingE8.getCurrentPositionY());
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+	
+		
+		if(BlackBishopC8.getActive() == true){
+			MultiArray = Superclass_BlackBishop.checkPreventer(MultiArray, BlackBishopC8.getCurrentPositionX(), BlackBishopC8.getCurrentPositionY(),ComXY,CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackBishopF8.getActive() == true){
+			MultiArray = Superclass_BlackBishop.checkPreventer(MultiArray, BlackBishopF8.getCurrentPositionX(), BlackBishopF8.getCurrentPositionY(),ComXY,CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		
+		if(BlackQueenD8.getActive() == true){
+			MultiArray = Superclass_BlackQueen.checkPreventer(MultiArray, BlackQueenD8.getCurrentPositionX(), BlackQueenD8.getCurrentPositionY(),ComXY,CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+
+
+		if(BlackRookProm1.getActive() == true){
+			MultiArray = Superclass_BlackRook.checkPreventer(MultiArray, BlackRookProm1.getCurrentPositionX(), BlackRookProm1.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackRookProm2.getActive() == true){
+			MultiArray = Superclass_BlackRook.checkPreventer(MultiArray, BlackRookProm2.getCurrentPositionX(), BlackRookProm2.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackRookProm3.getActive() == true){
+			MultiArray = Superclass_BlackRook.checkPreventer(MultiArray, BlackRookProm3.getCurrentPositionX(), BlackRookProm3.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackRookProm4.getActive() == true){
+			MultiArray = Superclass_BlackRook.checkPreventer(MultiArray, BlackRookProm4.getCurrentPositionX(), BlackRookProm4.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackRookProm5.getActive() == true){
+			MultiArray = Superclass_BlackRook.checkPreventer(MultiArray, BlackRookProm5.getCurrentPositionX(), BlackRookProm5.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackRookProm6.getActive() == true){
+			MultiArray = Superclass_BlackRook.checkPreventer(MultiArray, BlackRookProm6.getCurrentPositionX(), BlackRookProm6.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackRookProm7.getActive() == true){
+			MultiArray = Superclass_BlackRook.checkPreventer(MultiArray, BlackRookProm7.getCurrentPositionX(), BlackRookProm7.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackRookProm8.getActive() == true){
+			MultiArray = Superclass_BlackRook.checkPreventer(MultiArray, BlackRookProm8.getCurrentPositionX(), BlackRookProm8.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+
+		if(BlackQueenProm1.getActive() == true){
+			MultiArray = Superclass_BlackQueen.checkPreventer(MultiArray, BlackQueenProm1.getCurrentPositionX(), BlackQueenProm1.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+
+		if(BlackQueenProm2.getActive() == true){
+			MultiArray = Superclass_BlackQueen.checkPreventer(MultiArray, BlackQueenProm2.getCurrentPositionX(), BlackQueenProm2.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackQueenProm3.getActive() == true){
+			MultiArray = Superclass_BlackQueen.checkPreventer(MultiArray, BlackQueenProm3.getCurrentPositionX(), BlackQueenProm3.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackQueenProm4.getActive() == true){
+			MultiArray = Superclass_BlackQueen.checkPreventer(MultiArray, BlackQueenProm4.getCurrentPositionX(), BlackQueenProm4.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackQueenProm5.getActive() == true){
+			MultiArray = Superclass_BlackQueen.checkPreventer(MultiArray, BlackQueenProm5.getCurrentPositionX(), BlackQueenProm5.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackQueenProm6.getActive() == true){
+			MultiArray = Superclass_BlackQueen.checkPreventer(MultiArray, BlackQueenProm6.getCurrentPositionX(), BlackQueenProm6.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackQueenProm7.getActive() == true){
+			MultiArray = Superclass_BlackQueen.checkPreventer(MultiArray, BlackQueenProm7.getCurrentPositionX(), BlackQueenProm7.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackQueenProm8.getActive() == true){
+			MultiArray = Superclass_BlackQueen.checkPreventer(MultiArray, BlackQueenProm8.getCurrentPositionX(), BlackQueenProm8.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackQueenProm1.getActive() == true){
+			MultiArray = Superclass_BlackQueen.checkPreventer(MultiArray, BlackQueenProm1.getCurrentPositionX(), BlackQueenProm1.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+				}
+		}
+		if(BlackQueenProm2.getActive() == true){
+			MultiArray = Superclass_BlackQueen.checkPreventer(MultiArray, BlackQueenProm2.getCurrentPositionX(), BlackQueenProm2.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+				}
+		}
+		if(BlackQueenProm3.getActive() == true){
+			MultiArray = Superclass_BlackQueen.checkPreventer(MultiArray, BlackQueenProm3.getCurrentPositionX(), BlackQueenProm3.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackQueenProm4.getActive() == true){
+			MultiArray = Superclass_BlackQueen.checkPreventer(MultiArray, BlackQueenProm4.getCurrentPositionX(), BlackQueenProm4.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackQueenProm5.getActive() == true){
+			MultiArray = Superclass_BlackQueen.checkPreventer(MultiArray, BlackQueenProm5.getCurrentPositionX(), BlackQueenProm5.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackQueenProm6.getActive() == true){
+			MultiArray = Superclass_BlackQueen.checkPreventer(MultiArray, BlackQueenProm6.getCurrentPositionX(), BlackQueenProm6.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackQueenProm7.getActive() == true){
+			MultiArray = Superclass_BlackQueen.checkPreventer(MultiArray, BlackQueenProm7.getCurrentPositionX(), BlackQueenProm7.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackQueenProm8.getActive() == true){
+			MultiArray = Superclass_BlackQueen.checkPreventer(MultiArray, BlackQueenProm8.getCurrentPositionX(), BlackQueenProm8.getCurrentPositionY(), ComXY, CurrentTitle);
+				
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackBishopProm1.getActive() == true){
+			MultiArray = Superclass_BlackBishop.checkPreventer(MultiArray, BlackBishopProm1.getCurrentPositionX(), BlackBishopProm1.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackBishopProm2.getActive() == true){
+			MultiArray = Superclass_BlackBishop.checkPreventer(MultiArray, BlackBishopProm2.getCurrentPositionX(), BlackBishopProm2.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackBishopProm3.getActive() == true){
+			MultiArray = Superclass_BlackBishop.checkPreventer(MultiArray, BlackBishopProm3.getCurrentPositionX(), BlackBishopProm3.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackBishopProm4.getActive() == true){
+			MultiArray = Superclass_BlackBishop.checkPreventer(MultiArray, BlackBishopProm4.getCurrentPositionX(), BlackBishopProm4.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackBishopProm5.getActive() == true){
+			MultiArray = Superclass_BlackBishop.checkPreventer(MultiArray, BlackBishopProm5.getCurrentPositionX(), BlackBishopProm5.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackBishopProm6.getActive() == true){
+			MultiArray = Superclass_BlackBishop.checkPreventer(MultiArray, BlackBishopProm6.getCurrentPositionX(), BlackBishopProm6.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackBishopProm7.getActive() == true){
+			MultiArray = Superclass_BlackBishop.checkPreventer(MultiArray, BlackBishopProm7.getCurrentPositionX(), BlackBishopProm7.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackBishopProm8.getActive() == true){
+			MultiArray = Superclass_BlackBishop.checkPreventer(MultiArray, BlackBishopProm8.getCurrentPositionX(), BlackBishopProm8.getCurrentPositionY(), ComXY, CurrentTitle);
+			if(MultiArray[0]==null){
+					return true;
+			}
+		}	
+		
+		if(BlackKnightProm1.getActive() == true){
+			MultiArray = Superclass_BlackKnight.checkPreventer(MultiArray, BlackKnightProm1.getCurrentPositionX(), BlackKnightProm1.getCurrentPositionY());
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackKnightProm2.getActive() == true){
+			MultiArray = Superclass_BlackKnight.checkPreventer(MultiArray, BlackKnightProm2.getCurrentPositionX(), BlackKnightProm2.getCurrentPositionY());
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackKnightProm3.getActive() == true){
+			MultiArray = Superclass_BlackKnight.checkPreventer(MultiArray, BlackKnightProm3.getCurrentPositionX(), BlackKnightProm3.getCurrentPositionY());
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackKnightProm4.getActive() == true){
+			MultiArray = Superclass_BlackKnight.checkPreventer(MultiArray, BlackKnightProm4.getCurrentPositionX(), BlackKnightProm4.getCurrentPositionY());
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackKnightProm5.getActive() == true){
+			MultiArray = Superclass_BlackKnight.checkPreventer(MultiArray, BlackKnightProm5.getCurrentPositionX(), BlackKnightProm5.getCurrentPositionY());
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackKnightProm6.getActive() == true){
+			MultiArray = Superclass_BlackKnight.checkPreventer(MultiArray, BlackKnightProm6.getCurrentPositionX(), BlackKnightProm6.getCurrentPositionY());
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackKnightProm7.getActive() == true){
+			MultiArray = Superclass_BlackKnight.checkPreventer(MultiArray, BlackKnightProm7.getCurrentPositionX(), BlackKnightProm7.getCurrentPositionY());
+			if(MultiArray[0]==null){
+				return true;
+			}
+		}
+		if(BlackKnightProm8.getActive() == true){
+			MultiArray = Superclass_BlackKnight.checkPreventer(MultiArray, BlackKnightProm8.getCurrentPositionX(), BlackKnightProm8.getCurrentPositionY());
+			if(MultiArray[0]==null){
+					return true;
+			}
+		}	
+
+		return false;	
+	}
+	
 
 	
 	static int[][] movementKillEngine(int[] NewXY,int[][]MultiArray, int j){
 		for(int i = 0 ; i < aggregateBlacks().length ; i++) {
 			int[] Coordinate = aggregateBlacks()[i];
 			if(Arrays.equals(Coordinate, NewXY)){
-				System.out.println("We have found a valid black piece to kill");
+				//System.out.println("We have found a valid black piece to kill");
 				MultiArray[j]=NewXY;
 			}		    			  
 		}
 
 		return MultiArray;
+	}
+
+	public static boolean isWhiteKingInCheckMate() {
+		
+		if(WhiteKingE1.getActive()){
+			int [][] MovementHandler = WhiteKingE1.movementHandler(WhiteKingE1.getCurrentPositionX(), WhiteKingE1.getCurrentPositionY(), WhiteKingE1.StartingPositionX, WhiteKingE1.StartingPositionY);
+			for (int i = 0; i < MovementHandler.length ; i++){
+
+				//System.out.println("InnerLoopMovementHandlerForWhiteKingE1 " + Arrays.toString(MovementHandler[i]));
+				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White King (E1)")){
+					
+					return false;
+				}			
+			}
+		}
+		
+		if(WhiteRookA1.getActive()){
+			int [][] MovementHandler = WhiteRookA1.movementHandler(WhiteRookA1.getCurrentPositionX(), WhiteRookA1.getCurrentPositionY(), WhiteRookA1.StartingPositionX, WhiteRookA1.StartingPositionY);
+			for (int i = 0; i < MovementHandler.length ; i++){
+
+				//System.out.println("InnerLoopMovementHandler for WhiteRookA1 " + Arrays.toString(MovementHandler[i]));
+				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Rook (A1)")){
+					
+					return false;
+				}			
+			}
+		}
+		
+		if(WhiteRookH1.getActive()){
+			int [][] MovementHandler = WhiteRookH1.movementHandler(WhiteRookH1.getCurrentPositionX(), WhiteRookH1.getCurrentPositionY(), WhiteRookH1.StartingPositionX, WhiteRookH1.StartingPositionY);
+			for (int i = 0; i < MovementHandler.length ; i++){
+
+				//System.out.println("InnerLoopMovementHandler for WhiteRookH1 " + Arrays.toString(MovementHandler[i]));
+				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Rook (H1)")){
+					
+					return false;
+				}			
+			}
+		}
+		if(WhiteQueenD1.getActive()){
+			int [][] MovementHandler = WhiteQueenD1.movementHandler(WhiteQueenD1.getCurrentPositionX(), WhiteQueenD1.getCurrentPositionY(), WhiteQueenD1.StartingPositionX, WhiteQueenD1.StartingPositionY);
+			for (int i = 0; i < MovementHandler.length ; i++){
+
+				//System.out.println("InnerLoopMovementHandler for WhiteQueenD1 " + Arrays.toString(MovementHandler[i]));
+				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Queen (D1)")){
+					
+					return false;
+				}			
+			}
+		}
+		
+		if(WhiteBishopC1.getActive()){
+			int [][] MovementHandler = WhiteBishopC1.movementHandler(WhiteBishopC1.getCurrentPositionX(), WhiteBishopC1.getCurrentPositionY(), WhiteBishopC1.StartingPositionX, WhiteBishopC1.StartingPositionY);
+			for (int i = 0; i < MovementHandler.length ; i++){
+
+				//System.out.println("InnerLoopMovementHandler for WhiteBishopC1 " + Arrays.toString(MovementHandler[i]));
+				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Bishop (C1)")){
+					
+					return false;
+				}			
+			}
+		}
+		
+		if(WhiteBishopF1.getActive()){
+			int [][] MovementHandler = WhiteBishopF1.movementHandler(WhiteBishopF1.getCurrentPositionX(), WhiteBishopF1.getCurrentPositionY(), WhiteBishopF1.StartingPositionX, WhiteBishopF1.StartingPositionY);
+			for (int i = 0; i < MovementHandler.length ; i++){
+
+				//System.out.println("InnerLoopMovementHandler for WhiteBishopF1 " + Arrays.toString(MovementHandler[i]));
+				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Bishop (F1)")){
+					
+					return false;
+				}			
+			}
+		}
+		
+		if(WhiteKnightB1.getActive()){
+			int [][] MovementHandler = WhiteKnightB1.movementHandler(WhiteKnightB1.getCurrentPositionX(), WhiteKnightB1.getCurrentPositionY(), WhiteKnightB1.StartingPositionX, WhiteKnightB1.StartingPositionY);
+			for (int i = 0; i < MovementHandler.length ; i++){
+
+				//System.out.println("InnerLoopMovementHandler for WhiteKnightB1 " + Arrays.toString(MovementHandler[i]));
+				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Knight (B1)")){
+					
+					return false;
+				}			
+			}
+		}
+		if(WhiteKnightG1.getActive()){
+			int [][] MovementHandler = WhiteKnightG1.movementHandler(WhiteKnightG1.getCurrentPositionX(), WhiteKnightG1.getCurrentPositionY(), WhiteKnightG1.StartingPositionX, WhiteKnightG1.StartingPositionY);
+			for (int i = 0; i < MovementHandler.length ; i++){
+
+				//System.out.println("InnerLoopMovementHandler for WhiteKnightG1 " + Arrays.toString(MovementHandler[i]));
+				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Knight (G1)")){
+					
+					return false;
+				}			
+			}
+		}
+		
+		if(WhitePawnA2.getActive()){
+			int [][] MovementHandler = WhitePawnA2.movementHandler(WhitePawnA2.getCurrentPositionX(), WhitePawnA2.getCurrentPositionY(), WhitePawnA2.StartingPositionX, WhitePawnA2.StartingPositionY);
+			for (int i = 0; i < MovementHandler.length ; i++){
+
+				//System.out.println("InnerLoopMovementHandlerForWhitePawnA2 " + Arrays.toString(MovementHandler[i]));
+				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Pawn (A2)")){
+					
+					return false;
+				}			
+			}
+		}
+		
+		if(WhitePawnB2.getActive()){
+			int [][] MovementHandler = WhitePawnB2.movementHandler(WhitePawnB2.getCurrentPositionX(), WhitePawnB2.getCurrentPositionY(), WhitePawnB2.StartingPositionX, WhitePawnB2.StartingPositionY);
+			for (int i = 0; i < MovementHandler.length ; i++){
+
+				//System.out.println("InnerLoopMovementHandlerForWhitePawnB2 " + Arrays.toString(MovementHandler[i]));
+				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Pawn (B2)")){
+					
+					return false;
+				}			
+			}
+		}
+		
+		if(WhitePawnC2.getActive()){
+			int [][] MovementHandler = WhitePawnC2.movementHandler(WhitePawnC2.getCurrentPositionX(), WhitePawnC2.getCurrentPositionY(), WhitePawnC2.StartingPositionX, WhitePawnC2.StartingPositionY);
+			for (int i = 0; i < MovementHandler.length ; i++){
+
+				//System.out.println("InnerLoopMovementHandlerForWhitePawnC2 " + Arrays.toString(MovementHandler[i]));
+				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Pawn (C2)")){
+					
+					return false;
+				}			
+			}
+		}
+		
+		if(WhitePawnD2.getActive()){
+			int [][] MovementHandler = WhitePawnD2.movementHandler(WhitePawnD2.getCurrentPositionX(), WhitePawnD2.getCurrentPositionY(), WhitePawnD2.StartingPositionX, WhitePawnD2.StartingPositionY);
+			for (int i = 0; i < MovementHandler.length ; i++){
+
+				//System.out.println("InnerLoopMovementHandlerForWhitePawnD2 " + Arrays.toString(MovementHandler[i]));
+				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Pawn (D2)")){
+					
+					return false;
+				}			
+			}
+		}
+		
+		if(WhitePawnE2.getActive()){
+			int [][] MovementHandler = WhitePawnE2.movementHandler(WhitePawnE2.getCurrentPositionX(), WhitePawnE2.getCurrentPositionY(), WhitePawnE2.StartingPositionX, WhitePawnE2.StartingPositionY);
+			for (int i = 0; i < MovementHandler.length ; i++){
+
+				//System.out.println("InnerLoopMovementHandlerForWhitePawnE2 " + Arrays.toString(MovementHandler[i]));
+				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Pawn (E2)")){
+					
+					return false;
+				}			
+			}
+		}
+		
+		if(WhitePawnF2.getActive()){
+			int [][] MovementHandler = WhitePawnF2.movementHandler(WhitePawnF2.getCurrentPositionX(), WhitePawnF2.getCurrentPositionY(), WhitePawnF2.StartingPositionX, WhitePawnF2.StartingPositionY);
+			for (int i = 0; i < MovementHandler.length ; i++){
+
+				//System.out.println("InnerLoopMovementHandlerForWhitePawnF2 " + Arrays.toString(MovementHandler[i]));
+				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Pawn (F2)")){
+					
+					return false;
+				}			
+			}
+		}
+		
+		if(WhitePawnG2.getActive()){
+			int [][] MovementHandler = WhitePawnG2.movementHandler(WhitePawnG2.getCurrentPositionX(), WhitePawnG2.getCurrentPositionY(), WhitePawnG2.StartingPositionX, WhitePawnG2.StartingPositionY);
+			for (int i = 0; i < MovementHandler.length ; i++){
+
+				//System.out.println("InnerLoopMovementHandlerForWhitePawnG2 " + Arrays.toString(MovementHandler[i]));
+				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Pawn (G2)")){
+					
+					return false;
+				}			
+			}
+		}
+		
+		if(WhitePawnH2.getActive()){
+			int [][] MovementHandler = WhitePawnH2.movementHandler(WhitePawnH2.getCurrentPositionX(), WhitePawnH2.getCurrentPositionY(), WhitePawnH2.StartingPositionX, WhitePawnH2.StartingPositionY);
+			for (int i = 0; i < MovementHandler.length ; i++){
+
+				//System.out.println("InnerLoopMovementHandlerForWhitePawnH2 " + Arrays.toString(MovementHandler[i]));
+				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Pawn (H2)")){
+					
+					return false;
+				}			
+			}
+		}
+		
+
+		return true;
+
 	}
 }

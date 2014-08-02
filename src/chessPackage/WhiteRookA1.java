@@ -8,6 +8,8 @@ public class WhiteRookA1 extends Superclass_WhiteRook {
 	static int [] CurrentPositionXY = {0,7};
 	static boolean active = true;
 	static boolean FirstStrike = true;
+	static final String Title = "White Rook (A1)";
+	
 	static void reset(){
 		setActive(true);
 		setFirstStrike(true);
@@ -28,7 +30,6 @@ public class WhiteRookA1 extends Superclass_WhiteRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Rook (A1)";
 		return Title;
 	}
 
@@ -65,6 +66,8 @@ class WhiteRookH1 extends Superclass_WhiteRook {
 	static int [] CurrentPositionXY = {7,7};
 	static boolean active = true;
 	static boolean FirstStrike = true;
+	static final String Title = "White Rook (H1)";
+	
 	static void reset(){
 		setActive(true);
 		setFirstStrike(true);
@@ -85,7 +88,6 @@ class WhiteRookH1 extends Superclass_WhiteRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Rook (H1)";
 		return Title;
 	}
 
@@ -122,6 +124,8 @@ class WhiteRookProm1 extends Superclass_WhiteRook {
 	static int StartingPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
 	static boolean active = false;
+	static final String Title = "White Rook (Prom1)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -135,7 +139,6 @@ class WhiteRookProm1 extends Superclass_WhiteRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Rook (Prom1)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -167,6 +170,8 @@ class WhiteRookProm2 extends Superclass_WhiteRook {
 	static int StartingPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
 	static boolean active = false;
+	static final String Title = "White Rook (Prom2)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -180,7 +185,6 @@ class WhiteRookProm2 extends Superclass_WhiteRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Rook (Prom2)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -212,6 +216,8 @@ class WhiteRookProm3 extends Superclass_WhiteRook {
 	static int StartingPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
 	static boolean active = false;
+	static final String Title = "White Rook (Prom3)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -225,7 +231,6 @@ class WhiteRookProm3 extends Superclass_WhiteRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Rook (Prom3)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -257,6 +262,8 @@ class WhiteRookProm4 extends Superclass_WhiteRook {
 	static int StartingPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
 	static boolean active = false;
+	static final String Title = "White Rook (Prom4)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -270,7 +277,6 @@ class WhiteRookProm4 extends Superclass_WhiteRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Rook (Prom4)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -302,6 +308,8 @@ class WhiteRookProm5 extends Superclass_WhiteRook {
 	static int StartingPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
 	static boolean active = false;
+	static final String Title = "White Rook (Prom5)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -315,7 +323,6 @@ class WhiteRookProm5 extends Superclass_WhiteRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Rook (Prom5)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -347,6 +354,8 @@ class WhiteRookProm6 extends Superclass_WhiteRook {
 	static int StartingPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
 	static boolean active = false;
+	static final String Title = "White Rook (Prom6)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -360,7 +369,6 @@ class WhiteRookProm6 extends Superclass_WhiteRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Rook (Prom6)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -392,6 +400,8 @@ class WhiteRookProm7 extends Superclass_WhiteRook {
 	static int StartingPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
 	static boolean active = false;
+	static final String Title = "White Rook (Prom7)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -405,7 +415,6 @@ class WhiteRookProm7 extends Superclass_WhiteRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Rook (Prom7)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -437,6 +446,8 @@ class WhiteRookProm8 extends Superclass_WhiteRook {
 	static int StartingPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
 	static boolean active = false;
+	static final String Title = "White Rook (Prom8)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -450,7 +461,6 @@ class WhiteRookProm8 extends Superclass_WhiteRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Rook (Prom8)";
 		return Title;
 	}
 	static int getCurrentPositionX(){

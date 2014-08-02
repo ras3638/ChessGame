@@ -4,9 +4,10 @@ public class WhiteKnightB1 extends Superclass_WhiteKnight {
 	static int CurrentPositionX=1;
 	static int CurrentPositionY=7;
 	static int [] CurrentPositionXY = {1,7};
-	private final static int  StartingPositionX = 1;
-	private final static int StartingPositionY = 7;
+	static final int  StartingPositionX = 1;
+	static final int StartingPositionY = 7;
 	static boolean active = true;
+	static final String Title = "White Knight (B1)";
 	
 	static void reset(){
 		setActive(true);
@@ -21,7 +22,6 @@ public class WhiteKnightB1 extends Superclass_WhiteKnight {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Knight (B1)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -50,9 +50,11 @@ class WhiteKnightG1 extends Superclass_WhiteKnight {
 	static int CurrentPositionX=6;
 	static int CurrentPositionY=7;
 	static int [] CurrentPositionXY = {6,7};
-	private final static int  StartingPositionX = 6;
-	private final static int StartingPositionY = 7;
+	static final int  StartingPositionX = 6;
+	static final int StartingPositionY = 7;
 	static boolean active = true;
+	static final String Title = "White Knight (G1)";
+	
 	static void reset(){
 		setActive(true);
 		setCurrentPositionX(StartingPositionX);
@@ -66,7 +68,6 @@ class WhiteKnightG1 extends Superclass_WhiteKnight {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Knight (G1)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -95,9 +96,11 @@ class WhiteKnightProm1 extends Superclass_WhiteKnight {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	final static int  StartingPositionX = -10;
+	final static int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "White Knight (Prom1)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -111,7 +114,6 @@ class WhiteKnightProm1 extends Superclass_WhiteKnight {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Knight (Prom1)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -140,9 +142,11 @@ class WhiteKnightProm2 extends Superclass_WhiteKnight {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "White Knight (Prom2)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -156,7 +160,6 @@ class WhiteKnightProm2 extends Superclass_WhiteKnight {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Knight (Prom2)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -185,9 +188,11 @@ class WhiteKnightProm3 extends Superclass_WhiteKnight {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "White Knight (Prom3)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -201,7 +206,6 @@ class WhiteKnightProm3 extends Superclass_WhiteKnight {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Knight (Prom3)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -230,9 +234,11 @@ class WhiteKnightProm4 extends Superclass_WhiteKnight {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "White Knight (Prom4)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -246,7 +252,6 @@ class WhiteKnightProm4 extends Superclass_WhiteKnight {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Knight (Prom4)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -275,9 +280,10 @@ class WhiteKnightProm5 extends Superclass_WhiteKnight {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "White Knight (Prom5)";
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -291,7 +297,6 @@ class WhiteKnightProm5 extends Superclass_WhiteKnight {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Knight (Prom5)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -320,9 +325,11 @@ class WhiteKnightProm6 extends Superclass_WhiteKnight {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "White Knight (Prom6)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -336,7 +343,6 @@ class WhiteKnightProm6 extends Superclass_WhiteKnight {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Knight (Prom6)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -365,9 +371,11 @@ class WhiteKnightProm7 extends Superclass_WhiteKnight {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "White Knight (Prom7)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -381,7 +389,6 @@ class WhiteKnightProm7 extends Superclass_WhiteKnight {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Knight (Prom7)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -410,9 +417,11 @@ class WhiteKnightProm8 extends Superclass_WhiteKnight {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "White Knight (Prom8)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -426,7 +435,6 @@ class WhiteKnightProm8 extends Superclass_WhiteKnight {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Knight (Prom8)";
 		return Title;
 	}
 	static int getCurrentPositionX(){

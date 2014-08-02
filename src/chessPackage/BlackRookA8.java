@@ -4,10 +4,11 @@ public class BlackRookA8 extends Superclass_BlackRook {
 	static int CurrentPositionX=0;
 	static int CurrentPositionY=0;
 	static int [] CurrentPositionXY = {0,0};
-	private final static int  StartingPositionX = 0;
-	private final static int StartingPositionY = 0;
+	static final int  StartingPositionX = 0;
+	static final int StartingPositionY = 0;
 	static boolean active = true;
 	static boolean FirstStrike = true;
+	static final String Title = "Black Rook (A8)";
 	
 	static void reset(){
 		setActive(true);
@@ -29,7 +30,6 @@ public class BlackRookA8 extends Superclass_BlackRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "Black Rook (A8)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -60,10 +60,12 @@ class BlackRookH8 extends Superclass_BlackRook {
 	static int CurrentPositionX=7;
 	static int CurrentPositionY=0;
 	static int [] CurrentPositionXY = {7,0};
-	private final static int  StartingPositionX = 7;
-	private final static int StartingPositionY = 0;
+	static final int  StartingPositionX = 7;
+	static final int StartingPositionY = 0;
 	static boolean active = true;
 	static boolean FirstStrike = true;
+	static final String Title = "Black Rook (H8)";
+	
 	static void reset(){
 		setActive(true);
 		setFirstStrike(true);
@@ -84,7 +86,6 @@ class BlackRookH8 extends Superclass_BlackRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "Black Rook (H8)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -114,9 +115,11 @@ class BlackRookProm1 extends Superclass_BlackRook {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "Black Rook (Prom1)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -130,7 +133,6 @@ class BlackRookProm1 extends Superclass_BlackRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "Black Rook (Prom1)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -160,9 +162,11 @@ class BlackRookProm2 extends Superclass_BlackRook {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "Black Rook (Prom2)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -176,7 +180,6 @@ class BlackRookProm2 extends Superclass_BlackRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "Black Rook (Prom2)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -206,9 +209,11 @@ class BlackRookProm3 extends Superclass_BlackRook {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "Black Rook (Prom3)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -222,7 +227,6 @@ class BlackRookProm3 extends Superclass_BlackRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "Black Rook (Prom3)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -252,9 +256,11 @@ class BlackRookProm4 extends Superclass_BlackRook {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "Black Rook (Prom4)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -268,7 +274,6 @@ class BlackRookProm4 extends Superclass_BlackRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "Black Rook (Prom4)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -298,9 +303,11 @@ class BlackRookProm5 extends Superclass_BlackRook {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "Black Rook (Prom5)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -314,7 +321,6 @@ class BlackRookProm5 extends Superclass_BlackRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "Black Rook (Prom5)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -344,9 +350,11 @@ class BlackRookProm6 extends Superclass_BlackRook {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "Black Rook (Prom6)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -360,7 +368,6 @@ class BlackRookProm6 extends Superclass_BlackRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "Black Rook (Prom6)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -390,9 +397,11 @@ class BlackRookProm7 extends Superclass_BlackRook {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "Black Rook (Prom7)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -406,7 +415,6 @@ class BlackRookProm7 extends Superclass_BlackRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "Black Rook (Prom7)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -436,9 +444,11 @@ class BlackRookProm8 extends Superclass_BlackRook {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "Black Rook (Prom8)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -452,7 +462,6 @@ class BlackRookProm8 extends Superclass_BlackRook {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "Black Rook (Prom8)";
 		return Title;
 	}
 	static int getCurrentPositionX(){

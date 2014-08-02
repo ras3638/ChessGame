@@ -27,6 +27,8 @@ public class Chess extends JFrame  implements ActionListener {
 	static String CurrentTitle;
 	static String CurrentColor;
 	static int[][] PossibleXY;
+	static boolean ActivateBlackCheck = false;
+	static boolean ActivateWhiteCheck = false;
 
 	static Logger LOGGER = Logger.getLogger(Chess.class.getName());
 	
@@ -816,7 +818,8 @@ public class Chess extends JFrame  implements ActionListener {
 		System.out.println("Welcome to Chess");
 		new Chess(8, 8);
 	    try {
-	       Logging.setup();
+	    	System.setProperty("apple.laf.useScreenMenuBar", "true");
+	    	LoggerUtil.setup();
 	      
 	    }
 	    catch (Throwable e) {
@@ -1300,6 +1303,11 @@ public class Chess extends JFrame  implements ActionListener {
 			BlackPiece.updateKill(input);
 			BlackRookH8.setFirstStrike(false);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Rook (H1)"){
@@ -1315,6 +1323,11 @@ public class Chess extends JFrame  implements ActionListener {
 			WhitePiece.updateKill(input);
 			WhiteRookH1.setFirstStrike(false);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Queen (D1)"){
@@ -1328,19 +1341,13 @@ public class Chess extends JFrame  implements ActionListener {
 			WhiteQueenD1.setCurrentPositionXY(X,Y);
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
-		
-			/* retired
-			if(Superclass_WhiteQueen.ActivateCheck(input)){
-				System.out.println("Black Player in check by Queen");
-			}
-			*/
-			
-		
-			if(Superclass_BlackKing.isBlackKingInCheck(input, "White Queen (D1)")){
-				//this doesnt work. need to reverse ! logic in function isBlackKinginCheck
-				System.out.println("Black King in Check!");
-				}
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, "White Queen (D1)")){
+				System.out.println("Black King in Check by White Queen!");
+				ActivateBlackCheck = true;
+				}
+			
 			return;
 		}
 		if (CurrentTitle == "White Bishop (F1)"){
@@ -1355,6 +1362,12 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
+			
 			return;
 		}
 		if (CurrentTitle == "White Bishop (C1)"){
@@ -1369,6 +1382,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Rook (A1)"){
@@ -1384,6 +1402,10 @@ public class Chess extends JFrame  implements ActionListener {
 			WhitePiece.updateKill(input);
 			WhiteRookA1.setFirstStrike(false);
 			resetBlackEnPassat();
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Pawn (H2)"){
@@ -1414,6 +1436,10 @@ public class Chess extends JFrame  implements ActionListener {
 				}
 			}
 			resetBlackEnPassat();
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;		
 		}
 		if (CurrentTitle == "White Pawn (G2)"){
@@ -1444,6 +1470,10 @@ public class Chess extends JFrame  implements ActionListener {
 				}
 			}
 			resetBlackEnPassat();
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;		
 		}
 		if (CurrentTitle == "White Pawn (F2)"){
@@ -1474,6 +1504,10 @@ public class Chess extends JFrame  implements ActionListener {
 				}
 			}
 			resetBlackEnPassat();
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;		
 		}
 		if (CurrentTitle == "White Pawn (E2)"){
@@ -1504,6 +1538,10 @@ public class Chess extends JFrame  implements ActionListener {
 				}
 			}
 			resetBlackEnPassat();
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;		
 		}
 		if (CurrentTitle == "White Pawn (D2)"){
@@ -1534,6 +1572,10 @@ public class Chess extends JFrame  implements ActionListener {
 				}
 			}
 			resetBlackEnPassat();
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;		
 		}
 		if (CurrentTitle == "White Pawn (C2)"){
@@ -1564,6 +1606,10 @@ public class Chess extends JFrame  implements ActionListener {
 				}
 			}
 			resetBlackEnPassat();
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;		
 		}
 		if (CurrentTitle == "White Pawn (B2)"){
@@ -1594,6 +1640,11 @@ public class Chess extends JFrame  implements ActionListener {
 				}
 			}
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;	
 		}
 		if (CurrentTitle == "White Pawn (A2)"){
@@ -1624,6 +1675,11 @@ public class Chess extends JFrame  implements ActionListener {
 				}
 			}
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White King (E1)"){
@@ -1665,6 +1721,11 @@ public class Chess extends JFrame  implements ActionListener {
 				}
 			}
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Knight (G1)"){
@@ -1679,6 +1740,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;	
 		}
 		if (CurrentTitle == "White Knight (B1)"){
@@ -1693,6 +1759,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;	
 		}
 		if (CurrentTitle == "Black Pawn (H7)"){
@@ -1723,6 +1794,11 @@ public class Chess extends JFrame  implements ActionListener {
 				}
 			}
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Pawn (G7)"){
@@ -1753,6 +1829,11 @@ public class Chess extends JFrame  implements ActionListener {
 				}
 			}
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Pawn (F7)"){
@@ -1783,6 +1864,11 @@ public class Chess extends JFrame  implements ActionListener {
 				}
 			}
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Pawn (E7)"){
@@ -1813,6 +1899,11 @@ public class Chess extends JFrame  implements ActionListener {
 				}
 			}
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Pawn (D7)"){
@@ -1843,6 +1934,11 @@ public class Chess extends JFrame  implements ActionListener {
 				}
 			}
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Pawn (A7)"){
@@ -1873,6 +1969,11 @@ public class Chess extends JFrame  implements ActionListener {
 				}
 			}
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Pawn (B7)"){
@@ -1903,6 +2004,11 @@ public class Chess extends JFrame  implements ActionListener {
 				}
 			}
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black King (E8)"){
@@ -1944,6 +2050,11 @@ public class Chess extends JFrame  implements ActionListener {
 				}
 			}
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		
@@ -1959,6 +2070,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Knight (G8)"){
@@ -1973,6 +2089,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Pawn (C7)"){
@@ -2003,6 +2124,11 @@ public class Chess extends JFrame  implements ActionListener {
 				}
 			}
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 	
@@ -2019,6 +2145,11 @@ public class Chess extends JFrame  implements ActionListener {
 			BlackPiece.updateKill(input);
 			BlackRookA8.setFirstStrike(false);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Bishop (C8)"){
@@ -2033,6 +2164,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 
 		}
@@ -2048,6 +2184,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 
 		}
@@ -2063,9 +2204,14 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
-		
+		//////////////////////////
 		if (CurrentTitle == "White Queen (Prom1)"){
 			LOGGER.log(Level.INFO, "You have set White Queen (Prom1) on to " + Arrays.toString(input));
 			J.setIcon(WhiteQueenProm1.getIcon());
@@ -2078,6 +2224,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Queen (Prom2)"){
@@ -2092,6 +2243,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Queen (Prom3)"){
@@ -2106,6 +2262,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Queen (Prom4)"){
@@ -2120,6 +2281,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Queen (Prom5)"){
@@ -2134,6 +2300,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Queen (Prom6)"){
@@ -2148,6 +2319,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Queen (Prom7)"){
@@ -2162,6 +2338,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Queen (Prom8)"){
@@ -2176,6 +2357,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Rook (Prom1)"){
@@ -2190,6 +2376,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Rook (Prom2)"){
@@ -2204,6 +2395,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Rook (Prom3)"){
@@ -2218,6 +2414,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Rook (Prom4)"){
@@ -2232,6 +2433,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Rook (Prom5)"){
@@ -2246,6 +2452,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Rook (Prom6)"){
@@ -2260,6 +2471,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Rook (Prom7)"){
@@ -2274,6 +2490,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Rook (Prom8)"){
@@ -2288,6 +2509,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Bishop (Prom1)"){
@@ -2302,6 +2528,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Bishop (Prom2)"){
@@ -2316,6 +2547,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Bishop (Prom3)"){
@@ -2330,6 +2566,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Bishop (Prom4)"){
@@ -2344,6 +2585,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Bishop (Prom5)"){
@@ -2358,6 +2604,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Bishop (Prom6)"){
@@ -2372,6 +2623,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Bishop (Prom7)"){
@@ -2386,6 +2642,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Bishop (Prom8)"){
@@ -2400,6 +2661,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Knight (Prom1)"){
@@ -2414,6 +2680,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Knight (Prom2)"){
@@ -2428,6 +2699,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Knight (Prom3)"){
@@ -2442,6 +2718,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Knight (Prom4)"){
@@ -2456,6 +2737,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Knight (Prom5)"){
@@ -2470,6 +2756,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Knight (Prom6)"){
@@ -2484,6 +2775,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Knight (Prom7)"){
@@ -2498,6 +2794,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "White Knight (Prom8)"){
@@ -2512,6 +2813,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			WhitePiece.updateKill(input);
 			resetBlackEnPassat();
+			
+			if(Superclass_BlackKing.isBlackKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("Black King in Check by " + CurrentTitle + "!");
+				ActivateBlackCheck = true;
+			}
 			return;
 		}
 		////////////////////////////////
@@ -2527,6 +2833,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Queen (Prom2)"){
@@ -2541,6 +2852,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Queen (Prom3)"){
@@ -2555,6 +2871,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Queen (Prom4)"){
@@ -2570,6 +2891,11 @@ public class Chess extends JFrame  implements ActionListener {
 			BlackPiece.updateKill(input);
 			//determine if a pawn has reached end of board
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Queen (Prom5)"){
@@ -2584,6 +2910,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Queen (Prom6)"){
@@ -2598,6 +2929,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Queen (Prom7)"){
@@ -2612,6 +2948,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Queen (Prom8)"){
@@ -2626,6 +2967,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Rook (Prom1)"){
@@ -2640,6 +2986,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Rook (Prom2)"){
@@ -2654,6 +3005,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Rook (Prom3)"){
@@ -2669,6 +3025,11 @@ public class Chess extends JFrame  implements ActionListener {
 			BlackPiece.updateKill(input);
 			//determine if a pawn has reached end of board
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Rook (Prom4)"){
@@ -2683,6 +3044,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Rook (Prom5)"){
@@ -2697,6 +3063,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Rook (Prom6)"){
@@ -2711,6 +3082,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Rook (Prom7)"){
@@ -2725,6 +3101,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Rook (Prom8)"){
@@ -2739,6 +3120,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Bishop (Prom1)"){
@@ -2753,6 +3139,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Bishop (Prom2)"){
@@ -2767,6 +3158,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Bishop (Prom3)"){
@@ -2781,6 +3177,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Bishop (Prom4)"){
@@ -2795,6 +3196,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Bishop (Prom5)"){
@@ -2809,6 +3215,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Bishop (Prom6)"){
@@ -2823,6 +3234,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Bishop (Prom7)"){
@@ -2837,6 +3253,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Bishop (Prom8)"){
@@ -2851,6 +3272,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Knight (Prom1)"){
@@ -2865,6 +3291,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Knight (Prom2)"){
@@ -2879,6 +3310,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Knight (Prom3)"){
@@ -2893,6 +3329,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Knight (Prom4)"){
@@ -2907,6 +3348,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Knight (Prom5)"){
@@ -2921,6 +3367,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Knight (Prom6)"){
@@ -2935,6 +3386,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Knight (Prom7)"){
@@ -2949,6 +3405,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 		if (CurrentTitle == "Black Knight (Prom8)"){
@@ -2962,6 +3423,11 @@ public class Chess extends JFrame  implements ActionListener {
 			//determine if a kill has been made. if so then have to update piece location
 			BlackPiece.updateKill(input);
 			resetWhiteEnPassat();
+			
+			if(Superclass_WhiteKing.isWhiteKingInCheck_Set(input, CurrentTitle)){
+				System.out.println("White King in Check by " + CurrentTitle + "!");
+				ActivateWhiteCheck = true;
+			}
 			return;
 		}
 	}
@@ -3996,7 +4462,7 @@ public class Chess extends JFrame  implements ActionListener {
 	static void Engine(int ComX, int ComY,int[] ComXY, JButton b){
 		
 		CurrentColor = getColor(ComX,ComY);
-
+		
 		if (Highlighted == false && CurrentColor == "White"){
 			if (WhiteTurn == true){
 				final long startWhiteGrabTime = System.currentTimeMillis();
@@ -4052,6 +4518,7 @@ public class Chess extends JFrame  implements ActionListener {
 							dehighlightButton(ComingFrom);	
 							break;
 							}
+						ActivateWhiteCheck = false;
 						final long endCheckTime = System.currentTimeMillis();
 						System.out.println("Total white set piece time: " + (endCheckTime - startCheckTime));
 					}
@@ -4064,6 +4531,7 @@ public class Chess extends JFrame  implements ActionListener {
 								dehighlightButton(ComingFrom);	
 								break;
 							}
+							ActivateBlackCheck = false;
 							final long endCheckTime = System.currentTimeMillis();
 							System.out.println("Total black set piece time: " + (endCheckTime - startCheckTime));			
 					}
@@ -4072,6 +4540,25 @@ public class Chess extends JFrame  implements ActionListener {
 					
 					setPiece(b,ComXY[0],ComXY[1]);
 					LOGGER.log(Level.FINE,"You have done a valid move");
+					
+					// have to look for checkmate here
+					final long startCheckMateTime = System.currentTimeMillis();
+					if(ActivateBlackCheck){
+						
+						
+						if(Superclass_BlackKing.isBlackKingInCheckMate()){
+							System.out.println("Black King in Checkmate. White wins!");
+						}
+					}
+					
+					if(ActivateWhiteCheck){
+						
+						if(Superclass_WhiteKing.isWhiteKingInCheckMate()){
+							System.out.println("White King in Checkmate. Black wins!");
+						}	
+					}
+					final long endCheckMateTime = System.currentTimeMillis();
+					System.out.println("Total checkmate set piece time: " + (endCheckMateTime - startCheckMateTime));	
 					break;  
 				}		
 			}		

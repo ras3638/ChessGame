@@ -23,6 +23,9 @@ public class Superclass_BlackBishop extends BlackPiece {
 			MultiArray=searcherTopRightTiles(MultiArray,CurrentX,CurrentY); 
 			MultiArray=searcherBottomLeftTiles(MultiArray,CurrentX,CurrentY);
 			MultiArray=searcherBottomRightTiles(MultiArray,CurrentX,CurrentY); 	
+			
+			MultiArray = Piece.arrayConverter(MultiArray);
+			
 			return MultiArray;
 	}
 
@@ -60,7 +63,7 @@ public class Superclass_BlackBishop extends BlackPiece {
 
 			for(int i = 0 ; i < MultiArray.length ; i++) {
 				if(Arrays.equals(MultiArray[i], NewXY)){
-					System.out.println("Black Bishop threatining check from the bottom right");
+					//System.out.println("Black Bishop threatining check from the bottom right");
 					MultiArray[i]=null;	
 					break outerloop_TopLeftTiles;  
 				}		    			  
@@ -94,12 +97,12 @@ public class Superclass_BlackBishop extends BlackPiece {
 			}
 			if(Arrays.equals(NewXY,ComXY) && CurrentTitle != "White King (E1)"){
 				//this if statement is necessary to allow pieces to block bishop's line of sight
-				//System.out.println("Outerbreak3.3");
+				////System.out.println("Outerbreak3.3");
 				break outerloop_TopRightTiles;
 			}
 			for(int i = 0 ; i < MultiArray.length ; i++) {
 				if(Arrays.equals(MultiArray[i], NewXY)){
-					System.out.println("Black Bishop threatining check from the bottom left");
+					//System.out.println("Black Bishop threatining check from the bottom left");
 					MultiArray[i]=null;	
 					break outerloop_TopRightTiles;  
 				}		    			  
@@ -122,7 +125,7 @@ public class Superclass_BlackBishop extends BlackPiece {
 			for(int i = 0 ; i < aggregateWhitesEXKing(CurrentTitle,ComXY).length ; i++) {
 				int[] Coordinate = aggregateWhitesEXKing(CurrentTitle,ComXY)[i];
 				if(Arrays.equals(Coordinate, NewXY)){
-					//System.out.println("Outerbreak3.1");
+					////System.out.println("Outerbreak3.1");
 					break outerloop_BottomLeftTiles;
 				}		    			  
 			}
@@ -145,7 +148,7 @@ public class Superclass_BlackBishop extends BlackPiece {
 
 			for(int i = 0 ; i < MultiArray.length ; i++) {
 				if(Arrays.equals(MultiArray[i], NewXY)){
-					System.out.println("Black Bishop threatining check from the top right");
+					//System.out.println("Black Bishop threatining check from the top right");
 					MultiArray[i]=null;	
 					break outerloop_BottomLeftTiles;  
 				}		    			  
@@ -184,7 +187,7 @@ public class Superclass_BlackBishop extends BlackPiece {
 			}
 			for(int i = 0 ; i < MultiArray.length ; i++) {
 				if(Arrays.equals(MultiArray[i], NewXY)){
-					System.out.println("Black Bishop threatining check from the top left");
+					//System.out.println("Black Bishop threatining check from the top left");
 					MultiArray[i]=null;	
 					break outerloop_BottomRightTiles;
 				}		    			  
@@ -206,7 +209,7 @@ public class Superclass_BlackBishop extends BlackPiece {
 			for(int i = 0 ; i < aggregateWhites().length ; i++) {
 				int[] Coordinate = aggregateWhites()[i];
 				if(Arrays.equals(Coordinate, NewXY)){
-					System.out.println("We have found a valid white piece to kill " + j + " tiles top left of this bishop");
+					//System.out.println("We have found a valid white piece to kill " + j + " tiles top left of this bishop");
 					MultiArray[j-1]=NewXY;
 					return MultiArray;
 				}		    			  
@@ -215,7 +218,7 @@ public class Superclass_BlackBishop extends BlackPiece {
 				int[] Coordinate = aggregateBlacks()[i];
 				
 				if(Arrays.equals(Coordinate, NewXY)){
-					System.out.println("We have found a black piece " + j + " tiles top left of this bishop");
+					//System.out.println("We have found a black piece " + j + " tiles top left of this bishop");
 					return MultiArray;
 				}		
 			
@@ -235,7 +238,7 @@ public class Superclass_BlackBishop extends BlackPiece {
 			for(int i = 0 ; i < aggregateWhites().length ; i++) {
 				int[] Coordinate = aggregateWhites()[i];
 				if(Arrays.equals(Coordinate, NewXY)){
-					System.out.println("We have found a valid white piece to kill " + j + " tiles top right of this bishop");
+					//System.out.println("We have found a valid white piece to kill " + j + " tiles top right of this bishop");
 					MultiArray[j+6]=NewXY;
 					return MultiArray;
 				}		    			  
@@ -244,7 +247,7 @@ public class Superclass_BlackBishop extends BlackPiece {
 			for(int i = 0 ; i < aggregateBlacks().length ; i++) {
 				int[] Coordinate = aggregateBlacks()[i];
 				if(Arrays.equals(Coordinate, NewXY)){
-					System.out.println("We have found a black piece " + j + " tiles top right of this bishop");
+					//System.out.println("We have found a black piece " + j + " tiles top right of this bishop");
 					return MultiArray;
 					}		
 				}
@@ -263,7 +266,7 @@ public class Superclass_BlackBishop extends BlackPiece {
 			for(int i = 0 ; i < aggregateWhites().length ; i++) {
 				int[] Coordinate = aggregateWhites()[i];
 				if(Arrays.equals(Coordinate, NewXY)){
-					System.out.println("We have found a valid white piece to kill " + j + " tiles bottom left of this bishop");
+					//System.out.println("We have found a valid white piece to kill " + j + " tiles bottom left of this bishop");
 					MultiArray[j+13]=NewXY;
 					return MultiArray;
 				}		    			  
@@ -272,7 +275,7 @@ public class Superclass_BlackBishop extends BlackPiece {
 			for(int i = 0 ; i < aggregateBlacks().length ; i++) {
 				int[] Coordinate = aggregateBlacks()[i];
 				if(Arrays.equals(Coordinate, NewXY)){
-					System.out.println("We have found a black piece " + j + " tiles bottom left of this bishop");
+					//System.out.println("We have found a black piece " + j + " tiles bottom left of this bishop");
 					return MultiArray;
 					}		
 				}
@@ -291,7 +294,7 @@ public class Superclass_BlackBishop extends BlackPiece {
 			for(int i = 0 ; i < aggregateWhites().length ; i++) {
 				int[] Coordinate = aggregateWhites()[i];
 				if(Arrays.equals(Coordinate, NewXY)){
-					System.out.println("We have found a valid white piece to kill " + j + " tiles bottom right of this bishop");
+					//System.out.println("We have found a valid white piece to kill " + j + " tiles bottom right of this bishop");
 					MultiArray[j+20]=NewXY;
 					return MultiArray;
 				}		    			  
@@ -300,7 +303,7 @@ public class Superclass_BlackBishop extends BlackPiece {
 			for(int i = 0 ; i < aggregateBlacks().length ; i++) {
 				int[] Coordinate = aggregateBlacks()[i];
 				if(Arrays.equals(Coordinate, NewXY)){
-					System.out.println("We have found a black piece " + j + " tiles bottom right of this bishop");
+					//System.out.println("We have found a black piece " + j + " tiles bottom right of this bishop");
 					return MultiArray;
 					}		
 				}

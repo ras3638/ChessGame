@@ -8,6 +8,8 @@ public class BlackKingE8 extends Superclass_BlackKing {
 	static final int StartingPositionY = 0;
 	static boolean active = true;
 	static boolean FirstStrike = true;
+	static final String Title = "Black King (E8)";
+	
 	static void reset(){
 		setFirstStrike(true);
 		setActive(true);
@@ -28,7 +30,6 @@ public class BlackKingE8 extends Superclass_BlackKing {
 		return active;
 	}	
 	static String getTitle(){
-		String Title = "Black King (E8)";
 		return Title;
 	}
 	static int getCurrentPositionX(){

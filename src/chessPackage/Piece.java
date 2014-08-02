@@ -1,5 +1,7 @@
 package chessPackage;
 
+import java.util.ArrayList;
+
 public class Piece {
 	static int[][] aggregateBlacks(){
 		
@@ -121,5 +123,20 @@ public class Piece {
 
 		
 		return WhiteAggregate;
+	}
+	public static int[][] arrayConverter(int[][] m) {
+		//reduces the size of int [][] by removing nulls and out of reach board cells
+		ArrayList<int []> EM = new ArrayList<int []>();
+		
+		for(int i = 0 ; i < m.length ; i++){
+			if(m[i] != null){
+				if(m[i][0] > -1 && m[i][0] < 8 && m[i][1] > -1 && m[i][1] < 8)
+					EM.add(m[i]);
+			}
+		}
+		
+		int [][]MultiArray = EM.toArray(new int [][] {});
+		
+		return MultiArray;
 	}
 }

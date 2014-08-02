@@ -17,7 +17,7 @@ class StdoutConsoleHandler extends ConsoleHandler {
 	  }
 	}
 
-public class Logging {
+public class LoggerUtil {
 
 	   static public void setup() throws IOException {
 

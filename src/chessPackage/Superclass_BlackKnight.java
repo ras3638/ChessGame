@@ -28,6 +28,8 @@ public class Superclass_BlackKnight extends BlackPiece {
 			MultiArray= killSearcher(MultiArray,CurrentX,CurrentY); //XY1,XY2,XY3...XY8
 			MultiArray=searcherOneTile(MultiArray,CurrentX,CurrentY); 
 			
+			MultiArray = Piece.arrayConverter(MultiArray);
+			
 			return MultiArray;
 	}
 
@@ -51,7 +53,7 @@ public class Superclass_BlackKnight extends BlackPiece {
 		for(int i = 0 ; i < aggregateWhites().length ; i++) {
 			int[] Coordinate = aggregateWhites()[i];
 			if(Arrays.equals(Coordinate, NewXY1)){
-				System.out.println("We have found a valid white piece to kill");
+				//System.out.println("We have found a valid white piece to kill");
 				MultiArray[0]=NewXY1;
 				break;  
 			}		    			  
@@ -64,7 +66,7 @@ public class Superclass_BlackKnight extends BlackPiece {
 		for(int i = 0 ; i < aggregateWhites().length ; i++) {
 			int[] Coordinate = aggregateWhites()[i];
 			if(Arrays.equals(Coordinate,NewXY2)){
-				System.out.println("We have found a valid white piece to kill");
+				//System.out.println("We have found a valid white piece to kill");
 				MultiArray[1]=NewXY2;
 				break;  
 			}		    			  
@@ -76,7 +78,7 @@ public class Superclass_BlackKnight extends BlackPiece {
 		for(int i = 0 ; i < aggregateWhites().length ; i++) {
 			int[] Coordinate = aggregateWhites()[i];
 			if(Arrays.equals(Coordinate,NewXY3)){
-				System.out.println("We have found a valid white piece to kill");
+				//System.out.println("We have found a valid white piece to kill");
 				MultiArray[2]=NewXY3;
 				break;  
 			}		    			  
@@ -88,7 +90,7 @@ public class Superclass_BlackKnight extends BlackPiece {
 		for(int i = 0 ; i < aggregateWhites().length ; i++) {
 			int[] Coordinate = aggregateWhites()[i];
 			if(Arrays.equals(Coordinate,NewXY4)){
-				System.out.println("We have found a valid white piece to kill");
+				//System.out.println("We have found a valid white piece to kill");
 				MultiArray[3]=NewXY4;
 				break;  
 			}		    			  
@@ -100,7 +102,7 @@ public class Superclass_BlackKnight extends BlackPiece {
 		for(int i = 0 ; i < aggregateWhites().length ; i++) {
 			int[] Coordinate = aggregateWhites()[i];
 			if(Arrays.equals(Coordinate,NewXY5)){
-				System.out.println("We have found a valid white piece to kill");
+				//System.out.println("We have found a valid white piece to kill");
 				MultiArray[4]=NewXY5;
 				break;  
 			}		    			  
@@ -112,7 +114,7 @@ public class Superclass_BlackKnight extends BlackPiece {
 		for(int i = 0 ; i < aggregateWhites().length ; i++) {
 			int[] Coordinate = aggregateWhites()[i];
 			if(Arrays.equals(Coordinate,NewXY6)){
-				System.out.println("We have found a valid white piece to kill");
+				//System.out.println("We have found a valid white piece to kill");
 				MultiArray[5]=NewXY6;
 				break;  
 			}		    			  
@@ -124,7 +126,7 @@ public class Superclass_BlackKnight extends BlackPiece {
 		for(int i = 0 ; i < aggregateWhites().length ; i++) {
 			int[] Coordinate = aggregateWhites()[i];
 			if(Arrays.equals(Coordinate,NewXY7)){
-				System.out.println("We have found a valid white piece to kill");
+				//System.out.println("We have found a valid white piece to kill");
 				MultiArray[6]=NewXY7;
 				break;  
 			}		    			  
@@ -136,7 +138,7 @@ public class Superclass_BlackKnight extends BlackPiece {
 		for(int i = 0 ; i < aggregateWhites().length ; i++) {
 			int[] Coordinate = aggregateWhites()[i];
 			if(Arrays.equals(Coordinate,NewXY8)){
-				System.out.println("We have found a valid white piece to kill");
+				//System.out.println("We have found a valid white piece to kill");
 				MultiArray[7]=NewXY8;
 				break;  
 			}		    			  
@@ -196,7 +198,7 @@ public class Superclass_BlackKnight extends BlackPiece {
 		for(int i = 0 ; i < aggregateBlacks().length ; i++) {
 			int[] Coordinate = aggregateBlacks()[i];
 			if(Arrays.equals(Coordinate, NewXY)){
-				System.out.println("We have found a black piece interrupting this knight");
+				//System.out.println("We have found a black piece interrupting this knight");
 				return MultiArray;
 				//gotta exit out of this function
 
@@ -223,7 +225,7 @@ public class Superclass_BlackKnight extends BlackPiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i], NewXY1)){
-				System.out.println("Black Knight threatining check");
+				//System.out.println("Black Knight threatining check");
 				MultiArray[i]=null;
 				
 				break;  
@@ -237,7 +239,7 @@ public class Superclass_BlackKnight extends BlackPiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY2)){
-				System.out.println("Black Knight threatining check");
+				//System.out.println("Black Knight threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -249,7 +251,7 @@ public class Superclass_BlackKnight extends BlackPiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY3)){
-				System.out.println("Black Knight threatining check");
+				//System.out.println("Black Knight threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -260,7 +262,7 @@ public class Superclass_BlackKnight extends BlackPiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY4)){
-				System.out.println("Black Knight threatining check");
+				//System.out.println("Black Knight threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -271,7 +273,7 @@ public class Superclass_BlackKnight extends BlackPiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY5)){
-				System.out.println("Black Knight threatining check");
+				//System.out.println("Black Knight threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -283,7 +285,7 @@ public class Superclass_BlackKnight extends BlackPiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY6)){
-				System.out.println("Black Knight threatining check");
+				//System.out.println("Black Knight threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -296,7 +298,7 @@ public class Superclass_BlackKnight extends BlackPiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY7)){
-				System.out.println("Black Knight threatining check");
+				//System.out.println("Black Knight threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -308,7 +310,7 @@ public class Superclass_BlackKnight extends BlackPiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY8)){
-				System.out.println("Black Knight threatining check");
+				//System.out.println("Black Knight threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  

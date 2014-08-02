@@ -9,6 +9,8 @@ public class WhitePawnA2 extends Superclass_WhitePawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
+	static final String Title = "White Pawn (A2)";
+	
 	static void reset(){
 		setActive(true);
 		setFirstStrike(true);
@@ -29,7 +31,6 @@ public class WhitePawnA2 extends Superclass_WhitePawn {
 	static boolean getEnPassant(){
 		return EnPassant;
 	}	
-	
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -37,7 +38,6 @@ public class WhitePawnA2 extends Superclass_WhitePawn {
 		return active;
 	}	
 	static String getTitle(){
-		String Title = "White Pawn (A2)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -72,6 +72,8 @@ class WhitePawnB2 extends Superclass_WhitePawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
+	static final String Title = "White Pawn (B2)";
+	
 	static void reset(){
 		setActive(true);
 		setFirstStrike(true);
@@ -92,7 +94,6 @@ class WhitePawnB2 extends Superclass_WhitePawn {
 	static boolean getEnPassant(){
 		return EnPassant;
 	}	
-	
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -100,7 +101,6 @@ class WhitePawnB2 extends Superclass_WhitePawn {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Pawn (B2)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -134,6 +134,8 @@ class WhitePawnC2 extends Superclass_WhitePawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
+	static final String Title = "White Pawn (C2)";
+	
 	static void reset(){
 		setActive(true);
 		setFirstStrike(true);
@@ -153,8 +155,7 @@ class WhitePawnC2 extends Superclass_WhitePawn {
 	}
 	static boolean getEnPassant(){
 		return EnPassant;
-	}	
-	
+	}		
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -162,7 +163,6 @@ class WhitePawnC2 extends Superclass_WhitePawn {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Pawn (C2)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -196,6 +196,8 @@ class WhitePawnD2 extends Superclass_WhitePawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
+	static final String Title = "White Pawn (D2)";
+	
 	static void reset(){
 		setActive(true);
 		setFirstStrike(true);
@@ -216,7 +218,6 @@ class WhitePawnD2 extends Superclass_WhitePawn {
 	static boolean getEnPassant(){
 		return EnPassant;
 	}	
-	
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -224,7 +225,6 @@ class WhitePawnD2 extends Superclass_WhitePawn {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Pawn (D2)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -258,6 +258,8 @@ class WhitePawnE2 extends Superclass_WhitePawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
+	static final String Title = "White Pawn (E2)";
+	
 	static void reset(){
 		setActive(true);
 		setFirstStrike(true);
@@ -278,7 +280,6 @@ class WhitePawnE2 extends Superclass_WhitePawn {
 	static boolean getEnPassant(){
 		return EnPassant;
 	}	
-	
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -286,7 +287,6 @@ class WhitePawnE2 extends Superclass_WhitePawn {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Pawn (E2)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -320,6 +320,8 @@ class WhitePawnF2 extends Superclass_WhitePawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
+	static final String Title = "White Pawn (F2)";
+	
 	static void reset(){
 		setActive(true);
 		setFirstStrike(true);
@@ -340,7 +342,6 @@ class WhitePawnF2 extends Superclass_WhitePawn {
 	static boolean getEnPassant(){
 		return EnPassant;
 	}	
-	
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -348,7 +349,6 @@ class WhitePawnF2 extends Superclass_WhitePawn {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Pawn (F2)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -382,6 +382,8 @@ class WhitePawnG2 extends Superclass_WhitePawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
+	static final String Title = "White Pawn (G2)";
+	
 	static void reset(){
 		setActive(true);
 		setFirstStrike(true);
@@ -402,7 +404,6 @@ class WhitePawnG2 extends Superclass_WhitePawn {
 	static boolean getEnPassant(){
 		return EnPassant;
 	}	
-	
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -410,7 +411,6 @@ class WhitePawnG2 extends Superclass_WhitePawn {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Pawn (G2)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -444,6 +444,8 @@ class WhitePawnH2 extends Superclass_WhitePawn {
 	static boolean active = true;
 	static boolean EnPassant = false;
 	static boolean FirstStrike = true;
+	static final String Title = "White Pawn (H2)";
+	
 	static void reset(){
 		setActive(true);
 		setFirstStrike(true);
@@ -464,7 +466,6 @@ class WhitePawnH2 extends Superclass_WhitePawn {
 	static boolean getEnPassant(){
 		return EnPassant;
 	}	
-	
 	static void setActive(boolean a){
 		active = a;
 	}
@@ -472,7 +473,6 @@ class WhitePawnH2 extends Superclass_WhitePawn {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "White Pawn (H2)";
 		return Title;
 	}
 	static int getCurrentPositionX(){

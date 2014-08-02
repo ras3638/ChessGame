@@ -4,9 +4,11 @@ public class BlackQueenD8 extends Superclass_BlackQueen {
 	static int CurrentPositionX=3;
 	static int CurrentPositionY=0;
 	static int [] CurrentPositionXY = {3,0};
-	private final static int  StartingPositionX = 3;
-	private final static int StartingPositionY = 0;
+	static final int  StartingPositionX = 3;
+	static final int StartingPositionY = 0;
 	static boolean active = true;
+	static final String Title = "Black Queen (D8)";
+	
 	static void reset(){
 		setActive(true);
 		setCurrentPositionX(StartingPositionX);
@@ -20,7 +22,6 @@ public class BlackQueenD8 extends Superclass_BlackQueen {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "Black Queen (D8)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -49,9 +50,11 @@ class BlackQueenProm1 extends Superclass_BlackQueen {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "Black Queen (Prom1)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -65,7 +68,6 @@ class BlackQueenProm1 extends Superclass_BlackQueen {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "Black Queen (Prom1)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -94,9 +96,11 @@ class BlackQueenProm2 extends Superclass_BlackQueen {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "Black Queen (Prom2)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -110,7 +114,6 @@ class BlackQueenProm2 extends Superclass_BlackQueen {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "Black Queen (Prom2)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -139,9 +142,11 @@ class BlackQueenProm3 extends Superclass_BlackQueen {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "Black Queen (Prom3)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -155,7 +160,6 @@ class BlackQueenProm3 extends Superclass_BlackQueen {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "Black Queen (Prom3)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -184,9 +188,11 @@ class BlackQueenProm4 extends Superclass_BlackQueen {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "Black Queen (Prom4)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -200,7 +206,6 @@ class BlackQueenProm4 extends Superclass_BlackQueen {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "Black Queen (Prom4)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -229,9 +234,11 @@ class BlackQueenProm5 extends Superclass_BlackQueen {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "Black Queen (Prom5)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -245,7 +252,6 @@ class BlackQueenProm5 extends Superclass_BlackQueen {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "Black Queen (Prom5)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -274,9 +280,11 @@ class BlackQueenProm6 extends Superclass_BlackQueen {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "Black Queen (Prom6)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -290,7 +298,6 @@ class BlackQueenProm6 extends Superclass_BlackQueen {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "Black Queen (Prom6)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -319,9 +326,11 @@ class BlackQueenProm7 extends Superclass_BlackQueen {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final  String Title = "Black Queen (Prom7)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -335,7 +344,6 @@ class BlackQueenProm7 extends Superclass_BlackQueen {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "Black Queen (Prom7)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
@@ -364,9 +372,11 @@ class BlackQueenProm8 extends Superclass_BlackQueen {
 	static int CurrentPositionX=-10;
 	static int CurrentPositionY=-10;
 	static int [] CurrentPositionXY = {-10,-10};
-	private final static int  StartingPositionX = -10;
-	private final static int StartingPositionY = -10;
+	static final int  StartingPositionX = -10;
+	static final int StartingPositionY = -10;
 	static boolean active = false;
+	static final String Title = "Black Queen (Prom8)";
+	
 	static void reset(){
 		setActive(false);
 		setCurrentPositionX(StartingPositionX);
@@ -380,7 +390,6 @@ class BlackQueenProm8 extends Superclass_BlackQueen {
 		return active;
 	}
 	static String getTitle(){
-		String Title = "Black Queen (Prom8)";
 		return Title;
 	}
 	static int getCurrentPositionX(){
