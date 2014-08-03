@@ -1,5 +1,7 @@
 package chessPackage;
 
+import java.util.ArrayList;
+
 public class WhiteBishopC1 extends Superclass_WhiteBishop {
 	static int CurrentPositionX=2;
 	static int CurrentPositionY=7;
@@ -42,7 +44,7 @@ public class WhiteBishopC1 extends Superclass_WhiteBishop {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
 	}
 }
@@ -88,7 +90,7 @@ class WhiteBishopF1 extends Superclass_WhiteBishop {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
 	}
 }
@@ -134,7 +136,7 @@ class WhiteBishopProm1 extends Superclass_WhiteBishop {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
 	}
 }
@@ -180,7 +182,7 @@ class WhiteBishopProm2 extends Superclass_WhiteBishop {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
 	}
 }
@@ -226,7 +228,7 @@ class WhiteBishopProm3 extends Superclass_WhiteBishop {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
 	}
 }
@@ -272,7 +274,7 @@ class WhiteBishopProm4 extends Superclass_WhiteBishop {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
 	}
 }
@@ -318,7 +320,7 @@ class WhiteBishopProm5 extends Superclass_WhiteBishop {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
 	}
 }
@@ -364,7 +366,7 @@ class WhiteBishopProm6 extends Superclass_WhiteBishop {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
 	}
 }
@@ -410,7 +412,7 @@ class WhiteBishopProm7 extends Superclass_WhiteBishop {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
 	}
 }
@@ -456,7 +458,7 @@ class WhiteBishopProm8 extends Superclass_WhiteBishop {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
 	}
 }

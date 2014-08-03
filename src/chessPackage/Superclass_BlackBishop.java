@@ -1,6 +1,7 @@
 package chessPackage;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.ImageIcon;
@@ -12,21 +13,17 @@ public class Superclass_BlackBishop extends BlackPiece {
 		return Black_Bishop_Icon;
 	}
 	
-	static int[][] movementHandler(int CurrentX, int CurrentY,int StartingPositionX, int StartingPositionY){
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY,int StartingPositionX, int StartingPositionY){
 		
-			int [][]MultiArray = new int[28][2];
-			for(int i = 0 ; i < MultiArray.length ; i++) {
-				MultiArray[i]=null;
-			}
+		ArrayList<int[]> MoveList = new ArrayList<int[]>();
 
-			MultiArray=searcherTopLeftTiles(MultiArray,CurrentX,CurrentY); 
-			MultiArray=searcherTopRightTiles(MultiArray,CurrentX,CurrentY); 
-			MultiArray=searcherBottomLeftTiles(MultiArray,CurrentX,CurrentY);
-			MultiArray=searcherBottomRightTiles(MultiArray,CurrentX,CurrentY); 	
-			
-			MultiArray = Piece.arrayConverter(MultiArray);
-			
-			return MultiArray;
+		MoveList=searcherTopLeftTiles(MoveList,CurrentX,CurrentY); 
+		MoveList=searcherTopRightTiles(MoveList,CurrentX,CurrentY); 
+		MoveList=searcherBottomLeftTiles(MoveList,CurrentX,CurrentY);
+		MoveList=searcherBottomRightTiles(MoveList,CurrentX,CurrentY);
+
+		
+		return MoveList;
 	}
 
 	static int [][] checkPreventer( int[][]MultiArray,int CurrentX, int CurrentY, int[] ComXY, String CurrentTitle){
@@ -50,11 +47,11 @@ public class Superclass_BlackBishop extends BlackPiece {
 				}		    			  
 			}
 	
-			for(int i = 0 ; i < aggregateBlacksForCheck(CurrentTitle,ComXY).length ; i++) {
-				int[] Coordinate = aggregateBlacksForCheck(CurrentTitle,ComXY)[i];
+			for(int[] i: aggregateBlacksForCheck(CurrentTitle, ComXY)){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
 					break outerloop_TopLeftTiles;
-				}		
+				}	 
 			}
 			if(Arrays.equals(NewXY,ComXY) && CurrentTitle != "White King (E1)"){
 				//this if statement is necessary to allow pieces to block bishop's line of sight
@@ -89,11 +86,12 @@ public class Superclass_BlackBishop extends BlackPiece {
 				}		    			  
 			}
 			
-			for(int i = 0 ; i < aggregateBlacksForCheck(CurrentTitle,ComXY).length ; i++) {
-				int[] Coordinate = aggregateBlacksForCheck(CurrentTitle,ComXY)[i];
+
+			for(int[] i: aggregateBlacksForCheck(CurrentTitle, ComXY)){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
 					break outerloop_TopRightTiles;
-				}		
+				}	 
 			}
 			if(Arrays.equals(NewXY,ComXY) && CurrentTitle != "White King (E1)"){
 				//this if statement is necessary to allow pieces to block bishop's line of sight
@@ -131,14 +129,12 @@ public class Superclass_BlackBishop extends BlackPiece {
 			}
 		
 			
-			for(int i = 0 ; i < aggregateBlacksForCheck(CurrentTitle,ComXY).length ; i++) {
-				int[] Coordinate = aggregateBlacksForCheck(CurrentTitle,ComXY)[i];
-	
+
+			for(int[] i: aggregateBlacksForCheck(CurrentTitle, ComXY)){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
-				
 					break outerloop_BottomLeftTiles;
-				}		
-			
+				}				 
 			}
 			if(Arrays.equals(NewXY,ComXY) && CurrentTitle != "White King (E1)"){
 				//this if statement is necessary to allow pieces to block bishop's line of sight
@@ -174,13 +170,13 @@ public class Superclass_BlackBishop extends BlackPiece {
 			}
 			
 			
-			for(int i = 0 ; i < aggregateBlacksForCheck(CurrentTitle,ComXY).length ; i++) {
-				int[] Coordinate = aggregateBlacksForCheck(CurrentTitle,ComXY)[i];
+
+			for(int[] i: aggregateBlacksForCheck(CurrentTitle, ComXY)){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
 					break outerloop_BottomRightTiles;
-				}		
+				}				 
 			}
-	
 			if(Arrays.equals(NewXY,ComXY) && CurrentTitle != "White King (E1)"){
 				//this if statement is necessary to allow pieces to block bishop's line of sight
 				break outerloop_BottomRightTiles;
@@ -198,7 +194,7 @@ public class Superclass_BlackBishop extends BlackPiece {
 	}
 
 
-	static int [][] searcherTopLeftTiles(int[][]MultiArray,int CurrentX, int CurrentY){
+	static ArrayList<int[]> searcherTopLeftTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
 		//this function looks for black pieces blocking this bishop top left tiles
 		
 		for(int j = 1; j <=7 ; j++){
@@ -206,28 +202,30 @@ public class Superclass_BlackBishop extends BlackPiece {
 			NewXY[0] = CurrentX - j;
 			NewXY[1] = CurrentY - j;
 			
-			for(int i = 0 ; i < aggregateWhites().length ; i++) {
-				int[] Coordinate = aggregateWhites()[i];
+			if(NewXY[0] < 0 || NewXY[1] < 0){
+				return MoveList;
+			}
+			for(int[] i: aggregateWhites()){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
 					//System.out.println("We have found a valid white piece to kill " + j + " tiles top left of this bishop");
-					MultiArray[j-1]=NewXY;
-					return MultiArray;
-				}		    			  
+					MoveList.add(NewXY);
+					return MoveList;
+				}				 
 			}
-			for(int i = 0 ; i < aggregateBlacks().length ; i++) {
-				int[] Coordinate = aggregateBlacks()[i];
-				
+
+			for(int [] i: aggregateBlacks()){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
 					//System.out.println("We have found a black piece " + j + " tiles top left of this bishop");
-					return MultiArray;
-				}		
-			
+					return MoveList;
+				}	
 			}
-			MultiArray[j-1]=NewXY;
+			MoveList.add(NewXY);
 		}
-		return MultiArray;
+		return MoveList;
 	}	
-	static int [][] searcherTopRightTiles(int[][]MultiArray,int CurrentX, int CurrentY){
+	static ArrayList<int[]> searcherTopRightTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
 		//this function looks for black pieces blocking this bishop top right tiles
 		
 		for(int j = 1; j <=7 ; j++){
@@ -235,27 +233,30 @@ public class Superclass_BlackBishop extends BlackPiece {
 			NewXY[0] = CurrentX + j;
 			NewXY[1] = CurrentY - j;
 			
-			for(int i = 0 ; i < aggregateWhites().length ; i++) {
-				int[] Coordinate = aggregateWhites()[i];
+			if(NewXY[0] > 7 || NewXY[1] < 0){
+				return MoveList;
+			}
+			for(int[] i: aggregateWhites()){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
 					//System.out.println("We have found a valid white piece to kill " + j + " tiles top right of this bishop");
-					MultiArray[j+6]=NewXY;
-					return MultiArray;
-				}		    			  
+					MoveList.add(NewXY);
+					return MoveList;
+				}			 
 			}
-			
-			for(int i = 0 ; i < aggregateBlacks().length ; i++) {
-				int[] Coordinate = aggregateBlacks()[i];
+
+			for(int [] i: aggregateBlacks()){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
 					//System.out.println("We have found a black piece " + j + " tiles top right of this bishop");
-					return MultiArray;
-					}		
-				}
-			MultiArray[j+6]=NewXY;
+					return MoveList;
+				}	
 			}
-		return MultiArray;
+			MoveList.add(NewXY);
+			}
+		return MoveList;
 		}
-	static int [][] searcherBottomLeftTiles(int[][]MultiArray,int CurrentX, int CurrentY){
+	static ArrayList<int[]> searcherBottomLeftTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
 		//this function looks for black pieces blocking this bishop bottom left tiles
 		
 		for(int j = 1; j <=7 ; j++){
@@ -263,27 +264,31 @@ public class Superclass_BlackBishop extends BlackPiece {
 			NewXY[0] = CurrentX - j;
 			NewXY[1] = CurrentY + j;
 			
-			for(int i = 0 ; i < aggregateWhites().length ; i++) {
-				int[] Coordinate = aggregateWhites()[i];
+			if(NewXY[0] < 0 || NewXY[1] > 7){
+				return MoveList;
+			}
+			
+			for(int[] i: aggregateWhites()){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
 					//System.out.println("We have found a valid white piece to kill " + j + " tiles bottom left of this bishop");
-					MultiArray[j+13]=NewXY;
-					return MultiArray;
-				}		    			  
+					MoveList.add(NewXY);
+					return MoveList;
+				}			 
 			}
 
-			for(int i = 0 ; i < aggregateBlacks().length ; i++) {
-				int[] Coordinate = aggregateBlacks()[i];
+			for(int [] i: aggregateBlacks()){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
 					//System.out.println("We have found a black piece " + j + " tiles bottom left of this bishop");
-					return MultiArray;
-					}		
-				}
-			MultiArray[j+13]=NewXY;
+					return MoveList;
+				}	
 			}
-		return MultiArray;
+			MoveList.add(NewXY);
+			}
+		return MoveList;
 		}
-	static int [][] searcherBottomRightTiles(int[][]MultiArray,int CurrentX, int CurrentY){
+	static ArrayList<int[]> searcherBottomRightTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
 		//this function looks for black pieces blocking this bishop bottom right tiles
 		
 		for(int j = 1; j <=7 ; j++){
@@ -291,24 +296,28 @@ public class Superclass_BlackBishop extends BlackPiece {
 			NewXY[0] = CurrentX + j;
 			NewXY[1] = CurrentY + j;
 			
-			for(int i = 0 ; i < aggregateWhites().length ; i++) {
-				int[] Coordinate = aggregateWhites()[i];
-				if(Arrays.equals(Coordinate, NewXY)){
-					//System.out.println("We have found a valid white piece to kill " + j + " tiles bottom right of this bishop");
-					MultiArray[j+20]=NewXY;
-					return MultiArray;
-				}		    			  
+			if(NewXY[0] > 7 || NewXY[1] > 7){
+				return MoveList;
 			}
 			
-			for(int i = 0 ; i < aggregateBlacks().length ; i++) {
-				int[] Coordinate = aggregateBlacks()[i];
+			for(int[] i: aggregateWhites()){
+				int[] Coordinate = i;
+				if(Arrays.equals(Coordinate, NewXY)){
+					//System.out.println("We have found a valid white piece to kill " + j + " tiles bottom right of this bishop");
+					MoveList.add(NewXY);
+					return MoveList;
+				}			 
+			}
+
+			for(int [] i: aggregateBlacks()){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
 					//System.out.println("We have found a black piece " + j + " tiles bottom right of this bishop");
-					return MultiArray;
-					}		
-				}
-			MultiArray[j+20]=NewXY;
+					return MoveList;
+				}	
 			}
-		return MultiArray;
+			MoveList.add(NewXY);
+			}
+		return MoveList;
 		}
 }

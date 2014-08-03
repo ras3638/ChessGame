@@ -1,6 +1,7 @@
 package chessPackage;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.ImageIcon;
@@ -12,42 +13,34 @@ public class Superclass_WhiteKing extends WhitePiece {
 		return White_King_Icon;
 	}
 
-	static int[][] movementHandler(int CurrentX, int CurrentY,int StartingPositionX, int StartingPositionY){
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY,int StartingPositionX, int StartingPositionY){
 
-		int [][]MultiArray = new int[10][2];
-		MultiArray[0]=null;
-		MultiArray[1]=null;
-		MultiArray[2]=null;
-		MultiArray[3]=null;
-		MultiArray[4]=null;
-		MultiArray[5]=null;
-		MultiArray[6]=null;
-		MultiArray[7]=null;
+		ArrayList<int[]> MoveList = new ArrayList<int []>();
+		
+		MoveList = searcherTopTiles(MoveList,CurrentX,CurrentY); 
+		MoveList = searcherLeftTiles(MoveList,CurrentX,CurrentY); 
+		MoveList=searcherBottomTiles(MoveList,CurrentX,CurrentY);
+		MoveList=searcherRightTiles(MoveList,CurrentX,CurrentY); 	
+		
+		MoveList=searcherTopLeftTiles(MoveList,CurrentX,CurrentY); 
+		MoveList=searcherTopRightTiles(MoveList,CurrentX,CurrentY); 
+		MoveList=searcherBottomLeftTiles(MoveList,CurrentX,CurrentY);
+		MoveList=searcherBottomRightTiles(MoveList,CurrentX,CurrentY);
+		
+		MoveList=castleLeftSide(MoveList,CurrentX,CurrentY);
+		MoveList=castleRightSide(MoveList,CurrentX,CurrentY);
 
-		
-		//this looks for possibles kills
-		MultiArray= killSearcher(MultiArray,CurrentX,CurrentY); //XY2,XY3
-
-		//this looks for all possible moves.
-		MultiArray=searcherOneTile(MultiArray,CurrentX,CurrentY); //XY1
-		
-		//this looks for castle left rook side
-		MultiArray=castleLeftSide(MultiArray,CurrentX,CurrentY);
-		MultiArray=castleRightSide(MultiArray,CurrentX,CurrentY);
-		
-		MultiArray = Piece.arrayConverter(MultiArray);
-		
-		return MultiArray;
+		return MoveList;
+	
 	}
-	static int [][] castleRightSide(int[][] MultiArray, int CurrentX, int CurrentY){
+	private static ArrayList<int[]> castleRightSide(ArrayList<int[]> MoveList, int CurrentX, int CurrentY) {
 		if(WhiteKingE1.getFirstStrike() == true && WhiteRookH1.getFirstStrike() == true){
 
 			int [] ComXY = {4,7};
 			if(WhiteKingE1.isWhiteKingInCheck(ComXY, "White King (E1)")){
 				//cannot castle out of check
 				//System.out.println("Cannot right castle out of check");
-				MultiArray[9] = null;
-				return MultiArray;
+				return MoveList;
 			}
 			
 			
@@ -59,51 +52,44 @@ public class Superclass_WhiteKing extends WhitePiece {
 			NewXY2[1] = 7;
 
 			//loop through all blacks
-			for(int i = 0 ; i < aggregateBlacks().length ; i++) {
-				int[] Coordinate = aggregateBlacks()[i];
-				
+
+			for(int [] i: aggregateBlacks()){
+				int[] Coordinate = i;
+			
 				if(Arrays.equals(Coordinate, NewXY)){
-					MultiArray[9] = null;
-					return MultiArray;
+					return MoveList;
 				}
 				if(Arrays.equals(Coordinate, NewXY2)){
-					MultiArray[9] = null;
-					return MultiArray;
-				}	
-	
-			}
-			//loop through all whites
-			for(int i = 0 ; i < aggregateWhites().length ; i++) {
-				int[] Coordinate = aggregateWhites()[i];
-				
+					return MoveList;
+				}		
+			}	
+			//loop through all whites	
+			for(int [] i: aggregateWhites()){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
-					MultiArray[9] = null;
-					return MultiArray;
+					return MoveList;
 				}
 				if(Arrays.equals(Coordinate, NewXY2)){	
-					MultiArray[9] = null;
-					return MultiArray;
-				}	
-
+					return MoveList;
+				}		
 			}	
 			//right side castle is possible. Add possible movement to MultiArray
-			MultiArray[9][0] = 6;	
-			MultiArray[9][1] = 7;
+
+			int [] Coord = {6,7};
+			MoveList.add(Coord);
 			Chess.ActivateWhiteRightCastle = true;
-			return MultiArray;
+			return MoveList;
 		}
 		//else right side castle is not possible. Add nulls movement to MultiArray
-		MultiArray[9] = null;
-		return MultiArray;
+		return MoveList;
 	}
 
-	static int [][] castleLeftSide(int[][] MultiArray, int CurrentX, int CurrentY){
+	private static ArrayList<int[]> castleLeftSide(ArrayList<int[]> MoveList, int CurrentX, int CurrentY) {
 		int [] ComXY = {4,7};
 		if(WhiteKingE1.isWhiteKingInCheck(ComXY, "White King (E1)")){
 			//cannot castle out of check
 			//System.out.println("Cannot left castle out of check");
-			MultiArray[8] = null;
-			return MultiArray;
+			return MoveList;
 		}
 		
 		if(WhiteKingE1.getFirstStrike() == true && WhiteRookA1.getFirstStrike() == true){
@@ -118,155 +104,49 @@ public class Superclass_WhiteKing extends WhitePiece {
 				NewXY3[0] = 1;
 				NewXY3[1] = 7;
 				//loop through all blacks
-				for(int i = 0 ; i < aggregateBlacks().length ; i++) {
-					int[] Coordinate = aggregateBlacks()[i];
-					
+
+				for(int [] i: aggregateBlacks()){
+					int[] Coordinate = i;
+				
 					if(Arrays.equals(Coordinate, NewXY)){
-						MultiArray[8] = null;
-						return MultiArray;
+						return MoveList;
 					}
 					if(Arrays.equals(Coordinate, NewXY2)){
-						MultiArray[8] = null;
-						return MultiArray;
+						return MoveList;
 					}	
 					if(Arrays.equals(Coordinate, NewXY3)){
-						MultiArray[8] = null;
-						return MultiArray;
-					}	
-				}
+						return MoveList;
+					}		
+				}	
 				//loop through all whites
-				for(int i = 0 ; i < aggregateWhites().length ; i++) {
-					int[] Coordinate = aggregateWhites()[i];
-					
+
+				for(int [] i: aggregateWhites()){
+					int[] Coordinate = i;
 					if(Arrays.equals(Coordinate, NewXY)){
-						MultiArray[8] = null;
-						return MultiArray;
+						return MoveList;
 					}
 					if(Arrays.equals(Coordinate, NewXY2)){	
-						MultiArray[8] = null;
-						return MultiArray;
+						return MoveList;
 					}	
 					if(Arrays.equals(Coordinate, NewXY3)){
-						MultiArray[8] = null;
-						return MultiArray;
-					}	
-				}	
+						return MoveList;
+					}			
+				}
 				//left side castle is possible. Add possible movement to MultiArray
-				MultiArray[8][0] = 2;	
-				MultiArray[8][1] = 7;
+	
+				int [] Coord = {2,7};
+				MoveList.add(Coord);
 				Chess.ActivateWhiteLeftCastle = true;
-				return MultiArray;
+				return MoveList;
 			}
 		
 		//else left side castle is not possible. Add nulls movement to MultiArray
-		MultiArray[8] = null;
-		return MultiArray;
+		return MoveList;
 	}
-	static int [][] killSearcher( int[][]MultiArray,int CurrentX, int CurrentY){
-		//this function looks for a black piece to kill
-		int [] NewXY=new int[2];
-		int [] NewXY2=new int[2];
-		int [] NewXY3=new int[2];
-		int [] NewXY4=new int[2];
-		int [] NewXY5=new int[2];
-		int [] NewXY6=new int[2];
-		int [] NewXY7=new int[2];
-		int [] NewXY8=new int[2];
-		
-		NewXY[0] = CurrentX +0;
-		NewXY[1] = CurrentY +1;
-		MultiArray=movementKillEngine(NewXY,MultiArray,0);
-		
-		NewXY2[0]= CurrentX + 0;
-		NewXY2[1]=CurrentY -1;
-		MultiArray=movementKillEngine(NewXY2,MultiArray,1);
-		
-		NewXY3[0]=CurrentX +1;
-		NewXY3[1]=CurrentY +0;
-		MultiArray=movementKillEngine(NewXY3,MultiArray,2);
-		
-		NewXY4[0]=CurrentX -1;
-		NewXY4[1]=CurrentY +0;
-		MultiArray=movementKillEngine(NewXY4,MultiArray,3);
-	
-		NewXY5[0]=CurrentX +1;
-		NewXY5[1]=CurrentY +1;
-		MultiArray=movementKillEngine(NewXY5,MultiArray,4);
-		
-		NewXY6[0]=CurrentX -1;
-		NewXY6[1]=CurrentY -1;
-		MultiArray=movementKillEngine(NewXY6,MultiArray,5);
-		
-		NewXY7[0]=CurrentX +1;
-		NewXY7[1]=CurrentY -1;
-		MultiArray=movementKillEngine(NewXY7,MultiArray,6);
-		
-		NewXY8[0]=CurrentX -1;
-		NewXY8[1]=CurrentY +1;
-		MultiArray=movementKillEngine(NewXY8,MultiArray,7);
 
-		return MultiArray;
-	}
-	static int [][] searcherOneTile( int[][]MultiArray,int CurrentX, int CurrentY){
-		//this function looks for a white piece 1 tile in front or anywhere
-			int [] NewXY=new int[2];
-			int [] NewXY2=new int[2];
-			int [] NewXY3=new int[2];
-			int [] NewXY4=new int[2];
-			int [] NewXY5=new int[2];
-			int [] NewXY6=new int[2];
-			int [] NewXY7=new int[2];
-			int [] NewXY8=new int[2];
 
-		NewXY[0] = CurrentX +0;
-		NewXY[1] = CurrentY +1;
-		MultiArray=movementEngine(NewXY,MultiArray,0);
-		
-		NewXY2[0]= CurrentX + 0;
-		NewXY2[1]=CurrentY -1;
-		MultiArray=movementEngine(NewXY2,MultiArray,1);
-		
-		NewXY3[0]=CurrentX +1;
-		NewXY3[1]=CurrentY +0;
-		MultiArray=movementEngine(NewXY3,MultiArray,2);
-		
-		NewXY4[0]=CurrentX -1;
-		NewXY4[1]=CurrentY +0;
-		MultiArray=movementEngine(NewXY4,MultiArray,3);
-		
-		NewXY5[0]=CurrentX +1;
-		NewXY5[1]=CurrentY +1;
-		MultiArray=movementEngine(NewXY5,MultiArray,4);
-		
-		NewXY6[0]=CurrentX -1;
-		NewXY6[1]=CurrentY -1;
-		MultiArray=movementEngine(NewXY6,MultiArray,5);
-		
-		NewXY7[0]=CurrentX +1;
-		NewXY7[1]=CurrentY -1;
-		MultiArray=movementEngine(NewXY7,MultiArray,6);
-		
-		NewXY8[0]=CurrentX -1;
-		NewXY8[1]=CurrentY +1;
-		MultiArray=movementEngine(NewXY8,MultiArray,7);
-	
-		return MultiArray;   			  
-	}
-	
-	static int[][] movementEngine(int[] NewXY,int[][]MultiArray, int j){
-		
-		for(int i = 0 ; i < aggregateWhites().length ; i++) {
-			int[] Coordinate = aggregateWhites()[i];
-			if(Arrays.equals(Coordinate, NewXY)){
-				//System.out.println("We have found a white piece interrupting this king");
-				return MultiArray;
-				//gotta exit out of this function
-			}		    			  
-		}
-		MultiArray[j]=NewXY;
-		return MultiArray;
-	}
-	
+
+
 	static int [][] checkPreventer( int[][]MultiArray,int CurrentX, int CurrentY){
 		//this forces other King to move out of check. Used for isBlackKinginCheck
 
@@ -285,7 +165,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i], NewXY)){
-				//System.out.println("White King threatining check");
+				////System.out.println("White King threatining check");
 				MultiArray[i]=null;
 				
 				break;  
@@ -299,7 +179,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY2)){
-				//System.out.println("White King threatining check");
+				////System.out.println("White King threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -311,7 +191,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY3)){
-				//System.out.println("White King threatining check");
+				////System.out.println("White King threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -323,7 +203,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY4)){
-				//System.out.println("White King threatining check");
+				////System.out.println("White King threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -335,7 +215,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY5)){
-				//System.out.println("White King threatining check");
+				////System.out.println("White King threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -347,7 +227,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY6)){
-				//System.out.println("White King threatining check");
+				////System.out.println("White King threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -359,7 +239,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY7)){
-				//System.out.println("White King threatining check");
+				////System.out.println("White King threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -371,7 +251,7 @@ public class Superclass_WhiteKing extends WhitePiece {
 		for(int i = 0 ; i < MultiArray.length ; i++) {
 			
 			if(Arrays.equals(MultiArray[i],NewXY8)){
-				//System.out.println("White King threatining check");
+				////System.out.println("White King threatining check");
 				MultiArray[i]=null;
 				break;  
 			}		    			  
@@ -1147,213 +1027,674 @@ public class Superclass_WhiteKing extends WhitePiece {
 	}
 	
 
-	
-	static int[][] movementKillEngine(int[] NewXY,int[][]MultiArray, int j){
-		for(int i = 0 ; i < aggregateBlacks().length ; i++) {
-			int[] Coordinate = aggregateBlacks()[i];
-			if(Arrays.equals(Coordinate, NewXY)){
-				//System.out.println("We have found a valid black piece to kill");
-				MultiArray[j]=NewXY;
-			}		    			  
-		}
-
-		return MultiArray;
-	}
 
 	public static boolean isWhiteKingInCheckMate() {
-		
+		//returns true if white king is in checkmate
 		if(WhiteKingE1.getActive()){
-			int [][] MovementHandler = WhiteKingE1.movementHandler(WhiteKingE1.getCurrentPositionX(), WhiteKingE1.getCurrentPositionY(), WhiteKingE1.StartingPositionX, WhiteKingE1.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandlerForWhiteKingE1 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White King (E1)")){
-					
+			ArrayList<int[]> MovementHandler = WhiteKingE1.movementHandler(WhiteKingE1.getCurrentPositionX(), WhiteKingE1.getCurrentPositionY(), WhiteKingE1.StartingPositionX, WhiteKingE1.StartingPositionY);
+			
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White King (E1)")){
 					return false;
-				}			
+				}
 			}
 		}
 		
 		if(WhiteRookA1.getActive()){
-			int [][] MovementHandler = WhiteRookA1.movementHandler(WhiteRookA1.getCurrentPositionX(), WhiteRookA1.getCurrentPositionY(), WhiteRookA1.StartingPositionX, WhiteRookA1.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandler for WhiteRookA1 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Rook (A1)")){
-					
+			ArrayList<int[]> MovementHandler = WhiteRookA1.movementHandler(WhiteRookA1.getCurrentPositionX(), WhiteRookA1.getCurrentPositionY(), WhiteRookA1.StartingPositionX, WhiteRookA1.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Rook (A1)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		
 		if(WhiteRookH1.getActive()){
-			int [][] MovementHandler = WhiteRookH1.movementHandler(WhiteRookH1.getCurrentPositionX(), WhiteRookH1.getCurrentPositionY(), WhiteRookH1.StartingPositionX, WhiteRookH1.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandler for WhiteRookH1 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Rook (H1)")){
-					
+			ArrayList<int[]> MovementHandler = WhiteRookH1.movementHandler(WhiteRookH1.getCurrentPositionX(), WhiteRookH1.getCurrentPositionY(), WhiteRookH1.StartingPositionX, WhiteRookH1.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Rook (H1)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		if(WhiteQueenD1.getActive()){
-			int [][] MovementHandler = WhiteQueenD1.movementHandler(WhiteQueenD1.getCurrentPositionX(), WhiteQueenD1.getCurrentPositionY(), WhiteQueenD1.StartingPositionX, WhiteQueenD1.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandler for WhiteQueenD1 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Queen (D1)")){
-					
+			ArrayList<int[]> MovementHandler = WhiteQueenD1.movementHandler(WhiteQueenD1.getCurrentPositionX(), WhiteQueenD1.getCurrentPositionY(), WhiteQueenD1.StartingPositionX, WhiteQueenD1.StartingPositionY);
+			
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Queen (D1)")){
 					return false;
-				}			
+				}
 			}
+			
 		}
 		
 		if(WhiteBishopC1.getActive()){
-			int [][] MovementHandler = WhiteBishopC1.movementHandler(WhiteBishopC1.getCurrentPositionX(), WhiteBishopC1.getCurrentPositionY(), WhiteBishopC1.StartingPositionX, WhiteBishopC1.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandler for WhiteBishopC1 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Bishop (C1)")){
-					
+			ArrayList<int[]> MovementHandler = WhiteBishopC1.movementHandler(WhiteBishopC1.getCurrentPositionX(), WhiteBishopC1.getCurrentPositionY(), WhiteBishopC1.StartingPositionX, WhiteBishopC1.StartingPositionY);
+			
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Bishop (C1)")){
 					return false;
-				}			
+				}
 			}
 		}
 		
 		if(WhiteBishopF1.getActive()){
-			int [][] MovementHandler = WhiteBishopF1.movementHandler(WhiteBishopF1.getCurrentPositionX(), WhiteBishopF1.getCurrentPositionY(), WhiteBishopF1.StartingPositionX, WhiteBishopF1.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandler for WhiteBishopF1 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Bishop (F1)")){
-					
+			ArrayList<int[]> MovementHandler = WhiteBishopF1.movementHandler(WhiteBishopF1.getCurrentPositionX(), WhiteBishopF1.getCurrentPositionY(), WhiteBishopF1.StartingPositionX, WhiteBishopF1.StartingPositionY);
+			
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Bishop (F1)")){
 					return false;
-				}			
+				}
 			}
 		}
 		
 		if(WhiteKnightB1.getActive()){
-			int [][] MovementHandler = WhiteKnightB1.movementHandler(WhiteKnightB1.getCurrentPositionX(), WhiteKnightB1.getCurrentPositionY(), WhiteKnightB1.StartingPositionX, WhiteKnightB1.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandler for WhiteKnightB1 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Knight (B1)")){
-					
+			ArrayList<int[]> MovementHandler = WhiteKnightB1.movementHandler(WhiteKnightB1.getCurrentPositionX(), WhiteKnightB1.getCurrentPositionY(), WhiteKnightB1.StartingPositionX, WhiteKnightB1.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Knight (B1)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		if(WhiteKnightG1.getActive()){
-			int [][] MovementHandler = WhiteKnightG1.movementHandler(WhiteKnightG1.getCurrentPositionX(), WhiteKnightG1.getCurrentPositionY(), WhiteKnightG1.StartingPositionX, WhiteKnightG1.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandler for WhiteKnightG1 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Knight (G1)")){
-					
+			ArrayList<int[]> MovementHandler = WhiteKnightG1.movementHandler(WhiteKnightG1.getCurrentPositionX(), WhiteKnightG1.getCurrentPositionY(), WhiteKnightG1.StartingPositionX, WhiteKnightG1.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Knight (G1)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		
 		if(WhitePawnA2.getActive()){
-			int [][] MovementHandler = WhitePawnA2.movementHandler(WhitePawnA2.getCurrentPositionX(), WhitePawnA2.getCurrentPositionY(), WhitePawnA2.StartingPositionX, WhitePawnA2.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandlerForWhitePawnA2 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Pawn (A2)")){
-					
+		
+			ArrayList<int[]> MovementHandler = WhitePawnA2.movementHandler(WhitePawnA2.getCurrentPositionX(), WhitePawnA2.getCurrentPositionY(), WhitePawnA2.StartingPositionX, WhitePawnA2.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Pawn (A2)")){
 					return false;
-				}			
-			}
+				}
+			}		
 		}
 		
 		if(WhitePawnB2.getActive()){
-			int [][] MovementHandler = WhitePawnB2.movementHandler(WhitePawnB2.getCurrentPositionX(), WhitePawnB2.getCurrentPositionY(), WhitePawnB2.StartingPositionX, WhitePawnB2.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandlerForWhitePawnB2 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Pawn (B2)")){
-					
+			ArrayList<int[]> MovementHandler = WhitePawnB2.movementHandler(WhitePawnB2.getCurrentPositionX(), WhitePawnB2.getCurrentPositionY(), WhitePawnB2.StartingPositionX, WhitePawnB2.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Pawn (B2)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		
 		if(WhitePawnC2.getActive()){
-			int [][] MovementHandler = WhitePawnC2.movementHandler(WhitePawnC2.getCurrentPositionX(), WhitePawnC2.getCurrentPositionY(), WhitePawnC2.StartingPositionX, WhitePawnC2.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandlerForWhitePawnC2 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Pawn (C2)")){
-					
+			ArrayList<int[]> MovementHandler = WhitePawnC2.movementHandler(WhitePawnC2.getCurrentPositionX(), WhitePawnC2.getCurrentPositionY(), WhitePawnC2.StartingPositionX, WhitePawnC2.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Pawn (C2)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		
 		if(WhitePawnD2.getActive()){
-			int [][] MovementHandler = WhitePawnD2.movementHandler(WhitePawnD2.getCurrentPositionX(), WhitePawnD2.getCurrentPositionY(), WhitePawnD2.StartingPositionX, WhitePawnD2.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandlerForWhitePawnD2 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Pawn (D2)")){
-					
+			ArrayList<int[]> MovementHandler = WhitePawnD2.movementHandler(WhitePawnD2.getCurrentPositionX(), WhitePawnD2.getCurrentPositionY(), WhitePawnD2.StartingPositionX, WhitePawnD2.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Pawn (D2)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		
 		if(WhitePawnE2.getActive()){
-			int [][] MovementHandler = WhitePawnE2.movementHandler(WhitePawnE2.getCurrentPositionX(), WhitePawnE2.getCurrentPositionY(), WhitePawnE2.StartingPositionX, WhitePawnE2.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandlerForWhitePawnE2 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Pawn (E2)")){
-					
+			ArrayList<int[]> MovementHandler = WhitePawnE2.movementHandler(WhitePawnE2.getCurrentPositionX(), WhitePawnE2.getCurrentPositionY(), WhitePawnE2.StartingPositionX, WhitePawnE2.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Pawn (E2)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		
 		if(WhitePawnF2.getActive()){
-			int [][] MovementHandler = WhitePawnF2.movementHandler(WhitePawnF2.getCurrentPositionX(), WhitePawnF2.getCurrentPositionY(), WhitePawnF2.StartingPositionX, WhitePawnF2.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandlerForWhitePawnF2 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Pawn (F2)")){
-					
+			ArrayList<int[]> MovementHandler = WhitePawnF2.movementHandler(WhitePawnF2.getCurrentPositionX(), WhitePawnF2.getCurrentPositionY(), WhitePawnF2.StartingPositionX, WhitePawnF2.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Pawn (F2)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		
 		if(WhitePawnG2.getActive()){
-			int [][] MovementHandler = WhitePawnG2.movementHandler(WhitePawnG2.getCurrentPositionX(), WhitePawnG2.getCurrentPositionY(), WhitePawnG2.StartingPositionX, WhitePawnG2.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandlerForWhitePawnG2 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Pawn (G2)")){
-					
+			ArrayList<int[]> MovementHandler = WhitePawnG2.movementHandler(WhitePawnG2.getCurrentPositionX(), WhitePawnG2.getCurrentPositionY(), WhitePawnG2.StartingPositionX, WhitePawnG2.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Pawn (G2)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		
 		if(WhitePawnH2.getActive()){
-			int [][] MovementHandler = WhitePawnH2.movementHandler(WhitePawnH2.getCurrentPositionX(), WhitePawnH2.getCurrentPositionY(), WhitePawnH2.StartingPositionX, WhitePawnH2.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandlerForWhitePawnH2 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_WhiteKing.isWhiteKingInCheck(MovementHandler[i], "White Pawn (H2)")){
-					
+			ArrayList<int[]> MovementHandler = WhitePawnH2.movementHandler(WhitePawnH2.getCurrentPositionX(), WhitePawnH2.getCurrentPositionY(), WhitePawnH2.StartingPositionX, WhitePawnH2.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Pawn (H2)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
-		
-
+		if(WhiteKnightProm1.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteKnightProm1.movementHandler(WhiteKnightProm1.getCurrentPositionX(), WhiteKnightProm1.getCurrentPositionY(), WhiteKnightProm1.StartingPositionX, WhiteKnightProm1.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Knight (Prom1)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteKnightProm2.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteKnightProm2.movementHandler(WhiteKnightProm2.getCurrentPositionX(), WhiteKnightProm2.getCurrentPositionY(), WhiteKnightProm2.StartingPositionX, WhiteKnightProm2.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Knight (Prom2)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteKnightProm3.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteKnightProm3.movementHandler(WhiteKnightProm3.getCurrentPositionX(), WhiteKnightProm3.getCurrentPositionY(), WhiteKnightProm3.StartingPositionX, WhiteKnightProm3.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Knight (Prom3)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteKnightProm4.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteKnightProm4.movementHandler(WhiteKnightProm4.getCurrentPositionX(), WhiteKnightProm4.getCurrentPositionY(), WhiteKnightProm4.StartingPositionX, WhiteKnightProm4.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Knight (Prom4)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteKnightProm5.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteKnightProm5.movementHandler(WhiteKnightProm5.getCurrentPositionX(), WhiteKnightProm5.getCurrentPositionY(), WhiteKnightProm5.StartingPositionX, WhiteKnightProm5.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Knight (Prom5)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteKnightProm6.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteKnightProm6.movementHandler(WhiteKnightProm6.getCurrentPositionX(), WhiteKnightProm6.getCurrentPositionY(), WhiteKnightProm6.StartingPositionX, WhiteKnightProm6.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Knight (Prom6)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteKnightProm7.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteKnightProm7.movementHandler(WhiteKnightProm7.getCurrentPositionX(), WhiteKnightProm7.getCurrentPositionY(), WhiteKnightProm7.StartingPositionX, WhiteKnightProm7.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Knight (Prom7)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteKnightProm8.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteKnightProm8.movementHandler(WhiteKnightProm8.getCurrentPositionX(), WhiteKnightProm8.getCurrentPositionY(), WhiteKnightProm8.StartingPositionX, WhiteKnightProm8.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Knight (Prom8)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteQueenProm1.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteQueenProm1.movementHandler(WhiteQueenProm1.getCurrentPositionX(), WhiteQueenProm1.getCurrentPositionY(), WhiteQueenProm1.StartingPositionX, WhiteQueenProm1.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Queen (Prom1)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteQueenProm2.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteQueenProm2.movementHandler(WhiteQueenProm2.getCurrentPositionX(), WhiteQueenProm2.getCurrentPositionY(), WhiteQueenProm2.StartingPositionX, WhiteQueenProm2.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Queen (Prom2)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteQueenProm3.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteQueenProm3.movementHandler(WhiteQueenProm3.getCurrentPositionX(), WhiteQueenProm3.getCurrentPositionY(), WhiteQueenProm3.StartingPositionX, WhiteQueenProm3.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Queen (Prom3)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteQueenProm4.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteQueenProm4.movementHandler(WhiteQueenProm4.getCurrentPositionX(), WhiteQueenProm4.getCurrentPositionY(), WhiteQueenProm4.StartingPositionX, WhiteQueenProm4.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Queen (Prom4)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteQueenProm5.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteQueenProm5.movementHandler(WhiteQueenProm5.getCurrentPositionX(), WhiteQueenProm5.getCurrentPositionY(), WhiteQueenProm5.StartingPositionX, WhiteQueenProm5.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Queen (Prom5)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteQueenProm6.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteQueenProm6.movementHandler(WhiteQueenProm6.getCurrentPositionX(), WhiteQueenProm6.getCurrentPositionY(), WhiteQueenProm6.StartingPositionX, WhiteQueenProm6.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Queen (Prom6)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteQueenProm7.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteQueenProm7.movementHandler(WhiteQueenProm7.getCurrentPositionX(), WhiteQueenProm7.getCurrentPositionY(), WhiteQueenProm7.StartingPositionX, WhiteQueenProm7.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Queen (Prom7)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteQueenProm8.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteQueenProm8.movementHandler(WhiteQueenProm8.getCurrentPositionX(), WhiteQueenProm8.getCurrentPositionY(), WhiteQueenProm8.StartingPositionX, WhiteQueenProm8.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Queen (Prom8)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteBishopProm1.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteBishopProm1.movementHandler(WhiteBishopProm1.getCurrentPositionX(), WhiteBishopProm1.getCurrentPositionY(), WhiteBishopProm1.StartingPositionX, WhiteBishopProm1.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Bishop (Prom1)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteBishopProm2.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteBishopProm2.movementHandler(WhiteBishopProm2.getCurrentPositionX(), WhiteBishopProm2.getCurrentPositionY(), WhiteBishopProm2.StartingPositionX, WhiteBishopProm2.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Bishop (Prom2)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteBishopProm2.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteBishopProm2.movementHandler(WhiteBishopProm2.getCurrentPositionX(), WhiteBishopProm2.getCurrentPositionY(), WhiteBishopProm2.StartingPositionX, WhiteBishopProm2.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Bishop (Prom2)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteBishopProm3.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteBishopProm3.movementHandler(WhiteBishopProm3.getCurrentPositionX(), WhiteBishopProm3.getCurrentPositionY(), WhiteBishopProm3.StartingPositionX, WhiteBishopProm3.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Bishop (Prom3)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteBishopProm4.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteBishopProm4.movementHandler(WhiteBishopProm4.getCurrentPositionX(), WhiteBishopProm4.getCurrentPositionY(), WhiteBishopProm4.StartingPositionX, WhiteBishopProm4.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Bishop (Prom4)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteBishopProm5.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteBishopProm5.movementHandler(WhiteBishopProm5.getCurrentPositionX(), WhiteBishopProm5.getCurrentPositionY(), WhiteBishopProm5.StartingPositionX, WhiteBishopProm5.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Bishop (Prom5)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteBishopProm6.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteBishopProm6.movementHandler(WhiteBishopProm6.getCurrentPositionX(), WhiteBishopProm6.getCurrentPositionY(), WhiteBishopProm6.StartingPositionX, WhiteBishopProm6.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Bishop (Prom6)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteBishopProm7.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteBishopProm7.movementHandler(WhiteBishopProm7.getCurrentPositionX(), WhiteBishopProm7.getCurrentPositionY(), WhiteBishopProm7.StartingPositionX, WhiteBishopProm7.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Bishop (Prom7)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteBishopProm8.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteBishopProm8.movementHandler(WhiteBishopProm8.getCurrentPositionX(), WhiteBishopProm8.getCurrentPositionY(), WhiteBishopProm8.StartingPositionX, WhiteBishopProm8.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Bishop (Prom8)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteRookProm1.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteRookProm1.movementHandler(WhiteRookProm1.getCurrentPositionX(), WhiteRookProm1.getCurrentPositionY(), WhiteRookProm1.StartingPositionX, WhiteRookProm1.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Rook (Prom1)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteRookProm2.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteRookProm2.movementHandler(WhiteRookProm2.getCurrentPositionX(), WhiteRookProm2.getCurrentPositionY(), WhiteRookProm2.StartingPositionX, WhiteRookProm2.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Rook (Prom2)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteRookProm3.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteRookProm3.movementHandler(WhiteRookProm3.getCurrentPositionX(), WhiteRookProm3.getCurrentPositionY(), WhiteRookProm3.StartingPositionX, WhiteRookProm3.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Rook (Prom3)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteRookProm4.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteRookProm4.movementHandler(WhiteRookProm4.getCurrentPositionX(), WhiteRookProm4.getCurrentPositionY(), WhiteRookProm4.StartingPositionX, WhiteRookProm4.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Rook (Prom4)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteRookProm5.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteRookProm5.movementHandler(WhiteRookProm5.getCurrentPositionX(), WhiteRookProm5.getCurrentPositionY(), WhiteRookProm5.StartingPositionX, WhiteRookProm5.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Rook (Prom5)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteRookProm6.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteRookProm6.movementHandler(WhiteRookProm6.getCurrentPositionX(), WhiteRookProm6.getCurrentPositionY(), WhiteRookProm6.StartingPositionX, WhiteRookProm6.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Rook (Prom6)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteRookProm7.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteRookProm7.movementHandler(WhiteRookProm7.getCurrentPositionX(), WhiteRookProm7.getCurrentPositionY(), WhiteRookProm7.StartingPositionX, WhiteRookProm7.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Rook (Prom7)")){
+					return false;
+				}
+			}	
+		}
+		if(WhiteRookProm8.getActive()){
+			ArrayList<int[]> MovementHandler = WhiteRookProm8.movementHandler(WhiteRookProm8.getCurrentPositionX(), WhiteRookProm8.getCurrentPositionY(), WhiteRookProm8.StartingPositionX, WhiteRookProm8.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_WhiteKing.isWhiteKingInCheck(i, "White Rook (Prom8)")){
+					return false;
+				}
+			}	
+		}
 		return true;
 
 	}
+	static ArrayList<int[]> searcherTopTiles(ArrayList<int[]> MoveList, int CurrentX, int CurrentY){
+		//this function looks for black pieces blocking this King top tiles
+			
+		int [] NewXY = new int[2];
+		
+		NewXY[0] = CurrentX + 0;
+		NewXY[1] = CurrentY - 1;
+		
+		if(NewXY[1] < 0){
+			return MoveList;
+		}
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a valid black piece to kill " + 1 + " tiles top of this King");
+				MoveList.add(NewXY);
+				return MoveList;
+			}			    				
+		}
+		
+		for (int [] i: aggregateWhites()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a white piece " + 1 + " tiles top of this King");
+				return MoveList;
+			}		
+		}	
+
+		MoveList.add(NewXY);
+		
+		return MoveList;
+	}	
+	static ArrayList<int[]> searcherLeftTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
+		//this function looks for black pieces blocking this King left tiles
+		
+	
+		int [] NewXY = new int[2];	
+		
+		NewXY[0] = CurrentX - 1;
+		NewXY[1] = CurrentY + 0;
+		
+		if(NewXY[0] < 0){
+			return MoveList;
+		}
+		
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a valid black piece to kill " + 1 + " tiles left of this King");
+				MoveList.add(NewXY);
+				return MoveList;
+			}			    				
+		}
+		for (int [] i: aggregateWhites()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a white piece " + 1 + " tiles left of this King");
+				return MoveList;
+			}		
+		}	
+		MoveList.add(NewXY);
+		
+	return MoveList;
+	}
+	static ArrayList<int[]> searcherBottomTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
+		//this function looks for black pieces blocking this King left tiles
+		
+		
+		int [] NewXY = new int[2];
+		NewXY[0] = CurrentX + 0;
+		NewXY[1] = CurrentY + 1;
+		
+		if(NewXY[1] > 7){
+			return MoveList;
+		}
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a valid blacks piece to kill " + 1 + " tiles bottom of this King");
+				MoveList.add(NewXY);
+				return MoveList;
+			}		    				
+		}
+
+		for (int [] i: aggregateWhites()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a white piece " + 1 + " tiles bottom  of this King");
+				return MoveList;
+			}		
+		}	
+		MoveList.add(NewXY);
+		
+		return MoveList;
+	}
+	static ArrayList<int[]> searcherRightTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
+		//this function looks for black pieces blocking this King left tiles
+		
+		
+		int [] NewXY = new int[2];	
+		NewXY[0] = CurrentX + 1;
+		NewXY[1] = CurrentY + 0;
+		
+		if(NewXY[0] > 7){
+			return MoveList;
+		}
+		
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a valid black piece to kill " + 1 + " tiles right of this King");
+				MoveList.add(NewXY);
+				return MoveList;
+			}		    				
+		}
+		for (int [] i: aggregateWhites()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a white piece " + 1 + " tiles right of this King");
+				return MoveList;
+			}		
+		}	
+		MoveList.add(NewXY);
+			
+		return MoveList;
+	}
+	static ArrayList<int[]> searcherTopLeftTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
+		//this function looks for black pieces blocking this rook top tiles
+		
+		
+		int [] NewXY = new int[2];
+		NewXY[0] = CurrentX - 1;
+		NewXY[1] = CurrentY - 1;
+		
+		if(NewXY[0] < 0 || NewXY[1] < 0){
+			return MoveList;
+		}
+		
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a valid black piece to kill " + 1 + " tiles top left of this King");
+				MoveList.add(NewXY);
+				return MoveList;
+			}		    				
+		}
+		for (int [] i: aggregateWhites()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a white piece " + 1 + " tiles top left of this King");
+				return MoveList;
+			}		
+		}	
+		MoveList.add(NewXY);
+	
+		return MoveList;
+	}	
+	static ArrayList<int[]> searcherTopRightTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
+		//this function looks for black pieces blocking this rook left tiles
+		
+		int [] NewXY = new int[2];	
+		NewXY[0] = CurrentX + 1;
+		NewXY[1] = CurrentY - 1;
+		
+		if(NewXY[0] > 7 || NewXY[1] < 0){
+			return MoveList;
+		}
+		
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a valid black piece to kill " + 1 + " tiles top right of this King");
+				MoveList.add(NewXY);
+				return MoveList;
+			}	    				
+		}
+		for (int [] i: aggregateWhites()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a white piece " + 1 + " tiles top right of this King");
+				return MoveList;
+			}		
+		}	
+		MoveList.add(NewXY);	
+		return MoveList;
+	}
+	static ArrayList<int[]> searcherBottomLeftTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
+		//this function looks for black pieces blocking this rook left tiles	
+		
+		int [] NewXY = new int[2];
+		NewXY[0] = CurrentX - 1;
+		NewXY[1] = CurrentY + 1;
+		
+		if(NewXY[0] < 0 || NewXY[1] > 7){
+			return MoveList;
+		}
+		
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a valid blacks piece to kill " + 1 + " tiles bottom left of this King");
+				MoveList.add(NewXY);
+				return MoveList;
+			}	    				
+		}
+		for (int [] i: aggregateWhites()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a white piece " + 1 + " tiles bottom left of this King");
+				return MoveList;
+			}		
+		}	
+		MoveList.add(NewXY);
+		return MoveList;
+	}
+	static ArrayList<int[]> searcherBottomRightTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
+		//this function looks for black pieces blocking this rook left tiles
+
+		int [] NewXY = new int[2];	
+		NewXY[0] = CurrentX + 1;
+		NewXY[1] = CurrentY + 1;
+		
+		if(NewXY[0] > 7 || NewXY[1] > 7){
+			return MoveList;
+		}
+		
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a valid black piece to kill " + 1 + " tiles bottom right of this King");
+				MoveList.add(NewXY);
+				return MoveList;
+			}	    				
+		}
+		for (int [] i: aggregateWhites()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a white piece " + 1 + " tiles bottom right of this King");
+				return MoveList;
+			}		
+		}	
+		MoveList.add(NewXY);
+		return MoveList;
+	}
+
 }

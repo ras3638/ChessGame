@@ -13,39 +13,34 @@ public class Superclass_BlackKing extends BlackPiece {
 		return Black_King_Icon;
 	}
 
-	static int[][] movementHandler(int CurrentX, int CurrentY,int StartingPositionX, int StartingPositionY){
-
-		int [][]MultiArray = new int[10][2];
-		MultiArray[0]=null;
-		MultiArray[1]=null;
-		MultiArray[2]=null;
-		MultiArray[3]=null;
-		MultiArray[4]=null;
-		MultiArray[5]=null;
-		MultiArray[6]=null;
-		MultiArray[7]=null;
-
-		MultiArray= killSearcher(MultiArray,CurrentX,CurrentY); //XY2,XY3
-		MultiArray=searcherOneTile(MultiArray,CurrentX,CurrentY); //XY1
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY,int StartingPositionX, int StartingPositionY){
 		
-		//this looks for castle left rook side
-		MultiArray=castleLeftSide(MultiArray,CurrentX,CurrentY);
-		MultiArray=castleRightSide(MultiArray,CurrentX,CurrentY);
-		
-		
-		MultiArray = Piece.arrayConverter(MultiArray);
+		ArrayList<int[]> MoveList = new ArrayList<int []>();
 
-		return MultiArray;
+		MoveList = searcherTopTiles(MoveList,CurrentX,CurrentY); 
+		MoveList = searcherLeftTiles(MoveList,CurrentX,CurrentY); 
+		MoveList=searcherBottomTiles(MoveList,CurrentX,CurrentY);
+		MoveList=searcherRightTiles(MoveList,CurrentX,CurrentY); 	
+		
+		MoveList=searcherTopLeftTiles(MoveList,CurrentX,CurrentY); 
+		MoveList=searcherTopRightTiles(MoveList,CurrentX,CurrentY); 
+		MoveList=searcherBottomLeftTiles(MoveList,CurrentX,CurrentY);
+		MoveList=searcherBottomRightTiles(MoveList,CurrentX,CurrentY);
+
+
+		MoveList=castleLeftSide(MoveList,CurrentX,CurrentY);
+		MoveList=castleRightSide(MoveList,CurrentX,CurrentY);
+
+		return MoveList;
 	}
 	
-	static int [][] castleRightSide(int[][] MultiArray, int CurrentX, int CurrentY){
+	static ArrayList<int[]> castleRightSide(ArrayList<int[]> MoveList, int CurrentX, int CurrentY){
 		if(BlackKingE8.getFirstStrike() == true && BlackRookH8.getFirstStrike() == true){
 			int [] ComXY = {4,0};
 			if(BlackKingE8.isBlackKingInCheck(ComXY, "Black King (E8)")){
 				//cannot castle out of check
 				//System.out.println("Cannot right castle out of check");
-				MultiArray[9] = null;
-				return MultiArray;
+				return MoveList;
 			}
 			int [] NewXY=new int[2];
 			NewXY[0] = 5;
@@ -55,53 +50,44 @@ public class Superclass_BlackKing extends BlackPiece {
 			NewXY2[1] = 0;
 
 			//loop through all blacks
-			for(int i = 0 ; i < aggregateBlacks().length ; i++) {
-				int[] Coordinate = aggregateBlacks()[i];
-				
+			for(int [] i: aggregateBlacks()){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
-					MultiArray[9] = null;
-					return MultiArray;
+					return MoveList;
 				}
 				if(Arrays.equals(Coordinate, NewXY2)){
-					MultiArray[9] = null;
-					return MultiArray;
-				}	
-	
+					return MoveList;
+				}			
 			}
 			//loop through all whites
-			for(int i = 0 ; i < aggregateWhites().length ; i++) {
-				int[] Coordinate = aggregateWhites()[i];
-				
+
+			for(int[] i: aggregateWhites()){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
-					MultiArray[9] = null;
-					return MultiArray;
+					return MoveList;
 				}
 				if(Arrays.equals(Coordinate, NewXY2)){	
-					MultiArray[9] = null;
-					return MultiArray;
-				}	
-
-			}	
+					return MoveList;
+				}				 
+			}
 			//right side castle is possible. Add possible movement to MultiArray
-			MultiArray[9][0] = 6;	
-			MultiArray[9][1] = 0;
+			int [] Coord = {6,0};
+			MoveList.add(Coord);
 			Chess.ActivateBlackRightCastle = true;
-			return MultiArray;
+			return MoveList;
 		}
 		//else right side castle is not possible. Add nulls movement to MultiArray
-		MultiArray[9] = null;
-		return MultiArray;
+		return MoveList;
 	}
 
-	static int [][] castleLeftSide(int[][] MultiArray, int CurrentX, int CurrentY){
+	static ArrayList<int[]> castleLeftSide(ArrayList<int[]> MoveList, int CurrentX, int CurrentY){
 		
 		if(BlackKingE8.getFirstStrike() == true && BlackRookA8.getFirstStrike() == true){
 			int [] ComXY = {4,0};
 			if(BlackKingE8.isBlackKingInCheck(ComXY, "Black King (E8)")){
 				//cannot castle out of check
 				//System.out.println("Cannot left castle out of check");
-				MultiArray[8] = null;
-				return MultiArray;
+				return MoveList;
 			}	
 			
 			
@@ -116,51 +102,55 @@ public class Superclass_BlackKing extends BlackPiece {
 				NewXY3[0] = 1;
 				NewXY3[1] = 0;
 				//loop through all blacks
-				for(int i = 0 ; i < aggregateBlacks().length ; i++) {
-					int[] Coordinate = aggregateBlacks()[i];
+
+				for(int [] i: aggregateBlacks()){
+					int[] Coordinate = i;
 					
 					if(Arrays.equals(Coordinate, NewXY)){
-						MultiArray[8] = null;
-						return MultiArray;
+						return MoveList;
 					}
 					if(Arrays.equals(Coordinate, NewXY2)){
-						MultiArray[8] = null;
-						return MultiArray;
+						return MoveList;
 					}	
 					if(Arrays.equals(Coordinate, NewXY3)){
-						MultiArray[8] = null;
-						return MultiArray;
-					}	
+						return MoveList;
+					}			
 				}
 				//loop through all whites
-				for(int i = 0 ; i < aggregateWhites().length ; i++) {
-					int[] Coordinate = aggregateWhites()[i];
-					
+
+				for(int[] i: aggregateWhites()){
+					int[] Coordinate = i;
 					if(Arrays.equals(Coordinate, NewXY)){
-						MultiArray[8] = null;
-						return MultiArray;
+						return MoveList;
 					}
 					if(Arrays.equals(Coordinate, NewXY2)){	
-						MultiArray[8] = null;
-						return MultiArray;
+						return MoveList;
 					}	
 					if(Arrays.equals(Coordinate, NewXY3)){
-						MultiArray[8] = null;
-						return MultiArray;
-					}	
-				}	
+						return MoveList;
+					}			 
+				}
 				//left side castle is possible. Add possible movement to MultiArray
-				MultiArray[8][0] = 2;	
-				MultiArray[8][1] = 0;
+				int [] Coord = {2,0};
+				MoveList.add(Coord);
 				Chess.ActivateBlackLeftCastle = true;
-				return MultiArray;
+				return MoveList;
 			}
 		
 		//else left side castle is not possible. Add nulls movement to MultiArray
-		MultiArray[8] = null;
+		return MoveList;
+	}
+	static int[][] movementKillEngine(int[] NewXY,int[][]MultiArray, int j){
+		for(int i = 0 ; i < aggregateWhites().size() ; i++) {
+			int[] Coordinate = aggregateWhites().get(i);
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a valid black piece to kill");
+				MultiArray[j]=NewXY;
+			}		    			  
+		}
+
 		return MultiArray;
 	}
-	
 	static int [][] killSearcher( int[][]MultiArray,int CurrentX, int CurrentY){
 		//this function looks for a white piece to kill
 		int [] NewXY=new int[2];
@@ -253,14 +243,15 @@ public class Superclass_BlackKing extends BlackPiece {
 		return MultiArray;   			  
 	}
 	static int[][] movementEngine(int[] NewXY,int[][]MultiArray, int j){
-		for(int i = 0 ; i < aggregateBlacks().length ; i++) {
-			int[] Coordinate = aggregateBlacks()[i];
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
 			if(Arrays.equals(Coordinate, NewXY)){
 				//System.out.println("We have found a black piece interrupting this king");
 				return MultiArray;
 				//gotta exit out of this function
-
-			}		    			  
+		
+			}
 		}
 		MultiArray[j]=NewXY;
 		return MultiArray;
@@ -1112,210 +1103,662 @@ public class Superclass_BlackKing extends BlackPiece {
 		return false;	
 	}
 	
+	
 	static boolean isBlackKingInCheckMate(){
+		
+		//returns true if black king is in checkmate
 		if(BlackKingE8.getActive()){
-			int [][] MovementHandler = BlackKingE8.movementHandler(BlackKingE8.getCurrentPositionX(), BlackKingE8.getCurrentPositionY(), BlackKingE8.StartingPositionX, BlackKingE8.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandlerForBlackKingE8 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_BlackKing.isBlackKingInCheck(MovementHandler[i], "Black King (E8)")){
-					
+			ArrayList<int[]> MovementHandler = BlackKingE8.movementHandler(BlackKingE8.getCurrentPositionX(), BlackKingE8.getCurrentPositionY(), BlackKingE8.StartingPositionX, BlackKingE8.StartingPositionY);
+			
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black King (E8)")){
 					return false;
-				}			
+				}
 			}
 		}
+		
 		if(BlackRookA8.getActive()){
-			int [][] MovementHandler = BlackRookA8.movementHandler(BlackRookA8.getCurrentPositionX(), BlackRookA8.getCurrentPositionY(), BlackRookA8.StartingPositionX, BlackRookA8.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandler for BlackRookA8 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_BlackKing.isBlackKingInCheck(MovementHandler[i], "Black Rook (A8)")){
-					
+			ArrayList<int[]> MovementHandler = BlackRookA8.movementHandler(BlackRookA8.getCurrentPositionX(), BlackRookA8.getCurrentPositionY(), BlackRookA8.StartingPositionX, BlackRookA8.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Rook (A8)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		
 		if(BlackRookH8.getActive()){
-			int [][] MovementHandler = BlackRookH8.movementHandler(BlackRookH8.getCurrentPositionX(), BlackRookH8.getCurrentPositionY(), BlackRookH8.StartingPositionX, BlackRookH8.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandler for BlackRookH8 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_BlackKing.isBlackKingInCheck(MovementHandler[i], "Black Rook (H8)")){
-					
+			ArrayList<int[]> MovementHandler = BlackRookH8.movementHandler(BlackRookH8.getCurrentPositionX(), BlackRookH8.getCurrentPositionY(), BlackRookH8.StartingPositionX, BlackRookH8.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Rook (H8)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		if(BlackQueenD8.getActive()){
-			int [][] MovementHandler = BlackQueenD8.movementHandler(BlackQueenD8.getCurrentPositionX(), BlackQueenD8.getCurrentPositionY(), BlackQueenD8.StartingPositionX, BlackQueenD8.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandler for BlackQueenD8 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_BlackKing.isBlackKingInCheck(MovementHandler[i], "Black Queen (D8)")){
-					
+			ArrayList<int[]> MovementHandler = BlackQueenD8.movementHandler(BlackQueenD8.getCurrentPositionX(), BlackQueenD8.getCurrentPositionY(), BlackQueenD8.StartingPositionX, BlackQueenD8.StartingPositionY);
+			
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Queen (D8)")){
 					return false;
-				}			
+				}
 			}
+			
 		}
 		
 		if(BlackBishopC8.getActive()){
-			int [][] MovementHandler = BlackBishopC8.movementHandler(BlackBishopC8.getCurrentPositionX(), BlackBishopC8.getCurrentPositionY(), BlackBishopC8.StartingPositionX, BlackBishopC8.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandler for BlackBishopC8 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_BlackKing.isBlackKingInCheck(MovementHandler[i], "Black Bishop (C8)")){
-					
+			ArrayList<int[]> MovementHandler = BlackBishopC8.movementHandler(BlackBishopC8.getCurrentPositionX(), BlackBishopC8.getCurrentPositionY(), BlackBishopC8.StartingPositionX, BlackBishopC8.StartingPositionY);
+			
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Bishop (C8)")){
 					return false;
-				}			
+				}
 			}
 		}
 		
 		if(BlackBishopF8.getActive()){
-			int [][] MovementHandler = BlackBishopF8.movementHandler(BlackBishopF8.getCurrentPositionX(), BlackBishopF8.getCurrentPositionY(), BlackBishopF8.StartingPositionX, BlackBishopF8.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandler for BlackBishopF8 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_BlackKing.isBlackKingInCheck(MovementHandler[i], "Black Bishop (F8)")){
-					
+			ArrayList<int[]> MovementHandler = BlackBishopF8.movementHandler(BlackBishopF8.getCurrentPositionX(), BlackBishopF8.getCurrentPositionY(), BlackBishopF8.StartingPositionX, BlackBishopF8.StartingPositionY);
+			
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Bishop (F8)")){
 					return false;
-				}			
+				}
 			}
 		}
 		
 		if(BlackKnightB8.getActive()){
-			int [][] MovementHandler = BlackKnightB8.movementHandler(BlackKnightB8.getCurrentPositionX(), BlackKnightB8.getCurrentPositionY(), BlackKnightB8.StartingPositionX, BlackKnightB8.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandler for BlackKnightB8 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_BlackKing.isBlackKingInCheck(MovementHandler[i], "Black Knight (B8)")){
-					
+			ArrayList<int[]> MovementHandler = BlackKnightB8.movementHandler(BlackKnightB8.getCurrentPositionX(), BlackKnightB8.getCurrentPositionY(), BlackKnightB8.StartingPositionX, BlackKnightB8.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Knight (B8)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		if(BlackKnightG8.getActive()){
-			int [][] MovementHandler = BlackKnightG8.movementHandler(BlackKnightG8.getCurrentPositionX(), BlackKnightG8.getCurrentPositionY(), BlackKnightG8.StartingPositionX, BlackKnightG8.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandler for BlackKnightG8 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_BlackKing.isBlackKingInCheck(MovementHandler[i], "Black Knight (G8)")){
-					
+			ArrayList<int[]> MovementHandler = BlackKnightG8.movementHandler(BlackKnightG8.getCurrentPositionX(), BlackKnightG8.getCurrentPositionY(), BlackKnightG8.StartingPositionX, BlackKnightG8.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Knight (G8)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		
 		if(BlackPawnA7.getActive()){
-			int [][] MovementHandler = BlackPawnA7.movementHandler(BlackPawnA7.getCurrentPositionX(), BlackPawnA7.getCurrentPositionY(), BlackPawnA7.StartingPositionX, BlackPawnA7.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandlerForBlackPawnA7 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_BlackKing.isBlackKingInCheck(MovementHandler[i], "Black Pawn (A7)")){
-					
+		
+			ArrayList<int[]> MovementHandler = BlackPawnA7.movementHandler(BlackPawnA7.getCurrentPositionX(), BlackPawnA7.getCurrentPositionY(), BlackPawnA7.StartingPositionX, BlackPawnA7.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Pawn (A7)")){
 					return false;
-				}			
-			}
+				}
+			}		
 		}
 		
 		if(BlackPawnB7.getActive()){
-			int [][] MovementHandler = BlackPawnB7.movementHandler(BlackPawnB7.getCurrentPositionX(), BlackPawnB7.getCurrentPositionY(), BlackPawnB7.StartingPositionX, BlackPawnB7.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandlerForBlackPawnB7 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_BlackKing.isBlackKingInCheck(MovementHandler[i], "Black Pawn (B7)")){
-					
+			ArrayList<int[]> MovementHandler = BlackPawnB7.movementHandler(BlackPawnB7.getCurrentPositionX(), BlackPawnB7.getCurrentPositionY(), BlackPawnB7.StartingPositionX, BlackPawnB7.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Pawn (B7)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		
 		if(BlackPawnC7.getActive()){
-			int [][] MovementHandler = BlackPawnC7.movementHandler(BlackPawnC7.getCurrentPositionX(), BlackPawnC7.getCurrentPositionY(), BlackPawnC7.StartingPositionX, BlackPawnC7.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandlerForBlackPawnC7 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_BlackKing.isBlackKingInCheck(MovementHandler[i], "Black Pawn (C7)")){
-					
+			ArrayList<int[]> MovementHandler = BlackPawnC7.movementHandler(BlackPawnC7.getCurrentPositionX(), BlackPawnC7.getCurrentPositionY(), BlackPawnC7.StartingPositionX, BlackPawnC7.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Pawn (C7)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		
 		if(BlackPawnD7.getActive()){
-			int [][] MovementHandler = BlackPawnD7.movementHandler(BlackPawnD7.getCurrentPositionX(), BlackPawnD7.getCurrentPositionY(), BlackPawnD7.StartingPositionX, BlackPawnD7.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandlerForBlackPawnD7 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_BlackKing.isBlackKingInCheck(MovementHandler[i], "Black Pawn (D7)")){
-					
+			ArrayList<int[]> MovementHandler = BlackPawnD7.movementHandler(BlackPawnD7.getCurrentPositionX(), BlackPawnD7.getCurrentPositionY(), BlackPawnD7.StartingPositionX, BlackPawnD7.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Pawn (D7)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		
 		if(BlackPawnE7.getActive()){
-			int [][] MovementHandler = BlackPawnE7.movementHandler(BlackPawnE7.getCurrentPositionX(), BlackPawnE7.getCurrentPositionY(), BlackPawnE7.StartingPositionX, BlackPawnE7.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandlerForBlackPawnE7 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_BlackKing.isBlackKingInCheck(MovementHandler[i], "Black Pawn (E7)")){
-					
+			ArrayList<int[]> MovementHandler = BlackPawnE7.movementHandler(BlackPawnE7.getCurrentPositionX(), BlackPawnE7.getCurrentPositionY(), BlackPawnE7.StartingPositionX, BlackPawnE7.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Pawn (E7)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		
 		if(BlackPawnF7.getActive()){
-			int [][] MovementHandler = BlackPawnF7.movementHandler(BlackPawnF7.getCurrentPositionX(), BlackPawnF7.getCurrentPositionY(), BlackPawnF7.StartingPositionX, BlackPawnF7.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandlerForBlackPawnF7 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_BlackKing.isBlackKingInCheck(MovementHandler[i], "Black Pawn (F7)")){
-					
+			ArrayList<int[]> MovementHandler = BlackPawnF7.movementHandler(BlackPawnF7.getCurrentPositionX(), BlackPawnF7.getCurrentPositionY(), BlackPawnF7.StartingPositionX, BlackPawnF7.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Pawn (F7)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		
 		if(BlackPawnG7.getActive()){
-			int [][] MovementHandler = BlackPawnG7.movementHandler(BlackPawnG7.getCurrentPositionX(), BlackPawnG7.getCurrentPositionY(), BlackPawnG7.StartingPositionX, BlackPawnG7.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandlerForBlackPawnG7 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_BlackKing.isBlackKingInCheck(MovementHandler[i], "Black Pawn (G7)")){
-					
+			ArrayList<int[]> MovementHandler = BlackPawnG7.movementHandler(BlackPawnG7.getCurrentPositionX(), BlackPawnG7.getCurrentPositionY(), BlackPawnG7.StartingPositionX, BlackPawnG7.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Pawn (G7)")){
 					return false;
-				}			
-			}
+				}
+			}	
 		}
 		
 		if(BlackPawnH7.getActive()){
-			int [][] MovementHandler = BlackPawnH7.movementHandler(BlackPawnH7.getCurrentPositionX(), BlackPawnH7.getCurrentPositionY(), BlackPawnH7.StartingPositionX, BlackPawnH7.StartingPositionY);
-			for (int i = 0; i < MovementHandler.length ; i++){
-
-				//System.out.println("InnerLoopMovementHandlerForBlackPawnH7 " + Arrays.toString(MovementHandler[i]));
-				if (!Superclass_BlackKing.isBlackKingInCheck(MovementHandler[i], "Black Pawn (H7)")){
-					
+			ArrayList<int[]> MovementHandler = BlackPawnH7.movementHandler(BlackPawnH7.getCurrentPositionX(), BlackPawnH7.getCurrentPositionY(), BlackPawnH7.StartingPositionX, BlackPawnH7.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Pawn (H7)")){
 					return false;
-				}			
-			}
+				}
+			}	
+		}
+		if(BlackKnightProm1.getActive()){
+			ArrayList<int[]> MovementHandler = BlackKnightProm1.movementHandler(BlackKnightProm1.getCurrentPositionX(), BlackKnightProm1.getCurrentPositionY(), BlackKnightProm1.StartingPositionX, BlackKnightProm1.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Knight (Prom1)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackKnightProm2.getActive()){
+			ArrayList<int[]> MovementHandler = BlackKnightProm2.movementHandler(BlackKnightProm2.getCurrentPositionX(), BlackKnightProm2.getCurrentPositionY(), BlackKnightProm2.StartingPositionX, BlackKnightProm2.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Knight (Prom2)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackKnightProm3.getActive()){
+			ArrayList<int[]> MovementHandler = BlackKnightProm3.movementHandler(BlackKnightProm3.getCurrentPositionX(), BlackKnightProm3.getCurrentPositionY(), BlackKnightProm3.StartingPositionX, BlackKnightProm3.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Knight (Prom3)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackKnightProm4.getActive()){
+			ArrayList<int[]> MovementHandler = BlackKnightProm4.movementHandler(BlackKnightProm4.getCurrentPositionX(), BlackKnightProm4.getCurrentPositionY(), BlackKnightProm4.StartingPositionX, BlackKnightProm4.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Knight (Prom4)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackKnightProm5.getActive()){
+			ArrayList<int[]> MovementHandler = BlackKnightProm5.movementHandler(BlackKnightProm5.getCurrentPositionX(), BlackKnightProm5.getCurrentPositionY(), BlackKnightProm5.StartingPositionX, BlackKnightProm5.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Knight (Prom5)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackKnightProm6.getActive()){
+			ArrayList<int[]> MovementHandler = BlackKnightProm6.movementHandler(BlackKnightProm6.getCurrentPositionX(), BlackKnightProm6.getCurrentPositionY(), BlackKnightProm6.StartingPositionX, BlackKnightProm6.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Knight (Prom6)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackKnightProm7.getActive()){
+			ArrayList<int[]> MovementHandler = BlackKnightProm7.movementHandler(BlackKnightProm7.getCurrentPositionX(), BlackKnightProm7.getCurrentPositionY(), BlackKnightProm7.StartingPositionX, BlackKnightProm7.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Knight (Prom7)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackKnightProm8.getActive()){
+			ArrayList<int[]> MovementHandler = BlackKnightProm8.movementHandler(BlackKnightProm8.getCurrentPositionX(), BlackKnightProm8.getCurrentPositionY(), BlackKnightProm8.StartingPositionX, BlackKnightProm8.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Knight (Prom8)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackQueenProm1.getActive()){
+			ArrayList<int[]> MovementHandler = BlackQueenProm1.movementHandler(BlackQueenProm1.getCurrentPositionX(), BlackQueenProm1.getCurrentPositionY(), BlackQueenProm1.StartingPositionX, BlackQueenProm1.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Queen (Prom1)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackQueenProm2.getActive()){
+			ArrayList<int[]> MovementHandler = BlackQueenProm2.movementHandler(BlackQueenProm2.getCurrentPositionX(), BlackQueenProm2.getCurrentPositionY(), BlackQueenProm2.StartingPositionX, BlackQueenProm2.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Queen (Prom2)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackQueenProm3.getActive()){
+			ArrayList<int[]> MovementHandler = BlackQueenProm3.movementHandler(BlackQueenProm3.getCurrentPositionX(), BlackQueenProm3.getCurrentPositionY(), BlackQueenProm3.StartingPositionX, BlackQueenProm3.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Queen (Prom3)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackQueenProm4.getActive()){
+			ArrayList<int[]> MovementHandler = BlackQueenProm4.movementHandler(BlackQueenProm4.getCurrentPositionX(), BlackQueenProm4.getCurrentPositionY(), BlackQueenProm4.StartingPositionX, BlackQueenProm4.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Queen (Prom4)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackQueenProm5.getActive()){
+			ArrayList<int[]> MovementHandler = BlackQueenProm5.movementHandler(BlackQueenProm5.getCurrentPositionX(), BlackQueenProm5.getCurrentPositionY(), BlackQueenProm5.StartingPositionX, BlackQueenProm5.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Queen (Prom5)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackQueenProm6.getActive()){
+			ArrayList<int[]> MovementHandler = BlackQueenProm6.movementHandler(BlackQueenProm6.getCurrentPositionX(), BlackQueenProm6.getCurrentPositionY(), BlackQueenProm6.StartingPositionX, BlackQueenProm6.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Queen (Prom6)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackQueenProm7.getActive()){
+			ArrayList<int[]> MovementHandler = BlackQueenProm7.movementHandler(BlackQueenProm7.getCurrentPositionX(), BlackQueenProm7.getCurrentPositionY(), BlackQueenProm7.StartingPositionX, BlackQueenProm7.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Queen (Prom7)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackQueenProm8.getActive()){
+			ArrayList<int[]> MovementHandler = BlackQueenProm8.movementHandler(BlackQueenProm8.getCurrentPositionX(), BlackQueenProm8.getCurrentPositionY(), BlackQueenProm8.StartingPositionX, BlackQueenProm8.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Queen (Prom8)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackBishopProm1.getActive()){
+			ArrayList<int[]> MovementHandler = BlackBishopProm1.movementHandler(BlackBishopProm1.getCurrentPositionX(), BlackBishopProm1.getCurrentPositionY(), BlackBishopProm1.StartingPositionX, BlackBishopProm1.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Bishop (Prom1)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackBishopProm2.getActive()){
+			ArrayList<int[]> MovementHandler = BlackBishopProm2.movementHandler(BlackBishopProm2.getCurrentPositionX(), BlackBishopProm2.getCurrentPositionY(), BlackBishopProm2.StartingPositionX, BlackBishopProm2.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Bishop (Prom2)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackBishopProm3.getActive()){
+			ArrayList<int[]> MovementHandler = BlackBishopProm3.movementHandler(BlackBishopProm3.getCurrentPositionX(), BlackBishopProm3.getCurrentPositionY(), BlackBishopProm3.StartingPositionX, BlackBishopProm3.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Bishop (Prom3)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackBishopProm4.getActive()){
+			ArrayList<int[]> MovementHandler = BlackBishopProm4.movementHandler(BlackBishopProm4.getCurrentPositionX(), BlackBishopProm4.getCurrentPositionY(), BlackBishopProm4.StartingPositionX, BlackBishopProm4.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Bishop (Prom4)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackBishopProm5.getActive()){
+			ArrayList<int[]> MovementHandler = BlackBishopProm5.movementHandler(BlackBishopProm5.getCurrentPositionX(), BlackBishopProm5.getCurrentPositionY(), BlackBishopProm5.StartingPositionX, BlackBishopProm5.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Bishop (Prom5)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackBishopProm6.getActive()){
+			ArrayList<int[]> MovementHandler = BlackBishopProm6.movementHandler(BlackBishopProm6.getCurrentPositionX(), BlackBishopProm6.getCurrentPositionY(), BlackBishopProm6.StartingPositionX, BlackBishopProm6.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Bishop (Prom6)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackBishopProm7.getActive()){
+			ArrayList<int[]> MovementHandler = BlackBishopProm7.movementHandler(BlackBishopProm7.getCurrentPositionX(), BlackBishopProm7.getCurrentPositionY(), BlackBishopProm7.StartingPositionX, BlackBishopProm7.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Bishop (Prom7)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackBishopProm8.getActive()){
+			ArrayList<int[]> MovementHandler = BlackBishopProm8.movementHandler(BlackBishopProm8.getCurrentPositionX(), BlackBishopProm8.getCurrentPositionY(), BlackBishopProm8.StartingPositionX, BlackBishopProm8.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Bishop (Prom8)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackRookProm1.getActive()){
+			ArrayList<int[]> MovementHandler = BlackRookProm1.movementHandler(BlackRookProm1.getCurrentPositionX(), BlackRookProm1.getCurrentPositionY(), BlackRookProm1.StartingPositionX, BlackRookProm1.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Rook (Prom1)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackRookProm2.getActive()){
+			ArrayList<int[]> MovementHandler = BlackRookProm2.movementHandler(BlackRookProm2.getCurrentPositionX(), BlackRookProm2.getCurrentPositionY(), BlackRookProm2.StartingPositionX, BlackRookProm2.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Rook (Prom2)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackRookProm3.getActive()){
+			ArrayList<int[]> MovementHandler = BlackRookProm3.movementHandler(BlackRookProm3.getCurrentPositionX(), BlackRookProm3.getCurrentPositionY(), BlackRookProm3.StartingPositionX, BlackRookProm3.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Rook (Prom3)")){
+					return false;
+				}
+			}	
+		}
+		if(BlackRookProm4.getActive()){
+			ArrayList<int[]> MovementHandler = BlackRookProm4.movementHandler(BlackRookProm4.getCurrentPositionX(), BlackRookProm4.getCurrentPositionY(), BlackRookProm4.StartingPositionX, BlackRookProm4.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Rook (Prom4)")){
+					return false;
+				}
+			}	
 		}
 		
-
+		if(BlackRookProm5.getActive()){
+			ArrayList<int[]> MovementHandler = BlackRookProm5.movementHandler(BlackRookProm5.getCurrentPositionX(), BlackRookProm5.getCurrentPositionY(), BlackRookProm5.StartingPositionX, BlackRookProm5.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Rook (Prom5)")){
+					return false;
+				}
+			}	
+		}
+		
+		if(BlackRookProm6.getActive()){
+			ArrayList<int[]> MovementHandler = BlackRookProm6.movementHandler(BlackRookProm6.getCurrentPositionX(), BlackRookProm6.getCurrentPositionY(), BlackRookProm6.StartingPositionX, BlackRookProm6.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Rook (Prom6)")){
+					return false;
+				}
+			}	
+		}
+		
+		if(BlackRookProm7.getActive()){
+			ArrayList<int[]> MovementHandler = BlackRookProm7.movementHandler(BlackRookProm7.getCurrentPositionX(), BlackRookProm7.getCurrentPositionY(), BlackRookProm7.StartingPositionX, BlackRookProm7.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Rook (Prom7)")){
+					return false;
+				}
+			}	
+		}
+		
+		if(BlackRookProm8.getActive()){
+			ArrayList<int[]> MovementHandler = BlackRookProm8.movementHandler(BlackRookProm8.getCurrentPositionX(), BlackRookProm8.getCurrentPositionY(), BlackRookProm8.StartingPositionX, BlackRookProm8.StartingPositionY);
+			for (int [] i: MovementHandler){
+				if(!Superclass_BlackKing.isBlackKingInCheck(i, "Black Rook (Prom8)")){
+					return false;
+				}
+			}	
+		}
 		return true;
+
 	}
-	static int[][] movementKillEngine(int[] NewXY,int[][]MultiArray, int j){
-		for(int i = 0 ; i < aggregateWhites().length ; i++) {
-			int[] Coordinate = aggregateWhites()[i];
+	
+	static ArrayList<int[]> searcherTopTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
+		//this function looks for black pieces blocking this queen top tiles
+
+		int [] NewXY = new int[2];
+		NewXY[0] = CurrentX + 0;
+		NewXY[1] = CurrentY - 1;
+		
+		if(NewXY[1] < 0){
+			return MoveList;
+		}
+		for(int [] i: aggregateWhites()){
+			int[] Coordinate = i;
 			if(Arrays.equals(Coordinate, NewXY)){
-				//System.out.println("We have found a valid white piece to kill");
-				MultiArray[j]=NewXY;
-			}		    			  
+				//System.out.println("We have found a valid white piece to kill " + j + " tiles top of this Queen");
+				MoveList.add(NewXY);
+				return MoveList;
+			}
 		}
 
-		return MultiArray;
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a black piece " + j + " tiles top of this Queen");
+				return MoveList;
+			}				
+		}
+		MoveList.add(NewXY);
+		return MoveList;
+	}	
+	static ArrayList<int[]> searcherLeftTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
+		//this function looks for black pieces blocking this queen left tiles
+
+		int [] NewXY = new int[2];	
+		NewXY[0] = CurrentX - 1;
+		NewXY[1] = CurrentY + 0;
+		
+		if(NewXY[0] < 0){
+			return MoveList;
+		}
+		
+		for(int [] i: aggregateWhites()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a valid white piece to kill " + j + " tiles left of this Queen");
+				MoveList.add(NewXY);
+				return MoveList;
+			}	
+		}
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a black piece " + j + " tiles left of this Queen");
+				return MoveList;
+			}				
+		}
+		MoveList.add(NewXY);
+		
+		return MoveList;
 	}
+	static ArrayList<int[]> searcherBottomTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
+		//this function looks for black pieces blocking this Queen left tiles
+
+		int [] NewXY = new int[2];
+		NewXY[0] = CurrentX + 0;
+		NewXY[1] = CurrentY + 1;
+		
+		if(NewXY[1] > 7){
+			return MoveList;
+		}
+		for(int [] i: aggregateWhites()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a valid white piece to kill " + j + " tiles bottom of this Queen");
+				MoveList.add(NewXY);
+				return MoveList;
+			}	
+		}
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a black piece " + j + " tiles bottom of this Queen");
+				return MoveList;				
+			}			
+		}
+		MoveList.add(NewXY);
+		
+		return MoveList;
+	}
+	static ArrayList<int[]> searcherRightTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
+		//this function looks for black pieces blocking this Queen left tiles
+
+		int [] NewXY = new int[2];	
+		NewXY[0] = CurrentX + 1;
+		NewXY[1] = CurrentY + 0;
+		
+		if(NewXY[0] > 7){
+			return MoveList;
+		}
+		for(int [] i: aggregateWhites()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a valid white piece to kill " + j + " tiles right of this Queen");
+				MoveList.add(NewXY);
+				return MoveList;
+			}	
+		}
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a black piece " + j + " tiles right of this Queen");
+				return MoveList;
+			}			
+		}
+		MoveList.add(NewXY);
+		
+		return MoveList;
+	}
+	static ArrayList<int[]> searcherTopLeftTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
+		//this function looks for black pieces blocking this Queen top left tiles
+		
+
+		int [] NewXY = new int[2];
+		NewXY[0] = CurrentX - 1;
+		NewXY[1] = CurrentY - 1;
+		
+		if(NewXY[0] < 0 || NewXY[1] < 0){
+			return MoveList;
+		}
+		for(int [] i: aggregateWhites()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a valid white piece to kill " + j + " tiles top left of this Queen");
+				MoveList.add(NewXY);
+				return MoveList;
+			}	
+		}
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a black piece " + j + " tiles top left of this Queen");
+				return MoveList;
+			}			
+		}
+		MoveList.add(NewXY);
 	
-	
+		return MoveList;
+	}	
+	static ArrayList<int[]> searcherTopRightTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
+		//this function looks for black pieces blocking this Queen top right tiles
+
+		int [] NewXY = new int[2];	
+		NewXY[0] = CurrentX + 1;
+		NewXY[1] = CurrentY - 1;
+		
+		if(NewXY[0] > 7 || NewXY[1] < 0){
+			return MoveList;
+		}
+		for(int [] i: aggregateWhites()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a valid white piece to kill " + j + " tiles top right of this Queen");
+				MoveList.add(NewXY);
+				return MoveList;
+			}	
+		}
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a black piece " + j + " tiles top right of this Queen");
+				return MoveList;
+			}			
+		}
+		MoveList.add(NewXY);
+		
+	return MoveList;
+		}
+	static ArrayList<int[]> searcherBottomLeftTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
+		//this function looks for black pieces blocking this Queen bottom left tiles
+		
+
+		int [] NewXY = new int[2];
+		NewXY[0] = CurrentX - 1;
+		NewXY[1] = CurrentY + 1;
+		
+		if(NewXY[0] < 0 || NewXY[1] > 7){
+			return MoveList;
+		}
+		for(int [] i: aggregateWhites()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a valid white piece to kill " + j + " tiles bottom left of this Queen");
+				MoveList.add(NewXY);
+				return MoveList;
+			}	
+		}
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a black piece " + j + " tiles bottom left of this Queen");
+				return MoveList;
+			}			
+		}
+		MoveList.add(NewXY);
+		
+		return MoveList;
+	}
+	static ArrayList<int[]> searcherBottomRightTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
+		//this function looks for black pieces blocking this Queen bottom right tiles
+		
+
+		int [] NewXY = new int[2];	
+		NewXY[0] = CurrentX + 1;
+		NewXY[1] = CurrentY + 1;
+		
+		if(NewXY[0] > 7 || NewXY[1] > 7){
+			return MoveList;
+		}
+		for(int [] i: aggregateWhites()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a valid white piece to kill " + j + " tiles bottom right of this Queen");
+				MoveList.add(NewXY);
+				return MoveList;
+			}	
+		}
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
+			if(Arrays.equals(Coordinate, NewXY)){
+				//System.out.println("We have found a black piece " + j + " tiles bottom right of this Queen");
+				return MoveList;
+			}				
+		}
+		MoveList.add(NewXY);
+		
+		return MoveList;
+	}
 }

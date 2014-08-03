@@ -56,7 +56,7 @@ public class MenuBar implements ActionListener
   }
  
 
-  private class SampleDialog extends JDialog implements ActionListener
+  public class SampleDialog extends JDialog implements ActionListener
   {
     /**
 	 * 
@@ -66,8 +66,7 @@ public class MenuBar implements ActionListener
     private JLabel label1 = new JLabel("(c) Copyright 2014",JLabel.CENTER);
     private JLabel label2 = new JLabel("Author: Robert Salinas",JLabel.CENTER);
     
-    private SampleDialog()
-    {
+    private SampleDialog(){
       super(frame, "About Chess", true);
       JPanel panel = new JPanel(new FlowLayout());
 
@@ -116,7 +115,7 @@ public class MenuBar implements ActionListener
 		}
 	
 }
-	private void restartApplication() {
+	public static void restartApplication() {
 
 		//reset static variables
 		Chess.Highlighted = false;

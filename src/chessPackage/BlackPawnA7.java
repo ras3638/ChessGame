@@ -1,5 +1,7 @@
 package chessPackage;
 
+import java.util.ArrayList;
+
 public class BlackPawnA7 extends Superclass_BlackPawn {
 	static int CurrentPositionX = 0;
 	static int CurrentPositionY = 1;
@@ -59,7 +61,7 @@ public class BlackPawnA7 extends Superclass_BlackPawn {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
 	}
 }
@@ -121,7 +123,7 @@ class BlackPawnB7 extends Superclass_BlackPawn {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
 	}
 }
@@ -183,7 +185,7 @@ class BlackPawnC7 extends Superclass_BlackPawn {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
 	}
 }
@@ -245,7 +247,7 @@ class BlackPawnD7 extends Superclass_BlackPawn {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
 	}
 }
@@ -307,7 +309,7 @@ class BlackPawnE7 extends Superclass_BlackPawn {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
 	}
 }
@@ -369,7 +371,7 @@ class BlackPawnF7 extends Superclass_BlackPawn {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
 	}
 }
@@ -431,7 +433,7 @@ class BlackPawnG7 extends Superclass_BlackPawn {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
 	}
 }
@@ -494,7 +496,7 @@ class BlackPawnH7 extends Superclass_BlackPawn {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
 	}
 }

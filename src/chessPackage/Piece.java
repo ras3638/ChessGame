@@ -3,140 +3,345 @@ package chessPackage;
 import java.util.ArrayList;
 
 public class Piece {
-	static int[][] aggregateBlacks(){
+	static ArrayList<int[]> aggregateBlacks(){
 		
-		int [][] BlackAggregate = new int [48][2];
+		ArrayList<int[]> BlackAggregate = new ArrayList<int []>();
+
+		if (BlackQueenD8.getActive()){
+			BlackAggregate.add(BlackQueenD8.getCurrentPositionXY());
+		}
 		
-		BlackAggregate[0]=BlackPawnA7.getCurrentPositionXY();
-		BlackAggregate[1]=BlackPawnB7.getCurrentPositionXY();
-		BlackAggregate[2]=BlackKingE8.getCurrentPositionXY();
-		BlackAggregate[3]=BlackKnightB8.getCurrentPositionXY();
-		BlackAggregate[4]=BlackPawnC7.getCurrentPositionXY();
-		BlackAggregate[5]=BlackRookA8.getCurrentPositionXY();
-		BlackAggregate[6]=BlackBishopC8.getCurrentPositionXY();
-		BlackAggregate[7]=BlackQueenD8.getCurrentPositionXY();
+		if(BlackKingE8.getActive()){
+			BlackAggregate.add(BlackKingE8.getCurrentPositionXY());
+		}
+	
+		if(BlackRookH8.getActive()){
+			BlackAggregate.add(BlackRookH8.getCurrentPositionXY());
+		}
+	
+		if(BlackRookA8.getActive()){
+			BlackAggregate.add(BlackRookA8.getCurrentPositionXY());
+		}
+
+
 		
-		BlackAggregate[8]=BlackRookProm1.getCurrentPositionXY();
-		BlackAggregate[9]=BlackRookProm2.getCurrentPositionXY();
-		BlackAggregate[10]=BlackRookProm3.getCurrentPositionXY();
-		BlackAggregate[11]=BlackRookProm4.getCurrentPositionXY();
-		BlackAggregate[12]=BlackRookProm5.getCurrentPositionXY();
-		BlackAggregate[13]=BlackRookProm6.getCurrentPositionXY();
-		BlackAggregate[14]=BlackRookProm7.getCurrentPositionXY();
-		BlackAggregate[15]=BlackRookProm8.getCurrentPositionXY();
+		if (BlackBishopC8.getActive()){
+			BlackAggregate.add(BlackBishopC8.getCurrentPositionXY());
+		}
+
+		if(BlackBishopF8.getActive()){
+			BlackAggregate.add(BlackBishopF8.getCurrentPositionXY());
+		}
+		if(BlackKnightG8.getActive()){
+			BlackAggregate.add(BlackKnightG8.getCurrentPositionXY());
+		}
+		if(BlackKnightB8.getActive()){
+			BlackAggregate.add(BlackKnightB8.getCurrentPositionXY());
+		}
+
+		if(BlackPawnA7.getActive()){
+			BlackAggregate.add(BlackPawnA7.getCurrentPositionXY());
+		}
+		if(BlackPawnB7.getActive()){
+			BlackAggregate.add(BlackPawnB7.getCurrentPositionXY());
+		}
 		
-		BlackAggregate[16]=BlackQueenProm1.getCurrentPositionXY();
-		BlackAggregate[17]=BlackQueenProm2.getCurrentPositionXY();
-		BlackAggregate[18]=BlackQueenProm3.getCurrentPositionXY();
-		BlackAggregate[19]=BlackQueenProm4.getCurrentPositionXY();
-		BlackAggregate[20]=BlackQueenProm5.getCurrentPositionXY();
-		BlackAggregate[21]=BlackQueenProm6.getCurrentPositionXY();
-		BlackAggregate[22]=BlackQueenProm7.getCurrentPositionXY();
-		BlackAggregate[23]=BlackQueenProm8.getCurrentPositionXY();
+		if(BlackPawnC7.getActive()){
+			BlackAggregate.add(BlackPawnC7.getCurrentPositionXY());
+		}
+		if(BlackPawnD7.getActive()){
+			BlackAggregate.add(BlackPawnD7.getCurrentPositionXY());
+		}
+		if(BlackPawnE7.getActive()){
+			BlackAggregate.add(BlackPawnE7.getCurrentPositionXY());
+		}
+		if(BlackPawnF7.getActive()){
+			BlackAggregate.add(BlackPawnF7.getCurrentPositionXY());
+		}
+		if(BlackPawnG7.getActive()){
+			BlackAggregate.add(BlackPawnG7.getCurrentPositionXY());
+		}
+		if(BlackPawnH7.getActive()){
+			BlackAggregate.add(BlackPawnH7.getCurrentPositionXY());
+		}
 		
-		BlackAggregate[24]=BlackBishopProm1.getCurrentPositionXY();
-		BlackAggregate[25]=BlackBishopProm2.getCurrentPositionXY();
-		BlackAggregate[26]=BlackBishopProm3.getCurrentPositionXY();
-		BlackAggregate[27]=BlackBishopProm4.getCurrentPositionXY();
-		BlackAggregate[28]=BlackBishopProm5.getCurrentPositionXY();
-		BlackAggregate[29]=BlackBishopProm6.getCurrentPositionXY();
-		BlackAggregate[30]=BlackBishopProm7.getCurrentPositionXY();
-		BlackAggregate[31]=BlackBishopProm8.getCurrentPositionXY();
 		
-		BlackAggregate[32]=BlackKnightProm1.getCurrentPositionXY();
-		BlackAggregate[33]=BlackKnightProm2.getCurrentPositionXY();
-		BlackAggregate[34]=BlackKnightProm3.getCurrentPositionXY();
-		BlackAggregate[35]=BlackKnightProm4.getCurrentPositionXY();
-		BlackAggregate[36]=BlackKnightProm5.getCurrentPositionXY();
-		BlackAggregate[37]=BlackKnightProm6.getCurrentPositionXY();
-		BlackAggregate[38]=BlackKnightProm7.getCurrentPositionXY();
-		BlackAggregate[39]=BlackKnightProm8.getCurrentPositionXY();
+		if(BlackRookProm1.getActive()){
+			BlackAggregate.add(BlackRookProm1.getCurrentPositionXY());
+		}
 		
-		BlackAggregate[40]=BlackRookH8.getCurrentPositionXY();
-		BlackAggregate[41]=BlackPawnD7.getCurrentPositionXY();
-		BlackAggregate[42]=BlackBishopF8.getCurrentPositionXY();
-		BlackAggregate[43]=BlackKnightG8.getCurrentPositionXY();
-		BlackAggregate[44]=BlackPawnE7.getCurrentPositionXY();
-		BlackAggregate[45]=BlackPawnF7.getCurrentPositionXY();
-		BlackAggregate[46]=BlackPawnG7.getCurrentPositionXY();
-		BlackAggregate[47]=BlackPawnH7.getCurrentPositionXY();
+		if(BlackRookProm2.getActive()){
+			BlackAggregate.add(BlackRookProm2.getCurrentPositionXY());
+		}
+		if(BlackRookProm3.getActive()){
+			BlackAggregate.add(BlackRookProm3.getCurrentPositionXY());
+		}
+		if(BlackRookProm4.getActive()){
+			BlackAggregate.add(BlackRookProm4.getCurrentPositionXY());
+		}
+		if(BlackRookProm5.getActive()){
+			BlackAggregate.add(BlackRookProm5.getCurrentPositionXY());
+		}
+		if(BlackRookProm6.getActive()){
+			BlackAggregate.add(BlackRookProm6.getCurrentPositionXY());
+		}
+		if(BlackRookProm7.getActive()){
+			BlackAggregate.add(BlackRookProm7.getCurrentPositionXY());
+		}
+		if(BlackRookProm8.getActive()){
+			BlackAggregate.add(BlackRookProm8.getCurrentPositionXY());
+		}
+		if(BlackQueenProm1.getActive()){
+			BlackAggregate.add(BlackQueenProm1.getCurrentPositionXY());
+		}
+		if(BlackQueenProm2.getActive()){
+			BlackAggregate.add(BlackQueenProm2.getCurrentPositionXY());
+		}
+		if(BlackQueenProm3.getActive()){
+			BlackAggregate.add(BlackQueenProm3.getCurrentPositionXY());
+		}
+		if(BlackQueenProm4.getActive()){
+			BlackAggregate.add(BlackQueenProm4.getCurrentPositionXY());
+		}
+		if(BlackQueenProm5.getActive()){
+			BlackAggregate.add(BlackQueenProm5.getCurrentPositionXY());
+		}
+		
+		if(BlackQueenProm6.getActive()){
+			BlackAggregate.add(BlackQueenProm6.getCurrentPositionXY());
+		}
+		if(BlackQueenProm7.getActive()){
+			BlackAggregate.add(BlackQueenProm7.getCurrentPositionXY());
+		}
+		
+		if(BlackQueenProm8.getActive()){
+			BlackAggregate.add(BlackQueenProm8.getCurrentPositionXY());
+		}
+		
+		
+		if(BlackBishopProm1.getActive()){
+			BlackAggregate.add(BlackBishopProm1.getCurrentPositionXY());
+		}
+		if(BlackBishopProm2.getActive()){
+			BlackAggregate.add(BlackBishopProm2.getCurrentPositionXY());
+		}
+		if(BlackBishopProm3.getActive()){
+			BlackAggregate.add(BlackBishopProm3.getCurrentPositionXY());
+		}
+		if(BlackBishopProm4.getActive()){
+			BlackAggregate.add(BlackBishopProm4.getCurrentPositionXY());
+		}
+		if(BlackBishopProm5.getActive()){
+			BlackAggregate.add(BlackBishopProm5.getCurrentPositionXY());
+		}
+		
+		if(BlackBishopProm6.getActive()){
+			BlackAggregate.add(BlackBishopProm6.getCurrentPositionXY());
+		}
+		if(BlackBishopProm7.getActive()){
+			BlackAggregate.add(BlackBishopProm7.getCurrentPositionXY());
+		}
+		if(BlackBishopProm8.getActive()){
+			BlackAggregate.add(BlackBishopProm8.getCurrentPositionXY());
+		}
+		
+		
+		if(BlackKnightProm1.getActive()){
+			BlackAggregate.add(BlackKnightProm1.getCurrentPositionXY());
+		}
+		if(BlackKnightProm2.getActive()){
+			BlackAggregate.add(BlackKnightProm2.getCurrentPositionXY());
+		}
+		if(BlackKnightProm3.getActive()){
+			BlackAggregate.add(BlackKnightProm3.getCurrentPositionXY());
+		}
+		if(BlackKnightProm4.getActive()){
+			BlackAggregate.add(BlackKnightProm4.getCurrentPositionXY());
+		}
+		if(BlackKnightProm5.getActive()){
+			BlackAggregate.add(BlackKnightProm5.getCurrentPositionXY());
+		}
+		if(BlackKnightProm6.getActive()){
+			BlackAggregate.add(BlackKnightProm6.getCurrentPositionXY());
+		}
+		if(BlackKnightProm7.getActive()){
+			BlackAggregate.add(BlackKnightProm7.getCurrentPositionXY());
+		}
+		if(BlackKnightProm8.getActive()){
+			BlackAggregate.add(BlackKnightProm8.getCurrentPositionXY());
+		}
 		
 		return BlackAggregate;
 	}
-	static int[][] aggregateWhites(){
+	static ArrayList<int[]> aggregateWhites(){
 		
-		int [][] WhiteAggregate = new int [48][2];
+		ArrayList<int[]> WhiteAggregate = new ArrayList<int []>();
 		
-		WhiteAggregate[0]=WhitePawnB2.getCurrentPositionXY();
-		WhiteAggregate[1]=WhitePawnA2.getCurrentPositionXY();
-		WhiteAggregate[2]=WhiteKingE1.getCurrentPositionXY();
-		WhiteAggregate[3]=WhiteKnightB1.getCurrentPositionXY();
-		WhiteAggregate[4]=WhitePawnC2.getCurrentPositionXY();
-		WhiteAggregate[5]=WhiteRookA1.getCurrentPositionXY();
-		WhiteAggregate[6]=WhiteBishopC1.getCurrentPositionXY();
-		WhiteAggregate[7]=WhiteQueenD1.getCurrentPositionXY();
-	
-		WhiteAggregate[8]=WhiteRookH1.getCurrentPositionXY();
-		WhiteAggregate[9]=WhitePawnD2.getCurrentPositionXY();
-		WhiteAggregate[10]=WhiteBishopF1.getCurrentPositionXY();
-		WhiteAggregate[11]=WhiteKnightG1.getCurrentPositionXY();
-		WhiteAggregate[12]=WhitePawnE2.getCurrentPositionXY();
-		WhiteAggregate[13]=WhitePawnF2.getCurrentPositionXY();
-		WhiteAggregate[14]=WhitePawnG2.getCurrentPositionXY();
-		WhiteAggregate[15]=WhitePawnH2.getCurrentPositionXY();
+		if(WhitePawnB2.getActive()){
+			WhiteAggregate.add(WhitePawnB2.getCurrentPositionXY());
+		}
 		
-		WhiteAggregate[16]=WhiteRookProm1.getCurrentPositionXY();
-		WhiteAggregate[17]=WhiteRookProm2.getCurrentPositionXY();
-		WhiteAggregate[18]=WhiteRookProm3.getCurrentPositionXY();
-		WhiteAggregate[19]=WhiteRookProm4.getCurrentPositionXY();
-		WhiteAggregate[20]=WhiteRookProm5.getCurrentPositionXY();
-		WhiteAggregate[21]=WhiteRookProm6.getCurrentPositionXY();
-		WhiteAggregate[22]=WhiteRookProm7.getCurrentPositionXY();
-		WhiteAggregate[23]=WhiteRookProm8.getCurrentPositionXY();
-		WhiteAggregate[24]=WhiteQueenProm1.getCurrentPositionXY();
-		WhiteAggregate[25]=WhiteQueenProm2.getCurrentPositionXY();
-		WhiteAggregate[26]=WhiteQueenProm3.getCurrentPositionXY();
-		WhiteAggregate[27]=WhiteQueenProm4.getCurrentPositionXY();
-		WhiteAggregate[28]=WhiteQueenProm5.getCurrentPositionXY();
-		WhiteAggregate[29]=WhiteQueenProm6.getCurrentPositionXY();
-		WhiteAggregate[30]=WhiteQueenProm7.getCurrentPositionXY();
-		WhiteAggregate[31]=WhiteQueenProm8.getCurrentPositionXY();
+		if(WhitePawnA2.getActive()){
+			WhiteAggregate.add(WhitePawnA2.getCurrentPositionXY());
+		}
 		
-		WhiteAggregate[32]=WhiteBishopProm1.getCurrentPositionXY();
-		WhiteAggregate[33]=WhiteBishopProm2.getCurrentPositionXY();
-		WhiteAggregate[34]=WhiteBishopProm3.getCurrentPositionXY();
-		WhiteAggregate[35]=WhiteBishopProm4.getCurrentPositionXY();
-		WhiteAggregate[36]=WhiteBishopProm5.getCurrentPositionXY();
-		WhiteAggregate[37]=WhiteBishopProm6.getCurrentPositionXY();
-		WhiteAggregate[38]=WhiteBishopProm7.getCurrentPositionXY();
-		WhiteAggregate[39]=WhiteBishopProm8.getCurrentPositionXY();
+		if(WhiteKingE1.getActive()){
+			WhiteAggregate.add(WhiteKingE1.getCurrentPositionXY());
+		}
 		
-		WhiteAggregate[39]=WhiteKnightProm1.getCurrentPositionXY();
-		WhiteAggregate[40]=WhiteKnightProm2.getCurrentPositionXY();
-		WhiteAggregate[41]=WhiteKnightProm3.getCurrentPositionXY();
-		WhiteAggregate[42]=WhiteKnightProm4.getCurrentPositionXY();
-		WhiteAggregate[43]=WhiteKnightProm5.getCurrentPositionXY();
-		WhiteAggregate[44]=WhiteKnightProm6.getCurrentPositionXY();
-		WhiteAggregate[45]=WhiteKnightProm7.getCurrentPositionXY();
-		WhiteAggregate[46]=WhiteKnightProm8.getCurrentPositionXY();
+		if(WhiteKnightB1.getActive()){
+			WhiteAggregate.add(WhiteKnightB1.getCurrentPositionXY());
+		}
 		
+		if(WhitePawnC2.getActive()){
+			WhiteAggregate.add(WhitePawnC2.getCurrentPositionXY());
+		}
+		
+		if(WhiteRookA1.getActive()){
+			WhiteAggregate.add(WhiteRookA1.getCurrentPositionXY());
+		}
 
+		if (WhiteBishopC1.getActive()){
+			WhiteAggregate.add(WhiteBishopC1.getCurrentPositionXY());
+		}
+		if (WhiteQueenD1.getActive()){
+			WhiteAggregate.add(WhiteQueenD1.getCurrentPositionXY());
+		}
+		
+	
+		if(WhiteRookH1.getActive()){
+			WhiteAggregate.add(WhiteRookH1.getCurrentPositionXY());
+		}
+		if(WhitePawnD2.getActive()){
+			WhiteAggregate.add(WhitePawnD2.getCurrentPositionXY());
+		}
+		if(WhiteBishopF1.getActive()){
+			WhiteAggregate.add(WhiteBishopF1.getCurrentPositionXY());
+		}
+		if(WhiteKnightG1.getActive()){
+			WhiteAggregate.add(WhiteKnightG1.getCurrentPositionXY());
+		}
+		if(WhitePawnE2.getActive()){
+			WhiteAggregate.add(WhitePawnE2.getCurrentPositionXY());
+		}
+		if(WhitePawnF2.getActive()){
+			WhiteAggregate.add(WhitePawnF2.getCurrentPositionXY());
+		}
+		if(WhitePawnG2.getActive()){
+			WhiteAggregate.add(WhitePawnG2.getCurrentPositionXY());
+		}
+		if(WhitePawnH2.getActive()){
+			WhiteAggregate.add(WhitePawnH2.getCurrentPositionXY());
+		}
+		
+		
+		if(WhiteRookProm1.getActive()){
+			WhiteAggregate.add(WhiteRookProm1.getCurrentPositionXY());
+		}
+		
+		if(WhiteRookProm2.getActive()){
+			WhiteAggregate.add(WhiteRookProm2.getCurrentPositionXY());
+		}
+		if(WhiteRookProm3.getActive()){
+			WhiteAggregate.add(WhiteRookProm3.getCurrentPositionXY());
+		}
+		if(WhiteRookProm4.getActive()){
+			WhiteAggregate.add(WhiteRookProm4.getCurrentPositionXY());
+		}
+		if(WhiteRookProm5.getActive()){
+			WhiteAggregate.add(WhiteRookProm5.getCurrentPositionXY());
+		}
+		if(WhiteRookProm6.getActive()){
+			WhiteAggregate.add(WhiteRookProm6.getCurrentPositionXY());
+		}
+		if(WhiteRookProm7.getActive()){
+			WhiteAggregate.add(WhiteRookProm7.getCurrentPositionXY());
+		}
+		if(WhiteRookProm8.getActive()){
+			WhiteAggregate.add(WhiteRookProm8.getCurrentPositionXY());
+		}
+		if(WhiteQueenProm1.getActive()){
+			WhiteAggregate.add(WhiteQueenProm1.getCurrentPositionXY());
+		}
+		if(WhiteQueenProm2.getActive()){
+			WhiteAggregate.add(WhiteQueenProm2.getCurrentPositionXY());
+		}
+		if(WhiteQueenProm3.getActive()){
+			WhiteAggregate.add(WhiteQueenProm3.getCurrentPositionXY());
+		}
+		if(WhiteQueenProm4.getActive()){
+			WhiteAggregate.add(WhiteQueenProm4.getCurrentPositionXY());
+		}
+		if(WhiteQueenProm5.getActive()){
+			WhiteAggregate.add(WhiteQueenProm5.getCurrentPositionXY());
+		}
+		
+		if(WhiteQueenProm6.getActive()){
+			WhiteAggregate.add(WhiteQueenProm6.getCurrentPositionXY());
+		}
+		if(WhiteQueenProm7.getActive()){
+			WhiteAggregate.add(WhiteQueenProm7.getCurrentPositionXY());
+		}
+		
+		if(WhiteQueenProm8.getActive()){
+			WhiteAggregate.add(WhiteQueenProm8.getCurrentPositionXY());
+		}
+		
+		
+		if(WhiteBishopProm1.getActive()){
+			WhiteAggregate.add(WhiteBishopProm1.getCurrentPositionXY());
+		}
+		if(WhiteBishopProm2.getActive()){
+			WhiteAggregate.add(WhiteBishopProm2.getCurrentPositionXY());
+		}
+		if(WhiteBishopProm3.getActive()){
+			WhiteAggregate.add(WhiteBishopProm3.getCurrentPositionXY());
+		}
+		if(WhiteBishopProm4.getActive()){
+			WhiteAggregate.add(WhiteBishopProm4.getCurrentPositionXY());
+		}
+		if(WhiteBishopProm5.getActive()){
+			WhiteAggregate.add(WhiteBishopProm5.getCurrentPositionXY());
+		}
+		
+		if(WhiteBishopProm6.getActive()){
+			WhiteAggregate.add(WhiteBishopProm6.getCurrentPositionXY());
+		}
+		if(WhiteBishopProm7.getActive()){
+			WhiteAggregate.add(WhiteBishopProm7.getCurrentPositionXY());
+		}
+		if(WhiteBishopProm8.getActive()){
+			WhiteAggregate.add(WhiteBishopProm8.getCurrentPositionXY());
+		}
+		
+		
+		if(WhiteKnightProm1.getActive()){
+			WhiteAggregate.add(WhiteKnightProm1.getCurrentPositionXY());
+		}
+		if(WhiteKnightProm2.getActive()){
+			WhiteAggregate.add(WhiteKnightProm2.getCurrentPositionXY());
+		}
+		if(WhiteKnightProm3.getActive()){
+			WhiteAggregate.add(WhiteKnightProm3.getCurrentPositionXY());
+		}
+		if(WhiteKnightProm4.getActive()){
+			WhiteAggregate.add(WhiteKnightProm4.getCurrentPositionXY());
+		}
+		if(WhiteKnightProm5.getActive()){
+			WhiteAggregate.add(WhiteKnightProm5.getCurrentPositionXY());
+		}
+		if(WhiteKnightProm6.getActive()){
+			WhiteAggregate.add(WhiteKnightProm6.getCurrentPositionXY());
+		}
+		if(WhiteKnightProm7.getActive()){
+			WhiteAggregate.add(WhiteKnightProm7.getCurrentPositionXY());
+		}
+		if(WhiteKnightProm8.getActive()){
+			WhiteAggregate.add(WhiteKnightProm8.getCurrentPositionXY());
+		}
+	
 		
 		return WhiteAggregate;
 	}
-	public static int[][] arrayConverter(int[][] m) {
-		//reduces the size of int [][] by removing nulls and out of reach board cells
-		ArrayList<int []> EM = new ArrayList<int []>();
-		
-		for(int i = 0 ; i < m.length ; i++){
-			if(m[i] != null){
-				if(m[i][0] > -1 && m[i][0] < 8 && m[i][1] > -1 && m[i][1] < 8)
-					EM.add(m[i]);
-			}
-		}
-		
-		int [][]MultiArray = EM.toArray(new int [][] {});
-		
-		return MultiArray;
-	}
+
 }

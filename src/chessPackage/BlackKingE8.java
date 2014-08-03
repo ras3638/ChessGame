@@ -1,5 +1,7 @@
 package chessPackage;
 
+import java.util.ArrayList;
+
 public class BlackKingE8 extends Superclass_BlackKing {
 	static int CurrentPositionX=4;
 	static int CurrentPositionY =0;
@@ -50,7 +52,7 @@ public class BlackKingE8 extends Superclass_BlackKing {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX,StartingPositionY);
 	}
 }

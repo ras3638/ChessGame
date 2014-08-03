@@ -1,5 +1,6 @@
 package chessPackage;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class BlackPiece extends Piece {
@@ -929,20 +930,20 @@ public class BlackPiece extends Piece {
 		}
 		return WhiteAggregate;
 	}
-	static int[][] aggregateBlacksForCheck(String CurrentTitle, int [] ComXY){
+	static ArrayList<int[]> aggregateBlacksForCheck(String CurrentTitle, int [] ComXY){
 		//Used for check mechanic specifically. 
-
-		int [][] BlackAggregate = new int [48][2];
+		ArrayList<int[]> BlackAggregate;
 		
 		BlackAggregate = aggregateBlacks();
 	
 		if (CurrentTitle == "White King (E1)"){
-			for(int i = 0 ; i < BlackAggregate.length ; i++) {
-				int[] Coordinate = BlackAggregate[i];
+			for(int [] i: aggregateBlacks()){
+				int[] Coordinate = i;
 				if(Arrays.equals(ComXY, Coordinate)){
-					BlackAggregate[i]=null;
-				}
-			}	
+					BlackAggregate.remove(i);
+					
+				}				
+			}
 		}
 		return BlackAggregate;
 	}

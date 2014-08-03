@@ -1,5 +1,7 @@
 package chessPackage;
 
+import java.util.ArrayList;
+
 public class WhiteRookA1 extends Superclass_WhiteRook {
 	static int CurrentPositionX=0;
 	static int CurrentPositionY=7;
@@ -54,7 +56,7 @@ public class WhiteRookA1 extends Superclass_WhiteRook {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY, StartingPositionY, StartingPositionY);
 	}
 }
@@ -112,7 +114,7 @@ class WhiteRookH1 extends Superclass_WhiteRook {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY, StartingPositionY, StartingPositionY);
 	}
 }
@@ -159,7 +161,7 @@ class WhiteRookProm1 extends Superclass_WhiteRook {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX, StartingPositionY);
 	}
 }
@@ -205,7 +207,7 @@ class WhiteRookProm2 extends Superclass_WhiteRook {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX, StartingPositionY);
 	}
 }
@@ -251,7 +253,7 @@ class WhiteRookProm3 extends Superclass_WhiteRook {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX, StartingPositionY);
 	}
 }
@@ -297,7 +299,7 @@ class WhiteRookProm4 extends Superclass_WhiteRook {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX, StartingPositionY);
 	}
 }
@@ -343,7 +345,7 @@ class WhiteRookProm5 extends Superclass_WhiteRook {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX, StartingPositionY);
 	}
 }
@@ -389,7 +391,7 @@ class WhiteRookProm6 extends Superclass_WhiteRook {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX, StartingPositionY);
 	}
 }
@@ -435,7 +437,7 @@ class WhiteRookProm7 extends Superclass_WhiteRook {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX, StartingPositionY);
 	}
 }
@@ -481,7 +483,7 @@ class WhiteRookProm8 extends Superclass_WhiteRook {
 	static void setCurrentPositionXY(int X,int Y){
 		CurrentPositionXY = new int[] {X,Y};
 	}
-	static int[][] movementHandler(int CurrentX, int CurrentY) {
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY) {
 		return movementHandler(CurrentX,CurrentY,StartingPositionX, StartingPositionY);
 	}
 }

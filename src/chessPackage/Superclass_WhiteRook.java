@@ -1,6 +1,7 @@
 package chessPackage;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.ImageIcon;
@@ -12,21 +13,16 @@ public class Superclass_WhiteRook extends WhitePiece {
 		return White_Rook_Icon;
 	}
 	
-	static int[][] movementHandler(int CurrentX, int CurrentY, int StartingPositionX, int StartingPositionY){
+	static ArrayList<int[]> movementHandler(int CurrentX, int CurrentY, int StartingPositionX, int StartingPositionY){
 		
-			int [][]MultiArray = new int[28][2];
-			for(int i = 0 ; i < MultiArray.length ; i++) {
-				MultiArray[i]=null;
-			}
+			ArrayList<int[]> MoveList = new ArrayList<int []>();
 
-			MultiArray=searcherTopTiles(MultiArray,CurrentX,CurrentY); 
-			MultiArray=searcherLeftTiles(MultiArray,CurrentX,CurrentY); 
-			MultiArray=searcherBottomTiles(MultiArray,CurrentX,CurrentY);
-			MultiArray=searcherRightTiles(MultiArray,CurrentX,CurrentY); 	
+			MoveList = searcherTopTiles(MoveList,CurrentX,CurrentY); 
+			MoveList = searcherLeftTiles(MoveList,CurrentX,CurrentY); 
+			MoveList = searcherBottomTiles(MoveList,CurrentX,CurrentY);
+			MoveList = searcherRightTiles(MoveList,CurrentX,CurrentY); 	
 			
-			MultiArray = Piece.arrayConverter(MultiArray);
-			
-			return MultiArray;
+			return MoveList;
 	}
 
 	static int [][] checkPreventer( int[][]MultiArray,int CurrentX, int CurrentY, int[] ComXY, String CurrentTitle){
@@ -51,11 +47,12 @@ public class Superclass_WhiteRook extends WhitePiece {
 				}		    			  
 			}
 	
-			for(int i = 0 ; i < aggregateWhitesForCheck(CurrentTitle, ComXY).length ; i++) {
-				int[] Coordinate = aggregateWhitesForCheck(CurrentTitle, ComXY)[i];
+
+			for(int[] i: aggregateWhitesForCheck(CurrentTitle, ComXY)){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
 					break outerloop_TopTiles;
-				}		
+				}	
 			}
 			
 			if(Arrays.equals(NewXY,ComXY) && CurrentTitle != "Black King (E8)"){
@@ -92,11 +89,12 @@ public class Superclass_WhiteRook extends WhitePiece {
 				}		    			  
 			}
 			
-			for(int i = 0 ; i < aggregateWhitesForCheck(CurrentTitle, ComXY).length ; i++) {
-				int[] Coordinate = aggregateWhitesForCheck(CurrentTitle, ComXY)[i];
+
+			for(int[] i: aggregateWhitesForCheck(CurrentTitle, ComXY)){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
 					break outerloop_LeftTiles;
-				}		
+				}	
 			}
 			if(Arrays.equals(NewXY,ComXY) && CurrentTitle != "Black King (E8)"){
 				//this if statement is necessary to allow pieces to block rook's line of sight
@@ -130,15 +128,13 @@ public class Superclass_WhiteRook extends WhitePiece {
 				}		    			  
 			}
 		
-			
-			for(int i = 0 ; i < aggregateWhitesForCheck(CurrentTitle, ComXY).length ; i++) {
-				int[] Coordinate = aggregateWhitesForCheck(CurrentTitle, ComXY)[i];
-				
+
+			for(int[] i: aggregateWhitesForCheck(CurrentTitle, ComXY)){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
 					////System.out.println("Outerbreak3.2");
 					break outerloop_BottomTiles;
-				}		
-			
+				}	
 			}
 			if(Arrays.equals(NewXY,ComXY) && CurrentTitle != "Black King (E8)"){
 				//this if statement is necessary to allow pieces to block rook's line of sight
@@ -174,13 +170,12 @@ public class Superclass_WhiteRook extends WhitePiece {
 			}
 			
 			
-			for(int i = 0 ; i < aggregateWhitesForCheck(CurrentTitle, ComXY).length ; i++) {
-				int[] Coordinate = aggregateWhitesForCheck(CurrentTitle, ComXY)[i];
+			for(int[] i: aggregateWhitesForCheck(CurrentTitle, ComXY)){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
 					break outerloop_RightTiles;
-				}		
+				}	
 			}
-	
 			if(Arrays.equals(NewXY,ComXY) && CurrentTitle != "Black King (E8)"){
 				//this if statement is necessary to allow pieces to block rook's line of sight
 				break outerloop_RightTiles;
@@ -198,7 +193,7 @@ public class Superclass_WhiteRook extends WhitePiece {
 	}
 
 
-	static int [][] searcherTopTiles(int[][]MultiArray,int CurrentX, int CurrentY){
+	static ArrayList<int[]> searcherTopTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
 		//this function looks for black pieces blocking this rook top tiles
 		
 		for(int j = 1; j <=7 ; j++){
@@ -206,28 +201,32 @@ public class Superclass_WhiteRook extends WhitePiece {
 			NewXY[0] = CurrentX + 0;
 			NewXY[1] = CurrentY - j;
 			
-			for(int i = 0 ; i < aggregateBlacks().length ; i++) {
-				int[] Coordinate = aggregateBlacks()[i];
+			if(NewXY[1] < 0){
+				return MoveList;
+			}
+			
+
+			for(int [] i: aggregateBlacks()){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
 					//System.out.println("We have found a valid black piece to kill " + j + " tiles top of this rook");
-					MultiArray[j-1]=NewXY;
-					return MultiArray;
-				}		    			  
+					MoveList.add(NewXY);
+					return MoveList;
+				}	    				
 			}
-			for(int i = 0 ; i < aggregateWhites().length ; i++) {
-				int[] Coordinate = aggregateWhites()[i];
-				
+			for(int [] i: aggregateWhites()){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
-					//System.out.println("We have found a white piece " + j + " tiles top of this rook");
-					return MultiArray;
+					//System.out.println("We have found a white piece " + j + " tiles top of this Queen");
+					return MoveList;
 				}		
+			}	
+			MoveList.add(NewXY);
 			
-			}
-			MultiArray[j-1]=NewXY;
 		}
-		return MultiArray;
+		return MoveList;
 	}	
-	static int [][] searcherLeftTiles(int[][]MultiArray,int CurrentX, int CurrentY){
+	static ArrayList<int[]> searcherLeftTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
 		//this function looks for black pieces blocking this rook left tiles
 		
 		for(int j = 1; j <=7 ; j++){
@@ -235,27 +234,32 @@ public class Superclass_WhiteRook extends WhitePiece {
 			NewXY[0] = CurrentX - j;
 			NewXY[1] = CurrentY + 0;
 			
-			for(int i = 0 ; i < aggregateBlacks().length ; i++) {
-				int[] Coordinate = aggregateBlacks()[i];
-				if(Arrays.equals(Coordinate, NewXY)){
-					//System.out.println("We have found a valid black piece to kill " + j + " tiles left of this rook");
-					MultiArray[j+6]=NewXY;
-					return MultiArray;
-				}		    			  
+			if(NewXY[0] < 0){
+				return MoveList;
 			}
 			
-			for(int i = 0 ; i < aggregateWhites().length ; i++) {
-				int[] Coordinate = aggregateWhites()[i];
+
+			for(int [] i: aggregateBlacks()){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
-					//System.out.println("We have found a white piece " + j + " tiles left of this rook");
-					return MultiArray;
-					}		
-				}
-			MultiArray[j+6]=NewXY;
+					//System.out.println("We have found a valid black piece to kill " + j + " tiles left of this rook");
+					MoveList.add(NewXY);
+					return MoveList;
+				}	 				
 			}
-		return MultiArray;
+			for(int [] i: aggregateWhites()){
+				int[] Coordinate = i;
+				if(Arrays.equals(Coordinate, NewXY)){
+					//System.out.println("We have found a white piece " + j + " tiles top of this Queen");
+					return MoveList;
+				}		
+			}	
+			MoveList.add(NewXY);
+			
+			}
+		return MoveList;
 		}
-	static int [][] searcherBottomTiles(int[][]MultiArray,int CurrentX, int CurrentY){
+	static ArrayList<int[]> searcherBottomTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
 		//this function looks for black pieces blocking this rook left tiles
 		
 		for(int j = 1; j <=7 ; j++){
@@ -263,27 +267,32 @@ public class Superclass_WhiteRook extends WhitePiece {
 			NewXY[0] = CurrentX + 0;
 			NewXY[1] = CurrentY + j;
 			
-			for(int i = 0 ; i < aggregateBlacks().length ; i++) {
-				int[] Coordinate = aggregateBlacks()[i];
+			if(NewXY[1] > 7){
+				return MoveList;
+			}
+			
+
+			for(int [] i: aggregateBlacks()){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
 					//System.out.println("We have found a valid blacks piece to kill " + j + " tiles bottom of this rook");
-					MultiArray[j+13]=NewXY;
-					return MultiArray;
-				}		    			  
+					MoveList.add(NewXY);
+					return MoveList;
+				}	 				
 			}
-
-			for(int i = 0 ; i < aggregateWhites().length ; i++) {
-				int[] Coordinate = aggregateWhites()[i];
+			for(int [] i: aggregateWhites()){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
-					//System.out.println("We have found a white piece " + j + " tiles bottom of this rook");
-					return MultiArray;
-					}		
-				}
-			MultiArray[j+13]=NewXY;
+					//System.out.println("We have found a white piece " + j + " tiles top of this Queen");
+					return MoveList;
+				}		
+			}	
+			MoveList.add(NewXY);
+			
 			}
-		return MultiArray;
+		return MoveList;
 		}
-	static int [][] searcherRightTiles(int[][]MultiArray,int CurrentX, int CurrentY){
+	static ArrayList<int[]> searcherRightTiles(ArrayList<int[]> MoveList,int CurrentX, int CurrentY){
 		//this function looks for black pieces blocking this rook left tiles
 		
 		for(int j = 1; j <=7 ; j++){
@@ -291,24 +300,28 @@ public class Superclass_WhiteRook extends WhitePiece {
 			NewXY[0] = CurrentX + j;
 			NewXY[1] = CurrentY + 0;
 			
-			for(int i = 0 ; i < aggregateBlacks().length ; i++) {
-				int[] Coordinate = aggregateBlacks()[i];
-				if(Arrays.equals(Coordinate, NewXY)){
-					//System.out.println("We have found a valid black piece to kill " + j + " tiles right of this rook");
-					MultiArray[j+20]=NewXY;
-					return MultiArray;
-				}		    			  
+			if(NewXY[0] > 7){
+				return MoveList;
 			}
 			
-			for(int i = 0 ; i < aggregateWhites().length ; i++) {
-				int[] Coordinate = aggregateWhites()[i];
+
+			for(int [] i: aggregateBlacks()){
+				int[] Coordinate = i;
 				if(Arrays.equals(Coordinate, NewXY)){
-					//System.out.println("We have found a white piece " + j + " tiles right of this rook");
-					return MultiArray;
-					}		
-				}
-			MultiArray[j+20]=NewXY;
+					//System.out.println("We have found a valid black piece to kill " + j + " tiles right of this rook");
+					MoveList.add(NewXY);
+					return MoveList;
+				}	 				
 			}
-		return MultiArray;
+			for(int [] i: aggregateWhites()){
+				int[] Coordinate = i;
+				if(Arrays.equals(Coordinate, NewXY)){
+					//System.out.println("We have found a white piece " + j + " tiles top of this Queen");
+					return MoveList;
+				}		
+			}	
+			MoveList.add(NewXY);
+			}
+		return MoveList;
 		}
 }

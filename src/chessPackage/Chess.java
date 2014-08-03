@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,10 +27,9 @@ public class Chess extends JFrame  implements ActionListener {
 	static JButton ComingFrom = null;	
 	static String CurrentTitle;
 	static String CurrentColor;
-	static int[][] PossibleXY;
+	static ArrayList<int[]> PossibleXY;
 	static boolean ActivateBlackCheck = false;
 	static boolean ActivateWhiteCheck = false;
-
 	static Logger LOGGER = Logger.getLogger(Chess.class.getName());
 	
 	//Grid Coordinates
@@ -372,7 +372,6 @@ public class Chess extends JFrame  implements ActionListener {
 
 	static JFrame frame = new JFrame(); //creates frame
 	static JButton[][] grid; //names the grid of buttons
-
 	public Chess(int width, int length){ 
 		frame.setLayout(new GridLayout(width,length)); //set layout
 		grid=new JButton[width][length]; //allocate the size of grid
@@ -826,7 +825,7 @@ public class Chess extends JFrame  implements ActionListener {
 	        e.printStackTrace();
 	    }	
 	}
-	void ResetSelection(){
+	static void ResetSelection(){
 		bA8.setSelected(false);
 		bA7.setSelected(false);
 		bA6.setSelected(false);
@@ -3741,9 +3740,19 @@ public class Chess extends JFrame  implements ActionListener {
 		Highlighted = true;
 	}
 	static void dehighlightButton(JButton J){
-		J.setSelected(false);
-		J.setBorder(new LineBorder(Color.black, 2,true));
-		Highlighted = false;
+
+		try{
+			J.setSelected(false);
+			J.setBorder(new LineBorder(Color.black, 2,true));
+		}
+		catch(NullPointerException e){
+			//User has exited from winning screen. Null Pointer results from clicking reset game
+			//ResetSelection(); is taken care of from Winning Screen to avoid graphical glitch
+		}
+		finally{
+			Highlighted = false;
+		}
+		
 	}
 	static void whiteMovementHandler(int ComX, int ComY){
 
@@ -3751,452 +3760,461 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = WhiteKnightG1.getCurrentPositionX();
 			int y = WhiteKnightG1.getCurrentPositionY();
 			PossibleXY = WhiteKnightG1.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}	
-		if(CurrentTitle == "White Bishop (F1)"){
-			int x = WhiteBishopF1.getCurrentPositionX();
-			int y = WhiteBishopF1.getCurrentPositionY();
-			PossibleXY = WhiteBishopF1.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
-			return;
-		}	
-		if(CurrentTitle == "White Pawn (H2)"){
-			int x = WhitePawnH2.getCurrentPositionX();
-			int y = WhitePawnH2.getCurrentPositionY();
-			PossibleXY = WhitePawnH2.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
-			return;
-		}	
-		if(CurrentTitle == "White Pawn (G2)"){
-			int x = WhitePawnG2.getCurrentPositionX();
-			int y = WhitePawnG2.getCurrentPositionY();
-			PossibleXY = WhitePawnG2.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
-			return;
-		}	
-		if(CurrentTitle == "White Pawn (F2)"){
-			int x = WhitePawnF2.getCurrentPositionX();
-			int y = WhitePawnF2.getCurrentPositionY();
-			PossibleXY = WhitePawnF2.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
-			return;
-		}	
-		if(CurrentTitle == "White Pawn (E2)"){
-			int x = WhitePawnE2.getCurrentPositionX();
-			int y = WhitePawnE2.getCurrentPositionY();
-			PossibleXY = WhitePawnE2.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
-			return;
-		}	
-		if(CurrentTitle == "White Pawn (D2)"){
-			int x = WhitePawnD2.getCurrentPositionX();
-			int y = WhitePawnD2.getCurrentPositionY();
-			PossibleXY = WhitePawnD2.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
-			return;
-		}	
-		if(CurrentTitle == "White Queen (D1)"){
-			int x = WhiteQueenD1.getCurrentPositionX();
-			int y = WhiteQueenD1.getCurrentPositionY();
-			PossibleXY = WhiteQueenD1.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
-			return;
-		}
-		
-		if(CurrentTitle == "White Bishop (C1)"){
-			int x = WhiteBishopC1.getCurrentPositionX();
-			int y = WhiteBishopC1.getCurrentPositionY();
-			PossibleXY = WhiteBishopC1.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
-			return;
-		}
-		if(CurrentTitle == "White Rook (A1)"){
-			int x = WhiteRookA1.getCurrentPositionX();
-			int y = WhiteRookA1.getCurrentPositionY();
-			PossibleXY = WhiteRookA1.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
-			return;
-		}
-		if(CurrentTitle == "White Pawn (C2)"){
-			int x = WhitePawnC2.getCurrentPositionX();
-			int y = WhitePawnC2.getCurrentPositionY();
-			PossibleXY = WhitePawnC2.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
-			return;
-		}
-		if(CurrentTitle == "White Pawn (B2)"){
-			int x = WhitePawnB2.getCurrentPositionX();
-			int y = WhitePawnB2.getCurrentPositionY();
-			PossibleXY = WhitePawnB2.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
-			return;
-		}
-		if(CurrentTitle == "White Pawn (A2)"){
-			int x = WhitePawnA2.getCurrentPositionX();
-			int y = WhitePawnA2.getCurrentPositionY();
-			PossibleXY = WhitePawnA2.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+		if(CurrentTitle == "White Knight (B1)"){
+			int x = WhiteKnightB1.getCurrentPositionX();
+			int y = WhiteKnightB1.getCurrentPositionY();
+			PossibleXY = WhiteKnightB1.movementHandler(x, y);
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White King (E1)"){
 			int x = WhiteKingE1.getCurrentPositionX();
 			int y = WhiteKingE1.getCurrentPositionY();
 			PossibleXY = WhiteKingE1.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
-		if(CurrentTitle == "White Knight (B1)"){
-			int x = WhiteKnightB1.getCurrentPositionX();
-			int y = WhiteKnightB1.getCurrentPositionY();
-			PossibleXY = WhiteKnightB1.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+		if(CurrentTitle == "White Bishop (F1)"){
+			int x = WhiteBishopF1.getCurrentPositionX();
+			int y = WhiteBishopF1.getCurrentPositionY();
+			PossibleXY = WhiteBishopF1.movementHandler(x, y);
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
+			return;
+		}	
+		if(CurrentTitle == "White Bishop (C1)"){
+			int x = WhiteBishopC1.getCurrentPositionX();
+			int y = WhiteBishopC1.getCurrentPositionY();
+			PossibleXY = WhiteBishopC1.movementHandler(x, y);
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
+			return;
+		}
+		if(CurrentTitle == "White Rook (A1)"){
+			int x = WhiteRookA1.getCurrentPositionX();
+			int y = WhiteRookA1.getCurrentPositionY();
+			PossibleXY = WhiteRookA1.movementHandler(x, y);
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Rook (H1)"){
 			int x = WhiteRookH1.getCurrentPositionX();
 			int y = WhiteRookH1.getCurrentPositionY();
 			PossibleXY = WhiteRookH1.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
+		if(CurrentTitle == "White Pawn (H2)"){
+			int x = WhitePawnH2.getCurrentPositionX();
+			int y = WhitePawnH2.getCurrentPositionY();
+			PossibleXY = WhitePawnH2.movementHandler(x, y);
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
+			return;
+		}	
+		if(CurrentTitle == "White Pawn (G2)"){
+			int x = WhitePawnG2.getCurrentPositionX();
+			int y = WhitePawnG2.getCurrentPositionY();
+			PossibleXY = WhitePawnG2.movementHandler(x, y);
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
+			return;
+		}	
+		if(CurrentTitle == "White Pawn (F2)"){
+			int x = WhitePawnF2.getCurrentPositionX();
+			int y = WhitePawnF2.getCurrentPositionY();
+			PossibleXY = WhitePawnF2.movementHandler(x, y);
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
+			return;
+		}	
+		if(CurrentTitle == "White Pawn (E2)"){
+			int x = WhitePawnE2.getCurrentPositionX();
+			int y = WhitePawnE2.getCurrentPositionY();
+			PossibleXY = WhitePawnE2.movementHandler(x, y);
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
+			return;
+		}	
+		if(CurrentTitle == "White Pawn (D2)"){
+			int x = WhitePawnD2.getCurrentPositionX();
+			int y = WhitePawnD2.getCurrentPositionY();
+			PossibleXY = WhitePawnD2.movementHandler(x, y);
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
+			return;
+		}	
+
+		if(CurrentTitle == "White Pawn (C2)"){
+			int x = WhitePawnC2.getCurrentPositionX();
+			int y = WhitePawnC2.getCurrentPositionY();
+			PossibleXY = WhitePawnC2.movementHandler(x, y);
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
+			return;
+		}
+		if(CurrentTitle == "White Pawn (B2)"){
+			int x = WhitePawnB2.getCurrentPositionX();
+			int y = WhitePawnB2.getCurrentPositionY();
+			PossibleXY = WhitePawnB2.movementHandler(x, y);
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
+			return;
+		}
+		if(CurrentTitle == "White Pawn (A2)"){
+			int x = WhitePawnA2.getCurrentPositionX();
+			int y = WhitePawnA2.getCurrentPositionY();
+			PossibleXY = WhitePawnA2.movementHandler(x, y);
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
+			return;
+		}
+
+		
+	
+		if(CurrentTitle == "White Queen (D1)"){
+			int x = WhiteQueenD1.getCurrentPositionX();
+			int y = WhiteQueenD1.getCurrentPositionY();
+			PossibleXY = WhiteQueenD1.movementHandler(x, y);
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
+			return;
+		}
+		
 		if(CurrentTitle == "White Queen (Prom8)"){
 			int x = WhiteQueenProm8.getCurrentPositionX();
 			int y = WhiteQueenProm8.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm8.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom7)"){
 			int x = WhiteQueenProm7.getCurrentPositionX();
 			int y = WhiteQueenProm7.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm7.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom6)"){
 			int x = WhiteQueenProm6.getCurrentPositionX();
 			int y = WhiteQueenProm6.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm6.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom5)"){
 			int x = WhiteQueenProm5.getCurrentPositionX();
 			int y = WhiteQueenProm5.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm5.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom4)"){
 			int x = WhiteQueenProm4.getCurrentPositionX();
 			int y = WhiteQueenProm4.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm4.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom3)"){
 			int x = WhiteQueenProm3.getCurrentPositionX();
 			int y = WhiteQueenProm3.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm3.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom2)"){
 			int x = WhiteQueenProm2.getCurrentPositionX();
 			int y = WhiteQueenProm2.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm2.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Queen (Prom1)"){
 			int x = WhiteQueenProm1.getCurrentPositionX();
 			int y = WhiteQueenProm1.getCurrentPositionY();
 			PossibleXY = WhiteQueenProm1.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
+		
 		if(CurrentTitle == "White Knight (Prom8)"){
 			int x = WhiteKnightProm8.getCurrentPositionX();
 			int y = WhiteKnightProm8.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm8.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom7)"){
 			int x = WhiteKnightProm7.getCurrentPositionX();
 			int y = WhiteKnightProm7.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm7.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom6)"){
 			int x = WhiteKnightProm6.getCurrentPositionX();
 			int y = WhiteKnightProm6.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm6.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom5)"){
 			int x = WhiteKnightProm5.getCurrentPositionX();
 			int y = WhiteKnightProm5.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm5.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom4)"){
 			int x = WhiteKnightProm4.getCurrentPositionX();
 			int y = WhiteKnightProm4.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm4.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom3)"){
 			int x = WhiteKnightProm3.getCurrentPositionX();
 			int y = WhiteKnightProm3.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm3.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom2)"){
 			int x = WhiteKnightProm2.getCurrentPositionX();
 			int y = WhiteKnightProm2.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm2.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Knight (Prom1)"){
 			int x = WhiteKnightProm1.getCurrentPositionX();
 			int y = WhiteKnightProm1.getCurrentPositionY();
 			PossibleXY = WhiteKnightProm1.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom8)"){
 			int x = WhiteBishopProm8.getCurrentPositionX();
 			int y = WhiteBishopProm8.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm8.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom7)"){
 			int x = WhiteBishopProm7.getCurrentPositionX();
 			int y = WhiteBishopProm7.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm7.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom6)"){
 			int x = WhiteBishopProm6.getCurrentPositionX();
 			int y = WhiteBishopProm6.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm6.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom5)"){
 			int x = WhiteBishopProm5.getCurrentPositionX();
 			int y = WhiteBishopProm5.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm5.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom4)"){
 			int x = WhiteBishopProm4.getCurrentPositionX();
 			int y = WhiteBishopProm4.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm4.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom3)"){
 			int x = WhiteBishopProm3.getCurrentPositionX();
 			int y = WhiteBishopProm3.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm3.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom2)"){
 			int x = WhiteBishopProm2.getCurrentPositionX();
 			int y = WhiteBishopProm2.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm2.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Bishop (Prom1)"){
 			int x = WhiteBishopProm1.getCurrentPositionX();
 			int y = WhiteBishopProm1.getCurrentPositionY();
 			PossibleXY = WhiteBishopProm1.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom8)"){
 			int x = WhiteRookProm8.getCurrentPositionX();
 			int y = WhiteRookProm8.getCurrentPositionY();
 			PossibleXY = WhiteRookProm8.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom7)"){
 			int x = WhiteRookProm7.getCurrentPositionX();
 			int y = WhiteRookProm7.getCurrentPositionY();
 			PossibleXY = WhiteRookProm7.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom6)"){
 			int x = WhiteRookProm6.getCurrentPositionX();
 			int y = WhiteRookProm6.getCurrentPositionY();
 			PossibleXY = WhiteRookProm6.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom5)"){
 			int x = WhiteRookProm5.getCurrentPositionX();
 			int y = WhiteRookProm5.getCurrentPositionY();
 			PossibleXY = WhiteRookProm5.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom4)"){
 			int x = WhiteRookProm4.getCurrentPositionX();
 			int y = WhiteRookProm4.getCurrentPositionY();
 			PossibleXY = WhiteRookProm4.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom3)"){
 			int x = WhiteRookProm3.getCurrentPositionX();
 			int y = WhiteRookProm3.getCurrentPositionY();
 			PossibleXY = WhiteRookProm3.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom2)"){
 			int x = WhiteRookProm2.getCurrentPositionX();
 			int y = WhiteRookProm2.getCurrentPositionY();
 			PossibleXY = WhiteRookProm2.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "White Rook (Prom1)"){
 			int x = WhiteRookProm1.getCurrentPositionX();
 			int y = WhiteRookProm1.getCurrentPositionY();
 			PossibleXY = WhiteRookProm1.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
+		
 	}
 	static void blackMovementHandler(int ComX, int ComY){
-	
-		if(CurrentTitle == "Black Knight (G8)"){
-			int x = BlackKnightG8.getCurrentPositionX();
-			int y = BlackKnightG8.getCurrentPositionY();
-			PossibleXY = BlackKnightG8.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
-			return;
-		}
-		if(CurrentTitle == "Black Bishop (F8)"){
-			int x = BlackBishopF8.getCurrentPositionX();
-			int y = BlackBishopF8.getCurrentPositionY();
-			PossibleXY = BlackBishopF8.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
-			return;
-		}
-		if(CurrentTitle == "Black Rook (H8)"){
-			int x = BlackRookH8.getCurrentPositionX();
-			int y = BlackRookH8.getCurrentPositionY();
-			PossibleXY = BlackRookH8.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+		
+		if(CurrentTitle == "Black Pawn (C7)"){
+			int x = BlackPawnC7.getCurrentPositionX();
+			int y = BlackPawnC7.getCurrentPositionY();
+			PossibleXY = BlackPawnC7.movementHandler(x, y);
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Pawn (A7)"){
 			int x = BlackPawnA7.getCurrentPositionX();
 			int y = BlackPawnA7.getCurrentPositionY();
 			PossibleXY = BlackPawnA7.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Pawn (H7)"){
 			int x = BlackPawnH7.getCurrentPositionX();
 			int y = BlackPawnH7.getCurrentPositionY();
 			PossibleXY = BlackPawnH7.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Pawn (G7)"){
 			int x = BlackPawnG7.getCurrentPositionX();
 			int y = BlackPawnG7.getCurrentPositionY();
 			PossibleXY = BlackPawnG7.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Pawn (F7)"){
 			int x = BlackPawnF7.getCurrentPositionX();
 			int y = BlackPawnF7.getCurrentPositionY();
 			PossibleXY = BlackPawnF7.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Pawn (E7)"){
 			int x = BlackPawnE7.getCurrentPositionX();
 			int y = BlackPawnE7.getCurrentPositionY();
 			PossibleXY = BlackPawnE7.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Pawn (D7)"){
 			int x = BlackPawnD7.getCurrentPositionX();
 			int y = BlackPawnD7.getCurrentPositionY();
 			PossibleXY = BlackPawnD7.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Pawn (B7)"){
 			int x = BlackPawnB7.getCurrentPositionX();
 			int y = BlackPawnB7.getCurrentPositionY();
 			PossibleXY = BlackPawnB7.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
+		
+		if(CurrentTitle == "Black Knight (G8)"){
+			int x = BlackKnightG8.getCurrentPositionX();
+			int y = BlackKnightG8.getCurrentPositionY();
+			PossibleXY = BlackKnightG8.movementHandler(x, y);
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
+			return;
+		}
+		if(CurrentTitle == "Black Bishop (F8)"){
+			int x = BlackBishopF8.getCurrentPositionX();
+			int y = BlackBishopF8.getCurrentPositionY();
+			PossibleXY = BlackBishopF8.movementHandler(x, y);
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
+			return;
+		}
+		if(CurrentTitle == "Black Rook (H8)"){
+			int x = BlackRookH8.getCurrentPositionX();
+			int y = BlackRookH8.getCurrentPositionY();
+			PossibleXY = BlackRookH8.movementHandler(x, y);
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
+			return;
+		}
+		
 		if(CurrentTitle == "Black King (E8)"){
 			int x = BlackKingE8.getCurrentPositionX();
 			int y = BlackKingE8.getCurrentPositionY();
 			PossibleXY = BlackKingE8.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Knight (B8)"){
 			int x = BlackKnightB8.getCurrentPositionX();
 			int y = BlackKnightB8.getCurrentPositionY();
 			PossibleXY = BlackKnightB8.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
-		if(CurrentTitle == "Black Pawn (C7)"){
-			int x = BlackPawnC7.getCurrentPositionX();
-			int y = BlackPawnC7.getCurrentPositionY();
-			PossibleXY = BlackPawnC7.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
-			return;
-		}
+		
 		if(CurrentTitle == "Black Rook (A8)"){
 			int x = BlackRookA8.getCurrentPositionX();
 			int y = BlackRookA8.getCurrentPositionY();
 			PossibleXY = BlackRookA8.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Bishop (C8)"){
 			int x = BlackBishopC8.getCurrentPositionX();
 			int y = BlackBishopC8.getCurrentPositionY();
 			PossibleXY = BlackBishopC8.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Queen (D8)"){
 			int x = BlackQueenD8.getCurrentPositionX();
 			int y = BlackQueenD8.getCurrentPositionY();
 			PossibleXY = BlackQueenD8.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Queen (Prom8)"){
@@ -4204,7 +4222,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackQueenProm8.getCurrentPositionX();
 			int y = BlackQueenProm8.getCurrentPositionY();
 			PossibleXY = BlackQueenProm8.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Queen (Prom7)"){
@@ -4212,7 +4230,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackQueenProm7.getCurrentPositionX();
 			int y = BlackQueenProm7.getCurrentPositionY();
 			PossibleXY = BlackQueenProm7.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Queen (Prom6)"){
@@ -4220,7 +4238,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackQueenProm6.getCurrentPositionX();
 			int y = BlackQueenProm6.getCurrentPositionY();
 			PossibleXY = BlackQueenProm6.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Queen (Prom5)"){
@@ -4228,7 +4246,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackQueenProm5.getCurrentPositionX();
 			int y = BlackQueenProm5.getCurrentPositionY();
 			PossibleXY = BlackQueenProm5.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Queen (Prom4)"){
@@ -4236,7 +4254,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackQueenProm4.getCurrentPositionX();
 			int y = BlackQueenProm4.getCurrentPositionY();
 			PossibleXY = BlackQueenProm4.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Queen (Prom3)"){
@@ -4244,7 +4262,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackQueenProm3.getCurrentPositionX();
 			int y = BlackQueenProm3.getCurrentPositionY();
 			PossibleXY = BlackQueenProm3.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Queen (Prom2)"){
@@ -4252,7 +4270,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackQueenProm2.getCurrentPositionX();
 			int y = BlackQueenProm2.getCurrentPositionY();
 			PossibleXY = BlackQueenProm2.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Queen (Prom1)"){
@@ -4260,7 +4278,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackQueenProm1.getCurrentPositionX();
 			int y = BlackQueenProm1.getCurrentPositionY();
 			PossibleXY = BlackQueenProm1.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Knight (Prom8)"){
@@ -4268,7 +4286,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackKnightProm8.getCurrentPositionX();
 			int y = BlackKnightProm8.getCurrentPositionY();
 			PossibleXY = BlackKnightProm8.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Knight (Prom7)"){
@@ -4276,7 +4294,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackKnightProm7.getCurrentPositionX();
 			int y = BlackKnightProm7.getCurrentPositionY();
 			PossibleXY = BlackKnightProm7.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Knight (Prom6)"){
@@ -4284,7 +4302,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackKnightProm6.getCurrentPositionX();
 			int y = BlackKnightProm6.getCurrentPositionY();
 			PossibleXY = BlackKnightProm6.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Knight (Prom5)"){
@@ -4292,7 +4310,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackKnightProm5.getCurrentPositionX();
 			int y = BlackKnightProm5.getCurrentPositionY();
 			PossibleXY = BlackKnightProm5.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Knight (Prom4)"){
@@ -4300,7 +4318,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackKnightProm4.getCurrentPositionX();
 			int y = BlackKnightProm4.getCurrentPositionY();
 			PossibleXY = BlackKnightProm4.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Knight (Prom3)"){
@@ -4308,7 +4326,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackKnightProm3.getCurrentPositionX();
 			int y = BlackKnightProm3.getCurrentPositionY();
 			PossibleXY = BlackKnightProm3.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Knight (Prom2)"){
@@ -4316,7 +4334,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackKnightProm2.getCurrentPositionX();
 			int y = BlackKnightProm2.getCurrentPositionY();
 			PossibleXY = BlackKnightProm2.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Knight (Prom1)"){
@@ -4324,7 +4342,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackKnightProm1.getCurrentPositionX();
 			int y = BlackKnightProm1.getCurrentPositionY();
 			PossibleXY = BlackKnightProm1.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Bishop (Prom8)"){
@@ -4332,7 +4350,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackBishopProm8.getCurrentPositionX();
 			int y = BlackBishopProm8.getCurrentPositionY();
 			PossibleXY = BlackBishopProm8.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Bishop (Prom7)"){
@@ -4340,7 +4358,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackBishopProm7.getCurrentPositionX();
 			int y = BlackBishopProm7.getCurrentPositionY();
 			PossibleXY = BlackBishopProm7.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Bishop (Prom6)"){
@@ -4348,7 +4366,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackBishopProm6.getCurrentPositionX();
 			int y = BlackBishopProm6.getCurrentPositionY();
 			PossibleXY = BlackBishopProm6.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Bishop (Prom5)"){
@@ -4356,7 +4374,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackBishopProm5.getCurrentPositionX();
 			int y = BlackBishopProm5.getCurrentPositionY();
 			PossibleXY = BlackBishopProm5.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Bishop (Prom4)"){
@@ -4364,7 +4382,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackBishopProm4.getCurrentPositionX();
 			int y = BlackBishopProm4.getCurrentPositionY();
 			PossibleXY = BlackBishopProm4.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Bishop (Prom3)"){
@@ -4372,7 +4390,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackBishopProm3.getCurrentPositionX();
 			int y = BlackBishopProm3.getCurrentPositionY();
 			PossibleXY = BlackBishopProm3.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Bishop (Prom2)"){
@@ -4380,7 +4398,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackBishopProm2.getCurrentPositionX();
 			int y = BlackBishopProm2.getCurrentPositionY();
 			PossibleXY = BlackBishopProm2.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Bishop (Prom1)"){
@@ -4388,7 +4406,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackBishopProm1.getCurrentPositionX();
 			int y = BlackBishopProm1.getCurrentPositionY();
 			PossibleXY = BlackBishopProm1.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 
@@ -4398,7 +4416,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackRookProm8.getCurrentPositionX();
 			int y = BlackRookProm8.getCurrentPositionY();
 			PossibleXY = BlackRookProm8.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Rook (Prom7)"){
@@ -4406,7 +4424,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackRookProm7.getCurrentPositionX();
 			int y = BlackRookProm7.getCurrentPositionY();
 			PossibleXY = BlackRookProm7.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Rook (Prom6)"){
@@ -4414,7 +4432,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackRookProm6.getCurrentPositionX();
 			int y = BlackRookProm6.getCurrentPositionY();
 			PossibleXY = BlackRookProm6.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Rook (Prom5)"){
@@ -4422,7 +4440,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackRookProm5.getCurrentPositionX();
 			int y = BlackRookProm5.getCurrentPositionY();
 			PossibleXY = BlackRookProm5.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Rook (Prom4)"){
@@ -4430,7 +4448,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackRookProm4.getCurrentPositionX();
 			int y = BlackRookProm4.getCurrentPositionY();
 			PossibleXY = BlackRookProm4.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Rook (Prom3)"){
@@ -4438,7 +4456,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackRookProm3.getCurrentPositionX();
 			int y = BlackRookProm3.getCurrentPositionY();
 			PossibleXY = BlackRookProm3.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Rook (Prom2)"){
@@ -4446,7 +4464,7 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackRookProm2.getCurrentPositionX();
 			int y = BlackRookProm2.getCurrentPositionY();
 			PossibleXY = BlackRookProm2.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
 		if(CurrentTitle == "Black Rook (Prom1)"){
@@ -4454,9 +4472,10 @@ public class Chess extends JFrame  implements ActionListener {
 			int x = BlackRookProm1.getCurrentPositionX();
 			int y = BlackRookProm1.getCurrentPositionY();
 			PossibleXY = BlackRookProm1.movementHandler(x, y);
-			LOGGER.log(Level.INFO, "Available Moves: " + Arrays.deepToString(PossibleXY));
+			LOGGER.log(Level.INFO, "Available Moves: " + ListUtility.listToString(PossibleXY));
 			return;
 		}
+		
 	
 	}
 	static void Engine(int ComX, int ComY,int[] ComXY, JButton b){
@@ -4503,9 +4522,9 @@ public class Chess extends JFrame  implements ActionListener {
 		
 		else if (Highlighted == true && b.isSelected() == false){
 			//loops through PossibleXY multiarray to find a match
-			for(int i = 0 ; i < PossibleXY.length ; i++) {
+			for(int i = 0 ; i < PossibleXY.size() ; i++) {
 				
-				int[] Coordinate = PossibleXY[i];
+				int[] Coordinate = PossibleXY.get(i);
 				
 				if(Arrays.equals(Coordinate, ComXY)){		
 					//have to check if we are still in check right here	
@@ -4543,18 +4562,21 @@ public class Chess extends JFrame  implements ActionListener {
 					
 					// have to look for checkmate here
 					final long startCheckMateTime = System.currentTimeMillis();
+				
 					if(ActivateBlackCheck){
 						
-						
+						LOGGER.log(Level.INFO, "Black King in Check");
 						if(Superclass_BlackKing.isBlackKingInCheckMate()){
-							System.out.println("Black King in Checkmate. White wins!");
+							LOGGER.log(Level.INFO, "Black King in Checkmate. White wins!");
+							new WinningScreen(1);
 						}
 					}
 					
 					if(ActivateWhiteCheck){
-						
+						LOGGER.log(Level.INFO, "White King in Check");
 						if(Superclass_WhiteKing.isWhiteKingInCheckMate()){
-							System.out.println("White King in Checkmate. Black wins!");
+							LOGGER.log(Level.INFO, "White King in Checkmate. Black wins!");
+							new WinningScreen(0);
 						}	
 					}
 					final long endCheckMateTime = System.currentTimeMillis();

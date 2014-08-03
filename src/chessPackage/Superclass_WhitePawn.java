@@ -1,6 +1,7 @@
 package chessPackage;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.ImageIcon;
@@ -12,8 +13,10 @@ public class Superclass_WhitePawn extends WhitePiece {
 		return White_Pawn_Icon;
 	}
 	
-	static int[][] movementHandler(int CurrentX, int CurrentY, int StartingPositionX, int StartingPositionY){
-
+	static ArrayList<int []> movementHandler(int CurrentX, int CurrentY, int StartingPositionX, int StartingPositionY){
+		
+		ArrayList<int []> MoveList = new ArrayList<int []>();
+		
 		if (CurrentX == StartingPositionX && CurrentY == StartingPositionY){
 			int [][]MultiArray = new int[4][2];
 			MultiArray[0]=null;
@@ -24,9 +27,9 @@ public class Superclass_WhitePawn extends WhitePiece {
 			MultiArray= killSearcher(MultiArray,CurrentX,CurrentY); //XY2,XY3
 			MultiArray=searcherTwoTile(MultiArray,CurrentX,CurrentY); //XY4
 			
-			MultiArray = Piece.arrayConverter(MultiArray);
+			MoveList = ListUtility.arrayToListConverter(MultiArray);
 			
-			return MultiArray;
+			return MoveList;
 		}
 		else{
 			int [][]MultiArray = new int[5][2];
@@ -49,9 +52,10 @@ public class Superclass_WhitePawn extends WhitePiece {
 			WhitePawnG2.setEnPassant(false);
 			WhitePawnH2.setEnPassant(false);
 			
-			MultiArray = Piece.arrayConverter(MultiArray);
+	
+			MoveList = ListUtility.arrayToListConverter(MultiArray);
 			
-			return MultiArray;
+			return MoveList;
 		}
 	}
 static int[][] enPassant(int[][] MultiArray, int CurrentX,int CurrentY) {
@@ -109,23 +113,25 @@ static int[][] enPassant(int[][] MultiArray, int CurrentX,int CurrentY) {
 		
 		NewXY2[0] = CurrentX -1;
 		NewXY2[1] = CurrentY -1;
-		for(int i = 0 ; i < aggregateBlacks().length ; i++) {
-			int[] Coordinate = aggregateBlacks()[i];
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
 			if(Arrays.equals(Coordinate, NewXY2)){
 				//System.out.println("We have found a valid black piece to kill");
 				MultiArray[1]=NewXY2;
 				break;  
-			}		    			  
-		}		
+			}				    				
+		}
 		NewXY3[0]=CurrentX+1;
 		NewXY3[1]=CurrentY-1;
-		for(int i = 0 ; i < aggregateBlacks().length ; i++) {
-			int[] Coordinate = aggregateBlacks()[i];
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
 			if(Arrays.equals(Coordinate, NewXY3)){
 				//System.out.println("We have found a valid black piece to kill");
 				MultiArray[2]=NewXY3;
 				break;  
-			}		    			  
+			}					    				
 		}
 		
 		
@@ -174,22 +180,22 @@ static int[][] enPassant(int[][] MultiArray, int CurrentX,int CurrentY) {
 		NewXY[0] = CurrentX +0;
 		NewXY[1] = CurrentY -1;
 		//this loop looks for a white piece
-		for(int i = 0 ; i < aggregateWhites().length ; i++) {
-			int[] Coordinate = aggregateWhites()[i];
+		for(int [] i: aggregateWhites()){
+			int[] Coordinate = i;
 			if(Arrays.equals(Coordinate, NewXY)){
-				//System.out.println("We have found a white piece in front of this pawn");
+				//System.out.println("We have found a white piece " + j + " tiles top of this Queen");
 				return MultiArray;
-				//gotta exit out of this function
-			}				
-		}
+			}		
+		}	
 		//we have to account for black pieces 1 tile in front
-		for(int i = 0 ; i < aggregateBlacks().length ; i++) {
-			int[] Coordinate = aggregateBlacks()[i];
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
 			if(Arrays.equals(Coordinate, NewXY)){
 				//System.out.println("We have found a black piece in front of this pawn");
 				return MultiArray;
 				//gotta exit out of this function
-			}				
+			}					    				
 		}
 		MultiArray[0]=NewXY;
 		return MultiArray;   			  
@@ -205,25 +211,24 @@ static int[][] enPassant(int[][] MultiArray, int CurrentX,int CurrentY) {
 		NewXY5[1] = CurrentY -1;
 		
 		//this loop looks for a white piece 2 tiles in front
-		for(int i = 0 ; i < aggregateWhites().length ; i++) {
-			int[] Coordinate = aggregateWhites()[i];
+		for(int [] i: aggregateWhites()){
+			int[] Coordinate = i;
 			if(Arrays.equals(Coordinate, NewXY5)){
-				//System.out.println("We have found a white piece 2 tiles in front of this pawn");
+				//System.out.println("We have found a white piece " + j + " tiles top of this Queen");
 				return MultiArray;
-				//gotta exit out of this function
-			
-			}		    			  
-		}
+			}		
+		}	
 		
 		//we have to account for a black piece 2 tiles in front
-		for(int i = 0 ; i < aggregateBlacks().length ; i++) {
-			int[] Coordinate = aggregateBlacks()[i];
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
 			if(Arrays.equals(Coordinate, NewXY5)){
 				//System.out.println("We have found a black piece 2 tiles in front of this pawn");
 				return MultiArray;
 				//gotta exit out of this function
 			
-			}		    			  
+			}			    				
 		}
 		
 
@@ -234,25 +239,24 @@ static int[][] enPassant(int[][] MultiArray, int CurrentX,int CurrentY) {
 		NewXY4[1] = CurrentY -2;
 		
 		//this loop looks for a white piece 2 tiles in front
-		for(int i = 0 ; i < aggregateWhites().length ; i++) {
-			int[] Coordinate = aggregateWhites()[i];
+		for(int [] i: aggregateWhites()){
+			int[] Coordinate = i;
 			if(Arrays.equals(Coordinate, NewXY4)){
-				//System.out.println("We have found a white piece in front of this pawn");
+				//System.out.println("We have found a white piece " + j + " tiles top of this Queen");
 				return MultiArray;
-				//gotta exit out of this function
-			
-			}		    			  
-		}
+			}		
+		}	
 		
 		//we have to account for a black piece 2 tiles in front
-		for(int i = 0 ; i < aggregateBlacks().length ; i++) {
-			int[] Coordinate = aggregateBlacks()[i];
+
+		for(int [] i: aggregateBlacks()){
+			int[] Coordinate = i;
 			if(Arrays.equals(Coordinate, NewXY4)){
 				//System.out.println("We have found a black piece in front of this pawn");
 				return MultiArray;
 				//gotta exit out of this function
 			
-			}		    			  
+			}			    				
 		}
 		MultiArray[3]=NewXY4;
 		return MultiArray;   			  
